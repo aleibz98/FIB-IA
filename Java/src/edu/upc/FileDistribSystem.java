@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 /**
- * Created by Joan on 15/03/2016.
+ * Created by Joan on 15/03/2016
  */
 public class FileDistribSystem {
 
@@ -26,7 +26,7 @@ public class FileDistribSystem {
 
     public void initialRandom(Servers servers, Requests requests, int users) {
         system = new int[users][][];
-
+        //test
         for (int i = 0; i < requests.size(); ++i) {
             int[] req = requests.getRequest(i);
             int uid = req[0];
