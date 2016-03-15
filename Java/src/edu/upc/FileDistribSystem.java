@@ -1,8 +1,8 @@
 package edu.upc;
 import IA.DistFS.*;
 
-import java.util.HashMap;
-import java.util.Set;
+import java.lang.reflect.Array;
+import java.util.*;
 
 /**
  * Created by Joan on 15/03/2016.
@@ -25,7 +25,12 @@ public class FileDistribSystem {
     }
 
     public void initialRandom(Servers servers, Requests requests, int users) {
-        system = new int[users][][];
+        //system = new int[users][][];
+
+        ArrayList<ArrayList<ArrayList<Integer>>> st = new ArrayList<>();
+        for (int i = 0; i < users; ++i) {
+            st.add(new ArrayList<>());
+        }
 
         for (int i = 0; i < requests.size(); ++i) {
             int[] req = requests.getRequest(i);
@@ -35,12 +40,16 @@ public class FileDistribSystem {
                 userID = idConversion.size();
                 idConversion.put(uid, idConversion.size());
             }
-            uid = userID;
 
-            int fid = req[1];
+            Integer fid = req[1];
             Set<Integer> locations = servers.fileLocations(fid);
 
+            Iterator<Integer> itLoc = locations.iterator();
+            ArrayList<Integer> query = new ArrayList<>();
+            query.add(itLoc.next());
+            query.add(fid);
 
+            st.get(userID).add(query);
         }
     }
 }
