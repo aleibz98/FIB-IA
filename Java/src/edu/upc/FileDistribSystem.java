@@ -43,4 +43,37 @@ public class FileDistribSystem {
 
         }
     }
+
+    public void initialBestServer(Servers servers, Requests requests, int users) {
+        system = new int[users][][];
+        for (int i = 0; i <requests.size(); ++i) {
+            int[] req = requests.getRequest(i);
+            int uid = req[0];
+            Integer userID = idConversion.get(uid);
+            if (userID == null) {
+                userID = idConversion.size();
+                idConversion.put(uid, idConversion.size());
+            }
+            uid = userID;
+
+            int fid = req[1];
+            Set<Integer> locations = servers.fileLocations(fid);
+
+            int bestSid = -1;
+            int bestTime = 10000;
+
+            for (int sid : locations){
+                if (bestSid == -1){
+                    bestSid=sid;
+                }
+                else {
+                    int time=servers.tranmissionTime(sid,uid);
+                    if (time<bestTime){
+                        bestTime=time;
+                        bestSid=sid;
+                    }
+                }
+            }
+        }
+    }
 }
