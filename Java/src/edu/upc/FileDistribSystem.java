@@ -59,26 +59,6 @@ public class FileDistribSystem {
         system = convertToArray(st);
     }
 
-    /**
-     * Converts from an ArrayList to an Array
-     *
-     * @param st
-     */
-    private int[][][] convertToArray(ArrayList<ArrayList<ArrayList<Integer>>> st) {
-        // Conversion from ArrayList to Array
-        int[][][] res = new int[st.size()][][];
-        for (int i = 0; i < st.size(); ++i) {
-            ArrayList<ArrayList<Integer>> req = st.get(i);
-            res[i] = new int[req.size()][2];
-
-            for (int j = 0; j < req.size(); ++j) {
-                res[i][j][0] = req.get(j).get(0);
-                res[i][j][1] = req.get(j).get(1);
-            }
-        }
-        return res;
-    }
-
     public void initialBestServer(Servers servers, Requests requests, int users) {
         ArrayList<ArrayList<ArrayList<Integer>>> st = new ArrayList<>();
         for (int i = 0; i < users; ++i) {
@@ -118,5 +98,26 @@ public class FileDistribSystem {
 
             st.get(uid).add(query);
         }
+        system = convertToArray(st);
+    }
+
+    /**
+     * Converts from an ArrayList to an Array
+     *
+     * @param st
+     */
+    private int[][][] convertToArray(ArrayList<ArrayList<ArrayList<Integer>>> st) {
+        // Conversion from ArrayList to Array
+        int[][][] res = new int[st.size()][][];
+        for (int i = 0; i < st.size(); ++i) {
+            ArrayList<ArrayList<Integer>> req = st.get(i);
+            res[i] = new int[req.size()][2];
+
+            for (int j = 0; j < req.size(); ++j) {
+                res[i][j][0] = req.get(j).get(0);
+                res[i][j][1] = req.get(j).get(1);
+            }
+        }
+        return res;
     }
 }
