@@ -54,7 +54,10 @@ public class FileDistribSystem {
     }
 
     public void initialBestServer(Servers servers, Requests requests, int users) {
-        system = new int[users][][];
+        ArrayList<ArrayList<ArrayList<Integer>>> st = new ArrayList<>();
+        for (int i = 0; i < users; ++i) {
+            st.add(new ArrayList<>());
+        }
         for (int i = 0; i <requests.size(); ++i) {
             int[] req = requests.getRequest(i);
             int uid = req[0];
@@ -83,6 +86,11 @@ public class FileDistribSystem {
                     }
                 }
             }
+            ArrayList<Integer> query = new ArrayList<>();
+            query.add(bestSid);
+            query.add(fid);
+
+            st.get(uid).add(query);
         }
     }
 }
