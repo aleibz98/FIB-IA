@@ -21,6 +21,8 @@ public class FileDistribSystem {
 
     public HashMap<Integer, Integer> idUserCon = new HashMap<>();
 
+    public HashMap<Integer, Integer> idUserConBack = new HashMap<>();
+
     /**
      * Creates the initial state
      */
@@ -69,7 +71,8 @@ public class FileDistribSystem {
         Integer userID = idUserCon.get(uid);
         if (userID == null) {
             userID = idUserCon.size();
-            idUserCon.put(uid, idUserCon.size());
+            idUserCon.put(uid, idUserCon.size()); // Add new ID
+            idUserConBack.put(userID, uid);       // Store new ID for backwards conversion
         }
         uid = userID;
         return uid;
