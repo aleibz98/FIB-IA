@@ -26,6 +26,8 @@ public class FileDistribSystem {
 
     public HashMap<Integer, Integer> idConversion = new HashMap<>();
 
+    public HashMap<Integer, Integer> idUserConBack = new HashMap<>();
+
     /**
      * Creates the initial state
      */
@@ -34,6 +36,13 @@ public class FileDistribSystem {
         calculateServerTimes(servers, nServ);
     }
 
+    /**
+     * Creates initial state with random assignment
+     *
+     * @param servers  Container for servers
+     * @param requests All requests to the servers
+     * @param users    Users count
+     */
     public void initialRandom(Servers servers, Requests requests, int users) {
         //system = new int[users][][];
 
@@ -44,12 +53,7 @@ public class FileDistribSystem {
 
         for (int i = 0; i < requests.size(); ++i) {
             int[] req = requests.getRequest(i);
-            int uid = req[0];
-            Integer userID = idConversion.get(uid);
-            if (userID == null) {
-                userID = idConversion.size();
-                idConversion.put(uid, idConversion.size());
-            }
+            int uid = getUid(req[0]);
 
             Integer fid = req[1];
             Set<Integer> locations = servers.fileLocations(fid);
@@ -59,10 +63,27 @@ public class FileDistribSystem {
             query.add(itLoc.next());
             query.add(fid);
 
-            st.get(userID).add(query);
+            st.get(uid).add(query);
         }
 
         system = convertToArray(st);
+    }
+
+    /**
+     * Transforms a user id (can be between 0 and 10000) to an id between 0 and users count
+     *
+     * @param uid Id to transform
+     * @return Id transformed
+     */
+    private int getUid(int uid) {
+        Integer userID = idUserCon.get(uid);
+        if (userID == null) {
+            userID = idUserCon.size();
+            idUserCon.put(uid, idUserCon.size()); // Add new ID
+            idUserConBack.put(userID, uid);       // Store new ID for backwards conversion
+        }
+        uid = userID;
+        return uid;
     }
 
     public void initialBestServer(Servers servers, Requests requests, int users) {
@@ -70,15 +91,9 @@ public class FileDistribSystem {
         for (int i = 0; i < users; ++i) {
             st.add(new ArrayList<>());
         }
-        for (int i = 0; i <requests.size(); ++i) {
+        for (int i = 0; i < requests.size(); ++i) {
             int[] req = requests.getRequest(i);
-            int uid = req[0];
-            Integer userID = idConversion.get(uid);
-            if (userID == null) {
-                userID = idConversion.size();
-                idConversion.put(uid, idConversion.size());
-            }
-            uid = userID;
+            int uid = getUid(req[0]);
 
             int fid = req[1];
             Set<Integer> locations = servers.fileLocations(fid);
@@ -86,15 +101,14 @@ public class FileDistribSystem {
             int bestSid = -1;
             int bestTime = 10000;
 
-            for (int sid : locations){
-                if (bestSid == -1){
-                    bestSid=sid;
-                }
-                else {
-                    int time=servers.tranmissionTime(sid,uid);
-                    if (time<bestTime){
-                        bestTime=time;
-                        bestSid=sid;
+            for (int sid : locations) {
+                if (bestSid == -1) {
+                    bestSid = sid;
+                } else {
+                    int time = servers.tranmissionTime(sid, uid);
+                    if (time < bestTime) {
+                        bestTime = time;
+                        bestSid = sid;
                     }
                 }
             }
@@ -109,8 +123,7 @@ public class FileDistribSystem {
 
     /**
      * Converts from an ArrayList to an Array
-     *
-     * @param st
+     * @param st Array to convert
      */
     private int[][][] convertToArray(ArrayList<ArrayList<ArrayList<Integer>>> st) {
         // Conversion from ArrayList to Array
