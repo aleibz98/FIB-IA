@@ -21,12 +21,13 @@ public class FileDistribSystem {
 
     public HashMap<Integer, Integer> idUserCon = new HashMap<>();
 
-    public HashMap<Integer, Integer> idUserConBack = new HashMap<>();
+    public int[] idUserConBack;
 
     /**
      * Creates the initial state
      */
     public FileDistribSystem(Servers servers, Requests requests, int users) {
+        idUserConBack = new int[users];
         initialRandom(servers, requests, users);
     }
 
@@ -72,7 +73,7 @@ public class FileDistribSystem {
         if (userID == null) {
             userID = idUserCon.size();
             idUserCon.put(uid, idUserCon.size()); // Add new ID
-            idUserConBack.put(userID, uid);       // Store new ID for backwards conversion
+            idUserConBack[userID] = uid;       // Store new ID for backwards conversion
         }
         uid = userID;
         return uid;
