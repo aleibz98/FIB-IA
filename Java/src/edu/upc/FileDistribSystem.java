@@ -24,7 +24,7 @@ public class FileDistribSystem {
      */
     public int[] serverTimes;
 
-    public HashMap<Integer, Integer> idConversion = new HashMap<>();
+    public HashMap<Integer, Integer> idUserCon = new HashMap<>();
 
     public HashMap<Integer, Integer> idUserConBack = new HashMap<>();
 
