@@ -24,9 +24,10 @@ public class FileDistribSystem {
     /**
      * Creates the initial state
      */
-    public FileDistribSystem(Servers servers, Requests requests, int users) {
+    public FileDistribSystem(Servers servers, Requests requests, int users, int nServ) {
         idUserConBack = new int[users];
         initialRandom(servers, requests, users);
+        calculateServerTimes(servers, nServ);
     }
 
     /**
@@ -37,6 +38,8 @@ public class FileDistribSystem {
      * @param users    Users count
      */
     public void initialRandom(Servers servers, Requests requests, int users) {
+        //system = new int[users][][];
+
         ArrayList<ArrayList<ArrayList<Integer>>> st = new ArrayList<>();
         for (int i = 0; i < users; ++i) {
             st.add(new ArrayList<>());
@@ -129,5 +132,18 @@ public class FileDistribSystem {
             }
         }
         return res;
+    }
+
+    private void calculateServerTimes(Servers servers, int nServ){
+        serverTimes= new int[nServ];
+        for (int i=0; i<nServ; i++){
+            serverTimes[i]=0;
+        }
+        for (int uid = 0; uid < system.length; uid++) {
+            int[][] user = system[uid];
+            for (int[] request : user) {
+                serverTimes[request[0]] += servers.tranmissionTime(request[0],idUserConBack[uid]);
+            }
+        }
     }
 }
