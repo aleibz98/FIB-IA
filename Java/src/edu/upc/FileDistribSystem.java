@@ -13,15 +13,13 @@ import java.util.Set;
  */
 public class FileDistribSystem {
 
+    public static HashMap<Integer, Integer> idUserCon = new HashMap<>();
+    public static int[] idUserConBack;
     /**
      * Vector containing all the requests of every user, every request is of size 2 [IdServer, IdFile]
      * Users[] => Requests[] => [IdServer,IdFile]
      */
     public int[][][] system;
-
-    public HashMap<Integer, Integer> idUserCon = new HashMap<>();
-
-    public int[] idUserConBack;
 
     /**
      * Creates the initial state
@@ -72,8 +70,8 @@ public class FileDistribSystem {
         Integer userID = idUserCon.get(uid);
         if (userID == null) {
             userID = idUserCon.size();
-            idUserCon.put(uid, idUserCon.size()); // Add new ID
-            idUserConBack[userID] = uid;       // Store new ID for backwards conversion
+            idUserCon.put(uid, idUserCon.size());   // Add new ID
+            idUserConBack[userID] = uid;            // Store new ID for backwards conversion
         }
         uid = userID;
         return uid;
