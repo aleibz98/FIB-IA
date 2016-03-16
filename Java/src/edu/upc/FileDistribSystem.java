@@ -149,7 +149,7 @@ public class FileDistribSystem {
         for (int uid = 0; uid < system.length; uid++) {
             int[][] user = system[uid];
             for (int[] request : user) {
-                serverTimes[request[0]] += servers.tranmissionTime(request[0],);
+                serverTimes[request[0]] += servers.tranmissionTime(request[0],idUserConBack[uid]);
             }
         }
     }
