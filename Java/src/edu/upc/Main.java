@@ -11,8 +11,8 @@ public class Main {
         int nserv = 50;
         int nrep = 5;
 
-        Requests r =  new Requests(users, requests, seed);
+        Requests r = new Requests(users, requests, seed);
         Servers s = new Servers(nserv, nrep, seed);
-        FileDistribSystem fds = new FileDistribSystem(s,r,users);
+        FileDistribSystem fds = new FileDistribSystem(s, r, users);
     }
 }
