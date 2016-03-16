@@ -19,13 +19,19 @@ public class FileDistribSystem {
      */
     public int[][][] system;
 
+    /**
+     * Vector containing the total time each server takes to process all of its requests
+     */
+    public int[] serverTimes;
+
     public HashMap<Integer, Integer> idConversion = new HashMap<>();
 
     /**
      * Creates the initial state
      */
-    public FileDistribSystem(Servers servers, Requests requests, int users) {
+    public FileDistribSystem(Servers servers, Requests requests, int users, int nServ) {
         initialRandom(servers, requests, users);
+        calculateServerTimes(servers, nServ);
     }
 
     public void initialRandom(Servers servers, Requests requests, int users) {
@@ -119,5 +125,18 @@ public class FileDistribSystem {
             }
         }
         return res;
+    }
+
+    private void calculateServerTimes(Servers servers, int nServ){
+        serverTimes= new int[nServ];
+        for (int i=0; i<nServ; i++){
+            serverTimes[i]=0;
+        }
+        for (int uid = 0; uid < system.length; uid++) {
+            int[][] user = system[uid];
+            for (int[] request : user) {
+                serverTimes[request[0]] += servers.tranmissionTime(request[0],);
+            }
+        }
     }
 }
