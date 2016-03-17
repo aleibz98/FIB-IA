@@ -6,8 +6,8 @@ import IA.DistFS.Servers;
 import java.util.Iterator;
 import java.util.Set;
 
-public class Main {
-    public static void main(String[] args){
+public class FileDistribSystemDemo {
+    public static void main(String[] args) throws Servers.WrongParametersException {
         int users = 200;
         int requests = 5;
         int seed = 0;
