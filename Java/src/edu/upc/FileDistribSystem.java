@@ -15,6 +15,8 @@ public class FileDistribSystem {
 
     public static HashMap<Integer, Integer> idUserCon = new HashMap<>();
     public static int[] idUserConBack;
+    public static int[] serverTimes;
+
     /**
      * Vector containing all the requests of every user, every request is of size 2 [IdServer, IdFile]
      * Users[] => Requests[] => [IdServer,IdFile]
