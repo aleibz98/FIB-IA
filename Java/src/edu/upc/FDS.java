@@ -3,10 +3,7 @@ package edu.upc;
 import IA.DistFS.Requests;
 import IA.DistFS.Servers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by Joan on 15/03/2016.
@@ -35,10 +32,10 @@ public class FDS {
     /**
      * Creates the initial state
      */
-    public FDS(Servers servers, Requests requests, int users, int nServ, initialType init) {
+    public FDS(Servers servers, Requests requests, int users, int nServ, InitialType init) {
         idUserConBack = new int[users];
-        if (init == initialType.Random) initialRandom(servers, requests, users);
-        else if (init == initialType.BestServer) initialBestServer(servers, requests, users);
+        if (init == InitialType.RANDOM) initialRandom(servers, requests, users);
+        else if (init == InitialType.BEST_SERVER) initialBestServer(servers, requests, users);
         calculateServerTimes(servers, nServ);
     }
 
@@ -63,10 +60,8 @@ public class FDS {
 
             Integer fid = req[1];
             Set<Integer> locations = servers.fileLocations(fid);
-
-            Iterator<Integer> itLoc = locations.iterator();
             ArrayList<Integer> query = new ArrayList<>();
-            query.add(itLoc.next());
+            query.add((Integer) getRandomFromSet(locations));
             query.add(fid);
 
             st.get(uid).add(query);
@@ -154,16 +149,29 @@ public class FDS {
         for (int uid = 0; uid < system.length; uid++) {
             int[][] user = system[uid];
             for (int[] request : user) {
-                serverTimes[request[0]] += servers.tranmissionTime(request[0],idUserConBack[uid]);
+                serverTimes[request[0]] += servers.tranmissionTime(request[0], idUserConBack[uid]);
             }
         }
+    }
+
+    private Object getRandomFromSet(Set set) {
+        int size = set.size();
+        int item = new Random().nextInt(size);
+        int i = 0;
+        for (Object b : set) {
+            if (i == item) return b;
+            ++i;
+        }
+        Iterator it = set.iterator();
+        return it.next();
     }
 
     public int[] getServertimes() {
         return serverTimes;
     }
 
-    public enum initialType {
-        Random, BestServer
+    public enum InitialType {
+        RANDOM, BEST_SERVER
+
     }
 }

@@ -23,7 +23,7 @@ public class FDSDemo {
         // Inicialitazio del problema
         Requests r = new Requests(users, requests, seed);
         Servers s = new Servers(nserv, nrep, seed);
-        FDS fds = new FDS(s, r, users, nserv, FDS.initialType.Random);
+        FDS fds = new FDS(s, r, users, nserv, FDS.InitialType.RANDOM);
         HillClimbing(fds);
         SimulatedAnnealing(fds);
     }
