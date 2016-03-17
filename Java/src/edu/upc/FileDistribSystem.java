@@ -28,6 +28,11 @@ public class FileDistribSystem {
      */
     public static int[] serverTimes;
 
+
+
+    public enum initialType{
+        Random, BestServer
+    }
     /**
      * Vector containing all the requests of every user, every request is of size 2 [IdServer, IdFile]
      * Users[] => Requests[] => [IdServer,IdFile]
@@ -37,9 +42,10 @@ public class FileDistribSystem {
     /**
      * Creates the initial state
      */
-    public FileDistribSystem(Servers servers, Requests requests, int users, int nServ) {
+    public FileDistribSystem(Servers servers, Requests requests, int users, int nServ, initialType init) {
         idUserConBack = new int[users];
-        initialRandom(servers, requests, users);
+        if (init==initialType.Random)initialRandom(servers, requests, users);
+        else if (init==initialType.BestServer)initialBestServer(servers, requests, users);
         calculateServerTimes(servers, nServ);
     }
 
@@ -50,7 +56,7 @@ public class FileDistribSystem {
      * @param requests All requests to the servers
      * @param users    Users count
      */
-    public void initialRandom(Servers servers, Requests requests, int users) {
+    private void initialRandom(Servers servers, Requests requests, int users) {
         //system = new int[users][][];
 
         ArrayList<ArrayList<ArrayList<Integer>>> st = new ArrayList<>();
@@ -93,7 +99,7 @@ public class FileDistribSystem {
         return uid;
     }
 
-    public void initialBestServer(Servers servers, Requests requests, int users) {
+    private void initialBestServer(Servers servers, Requests requests, int users) {
         ArrayList<ArrayList<ArrayList<Integer>>> st = new ArrayList<>();
         for (int i = 0; i < users; ++i) {
             st.add(new ArrayList<>());
@@ -158,5 +164,9 @@ public class FileDistribSystem {
                 serverTimes[request[0]] += servers.tranmissionTime(request[0],idUserConBack[uid]);
             }
         }
+    }
+
+    public int[] getServertimes() {
+        return serverTimes;
     }
 }
