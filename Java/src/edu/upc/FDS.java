@@ -11,7 +11,7 @@ import java.util.Set;
 /**
  * Created by Joan on 15/03/2016.
  */
-public class FileDistribSystem {
+public class FDS {
 
     /**
      * Used to convert from idUser to array position
@@ -27,25 +27,18 @@ public class FileDistribSystem {
      * Total load (time) for every server
      */
     public static int[] serverTimes;
-
-
-
-    public enum initialType{
-        Random, BestServer
-    }
     /**
      * Vector containing all the requests of every user, every request is of size 2 [IdServer, IdFile]
      * Users[] => Requests[] => [IdServer,IdFile]
      */
     public int[][][] system;
-
     /**
      * Creates the initial state
      */
-    public FileDistribSystem(Servers servers, Requests requests, int users, int nServ, initialType init) {
+    public FDS(Servers servers, Requests requests, int users, int nServ, initialType init) {
         idUserConBack = new int[users];
-        if (init==initialType.Random)initialRandom(servers, requests, users);
-        else if (init==initialType.BestServer)initialBestServer(servers, requests, users);
+        if (init == initialType.Random) initialRandom(servers, requests, users);
+        else if (init == initialType.BestServer) initialBestServer(servers, requests, users);
         calculateServerTimes(servers, nServ);
     }
 
@@ -168,5 +161,9 @@ public class FileDistribSystem {
 
     public int[] getServertimes() {
         return serverTimes;
+    }
+
+    public enum initialType {
+        Random, BestServer
     }
 }
