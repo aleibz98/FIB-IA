@@ -3,7 +3,6 @@ package edu.upc;
 import IA.DistFS.Requests;
 import IA.DistFS.Servers;
 
-import java.util.Iterator;
 import java.util.Set;
 
 public class FileDistribSystemDemo {
@@ -32,7 +31,7 @@ public class FileDistribSystemDemo {
             }
         }
         System.out.println("Times:");
-        FileDistribSystem fds = new FileDistribSystem(s, r, users, nserv, FileDistribSystem.initialType.BestServer);
+        FDS fds = new FDS(s, r, users, nserv, FDS.InitialType.BEST_SERVER);
 
         int[] servertimes = fds.getServertimes();
         for (int i = 0, servertimesLength = servertimes.length; i < servertimesLength; i++) {
