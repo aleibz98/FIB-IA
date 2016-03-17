@@ -32,7 +32,7 @@ public class FileDistribSystemDemo {
             }
         }
         System.out.println("Times:");
-        FileDistribSystem fds = new FileDistribSystem(s, r, users, nserv, FileDistribSystem.initialType.Random);
+        FileDistribSystem fds = new FileDistribSystem(s, r, users, nserv, FileDistribSystem.initialType.BestServer);
 
         int[] servertimes = fds.getServertimes();
         for (int i = 0, servertimesLength = servertimes.length; i < servertimesLength; i++) {

@@ -6,8 +6,15 @@ import aima.search.framework.HeuristicFunction;
  * Created by joan.marce.igual on 17/03/2016.
  */
 public class FileDistribSystemHeuristicFunction implements HeuristicFunction {
+
     @Override
-    public double getHeuristicValue(Object o) {
-        return 0;
+    public double getHeuristicValue(Object state) {
+        FileDistribSystem fds = (FileDistribSystem) state;
+        int[] serverTimes = fds.getServertimes();
+        int max=0;
+        for (int time: serverTimes){
+            if (time>max)max=time;
+        }
+        return max;
     }
 }
