@@ -13,8 +13,19 @@ import java.util.Set;
  */
 public class FileDistribSystem {
 
+    /**
+     * Used to convert from idUser to array position
+     */
     public static HashMap<Integer, Integer> idUserCon = new HashMap<>();
+
+    /**
+     * Used to convert from array position to idUser
+     */
     public static int[] idUserConBack;
+
+    /**
+     * Total load (time) for every server
+     */
     public static int[] serverTimes;
 
     /**
