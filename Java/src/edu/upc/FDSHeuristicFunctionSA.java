@@ -7,7 +7,13 @@ import aima.search.framework.HeuristicFunction;
  */
 public class FDSHeuristicFunctionSA implements HeuristicFunction {
     @Override
-    public double getHeuristicValue(Object o) {
-        return 0;
+    public double getHeuristicValue(Object state) {
+        FileDistribSystem fds = (FileDistribSystem) state;
+        int[] serverTimes = fds.getServertimes();
+        int max=0;
+        for (int time: serverTimes){
+            if (time>max)max=time;
+        }
+        return max;
     }
 }
