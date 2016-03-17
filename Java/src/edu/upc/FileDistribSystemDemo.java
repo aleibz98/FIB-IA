@@ -3,7 +3,7 @@ package edu.upc;
 import IA.DistFS.Requests;
 import IA.DistFS.Servers;
 
-public class Main {
+public class FileDistribSystemDemo {
     public static void main(String[] args) throws Servers.WrongParametersException {
         int users = 200;
         int requests = 5;
