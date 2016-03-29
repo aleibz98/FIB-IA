@@ -7,6 +7,9 @@ import aima.search.framework.HeuristicFunction;
  */
 public class FDSHeuristicFunction implements HeuristicFunction {
 
+    /**
+     * Returns the server with the maximum value
+     */
     public double getHeuristicValue(Object state) {
         FDS fds = (FDS) state;
         int[] serverTimes = fds.getServertimes();
