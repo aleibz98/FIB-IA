@@ -7,10 +7,15 @@ import aima.search.framework.HeuristicFunction;
  */
 public class FDSHeuristicFunction2 implements HeuristicFunction {
 
+    //factors a modificar per trobar un bon heuristic
+    static float factor = 1;
+    static boolean squared = true;
+
     /**
      * Returns the server with the maximum value
      */
     public double getHeuristicValue(Object state) {
+
         FDS fds = (FDS) state;
         int[] serverTimes = fds.getServertimes();
 
@@ -20,6 +25,10 @@ public class FDSHeuristicFunction2 implements HeuristicFunction {
         int mig = sum / serverTimes.length;
         int var = 0;
         for (int time : serverTimes) var += (time - mig) * (time - mig);
-        return var;
+
+        double res;
+        if (squared) res = var + factor * mig * mig;
+        else res = var + factor * mig;
+        return res;
     }
 }
