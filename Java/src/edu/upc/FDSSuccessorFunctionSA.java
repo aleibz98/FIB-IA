@@ -20,20 +20,21 @@ public class FDSSuccessorFunctionSA implements SuccessorFunction {
 
 
         int uid = myRandom.nextInt(state.getNUsers());
-        int rid = myRandom.nextInt(state.getNRequests(i));
+        int rid = myRandom.nextInt(state.getNRequests(uid));
 
         //POSSIBLEMENT A MILLORAR EFICIENCIA
-        int[] servers = FDS.getServers().fileLocations(state.getFid(uid, rid)).toArray();
-        int sid = servers[myRandom.nextInt(servers.length)];
+        Object[] servers = FDS.getServers().fileLocations(state.getFid(uid, rid)).toArray();
+        int sid = (int) servers[myRandom.nextInt(servers.length)];
 
         FDS newState = new FDS(state);
+        int oldSid=state.getSid(uid,rid);
         newState.swapServer(uid, rid, sid);
 
 
         double v = heuristic.getHeuristicValue(newState);
         //String S = "Intercambio del " + " " + state.getSid() + " " + j + " Coste(" + v + ") ---> ";
 
-        retVal.add(new Successor("", newState));
+        retVal.add(new Successor("U"+uid+"'s request of F"+state.getFid(uid,rid)+" moved from S"+oldSid+" to S"+sid+": cost "+v, newState));
 
         return retVal;
     }
