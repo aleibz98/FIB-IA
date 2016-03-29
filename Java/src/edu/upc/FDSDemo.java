@@ -7,7 +7,9 @@ import aima.search.framework.Search;
 import aima.search.framework.SearchAgent;
 import aima.search.informed.HillClimbingSearch;
 import aima.search.informed.SimulatedAnnealingSearch;
+import javafx.util.Pair;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -17,17 +19,69 @@ public class FDSDemo {
     static int seed = 0;
     static int nserv = 50;
     static int nrep = 5;
+    static boolean hillClimbing = true;
 
     public static void main(String[] args) throws Servers.WrongParametersException {
+
+        readCommands(args);
+
         // Inicialitazio del problema
         Requests r = new Requests(users, requests, seed);
         Servers s = new Servers(nserv, nrep, seed);
         FDS fds = new FDS(s, r, users, nserv, FDS.InitialType.RANDOM);
 
-        HillClimbing(fds);
-        //SimulatedAnnealing(fds);
+        if (hillClimbing) HillClimbing(fds);
+        else SimulatedAnnealing(fds);
     }
 
+    public static void readCommands(String[] args) throws IllegalArgumentException {
+        if (args.length < 2) return;
+
+        List<String> argsList = new ArrayList<>();
+        List<Pair<String, String>> optsList = new ArrayList<>();
+
+        for (int i = 0; i < args.length; ++i) {
+            switch (args[i].charAt(0)) {
+                case '-':
+                    if (args.length - i < 2)
+                        throw new IllegalArgumentException("Not a valid argument: " + args[i]);
+                    else {
+                        optsList.add(new Pair<>(args[i].substring(1, args[i].length()), args[i + 1]));
+                        ++i;
+                    }
+                    break;
+                default:
+                    argsList.add(args[i]);
+                    break;
+            }
+        }
+
+        for (Pair<String, String> o : optsList) {
+            switch (o.getKey()) {
+                case "u":
+                    users = Integer.valueOf(o.getValue());
+                    break;
+                case "r":
+                    requests = Integer.valueOf(o.getValue());
+                    break;
+                case "seed":
+                    seed = Integer.valueOf(o.getValue());
+                    break;
+                case "serv":
+                    nserv = Integer.valueOf(o.getValue());
+                    break;
+                case "repl":
+                    nrep = Integer.valueOf(o.getValue());
+                    break;
+                case "algorithm":
+                    String al = o.getValue().toLowerCase();
+                    hillClimbing = al.contains("hill");
+                    break;
+                default:
+                    throw new IllegalArgumentException("Not a valid argument: " + o.getKey());
+            }
+        }
+    }
 
     private static void HillClimbing(FDS fds) {
         System.out.println("\nHillClimbing  -->");
