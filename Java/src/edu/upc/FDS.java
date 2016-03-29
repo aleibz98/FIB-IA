@@ -23,7 +23,10 @@ public class FDS {
     /**
      * Total load (time) for every server
      */
+    public static Servers servers;
+
     public int[] serverTimes;
+
     /**
      * Vector containing all the requests of every user, every request is of size 2 [IdServer, IdFile]
      * Users[] => Requests[] => [IdServer,IdFile]
@@ -37,6 +40,7 @@ public class FDS {
         if (init == InitialType.RANDOM) initialRandom(servers, requests, users);
         else if (init == InitialType.BEST_SERVER) initialBestServer(servers, requests, users);
         calculateServerTimes(servers, nServ);
+        FDS.servers = servers;
     }
 
     public FDS(FDS f) {
@@ -175,6 +179,26 @@ public class FDS {
         return serverTimes;
     }
 
+    public int getNUsers(){
+        return system.length;
+    }
+
+    public static Servers getServers() {
+        return servers;
+    }
+
+    public int getNRequests(int uid){
+        return system[uid].length;
+    }
+
+    public int getSid(int uid, int rid){
+        return system[uid][rid][0];
+    }
+
+    public int getFid(int uid, int rid){
+        return system[uid][rid][1];
+    }
+
     public String toString() {
         String ret = "Server Times:\n";
         for (int i = 0; i < serverTimes.length; ++i) {
@@ -196,6 +220,5 @@ public class FDS {
 
     public enum InitialType {
         RANDOM, BEST_SERVER
-
     }
 }
