@@ -12,6 +12,7 @@ import javafx.util.Pair;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.Random;
 
 public class FDSDemo {
     static int users = 200;
@@ -25,10 +26,12 @@ public class FDSDemo {
 
         readCommands(args);
 
+        if (seed == -1) seed = new Random().nextInt();
+
         // Inicialitazio del problema
         Requests r = new Requests(users, requests, seed);
         Servers s = new Servers(nserv, nrep, seed);
-        FDS fds = new FDS(s, r, users, nserv, FDS.InitialType.RANDOM);
+        FDS fds = new FDS(s, r, users, nserv, FDS.InitialType.RANDOM, seed);
 
         if (hillClimbing) HillClimbing(fds);
         else SimulatedAnnealing(fds);

@@ -14,30 +14,27 @@ public class FDS {
      * Used to convert from idUser to array position
      */
     public static HashMap<Integer, Integer> idUserCon = new HashMap<>();
-
     /**
      * Used to convert from array position to idUser
      */
     public static int[] idUserConBack;
-
     /**
      * Total load (time) for every server
      */
     public static Servers servers;
-
-    public int[] serverTimes;
-
     /**
      * Vector containing all the requests of every user, every request is of size 2 [IdServer, IdFile]
      * Users[] => Requests[] => [IdServer,IdFile]
      */
     public int[][][] system;
+    public int[] serverTimes;
+
     /**
      * Creates the initial state
      */
-    public FDS(Servers servers, Requests requests, int users, int nServ, InitialType init) {
+    public FDS(Servers servers, Requests requests, int users, int nServ, InitialType init, long seed) {
         idUserConBack = new int[users];
-        if (init == InitialType.RANDOM) initialRandom(servers, requests, users);
+        if (init == InitialType.RANDOM) initialRandom(servers, requests, users, seed);
         else if (init == InitialType.BEST_SERVER) initialBestServer(servers, requests, users);
         calculateServerTimes(servers, nServ);
         FDS.servers = servers;
@@ -48,6 +45,10 @@ public class FDS {
         system = f.system.clone();
     }
 
+    public static Servers getServers() {
+        return servers;
+    }
+
     /**
      * Creates initial state with random assignment
      *
@@ -55,7 +56,7 @@ public class FDS {
      * @param requests All requests to the servers
      * @param users    Users count
      */
-    private void initialRandom(Servers servers, Requests requests, int users) {
+    private void initialRandom(Servers servers, Requests requests, int users, long seed) {
         //system = new int[users][][];
 
         ArrayList<ArrayList<ArrayList<Integer>>> st = new ArrayList<>();
@@ -70,7 +71,7 @@ public class FDS {
             Integer fid = req[1];
             Set<Integer> locations = servers.fileLocations(fid);
             ArrayList<Integer> query = new ArrayList<>();
-            query.add((Integer) getRandomFromSet(locations));
+            query.add((Integer) getRandomFromSet(locations, seed));
             query.add(fid);
 
             st.get(uid).add(query);
@@ -163,9 +164,9 @@ public class FDS {
         }
     }
 
-    private Object getRandomFromSet(Set set) {
+    private Object getRandomFromSet(Set set, long seed) {
         int size = set.size();
-        int item = new Random().nextInt(size);
+        int item = new Random(seed).nextInt(size);
         int i = 0;
         for (Object b : set) {
             if (i == item) return b;
@@ -181,10 +182,6 @@ public class FDS {
 
     public int getNUsers(){
         return system.length;
-    }
-
-    public static Servers getServers() {
-        return servers;
     }
 
     public int getNRequests(int uid){
@@ -218,10 +215,6 @@ public class FDS {
         return ret;
     }
 
-    public enum InitialType {
-        RANDOM, BEST_SERVER
-    }
-
     public void swapServer (int uid, int rid, int sid){
 
         int[] req = system[uid][rid];
@@ -232,5 +225,9 @@ public class FDS {
         serverTimes[sid]    += servers.tranmissionTime(sid,    idUserConBack[uid]);
 
 
+    }
+
+    public enum InitialType {
+        RANDOM, BEST_SERVER
     }
 }
