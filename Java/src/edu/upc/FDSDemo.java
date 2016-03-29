@@ -17,16 +17,16 @@ import java.util.Random;
 public class FDSDemo {
     static int users = 200;
     static int requests = 5;
-    static int seed = 0;
+    static int seed = 1234;
     static int nserv = 50;
     static int nrep = 5;
     static boolean hillClimbing = true;
 
     public static void main(String[] args) throws Servers.WrongParametersException {
-
         readCommands(args);
-
         if (seed == -1) seed = new Random().nextInt();
+
+        long start = System.currentTimeMillis();
 
         // Inicialitazio del problema
         Requests r = new Requests(users, requests, seed);
@@ -35,6 +35,10 @@ public class FDSDemo {
 
         if (hillClimbing) HillClimbing(fds);
         else SimulatedAnnealing(fds);
+
+        long end = System.currentTimeMillis();
+
+        System.out.println("Elapsed time " + Long.toString(end - start) + "ms");
     }
 
     public static void readCommands(String[] args) throws IllegalArgumentException {
