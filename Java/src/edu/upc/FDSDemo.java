@@ -8,7 +8,6 @@ import aima.search.framework.SearchAgent;
 import aima.search.informed.HillClimbingSearch;
 import aima.search.informed.SimulatedAnnealingSearch;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
@@ -24,6 +23,7 @@ public class FDSDemo {
         Requests r = new Requests(users, requests, seed);
         Servers s = new Servers(nserv, nrep, seed);
         FDS fds = new FDS(s, r, users, nserv, FDS.InitialType.RANDOM);
+
         HillClimbing(fds);
         //SimulatedAnnealing(fds);
     }
@@ -47,7 +47,7 @@ public class FDSDemo {
     private static void SimulatedAnnealing(FDS fds) {
         System.out.println("\nTSP Simulated Annealing  -->");
         try {
-            Problem problem = new Problem(fds, new FDSSuccessorFunction(), new FDSGoalTest(), new FDSHeuristicFunctionSA());
+            Problem problem = new Problem(fds, new FDSSuccessorFunction(), new FDSGoalTest(), new FDSHeuristicFunction());
             SimulatedAnnealingSearch search = new SimulatedAnnealingSearch(2000, 100, 5, 0.001);
             //search.traceOn();
             SearchAgent agent = new SearchAgent(problem, search);
@@ -61,9 +61,8 @@ public class FDSDemo {
     }
 
     private static void printInstrumentation(Properties properties) {
-        Iterator keys = properties.keySet().iterator();
-        while (keys.hasNext()) {
-            String key = (String) keys.next();
+        for (Object o : properties.keySet()) {
+            String key = (String) o;
             String property = properties.getProperty(key);
             System.out.println(key + " : " + property);
         }
@@ -71,10 +70,7 @@ public class FDSDemo {
     }
 
     private static void printActions(List actions) {
-        for (int i = 0; i < actions.size(); i++) {
-            String action = (String) actions.get(i);
-            System.out.println(action);
-        }
+        actions.forEach(System.out::println);
     }
 
 }
