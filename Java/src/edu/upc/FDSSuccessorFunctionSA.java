@@ -20,6 +20,7 @@ public class FDSSuccessorFunctionSA implements SuccessorFunction {
 
 
         int uid = myRandom.nextInt(state.getNUsers());
+        while (state.getNRequests(uid)==0)uid = myRandom.nextInt(state.getNUsers());
         int rid = myRandom.nextInt(state.getNRequests(uid));
 
         //POSSIBLEMENT A MILLORAR EFICIENCIA

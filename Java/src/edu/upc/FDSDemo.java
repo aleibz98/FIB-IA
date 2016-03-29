@@ -24,8 +24,8 @@ public class FDSDemo {
         Servers s = new Servers(nserv, nrep, seed);
         FDS fds = new FDS(s, r, users, nserv, FDS.InitialType.RANDOM);
 
-        HillClimbing(fds);
-        //SimulatedAnnealing(fds);
+        //HillClimbing(fds);
+        SimulatedAnnealing(fds);
     }
 
 
@@ -47,7 +47,7 @@ public class FDSDemo {
     private static void SimulatedAnnealing(FDS fds) {
         System.out.println("\nTSP Simulated Annealing  -->");
         try {
-            Problem problem = new Problem(fds, new FDSSuccessorFunction(), new FDSGoalTest(), new FDSHeuristicFunction());
+            Problem problem = new Problem(fds, new FDSSuccessorFunctionSA(), new FDSGoalTest(), new FDSHeuristicFunction());
             SimulatedAnnealingSearch search = new SimulatedAnnealingSearch(2000, 100, 5, 0.001);
             //search.traceOn();
             SearchAgent agent = new SearchAgent(problem, search);
