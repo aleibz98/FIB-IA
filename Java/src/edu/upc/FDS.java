@@ -221,4 +221,16 @@ public class FDS {
     public enum InitialType {
         RANDOM, BEST_SERVER
     }
+
+    public void swapServer (int uid, int rid, int sid){
+
+        int[] req = system[uid][rid];
+        int oldSid = req[0];
+        req[0]=sid;
+
+        serverTimes[oldSid] -= servers.tranmissionTime(oldSid, idUserConBack[uid]);
+        serverTimes[sid]    += servers.tranmissionTime(sid,    idUserConBack[uid]);
+
+
+    }
 }
