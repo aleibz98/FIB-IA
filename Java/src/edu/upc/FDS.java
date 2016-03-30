@@ -27,7 +27,7 @@ public class FDS {
      * Users[] => Requests[] => [IdServer,IdFile]
      */
     public int[][] system;
-    public int[][] req;
+    public static int[][] req;
     public long[] serverTimes;
 
     /**
@@ -44,7 +44,6 @@ public class FDS {
     public FDS(FDS f) {
         serverTimes = f.serverTimes.clone();
         system = f.system.clone();
-        req = f.req.clone();
     }
 
     public static Servers getServers() {
