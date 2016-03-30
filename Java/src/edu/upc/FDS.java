@@ -202,6 +202,22 @@ public class FDS {
         return sum;
     }
 
+    public int getMaxTime() {
+        int max = serverTimes[0];
+        for (int i = 1; i < serverTimes.length; ++i) {
+            if (serverTimes[i] > max) max = serverTimes[i];
+        }
+        return max;
+    }
+
+    public int getMinTime() {
+        int min = serverTimes[0];
+        for (int i = 1; i < serverTimes.length; ++i) {
+            if (serverTimes[i] < min) min = serverTimes[i];
+        }
+        return min;
+    }
+
     public String toString() {
         String ret = "Server Times:\n";
         for (int i = 0; i < serverTimes.length; ++i) {
