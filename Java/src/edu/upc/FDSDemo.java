@@ -10,18 +10,20 @@ import aima.search.informed.SimulatedAnnealingSearch;
 import javafx.util.Pair;
 
 import java.io.PrintStream;
-import java.util.*;
+import java.util.Locale;
+import java.util.Properties;
+import java.util.Random;
 
 @SuppressWarnings("unchecked")
 public class FDSDemo {
-    static int users = 200;
-    static int requests = 5;
-    static int seed = 1234;
-    static int nserv = 50;
-    static int nrep = 5;
-    static int repetitions = 1;
-    static boolean hillClimbing = true;
-    static boolean printActions = false;
+    private static int users = 200;
+    private static int requests = 5;
+    private static int seed = 1234;
+    private static int nserv = 50;
+    private static int nrep = 5;
+    private static int repetitions = 1;
+    private static boolean hillClimbing = true;
+    private static boolean printActions = false;
 
     public static void main(String[] args) throws Servers.WrongParametersException {
         Locale.setDefault(new Locale("ca"));
@@ -42,7 +44,7 @@ public class FDSDemo {
         } else out.println("TestMode: OFF");
 
         SearchAgent agent = null;
-        FDS res = null;
+        FDS res;
         long tTime = 0;
         long transTime = 0;
         long maxTime = 0, minTime = 0;
@@ -108,15 +110,12 @@ public class FDSDemo {
         out.println("Average time: " + String.format("%,.2f ms", tTime / ((double) repetitions)));
     }
 
-    public static void checkParameter(int val, String s) throws IllegalArgumentException {
+    private static void checkParameter(int val, String s) throws IllegalArgumentException {
         if (val <= 0) throw new IllegalArgumentException("Not a valid argument: " + s);
     }
 
-    public static void readCommands(String[] args) throws IllegalArgumentException {
+    private static void readCommands(String[] args) throws IllegalArgumentException {
         if (args.length < 2) return;
-
-        List<String> argsList = new ArrayList<>();
-        List<Pair<String, String>> optsList = new ArrayList<>();
 
         for (int i = 0; i < args.length; i += 2) {
             String sub = args[i].substring(1);
@@ -199,10 +198,6 @@ public class FDSDemo {
             System.out.println(key + " : " + property);
         }
 
-    }
-
-    private static void printActions(List actions) {
-        actions.forEach(System.out::println);
     }
 
 }
