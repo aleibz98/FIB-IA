@@ -168,6 +168,13 @@ public class FDS {
         }
     }
 
+    public boolean checkConsistency() {
+        long[] aux = serverTimes.clone();
+        calculateServerTimes(FDS.servers, serverTimes.length);
+
+        return Arrays.equals(aux, serverTimes);
+    }
+
     private Object getRandomFromSet(Set set, long seed) {
         int size = set.size();
         int item = new Random(seed).nextInt(size);
