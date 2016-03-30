@@ -12,9 +12,9 @@ public class FDSHeuristicFunction implements HeuristicFunction {
      */
     public double getHeuristicValue(Object state) {
         FDS fds = (FDS) state;
-        int[] serverTimes = fds.getServerTimes();
-        int max = 0;
-        for (int time : serverTimes) {
+        long[] serverTimes = fds.getServerTimes();
+        long max = 0;
+        for (long time : serverTimes) {
             if (time > max) max = time;
         }
         return max;

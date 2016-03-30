@@ -22,7 +22,7 @@ public class FDSSuccessorFunction implements SuccessorFunction {
                     int oldSid = state.getSid(uid, rid);
                     newState.swapServer(uid, rid, sid);
                     double v = heuristic.getHeuristicValue(newState);
-                    int time = newState.getTotalTime();
+                    long time = newState.getTotalTime();
                     retVal.add(new Successor(
                             "U" + uid + " -> F" + state.getFid(uid, rid) + " from S" +
                             oldSid + " -> S" + sid + ": S=" + v + "ms T=" + time + "ms",

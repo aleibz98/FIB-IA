@@ -17,14 +17,14 @@ public class FDSHeuristicFunction2 implements HeuristicFunction {
     public double getHeuristicValue(Object state) {
 
         FDS fds = (FDS) state;
-        int[] serverTimes = fds.getServerTimes();
+        long[] serverTimes = fds.getServerTimes();
 
         int sum = 0;
-        for (int time : serverTimes) sum += time;
+        for (long time : serverTimes) sum += time;
 
         int mig = sum / serverTimes.length;
         int var = 0;
-        for (int time : serverTimes) var += (time - mig) * (time - mig);
+        for (long time : serverTimes) var += (time - mig) * (time - mig);
 
         double res;
         if (squared) res = var + factor * mig * mig;

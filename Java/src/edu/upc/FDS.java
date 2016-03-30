@@ -26,8 +26,9 @@ public class FDS {
      * Vector containing all the requests of every user, every request is of size 2 [IdServer, IdFile]
      * Users[] => Requests[] => [IdServer,IdFile]
      */
-    public int[][][] system;
-    public int[] serverTimes;
+    public int[][] system;
+    public int[][] req;
+    public long[] serverTimes;
 
     /**
      * Creates the initial state
@@ -59,25 +60,29 @@ public class FDS {
     private void initialRandom(Servers servers, Requests requests, int users, long seed) {
         //system = new int[users][][];
 
-        ArrayList<ArrayList<ArrayList<Integer>>> st = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> st = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> r = new ArrayList<>();
+
         for (int i = 0; i < users; ++i) {
             st.add(new ArrayList<>());
+            r.add(new ArrayList<>());
         }
 
         for (int i = 0; i < requests.size(); ++i) {
             int[] req = requests.getRequest(i);
             int uid = getUid(req[0]);
+            int fid = req[1];
 
-            Integer fid = req[1];
             Set<Integer> locations = servers.fileLocations(fid);
             ArrayList<Integer> query = new ArrayList<>();
-            query.add((Integer) getRandomFromSet(locations, seed));
             query.add(fid);
 
-            st.get(uid).add(query);
+            st.get(uid).add((Integer) getRandomFromSet(locations, seed));
+            r.get(uid).add(fid);
         }
 
         system = convertToArray(st);
+        req = convertToArray(r);
     }
 
     /**
@@ -98,19 +103,21 @@ public class FDS {
     }
 
     private void initialBestServer(Servers servers, Requests requests, int users) {
-        ArrayList<ArrayList<ArrayList<Integer>>> st = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> st = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> r = new ArrayList<>();
+
         for (int i = 0; i < users; ++i) {
             st.add(new ArrayList<>());
         }
         for (int i = 0; i < requests.size(); ++i) {
             int[] req = requests.getRequest(i);
             int uid = getUid(req[0]);
-
             int fid = req[1];
+
             Set<Integer> locations = servers.fileLocations(fid);
 
             int bestSid = -1;
-            int bestTime = 10000;
+            long bestTime = 1000000;
 
             for (int sid : locations) {
                 if (bestSid == -1) {
@@ -123,43 +130,40 @@ public class FDS {
                     }
                 }
             }
-            ArrayList<Integer> query = new ArrayList<>();
-            query.add(bestSid);
-            query.add(fid);
 
-            st.get(uid).add(query);
+            st.get(uid).add(bestSid);
+            r.get(uid).add(fid);
         }
         system = convertToArray(st);
+        req = convertToArray(r);
     }
 
     /**
      * Converts from an ArrayList to an Array
+     *
      * @param st Array to convert
      */
-    private int[][][] convertToArray(ArrayList<ArrayList<ArrayList<Integer>>> st) {
+    private int[][] convertToArray(ArrayList<ArrayList<Integer>> st) {
         // Conversion from ArrayList to Array
-        int[][][] res = new int[st.size()][][];
+        int[][] res = new int[st.size()][];
         for (int i = 0; i < st.size(); ++i) {
-            ArrayList<ArrayList<Integer>> req = st.get(i);
-            res[i] = new int[req.size()][2];
+            ArrayList<Integer> req = st.get(i);
+            res[i] = new int[req.size()];
 
-            for (int j = 0; j < req.size(); ++j) {
-                res[i][j][0] = req.get(j).get(0);
-                res[i][j][1] = req.get(j).get(1);
-            }
+            for (int j = 0; j < req.size(); ++j) res[i][j] = req.get(j);
         }
         return res;
     }
 
-    private void calculateServerTimes(Servers servers, int nServ){
-        serverTimes= new int[nServ];
-        for (int i=0; i<nServ; i++){
-            serverTimes[i]=0;
+    private void calculateServerTimes(Servers servers, int nServ) {
+        serverTimes = new long[nServ];
+        for (int i = 0; i < nServ; i++) {
+            serverTimes[i] = 0;
         }
         for (int uid = 0; uid < system.length; uid++) {
-            int[][] user = system[uid];
-            for (int[] request : user) {
-                serverTimes[request[0]] += servers.tranmissionTime(request[0], idUserConBack[uid]);
+            int[] user = req[uid];
+            for (int request : user) {
+                serverTimes[request] += servers.tranmissionTime(request, idUserConBack[uid]);
             }
         }
     }
@@ -176,42 +180,42 @@ public class FDS {
         return it.next();
     }
 
-    public int[] getServerTimes() {
+    public long[] getServerTimes() {
         return serverTimes;
     }
 
-    public int getNUsers(){
+    public int getNUsers() {
         return system.length;
     }
 
-    public int getNRequests(int uid){
+    public int getNRequests(int uid) {
         return system[uid].length;
     }
 
-    public int getSid(int uid, int rid){
-        return system[uid][rid][0];
+    public int getSid(int uid, int rid) {
+        return system[uid][rid];
     }
 
-    public int getFid(int uid, int rid){
-        return system[uid][rid][1];
+    public int getFid(int uid, int rid) {
+        return req[uid][rid];
     }
 
-    public int getTotalTime() {
+    public long getTotalTime() {
         int sum = 0;
-        for (int n : serverTimes) sum += n;
+        for (long n : serverTimes) sum += n;
         return sum;
     }
 
-    public int getMaxTime() {
-        int max = serverTimes[0];
+    public long getMaxTime() {
+        long max = serverTimes[0];
         for (int i = 1; i < serverTimes.length; ++i) {
             if (serverTimes[i] > max) max = serverTimes[i];
         }
         return max;
     }
 
-    public int getMinTime() {
-        int min = serverTimes[0];
+    public long getMinTime() {
+        long min = serverTimes[0];
         for (int i = 1; i < serverTimes.length; ++i) {
             if (serverTimes[i] < min) min = serverTimes[i];
         }
@@ -221,30 +225,29 @@ public class FDS {
     public String toString() {
         String ret = "Server Times:\n";
         for (int i = 0; i < serverTimes.length; ++i) {
-            ret += Integer.toString(i) + ": " + Integer.toString(serverTimes[i]) + "\n";
+            ret += i + ": " + serverTimes[i] + "\n";
         }
         ret += "\n";
 
         for (int i = 0; i < system.length; ++i) {
-            ret += "User " + Integer.toString(i) + ":\n";
+            ret += "User " + i + ":\n";
 
             for (int j = 0; j < system[i].length; ++j) {
-                ret += "    File: " + Integer.toString(system[i][j][1]) + " Server: " + Integer.toString(system[i][j][0])
-                        + "\n";
+                ret += "    File: " + req[i][j] + " Server: " + system[i][j] + "\n";
             }
         }
 
         return ret;
     }
 
-    public void swapServer (int uid, int rid, int sid){
+    public void swapServer(int uid, int rid, int sid) {
 
-        int[] req = system[uid][rid];
-        int oldSid = req[0];
-        req[0]=sid;
+        int req = system[uid][rid];
+        int oldSid = req;
+        req = sid;
 
         serverTimes[oldSid] -= servers.tranmissionTime(oldSid, idUserConBack[uid]);
-        serverTimes[sid]    += servers.tranmissionTime(sid,    idUserConBack[uid]);
+        serverTimes[sid] += servers.tranmissionTime(sid, idUserConBack[uid]);
 
 
     }
