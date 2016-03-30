@@ -51,6 +51,7 @@ public class FDSDemo {
         if (hillClimbing) System.out.println("\nHillClimbing  -->");
         else System.out.println("\nTSP Simulated Annealing  -->");
 
+        // Repeat the execution and get the mean values
         for (int i = 0; i < repetitions; ++i) {
             System.out.println("Iteration: " + (i + 1));
             long start = System.currentTimeMillis();
@@ -70,7 +71,7 @@ public class FDSDemo {
                     minTime = res.getMinTime();
                 }
             } else {
-                Pair<SearchAgent, Search> p = HillClimbing(fds);
+                Pair<SearchAgent, Search> p = SimulatedAnnealing(fds);
                 agent = p.getKey();
                 res = ((FDS) p.getValue().getGoalState());
                 transTime += res.getTotalTime();
@@ -81,6 +82,8 @@ public class FDSDemo {
             long end = System.currentTimeMillis();
             tTime += end - start;
         }
+
+        // Print results
         if (printActions) printActions(agent.getActions());
         printInstrumentation(agent.getInstrumentation());
         if (hillClimbing) {
