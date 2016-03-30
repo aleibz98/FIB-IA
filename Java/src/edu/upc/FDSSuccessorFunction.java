@@ -1,7 +1,5 @@
 package edu.upc;
 
-import IA.TSP2.ProbTSPBoard;
-import IA.TSP2.ProbTSPHeuristicFunction;
 import aima.search.framework.Successor;
 import aima.search.framework.SuccessorFunction;
 

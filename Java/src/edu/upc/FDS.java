@@ -6,7 +6,7 @@ import IA.DistFS.Servers;
 import java.util.*;
 
 /**
- * Created by Joan on 15/03/2016.
+ * File Distributed System
  */
 public class FDS {
 
@@ -176,7 +176,7 @@ public class FDS {
         return it.next();
     }
 
-    public int[] getServertimes() {
+    public int[] getServerTimes() {
         return serverTimes;
     }
 
