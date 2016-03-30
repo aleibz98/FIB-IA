@@ -22,19 +22,31 @@ public class FDSSuccessorFunction2 implements SuccessorFunction {
         }*/
 
         FDSHeuristicFunction heuristic = new FDSHeuristicFunction();
+        // For all users
         for (int uid = 0; uid < state.getNUsers(); ++uid) {
+            // For all files
             for (int rid = 0; rid < state.getNRequests(uid); ++rid) {
+                // For all files again (not the same as previows for)
                 for (int rid2 = 0; rid != rid2 && rid2 < state.getNRequests(uid); ++rid2) {
+                    // Get File IDs
                     int fid1 = state.getFid(uid, rid);
                     int fid2 = state.getFid(uid, rid2);
+
+                    // For all servers containing file 1
                     for (int sid : FDS.getServers().fileLocations(fid1)) {
                         int oldSid = state.getSid(uid, rid);
+                        // For all servers containing file 2
                         for (int sid2 : FDS.getServers().fileLocations(fid2)) {
+
+                            // Create new state
                             FDS newState = new FDS(state);
                             int oldSid2 = state.getSid(uid, rid2);
+
+                            // Change the servers for the 2 files
                             newState.swapServer(uid, rid, sid);
                             newState.swapServer(uid, rid2, sid2);
 
+                            // Print info
                             double v = heuristic.getHeuristicValue(newState);
                             long time = newState.getTotalTime();
                             retVal.add(new Successor(
