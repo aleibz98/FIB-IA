@@ -241,10 +241,8 @@ public class FDS {
     }
 
     public void swapServer(int uid, int rid, int sid) {
-
-        int req = system[uid][rid];
-        int oldSid = req;
-        req = sid;
+        int oldSid = system[uid][rid];
+        system[uid][rid] = sid;
 
         serverTimes[oldSid] -= servers.tranmissionTime(oldSid, idUserConBack[uid]);
         serverTimes[sid] += servers.tranmissionTime(sid, idUserConBack[uid]);
