@@ -20,7 +20,9 @@ public class FDSDemo {
     static int seed = 1234;
     static int nserv = 50;
     static int nrep = 5;
+    static int repetitions = 10;
     static boolean hillClimbing = true;
+    static boolean testMode = false;
 
     public static void main(String[] args) throws Servers.WrongParametersException {
         readCommands(args);

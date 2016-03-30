@@ -12,17 +12,21 @@ import java.util.List;
 public class FDSSuccessorFunction implements SuccessorFunction {
     public List getSuccessors(Object aState) {
         ArrayList retVal = new ArrayList();
-        FDS state = (FDS)aState;
+        FDS state = (FDS) aState;
         FDSHeuristicFunction heuristic = new FDSHeuristicFunction();
 
-        for(int uid = 0; uid < state.getNUsers(); ++uid) {
-            for(int rid = 0; rid < state.getNRequests(uid); ++rid) {
-                for (int sid : FDS.getServers().fileLocations(state.getFid(uid,rid))){
+        for (int uid = 0; uid < state.getNUsers(); ++uid) {
+            for (int rid = 0; rid < state.getNRequests(uid); ++rid) {
+                for (int sid : FDS.getServers().fileLocations(state.getFid(uid, rid))) {
                     FDS newState = new FDS(state);
-                    int oldSid=state.getSid(uid,rid);
+                    int oldSid = state.getSid(uid, rid);
                     newState.swapServer(uid, rid, sid);
                     double v = heuristic.getHeuristicValue(newState);
-                    retVal.add(new Successor("U"+uid+"'s request of F"+state.getFid(uid,rid)+" moved from S"+oldSid+" to S"+sid+": cost "+v, newState));
+                    int time = newState.getTotalTime();
+                    retVal.add(new Successor(
+                            "U" + uid + " -> F" + state.getFid(uid, rid) + " from S" +
+                            oldSid + " -> S" + sid + ": S=" + v + "ms T=" + time + "ms",
+                            newState));
                 }
             }
         }

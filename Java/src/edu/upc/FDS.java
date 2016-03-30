@@ -196,6 +196,12 @@ public class FDS {
         return system[uid][rid][1];
     }
 
+    public int getTotalTime() {
+        int sum = 0;
+        for (int n : serverTimes) sum += n;
+        return sum;
+    }
+
     public String toString() {
         String ret = "Server Times:\n";
         for (int i = 0; i < serverTimes.length; ++i) {
