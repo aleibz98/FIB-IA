@@ -44,6 +44,7 @@ public class FDS {
     public FDS(FDS f) {
         serverTimes = f.serverTimes.clone();
         system = f.system.clone();
+        req = f.req.clone();
     }
 
     public static Servers getServers() {
@@ -161,7 +162,7 @@ public class FDS {
             serverTimes[i] = 0;
         }
         for (int uid = 0; uid < system.length; uid++) {
-            int[] user = req[uid];
+            int[] user = system[uid];
             for (int request : user) {
                 serverTimes[request] += servers.tranmissionTime(request, idUserConBack[uid]);
             }
