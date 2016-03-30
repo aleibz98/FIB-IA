@@ -22,12 +22,12 @@ public class FDS {
      * Total load (time) for every server
      */
     public static Servers servers;
+    public static int[][] req;
     /**
      * Vector containing all the requests of every user, every request is of size 2 [IdServer, IdFile]
      * Users[] => Requests[] => [IdServer,IdFile]
      */
     public int[][] system;
-    public static int[][] req;
     public long[] serverTimes;
 
     /**
@@ -248,8 +248,6 @@ public class FDS {
 
         serverTimes[oldSid] -= servers.tranmissionTime(oldSid, idUserConBack[uid]);
         serverTimes[sid] += servers.tranmissionTime(sid, idUserConBack[uid]);
-
-
     }
 
     public enum InitialType {

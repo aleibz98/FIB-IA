@@ -54,7 +54,7 @@ public class FDSDemo {
 
         // Repeat the execution and get the mean values
         for (int i = 0; i < repetitions; ++i) {
-            System.out.println("Iteration: " + (i + 1));
+            if (repetitions > 1) System.out.println("Iteration: " + (i + 1));
             long start = System.currentTimeMillis();
 
             // Problem initialization
@@ -168,7 +168,7 @@ public class FDSDemo {
 
     private static Pair<SearchAgent, Search> HillClimbing(FDS fds) {
         try {
-            Problem problem = new Problem(fds, new FDSSuccessorFunction(), new FDSGoalTest(), new FDSHeuristicFunction());
+            Problem problem = new Problem(fds, new FDSSuccessorFunction2(), new FDSGoalTest(), new FDSHeuristicFunction());
             Search search = new HillClimbingSearch();
 
             return new Pair<>(new SearchAgent(problem, search), search);
