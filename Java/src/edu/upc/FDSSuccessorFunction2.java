@@ -27,7 +27,7 @@ public class FDSSuccessorFunction2 implements SuccessorFunction {
             // For all files
             for (int rid = 0; rid < state.getNRequests(uid); ++rid) {
                 // For all files again (not the same as previows for)
-                for (int rid2 = 0; rid != rid2 && rid2 < state.getNRequests(uid); ++rid2) {
+                for (int rid2 = rid + 1; rid2 < state.getNRequests(uid); ++rid2) {
                     // Get File IDs
                     int fid1 = state.getFid(uid, rid);
                     int fid2 = state.getFid(uid, rid2);
@@ -35,6 +35,7 @@ public class FDSSuccessorFunction2 implements SuccessorFunction {
                     // For all servers containing file 1
                     for (int sid : FDS.getServers().fileLocations(fid1)) {
                         int oldSid = state.getSid(uid, rid);
+
                         // For all servers containing file 2
                         for (int sid2 : FDS.getServers().fileLocations(fid2)) {
 

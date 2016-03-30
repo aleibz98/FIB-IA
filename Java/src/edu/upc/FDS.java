@@ -43,7 +43,9 @@ public class FDS {
 
     public FDS(FDS f) {
         serverTimes = f.serverTimes.clone();
-        system = f.system.clone();
+        system = new int[f.system.length][];
+
+        for (int i = 0; i < system.length; ++i) system[i] = f.system[i].clone();
     }
 
     public static Servers getServers() {
@@ -161,9 +163,9 @@ public class FDS {
             serverTimes[i] = 0;
         }
         for (int uid = 0; uid < system.length; uid++) {
-            int[] user = system[uid];
-            for (int request : user) {
-                serverTimes[request] += servers.tranmissionTime(request, idUserConBack[uid]);
+            int[] reqs = system[uid];
+            for (int serv : reqs) {
+                serverTimes[serv] += servers.tranmissionTime(serv, idUserConBack[uid]);
             }
         }
     }
@@ -251,8 +253,10 @@ public class FDS {
         int oldSid = system[uid][rid];
         system[uid][rid] = sid;
 
-        serverTimes[oldSid] -= servers.tranmissionTime(oldSid, idUserConBack[uid]);
-        serverTimes[sid] += servers.tranmissionTime(sid, idUserConBack[uid]);
+        long oldTime = servers.tranmissionTime(oldSid, idUserConBack[uid]);
+        long newTime = servers.tranmissionTime(sid, idUserConBack[uid]);
+        serverTimes[oldSid] -= oldTime;
+        serverTimes[sid] += newTime;
     }
 
     public enum InitialType {
