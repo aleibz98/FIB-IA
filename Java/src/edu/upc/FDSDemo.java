@@ -10,10 +10,7 @@ import aima.search.informed.SimulatedAnnealingSearch;
 import javafx.util.Pair;
 
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Properties;
-import java.util.Random;
+import java.util.*;
 
 public class FDSDemo {
     static int users = 200;
@@ -26,6 +23,7 @@ public class FDSDemo {
     static boolean printActions = false;
 
     public static void main(String[] args) throws Servers.WrongParametersException {
+        Locale.setDefault(new Locale("ca"));
         readCommands(args);
         if (seed == -1) seed = new Random().nextInt();
         PrintStream out = System.out;
@@ -84,7 +82,10 @@ public class FDSDemo {
         }
 
         // Print results
-        if (printActions) printActions(agent.getActions());
+        if (printActions) {
+            List actions = agent.getActions();
+            actions.forEach(out::println);
+        }
         printInstrumentation(agent.getInstrumentation());
         if (hillClimbing) {
             out.println("Total Transmission time: " + String.format("%,d ms", transTime));
@@ -101,8 +102,8 @@ public class FDSDemo {
         }
 
         System.out.println();
-        out.println("Elapsed time: " + tTime + "ms");
-        out.println("Average time: " + tTime / ((double) repetitions) + "ms");
+        out.println("Elapsed time: " + String.format("%,d ms", tTime));
+        out.println("Average time: " + String.format("%,.2f ms", tTime / ((double) repetitions)));
     }
 
     public static void checkParameter(int val, String s) throws IllegalArgumentException {
