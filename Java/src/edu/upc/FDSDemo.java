@@ -12,6 +12,7 @@ import javafx.util.Pair;
 import java.io.PrintStream;
 import java.util.*;
 
+@SuppressWarnings("unchecked")
 public class FDSDemo {
     static int users = 200;
     static int requests = 5;
@@ -54,7 +55,7 @@ public class FDSDemo {
             System.out.println("Iteration: " + (i + 1));
             long start = System.currentTimeMillis();
 
-            // Inicialitazio del problema
+            // Problem initialization
             Requests r = new Requests(users, requests, seed);
             Servers s = new Servers(nserv, nrep, seed);
             FDS fds = new FDS(s, r, users, nserv, FDS.InitialType.RANDOM, seed);
@@ -62,6 +63,7 @@ public class FDSDemo {
             if (hillClimbing) {
                 Pair<SearchAgent, Search> p = HillClimbing(fds);
                 if (i + 1 == repetitions) {
+                    assert p != null;
                     agent = p.getKey();
                     res = ((FDS) p.getValue().getGoalState());
                     transTime = res.getTotalTime();
@@ -70,6 +72,7 @@ public class FDSDemo {
                 }
             } else {
                 Pair<SearchAgent, Search> p = SimulatedAnnealing(fds);
+                assert p != null;
                 agent = p.getKey();
                 res = ((FDS) p.getValue().getGoalState());
                 transTime += res.getTotalTime();
@@ -80,12 +83,11 @@ public class FDSDemo {
             long end = System.currentTimeMillis();
             tTime += end - start;
         }
+        assert agent != null;
+
 
         // Print results
-        if (printActions) {
-            List actions = agent.getActions();
-            actions.forEach(out::println);
-        }
+        if (printActions) agent.getActions().forEach(out::println);
         printInstrumentation(agent.getInstrumentation());
         if (hillClimbing) {
             out.println("Total Transmission time: " + String.format("%,d ms", transTime));
@@ -117,13 +119,20 @@ public class FDSDemo {
         List<Pair<String, String>> optsList = new ArrayList<>();
 
         for (int i = 0; i < args.length; i += 2) {
-            if (args.length - i < 2) throw new IllegalArgumentException("Not a valid argument: " + args[i]);
             String sub = args[i].substring(1);
-            String par = args[i + 1];
+
+            // One parameter options
             switch (sub) {
                 case "a":
                     printActions = true;
-                    break;
+                    continue;
+                default:
+            }
+
+            // Two parameter options
+            if (args.length - i < 2) throw new IllegalArgumentException("Not a valid argument: " + args[i]);
+            String par = args[i + 1];
+            switch (sub) {
                 case "u":
                     users = Integer.valueOf(args[i + 1]);
                     checkParameter(users, par);
@@ -153,7 +162,7 @@ public class FDSDemo {
                     checkParameter(repetitions, par);
                     break;
                 default:
-                    throw new IllegalArgumentException("Not a valid argument: " + args[i]);
+                    throw new IllegalArgumentException("Argument not found: " + args[i]);
             }
         }
     }
