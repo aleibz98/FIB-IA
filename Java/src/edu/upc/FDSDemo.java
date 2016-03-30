@@ -44,7 +44,7 @@ public class FDSDemo {
         } else out.println("TestMode: OFF");
 
         SearchAgent agent = null;
-        FDS res;
+        FDS res = null;
         long tTime = 0;
         long transTime = 0;
         long maxTime = 0, minTime = 0;
@@ -89,7 +89,10 @@ public class FDSDemo {
 
 
         // Print results
-        if (printActions) agent.getActions().forEach(out::println);
+        if (printActions) {
+            agent.getActions().forEach(out::println);
+            out.println(res.toString());
+        }
         printInstrumentation(agent.getInstrumentation());
         if (hillClimbing) {
             out.println("Total Transmission time: " + String.format("%,d ms", transTime));
@@ -115,7 +118,7 @@ public class FDSDemo {
     }
 
     private static void readCommands(String[] args) throws IllegalArgumentException {
-        if (args.length < 2) return;
+        if (args.length == 0) return;
 
         for (int i = 0; i < args.length; i += 2) {
             String sub = args[i].substring(1);
