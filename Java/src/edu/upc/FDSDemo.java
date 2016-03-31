@@ -136,6 +136,7 @@ public class FDSDemo {
 
             // One parameter options
             switch (sub) {
+                // -a => Debug mode
                 case "a":
                     debug = true;
                     continue;
@@ -146,37 +147,51 @@ public class FDSDemo {
             if (args.length - i < 2) throw new IllegalArgumentException("Not a valid argument: " + args[i]);
             String par = args[i + 1];
             switch (sub) {
+                // -u n => Set n users for the problem
                 case "u":
                     users = Integer.valueOf(args[i + 1]);
                     checkParameter(users, par);
                     break;
+                // -r n => Set n requests for the problem
                 case "r":
                     requests = Integer.valueOf(args[i + 1]);
                     checkParameter(requests, par);
                     break;
+                // -seed n => Set seed n
                 case "seed":
                     seed = Integer.valueOf(args[i + 1]);
                     break;
+                // -serv n => Set n servers
                 case "serv":
                     nserv = Integer.valueOf(args[i + 1]);
                     checkParameter(nserv, par);
                     break;
+                // -repl n => Set n as the replication number
                 case "repl":
                     nrep = Integer.valueOf(par);
                     checkParameter(nrep, par);
                     break;
+                // -initial [best|random] => Select initial solution
                 case "initial":
                     String a = args[i + 1].toLowerCase();
                     bestServer = a.contains("best");
                     break;
+                // -algorithm [hillClimbing|Simulated] => Select algorithm
                 case "algorithm":
                     String al = args[i + 1].toLowerCase();
                     hillClimbing = al.contains("hill");
                     break;
+                // -R n => Repeat n times the search
                 case "R":
+                    // -repetitions n => Repeat n times the search
                 case "repetitions":
                     repetitions = Integer.valueOf(par);
                     checkParameter(repetitions, par);
+                    break;
+                // -diffS n => Start from selected seed and do the problem with n different seeds
+                case "diffS":
+                    diffSeeds = Integer.valueOf(par);
+                    checkParameter(diffSeeds, par);
                     break;
                 default:
                     throw new IllegalArgumentException("Argument not found: " + args[i]);
