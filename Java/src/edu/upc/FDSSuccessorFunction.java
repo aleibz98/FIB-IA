@@ -32,22 +32,16 @@ public class FDSSuccessorFunction implements SuccessorFunction {
         int worst=state.getMaxTimeSid();
         for (int uid = 0; uid < state.getNUsers(); ++uid) {
             for (int rid = 0; rid < state.getNRequests(uid); ++rid) {
-                for (int sid : FDS.getServers().fileLocations(state.getFid(uid, rid))) {
-                    FDS newState = new FDS(state);
-                    int oldSid=-1;
-                    double v=-1;
-                    long time=-1;
-                    if (debug) {
-                        oldSid = state.getSid(uid, rid);
-                        v = heuristic.getHeuristicValue(newState);
-                        time = newState.getTotalTime();
-                    }
-                    boolean add=true;
-                    if (worstServer) {
-                        if (!debug)oldSid = state.getSid(uid, rid);
-                        add = (oldSid==worst);
-                    }
-                    if (add) {
+                int oldSid = state.getSid(uid, rid);
+                if (!worstServer || worst==oldSid) {
+                    for (int sid : FDS.getServers().fileLocations(state.getFid(uid, rid))) {
+                        FDS newState = new FDS(state);
+                        double v=-1;
+                        long time=-1;
+                        if (debug) {
+                            v = heuristic.getHeuristicValue(newState);
+                            time = newState.getTotalTime();
+                        }
                         newState.swapServer(uid, rid, sid);
                         retVal.add(new Successor(debug ?
                                 "U" + uid + " -> F" + state.getFid(uid, rid) + " from S" +
