@@ -76,9 +76,6 @@ public class FDS {
             int fid = req[1];
 
             Set<Integer> locations = servers.fileLocations(fid);
-            ArrayList<Integer> query = new ArrayList<>();
-            query.add(fid);
-
             st.get(uid).add((Integer) getRandomFromSet(locations, seed));
             r.get(uid).add(fid);
         }
@@ -110,6 +107,7 @@ public class FDS {
 
         for (int i = 0; i < users; ++i) {
             st.add(new ArrayList<>());
+            r.add(new ArrayList<>());
         }
         for (int i = 0; i < requests.size(); ++i) {
             int[] req = requests.getRequest(i);
@@ -119,17 +117,13 @@ public class FDS {
             Set<Integer> locations = servers.fileLocations(fid);
 
             int bestSid = -1;
-            long bestTime = 1000000;
+            long bestTime = -1;
 
             for (int sid : locations) {
-                if (bestSid == -1) {
+                int time = servers.tranmissionTime(sid, uid);
+                if (time < bestTime || bestSid == -1) {
+                    bestTime = time;
                     bestSid = sid;
-                } else {
-                    int time = servers.tranmissionTime(sid, uid);
-                    if (time < bestTime) {
-                        bestTime = time;
-                        bestSid = sid;
-                    }
                 }
             }
 

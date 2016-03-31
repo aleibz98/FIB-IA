@@ -60,7 +60,7 @@ public class FDSDemo {
             // Problem initialization
             Requests r = new Requests(users, requests, seed);
             Servers s = new Servers(nserv, nrep, seed);
-            FDS fds = new FDS(s, r, users, nserv, FDS.InitialType.RANDOM, seed);
+            FDS fds = new FDS(s, r, users, nserv, FDS.InitialType.BEST_SERVER, seed);
 
             if (hillClimbing) {
                 Pair<SearchAgent, Search> p = HillClimbing(fds);
