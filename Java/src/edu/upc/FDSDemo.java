@@ -2,10 +2,7 @@ package edu.upc;
 
 import IA.DistFS.Requests;
 import IA.DistFS.Servers;
-import aima.search.framework.Problem;
-import aima.search.framework.Search;
-import aima.search.framework.SearchAgent;
-import aima.search.framework.SuccessorFunction;
+import aima.search.framework.*;
 import aima.search.informed.HillClimbingSearch;
 import aima.search.informed.SimulatedAnnealingSearch;
 import javafx.util.Pair;
@@ -27,13 +24,15 @@ public class FDSDemo {
     private static int successors = 3;
     private static boolean hillClimbing = true;
     private static boolean debug = false;
+    private static boolean printActions = false;
     private static boolean randomInit = false;
     private static boolean worstServer = true;
     private static boolean showHelp = false;
 
     private static String help =
             "-h             Print this help\n\n" +
-                    "-a             Print debug info\n" +
+                    "-a             Print actions\n" +
+                    "-d             Print debug info\n" +
                     "-R n           Repeat n times\n" +
                     "-s n           Select successor funciton [1|2|3]\n" +
                     "-heuristic s   Set s as desired heuristic [worstServer|totalTime]\n" +
@@ -91,6 +90,9 @@ public class FDSDemo {
             long transTime = 0;
             long maxTime = 0, minTime = 0;
 
+            long tTransTime = 0;
+            long tMaxTime = 0, tMinTime = 0;
+
 
             if (hillClimbing) System.out.println("\nHillClimbing  -->");
             else System.out.println("\nTSP Simulated Annealing  -->");
@@ -106,12 +108,14 @@ public class FDSDemo {
                 FDS fds = new FDS(s, r, users, nserv, type, seed);
 
                 if (hillClimbing) {
+                    //FDSHeuristicFunction2.factor = i;
                     Pair<SearchAgent, Search> p = HillClimbing(fds);
-                    if (i + 1 == repetitions) {
+                    if (i + 1 == repetitions || debug) {
                         assert p != null;
                         agent = p.getKey();
                         res = ((FDS) p.getValue().getGoalState());
-                        transTime = res.getTotalTime();
+                        long t = res.getTotalTime();
+                        transTime = t;
                         maxTime = res.getMaxTime();
                         minTime = res.getMinTime();
                     }
@@ -120,35 +124,44 @@ public class FDSDemo {
                     assert p != null;
                     agent = p.getKey();
                     res = ((FDS) p.getValue().getGoalState());
-                    transTime += res.getTotalTime();
-                    maxTime += res.getMaxTime();
-                    minTime += res.getMinTime();
+
+                    transTime = res.getTotalTime();
+                    maxTime = res.getMaxTime();
+                    minTime = res.getMinTime();
+
+                    tTransTime += res.getTotalTime();
+                    tMaxTime += res.getMaxTime();
+                    tMinTime += res.getMinTime();
                 }
 
                 long end = System.currentTimeMillis();
                 tTime += end - start;
-            }
-            assert agent != null;
 
+                if (i + 1 == repetitions || debug) {
+                    assert agent != null;
 
-            // Print results
-            if (debug) {
-                agent.getActions().forEach(out::println);
-                out.println(res.toString());
-            }
-            printInstrumentation(agent.getInstrumentation());
-            if (hillClimbing) {
-                out.println("Total Transmission time: " + String.format("%,d ms", transTime));
-                out.println("Maximum transmission time: " + String.format("%,d ms", maxTime));
-                out.println("Minimum transmission time: " + String.format("%,d ms", minTime));
-            } else {
-                double time1 = transTime / ((double) repetitions);
-                double time2 = maxTime / ((double) repetitions);
-                double time3 = minTime / ((double) repetitions);
+                    // Print results
+                    if (printActions) {
+                        agent.getActions().forEach(out::println);
+                        out.println(res.toString());
+                    }
+                    printInstrumentation(agent.getInstrumentation());
+                    if (hillClimbing || debug) {
+                        out.println("Total Transmission time: " + String.format("%,d ms", transTime));
+                        out.println("Maximum transmission time: " + String.format("%,d ms", maxTime));
+                        out.println("Minimum transmission time: " + String.format("%,d ms", minTime));
+                    }
 
-                out.println("Average total transmission time: " + String.format("%,f ms", time1));
-                out.println("Average max transmission time: " + String.format("%,f ms", time2));
-                out.println("Average min transmission time: " + String.format("%,f ms", time3));
+                    if (i + 1 == repetitions && !hillClimbing) {
+                        double time1 = transTime / ((double) repetitions);
+                        double time2 = maxTime / ((double) repetitions);
+                        double time3 = minTime / ((double) repetitions);
+
+                        out.println("Average total transmission time: " + String.format("%,f ms", time1));
+                        out.println("Average max transmission time: " + String.format("%,f ms", time2));
+                        out.println("Average min transmission time: " + String.format("%,f ms", time3));
+                    }
+                }
             }
 
             System.out.println();
@@ -169,9 +182,12 @@ public class FDSDemo {
 
             // One parameter options
             switch (sub) {
-                // -a => Debug mode
-                case "a":
+                // -d => Debug mode
+                case "d":
                     debug = true;
+                    continue;
+                case "a":
+                    printActions = true;
                     continue;
                 case "h":
                     showHelp = true;
@@ -261,7 +277,11 @@ public class FDSDemo {
                     throw new RuntimeException("Bad successor function");
             }
 
-            Problem problem = new Problem(fds, f, new FDSGoalTest(), new FDSHeuristicFunction());
+            HeuristicFunction h;
+            if (worstServer) h = new FDSHeuristicFunction();
+            else h = new FDSHeuristicFunction2();
+
+            Problem problem = new Problem(fds, f, new FDSGoalTest(), h);
             Search search = new HillClimbingSearch();
 
             return new Pair<>(new SearchAgent(problem, search), search);
