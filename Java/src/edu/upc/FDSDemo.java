@@ -297,15 +297,36 @@ public class FDSDemo {
             SearchAgent searchAgent = null;
             Search search = null;
             Problem problem = null;
-            while (keep) {
-                problem = new Problem(fds, new FDSSuccessorFunction(), new FDSGoalTest(), new FDSHeuristicFunction());
+
+            SuccessorFunction f;
+            switch (successors) {
+                case 1:
+                    f = new FDSSuccessorFunction();
+                    break;
+                case 2:
+                    f = new FDSSuccessorFunction2();
+                    break;
+                case 3:
+                    f = new FDSSuccessorFunction3();
+                    break;
+                default:
+                    throw new RuntimeException("Bad successor function");
+            }
+
+            HeuristicFunction h;
+            if (worstServer) h = new FDSHeuristicFunction();
+            else h = new FDSHeuristicFunction2();
+
+            int maxUnstucks=-1;
+            while (keep && ((maxUnstucks==-1)||(maxUnstucks--)>0)) {
+                problem = new Problem(fds, f, new FDSGoalTest(), h);
                 search = new HillClimbingSearch();
                 searchAgent = new SearchAgent(problem, search);
                 fds=(FDS)search.getGoalState();
-                System.out.println("Before unstuck: " + fds.getMaxTime());
-                keep = fds.unstuck(new FDSHeuristicFunction(), false, worstServer);
-                if (keep) System.out.println("After unstuck: "+fds.getMaxTime());
-                else System.out.println("Unstuck failed");
+                //System.out.println("Before unstuck: " + h.getHeuristicValue(fds));
+                keep = fds.unstuck(h, false, worstServer);
+                if (keep) System.out.println("After unstuck: "+h.getHeuristicValue(fds));
+                //else System.out.println("Unstuck failed");
             }
 
             return new Pair<>(searchAgent, search);
