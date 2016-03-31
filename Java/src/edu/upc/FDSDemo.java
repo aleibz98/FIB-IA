@@ -27,7 +27,7 @@ public class FDSDemo {
     private static int successors = 3;
     private static boolean hillClimbing = true;
     private static boolean debug = false;
-    private static boolean bestServer = true;
+    private static boolean randomInit = false;
     private static boolean worstServer = true;
     private static boolean showHelp = false;
 
@@ -63,7 +63,7 @@ public class FDSDemo {
         out.println("Servers: " + nserv);
         out.println("Replications: " + nrep);
         out.println("Successor F: " + successors);
-        out.println("Initial solution: " + (bestServer ? "BEST_SERVER" : "RANDOM"));
+        out.println("Initial solution: " + (randomInit ? "BEST_SERVER" : "RANDOM"));
         out.println("Algorithm: " + (hillClimbing ? "HILL_CLIMBING" : "SIMULATED_ANNEALING"));
         out.println("Optimization: " + (worstServer ? "WORST_SERVER" : "TOTAL_TIME"));
         out.println("Diff Seed Mode: " + (diffSeeds != 1 ? "ON" : "OFF"));
@@ -76,9 +76,11 @@ public class FDSDemo {
 
         // Initial type
         FDS.InitialType type;
-        if (bestServer) type = FDS.InitialType.BEST_SERVER;
+        if (randomInit) type = FDS.InitialType.BEST_SERVER;
         else type = FDS.InitialType.RANDOM;
 
+        FDSSuccessorFunction.debug = debug;
+        FDSSuccessorFunction.worstServer = worstServer;
 
         for (int j = 0; j < diffSeeds; ++j) {
             out.println("Seed: " + (seed + j));
@@ -208,7 +210,7 @@ public class FDSDemo {
                 // -initial [best|random] => Select initial solution
                 case "initial":
                     String a = args[i + 1].toLowerCase();
-                    bestServer = a.contains("best");
+                    randomInit = a.contains("rand");
                     break;
                 // -algorithm [hillClimbing|Simulated] => Select algorithm
                 case "algorithm":
@@ -247,13 +249,13 @@ public class FDSDemo {
             SuccessorFunction f;
             switch (successors) {
                 case 1:
-                    f = new FDSSuccessorFunction(debug, worstServer);
+                    f = new FDSSuccessorFunction();
                     break;
                 case 2:
-                    f = new FDSSuccessorFunction2(debug, worstServer);
+                    f = new FDSSuccessorFunction2();
                     break;
                 case 3:
-                    f = new FDSSuccessorFunction3(debug, worstServer);
+                    f = new FDSSuccessorFunction3();
                     break;
                 default:
                     throw new RuntimeException("Bad successor function");

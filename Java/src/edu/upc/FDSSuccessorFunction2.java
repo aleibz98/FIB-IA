@@ -11,14 +11,6 @@ import java.util.List;
  */
 public class FDSSuccessorFunction2 extends FDSSuccessorFunction implements SuccessorFunction {
 
-    public FDSSuccessorFunction2() {
-        super();
-    }
-
-    public FDSSuccessorFunction2(boolean debug, boolean worstServer) {
-        super(debug, worstServer);
-    }
-
     public List getSuccessors(Object aState) {
         ArrayList<Object> retVal = new ArrayList<>();
         FDS state = (FDS) aState;
