@@ -275,23 +275,31 @@ public class FDS {
         RANDOM, BEST_SERVER
     }
 
-    public boolean unstuck(HeuristicFunction heuristic){
+    public boolean unstuck(HeuristicFunction heuristic, boolean searchAll, boolean worstServer){
         double maxHeuristicValue=heuristic.getHeuristicValue(this);
         FDS maxSuccessor = null;
-        for (int uid1 = 0; uid1 < getNUsers(); ++uid1) {
-            for (int rid1 = 0; rid1 < getNRequests(uid1); ++rid1) {
-                for (int sid1 : FDS.getServers().fileLocations(getFid(uid1, rid1))) {
+        boolean end = false;
+        for (int uid1 = 0; !end && uid1 < getNUsers(); ++uid1) {
+            for (int rid1 = 0; !end && rid1 < getNRequests(uid1); ++rid1) {
+                for (Iterator<Integer> iterator = FDS.getServers().fileLocations(getFid(uid1, rid1)).iterator(); !end && iterator.hasNext(); ) {
+                    int sid1 = iterator.next();
                     FDS newState1 = new FDS(this);
                     newState1.swapServer(uid1, rid1, sid1);
-                    for (int uid2 = uid1; uid2 < getNUsers(); ++uid2) {
-                        for (int rid2 = rid1 + 1; rid2 < getNRequests(uid2); ++rid2) {
-                            for (int sid2 : FDS.getServers().fileLocations(getFid(uid2, rid2))) {
-                                FDS newState2 = new FDS(newState1);
-                                newState2.swapServer(uid2, rid2, sid2);
-                                double heuristicValue=heuristic.getHeuristicValue(newState2);
-                                if (heuristicValue>maxHeuristicValue){
-                                    maxHeuristicValue=heuristicValue;
-                                    maxSuccessor=newState2;
+                    int worst1=newState1.getMaxTimeSid();
+                    for (int uid2 = uid1; !end && uid2 < getNUsers(); ++uid2) {
+                        for (int rid2 = rid1 + 1; !end && rid2 < getNRequests(uid2); ++rid2) {
+                            int oldSid = newState1.getSid(uid2, rid2);
+                            if (worstServer || worst1==oldSid) {
+                                for (Iterator<Integer> iterator1 = FDS.getServers().fileLocations(getFid(uid2, rid2)).iterator(); !end && iterator1.hasNext(); ) {
+                                    int sid2 = iterator1.next();
+                                    FDS newState2 = new FDS(newState1);
+                                    newState2.swapServer(uid2, rid2, sid2);
+                                    double heuristicValue = heuristic.getHeuristicValue(newState2);
+                                    if (heuristicValue < maxHeuristicValue) {
+                                        maxHeuristicValue = heuristicValue;
+                                        maxSuccessor = newState2;
+                                        if (!searchAll) end = true;
+                                    }
                                 }
                             }
                         }

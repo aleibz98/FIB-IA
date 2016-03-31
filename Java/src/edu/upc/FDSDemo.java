@@ -109,7 +109,7 @@ public class FDSDemo {
 
                 if (hillClimbing) {
                     //FDSHeuristicFunction2.factor = i;
-                    Pair<SearchAgent, Search> p = HillClimbing(fds);
+                    Pair<SearchAgent, Search> p = HillClimbingUnstucking(fds);
                     if (i + 1 == repetitions || debug) {
                         assert p != null;
                         agent = p.getKey();
@@ -302,7 +302,10 @@ public class FDSDemo {
                 search = new HillClimbingSearch();
                 searchAgent = new SearchAgent(problem, search);
                 fds=(FDS)search.getGoalState();
-                keep = fds.unstuck(new FDSHeuristicFunction());
+                System.out.println("Before unstuck: " + fds.getMaxTime());
+                keep = fds.unstuck(new FDSHeuristicFunction(), false, worstServer);
+                if (keep) System.out.println("After unstuck: "+fds.getMaxTime());
+                else System.out.println("Unstuck failed");
             }
 
             return new Pair<>(searchAgent, search);
