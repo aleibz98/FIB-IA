@@ -175,7 +175,7 @@ public class FDSDemo {
 
     private static Pair<SearchAgent, Search> HillClimbing(FDS fds) {
         try {
-            Problem problem = new Problem(fds, new FDSSuccessorFunction2(), new FDSGoalTest(), new FDSHeuristicFunction());
+            Problem problem = new Problem(fds, new FDSSuccessorFunction3(), new FDSGoalTest(), new FDSHeuristicFunction());
             Search search = new HillClimbingSearch();
 
             return new Pair<>(new SearchAgent(problem, search), search);
