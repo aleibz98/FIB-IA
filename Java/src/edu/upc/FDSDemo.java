@@ -22,13 +22,12 @@ public class FDSDemo {
     private static int nrep = 5;
     private static int repetitions = 1;
     private static int successors = 3;
-    private static boolean hillClimbing = true;
+    private static Algorithm algorithm = Algorithm.HILL_CLIMBING;
     private static boolean debug = false;
     private static boolean printActions = false;
     private static boolean randomInit = false;
     private static boolean worstServer = true;
     private static boolean showHelp = false;
-
     private static String help =
             "-h             Print this help\n\n" +
                     "-a             Print actions\n" +
@@ -44,7 +43,6 @@ public class FDSDemo {
                     "-repl n        Set n as minimum replications\n\n" +
                     "-seed n        Set n as seed\n" +
                     "-diffS n       Start from selected seed and do the problem with n different seeds\n";
-
 
     public static void main(String[] args) throws Servers.WrongParametersException {
         Locale.setDefault(new Locale("ca"));
@@ -63,7 +61,7 @@ public class FDSDemo {
         out.println("Replications: " + nrep);
         out.println("Successor F: " + successors);
         out.println("Initial solution: " + (randomInit ? "BEST_SERVER" : "RANDOM"));
-        out.println("Algorithm: " + (hillClimbing ? "HILL_CLIMBING" : "SIMULATED_ANNEALING"));
+        out.println("algorithm: " + algorithm.toString());
         out.println("Optimization: " + (worstServer ? "WORST_SERVER" : "TOTAL_TIME"));
         out.println("Diff Seed Mode: " + (diffSeeds != 1 ? "ON" : "OFF"));
 
@@ -93,9 +91,7 @@ public class FDSDemo {
             long tTransTime = 0;
             long tMaxTime = 0, tMinTime = 0;
 
-
-            if (hillClimbing) System.out.println("\nHillClimbing  -->");
-            else System.out.println("\nTSP Simulated Annealing  -->");
+            System.out.println("\n" + algorithm.toString() + " -->");
 
             // Repeat the execution and get the mean values
             for (int i = 0; i < repetitions; ++i) {
@@ -107,31 +103,46 @@ public class FDSDemo {
                 Servers s = new Servers(nserv, nrep, seed);
                 FDS fds = new FDS(s, r, users, nserv, type, seed);
 
-                if (hillClimbing) {
-                    //FDSHeuristicFunction2.factor = i;
-                    Pair<SearchAgent, Search> p = HillClimbingUnstucking(fds);
-                    if (i + 1 == repetitions || debug) {
+                switch (algorithm) {
+                    case HILL_CLIMBING: {
+                        FDSHeuristicFunction2.factor = i + 10;
+                        Pair<SearchAgent, Search> p = HillClimbing(fds);
+                        if (i + 1 == repetitions || debug) {
+                            assert p != null;
+                            agent = p.getKey();
+                            res = ((FDS) p.getValue().getGoalState());
+                            transTime = res.getTotalTime();
+                            maxTime = res.getMaxTime();
+                            minTime = res.getMinTime();
+                        }
+                        break;
+                    }
+                    case SIMULATED_ANNEALING: {
+                        Pair<SearchAgent, Search> p = SimulatedAnnealing(fds);
                         assert p != null;
                         agent = p.getKey();
                         res = ((FDS) p.getValue().getGoalState());
-                        long t = res.getTotalTime();
-                        transTime = t;
+
+                        transTime = res.getTotalTime();
                         maxTime = res.getMaxTime();
                         minTime = res.getMinTime();
+
+                        tTransTime += res.getTotalTime();
+                        tMaxTime += res.getMaxTime();
+                        tMinTime += res.getMinTime();
+                        break;
                     }
-                } else {
-                    Pair<SearchAgent, Search> p = SimulatedAnnealing(fds);
-                    assert p != null;
-                    agent = p.getKey();
-                    res = ((FDS) p.getValue().getGoalState());
-
-                    transTime = res.getTotalTime();
-                    maxTime = res.getMaxTime();
-                    minTime = res.getMinTime();
-
-                    tTransTime += res.getTotalTime();
-                    tMaxTime += res.getMaxTime();
-                    tMinTime += res.getMinTime();
+                    case HILL_CLIMBING_UNSTUCKING: {
+                        Pair<SearchAgent, Search> p = HillClimbingUnstucking(fds);
+                        if (i + 1 == repetitions || debug) {
+                            assert p != null;
+                            agent = p.getKey();
+                            res = ((FDS) p.getValue().getGoalState());
+                            transTime = res.getTotalTime();
+                            maxTime = res.getMaxTime();
+                            minTime = res.getMinTime();
+                        }
+                    }
                 }
 
                 long end = System.currentTimeMillis();
@@ -146,20 +157,23 @@ public class FDSDemo {
                         out.println(res.toString());
                     }
                     printInstrumentation(agent.getInstrumentation());
-                    if (hillClimbing || debug) {
-                        out.println("Total Transmission time: " + String.format("%,d ms", transTime));
-                        out.println("Maximum transmission time: " + String.format("%,d ms", maxTime));
-                        out.println("Minimum transmission time: " + String.format("%,d ms", minTime));
-                    }
 
-                    if (i + 1 == repetitions && !hillClimbing) {
-                        double time1 = transTime / ((double) repetitions);
-                        double time2 = maxTime / ((double) repetitions);
-                        double time3 = minTime / ((double) repetitions);
+                    switch (algorithm) {
+                        case HILL_CLIMBING:
+                        case HILL_CLIMBING_UNSTUCKING:
+                            out.println("Total Transmission time: " + String.format("%,d ms", transTime));
+                            out.println("Maximum transmission time: " + String.format("%,d ms", maxTime));
+                            out.println("Minimum transmission time: " + String.format("%,d ms", minTime));
+                            break;
+                        case SIMULATED_ANNEALING:
+                            if (i + 1 != repetitions) break;
+                            double time1 = transTime / ((double) repetitions);
+                            double time2 = maxTime / ((double) repetitions);
+                            double time3 = minTime / ((double) repetitions);
 
-                        out.println("Average total transmission time: " + String.format("%,f ms", time1));
-                        out.println("Average max transmission time: " + String.format("%,f ms", time2));
-                        out.println("Average min transmission time: " + String.format("%,f ms", time3));
+                            out.println("Average total transmission time: " + String.format("%,f ms", time1));
+                            out.println("Average max transmission time: " + String.format("%,f ms", time2));
+                            out.println("Average min transmission time: " + String.format("%,f ms", time3));
                     }
                 }
             }
@@ -230,8 +244,12 @@ public class FDSDemo {
                     break;
                 // -algorithm [hillClimbing|Simulated] => Select algorithm
                 case "algorithm":
-                    String al = args[i + 1].toLowerCase();
-                    hillClimbing = al.contains("hill");
+                    int x = Integer.valueOf(par);
+                    try {
+                        algorithm = Algorithm.fromInteger(x);
+                    } catch (ArrayIndexOutOfBoundsException e) {
+                        throw new IllegalArgumentException(e.getMessage());
+                    }
                     break;
                 // -R n => Repeat n times the search
                 // -repetitions n => Repeat n times the search
@@ -333,6 +351,31 @@ public class FDSDemo {
             String key = (String) o;
             String property = properties.getProperty(key);
             System.out.println(key + " : " + property);
+        }
+    }
+
+    public enum Algorithm {
+        HILL_CLIMBING(1),
+        SIMULATED_ANNEALING(2),
+        HILL_CLIMBING_UNSTUCKING(3);
+
+        private int num;
+
+        Algorithm(int n) {
+            this.num = n;
+        }
+
+        public static Algorithm fromInteger(int x) throws ArrayIndexOutOfBoundsException {
+            switch (x) {
+                case 1:
+                    return HILL_CLIMBING;
+                case 2:
+                    return SIMULATED_ANNEALING;
+                case 3:
+                    return HILL_CLIMBING_UNSTUCKING;
+                default:
+                    throw new ArrayIndexOutOfBoundsException("No enum for this value " + x);
+            }
         }
     }
 }

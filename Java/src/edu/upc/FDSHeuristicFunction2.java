@@ -8,7 +8,7 @@ import aima.search.framework.HeuristicFunction;
 public class FDSHeuristicFunction2 implements HeuristicFunction {
 
     //factors a modificar per trobar un bon heuristic
-    static float factor = 1;
+    static float factor = 10;
     static boolean squared = true;
 
     /**
