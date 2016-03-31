@@ -23,7 +23,7 @@ public class FDSHeuristicFunction2 implements HeuristicFunction {
         for (long time : serverTimes) sum += time;
 
         int mig = sum / serverTimes.length;
-        int var = 0;
+        long var = 0;
         for (long time : serverTimes) var += (time - mig) * (time - mig);
 
         double res;
