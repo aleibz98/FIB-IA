@@ -11,24 +11,24 @@ import java.util.*;
 public class FDS {
 
     /**
-     * Used to convert from idUser to array position
-     */
-    public static HashMap<Integer, Integer> idUserCon = new HashMap<>();
-    /**
-     * Used to convert from array position to idUser
-     */
-    public static int[] idUserConBack;
-    /**
      * Total load (time) for every server
      */
     public static Servers servers;
-    public static int[][] req;
+    /**
+     * Used to convert from idUser to array position
+     */
+    private static HashMap<Integer, Integer> idUserCon = new HashMap<>();
+    /**
+     * Used to convert from array position to idUser
+     */
+    private static int[] idUserConBack;
+    private static int[][] req;
     /**
      * Vector containing all the requests of every user, every request is of size 2 [IdServer, IdFile]
      * Users[] => Requests[] => [IdServer,IdFile]
      */
-    public int[][] system;
-    public long[] serverTimes;
+    private int[][] system;
+    private long[] serverTimes;
 
     /**
      * Creates the initial state
