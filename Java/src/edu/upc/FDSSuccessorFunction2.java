@@ -22,7 +22,6 @@ public class FDSSuccessorFunction2 implements SuccessorFunction {
             retVal.addAll(simple.getSuccessors(((Successor) o).getState()));
         }*/
 
-        FDSHeuristicFunction heuristic = new FDSHeuristicFunction();
         // For all users
         for (int uid = 0; uid < state.getNUsers(); ++uid) {
             // For all files
