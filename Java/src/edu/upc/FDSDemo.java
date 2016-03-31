@@ -5,6 +5,7 @@ import IA.DistFS.Servers;
 import aima.search.framework.Problem;
 import aima.search.framework.Search;
 import aima.search.framework.SearchAgent;
+import aima.search.framework.SuccessorFunction;
 import aima.search.informed.HillClimbingSearch;
 import aima.search.informed.SimulatedAnnealingSearch;
 import javafx.util.Pair;
@@ -23,9 +24,11 @@ public class FDSDemo {
     private static int nserv = 50;
     private static int nrep = 5;
     private static int repetitions = 1;
+    private static int successors = 3;
     private static boolean hillClimbing = true;
     private static boolean debug = false;
     private static boolean bestServer = true;
+    private static boolean worstServer = true;
 
     public static void main(String[] args) throws Servers.WrongParametersException {
         Locale.setDefault(new Locale("ca"));
@@ -37,9 +40,11 @@ public class FDSDemo {
         out.println("Requests: " + requests);
         out.println("Servers: " + nserv);
         out.println("Replications: " + nrep);
-        out.println("Seed: " + seed);
+        out.println("Successor F: " + successors);
         out.println("Initial solution: " + (bestServer ? "BEST_SERVER" : "RANDOM"));
-        out.println("Algorithm: " + (hillClimbing ? "HILL_CLIMBING" : "SIMULATED ANNEALING"));
+        out.println("Algorithm: " + (hillClimbing ? "HILL_CLIMBING" : "SIMULATED_ANNEALING"));
+        out.println("Optimization: " + (worstServer ? "WORST_SERVER" : "TOTAL_TIME"));
+        out.println("Diff Seed Mode: " + (diffSeeds != 1 ? "ON" : "OFF"));
 
         // Test mode
         if (repetitions != 1) {
@@ -47,81 +52,85 @@ public class FDSDemo {
             out.println("Repetitions: " + repetitions);
         } else out.println("TestMode: OFF");
 
-        SearchAgent agent = null;
-        FDS res = null;
-        long tTime = 0;
-        long transTime = 0;
-        long maxTime = 0, minTime = 0;
-
-        if (hillClimbing) System.out.println("\nHillClimbing  -->");
-        else System.out.println("\nTSP Simulated Annealing  -->");
-
         // Initial type
         FDS.InitialType type;
         if (bestServer) type = FDS.InitialType.BEST_SERVER;
         else type = FDS.InitialType.RANDOM;
 
 
+        for (int j = 0; j < diffSeeds; ++j) {
+            out.println("Seed: " + (seed + j));
 
-        // Repeat the execution and get the mean values
-        for (int i = 0; i < repetitions; ++i) {
-            if (repetitions > 1) System.out.println("Iteration: " + (i + 1));
-            long start = System.currentTimeMillis();
+            SearchAgent agent = null;
+            FDS res = null;
+            long tTime = 0;
+            long transTime = 0;
+            long maxTime = 0, minTime = 0;
 
-            // Problem initialization
-            Requests r = new Requests(users, requests, seed);
-            Servers s = new Servers(nserv, nrep, seed);
-            FDS fds = new FDS(s, r, users, nserv, type, seed);
 
-            if (hillClimbing) {
-                Pair<SearchAgent, Search> p = HillClimbing(fds);
-                if (i + 1 == repetitions) {
+            if (hillClimbing) System.out.println("\nHillClimbing  -->");
+            else System.out.println("\nTSP Simulated Annealing  -->");
+
+            // Repeat the execution and get the mean values
+            for (int i = 0; i < repetitions; ++i) {
+                if (repetitions > 1) System.out.println("Iteration: " + (i + 1));
+                long start = System.currentTimeMillis();
+
+                // Problem initialization
+                Requests r = new Requests(users, requests, seed);
+                Servers s = new Servers(nserv, nrep, seed);
+                FDS fds = new FDS(s, r, users, nserv, type, seed);
+
+                if (hillClimbing) {
+                    Pair<SearchAgent, Search> p = HillClimbing(fds);
+                    if (i + 1 == repetitions) {
+                        assert p != null;
+                        agent = p.getKey();
+                        res = ((FDS) p.getValue().getGoalState());
+                        transTime = res.getTotalTime();
+                        maxTime = res.getMaxTime();
+                        minTime = res.getMinTime();
+                    }
+                } else {
+                    Pair<SearchAgent, Search> p = SimulatedAnnealing(fds);
                     assert p != null;
                     agent = p.getKey();
                     res = ((FDS) p.getValue().getGoalState());
-                    transTime = res.getTotalTime();
-                    maxTime = res.getMaxTime();
-                    minTime = res.getMinTime();
+                    transTime += res.getTotalTime();
+                    maxTime += res.getMaxTime();
+                    minTime += res.getMinTime();
                 }
+
+                long end = System.currentTimeMillis();
+                tTime += end - start;
+            }
+            assert agent != null;
+
+
+            // Print results
+            if (debug) {
+                agent.getActions().forEach(out::println);
+                out.println(res.toString());
+            }
+            printInstrumentation(agent.getInstrumentation());
+            if (hillClimbing) {
+                out.println("Total Transmission time: " + String.format("%,d ms", transTime));
+                out.println("Maximum transmission time: " + String.format("%,d ms", maxTime));
+                out.println("Minimum transmission time: " + String.format("%,d ms", minTime));
             } else {
-                Pair<SearchAgent, Search> p = SimulatedAnnealing(fds);
-                assert p != null;
-                agent = p.getKey();
-                res = ((FDS) p.getValue().getGoalState());
-                transTime += res.getTotalTime();
-                maxTime += res.getMaxTime();
-                minTime += res.getMinTime();
+                double time1 = transTime / ((double) repetitions);
+                double time2 = maxTime / ((double) repetitions);
+                double time3 = minTime / ((double) repetitions);
+
+                out.println("Average total transmission time: " + String.format("%,f ms", time1));
+                out.println("Average max transmission time: " + String.format("%,f ms", time2));
+                out.println("Average min transmission time: " + String.format("%,f ms", time3));
             }
 
-            long end = System.currentTimeMillis();
-            tTime += end - start;
+            System.out.println();
+            out.println("Elapsed time: " + String.format("%,d ms", tTime));
+            out.println("Average time: " + String.format("%,.2f ms", tTime / ((double) repetitions)));
         }
-        assert agent != null;
-
-
-        // Print results
-        if (debug) {
-            agent.getActions().forEach(out::println);
-            out.println(res.toString());
-        }
-        printInstrumentation(agent.getInstrumentation());
-        if (hillClimbing) {
-            out.println("Total Transmission time: " + String.format("%,d ms", transTime));
-            out.println("Maximum transmission time: " + String.format("%,d ms", maxTime));
-            out.println("Minimum transmission time: " + String.format("%,d ms", minTime));
-        } else {
-            double time1 = transTime / ((double) repetitions);
-            double time2 = maxTime / ((double) repetitions);
-            double time3 = minTime / ((double) repetitions);
-
-            out.println("Average total transmission time: " + String.format("%,f ms", time1));
-            out.println("Average max transmission time: " + String.format("%,f ms", time2));
-            out.println("Average min transmission time: " + String.format("%,f ms", time3));
-        }
-
-        System.out.println();
-        out.println("Elapsed time: " + String.format("%,d ms", tTime));
-        out.println("Average time: " + String.format("%,.2f ms", tTime / ((double) repetitions)));
     }
 
     private static void checkParameter(int val, String s) throws IllegalArgumentException {
@@ -182,8 +191,8 @@ public class FDSDemo {
                     hillClimbing = al.contains("hill");
                     break;
                 // -R n => Repeat n times the search
+                // -repetitions n => Repeat n times the search
                 case "R":
-                    // -repetitions n => Repeat n times the search
                 case "repetitions":
                     repetitions = Integer.valueOf(par);
                     checkParameter(repetitions, par);
@@ -193,6 +202,16 @@ public class FDSDemo {
                     diffSeeds = Integer.valueOf(par);
                     checkParameter(diffSeeds, par);
                     break;
+                // -s n => Select successor function
+                case "s":
+                    successors = Integer.valueOf(par);
+                    checkParameter(successors, par);
+                    break;
+                // -heuristic [worstServer|totalTime]
+                case "heuristic":
+                    String aux = args[i + 1].toLowerCase();
+                    worstServer = aux.contains("worst");
+                    break;
                 default:
                     throw new IllegalArgumentException("Argument not found: " + args[i]);
             }
@@ -201,7 +220,22 @@ public class FDSDemo {
 
     private static Pair<SearchAgent, Search> HillClimbing(FDS fds) {
         try {
-            Problem problem = new Problem(fds, new FDSSuccessorFunction3(debug, false), new FDSGoalTest(), new FDSHeuristicFunction());
+            SuccessorFunction f;
+            switch (successors) {
+                case 1:
+                    f = new FDSSuccessorFunction(debug, worstServer);
+                    break;
+                case 2:
+                    f = new FDSSuccessorFunction2(debug, worstServer);
+                    break;
+                case 3:
+                    f = new FDSSuccessorFunction3(debug, worstServer);
+                    break;
+                default:
+                    throw new RuntimeException("Bad successor function");
+            }
+
+            Problem problem = new Problem(fds, f, new FDSGoalTest(), new FDSHeuristicFunction());
             Search search = new HillClimbingSearch();
 
             return new Pair<>(new SearchAgent(problem, search), search);
