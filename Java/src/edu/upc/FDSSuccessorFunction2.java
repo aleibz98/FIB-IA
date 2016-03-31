@@ -9,18 +9,20 @@ import java.util.List;
 /**
  * Created by Inigo on 30/03/2016.
  */
-public class FDSSuccessorFunction2 implements SuccessorFunction {
+public class FDSSuccessorFunction2 extends FDSSuccessorFunction implements SuccessorFunction {
+
+    public FDSSuccessorFunction2() {
+        super();
+    }
+
+    public FDSSuccessorFunction2(boolean debug, boolean worstServer) {
+        super(debug, worstServer);
+    }
+
     public List getSuccessors(Object aState) {
         ArrayList<Object> retVal = new ArrayList<>();
         FDS state = (FDS) aState;
         FDSHeuristicFunction heuristic = new FDSHeuristicFunction();
-
-        /*FDSSuccessorFunction simple = new FDSSuccessorFunction();
-        List firststep= simple.getSuccessors(state);
-        for (Object o : firststep){
-            Successor s = (Successor) o;
-            retVal.addAll(simple.getSuccessors(((Successor) o).getState()));
-        }*/
 
         // For all users
         for (int uid = 0; uid < state.getNUsers(); ++uid) {
@@ -50,10 +52,10 @@ public class FDSSuccessorFunction2 implements SuccessorFunction {
                             // Print info
                             double v = heuristic.getHeuristicValue(newState);
                             long time = newState.getTotalTime();
-                            retVal.add(new Successor(
+                            retVal.add(new Successor(debug ?
                                     "U" + uid + " => F" + fid1 + " S" + oldSid + " -> S" + sid +
                                             " | F" + fid2 + " S" + oldSid2 + " -> S" + sid2 +
-                                            ": S=" + v + "ms T=" + time + "ms",
+                                            ": S=" + v + "ms T=" + time + "ms" : "",
                                     newState));
                         }
                     }

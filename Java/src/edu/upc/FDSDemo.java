@@ -24,7 +24,7 @@ public class FDSDemo {
     private static int nrep = 5;
     private static int repetitions = 1;
     private static boolean hillClimbing = true;
-    private static boolean printActions = false;
+    private static boolean debug = false;
     private static boolean bestServer = true;
 
     public static void main(String[] args) throws Servers.WrongParametersException {
@@ -100,7 +100,7 @@ public class FDSDemo {
 
 
         // Print results
-        if (printActions) {
+        if (debug) {
             agent.getActions().forEach(out::println);
             out.println(res.toString());
         }
@@ -137,7 +137,7 @@ public class FDSDemo {
             // One parameter options
             switch (sub) {
                 case "a":
-                    printActions = true;
+                    debug = true;
                     continue;
                 default:
             }
@@ -186,7 +186,7 @@ public class FDSDemo {
 
     private static Pair<SearchAgent, Search> HillClimbing(FDS fds) {
         try {
-            Problem problem = new Problem(fds, new FDSSuccessorFunction3(), new FDSGoalTest(), new FDSHeuristicFunction());
+            Problem problem = new Problem(fds, new FDSSuccessorFunction3(debug, false), new FDSGoalTest(), new FDSHeuristicFunction());
             Search search = new HillClimbingSearch();
 
             return new Pair<>(new SearchAgent(problem, search), search);

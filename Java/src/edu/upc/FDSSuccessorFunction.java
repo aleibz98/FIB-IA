@@ -10,6 +10,20 @@ import java.util.List;
  * Created by marc.asenjo on 17/03/2016.
  */
 public class FDSSuccessorFunction implements SuccessorFunction {
+
+    protected boolean debug = true;
+    protected boolean worstServer = false;
+
+    public FDSSuccessorFunction() {
+        super();
+    }
+
+    public FDSSuccessorFunction(boolean debug, boolean worstServer) {
+        super();
+        this.debug = debug;
+        this.worstServer = worstServer;
+    }
+
     public List getSuccessors(Object aState) {
         ArrayList<Successor> retVal = new ArrayList<>();
         FDS state = (FDS) aState;
@@ -23,9 +37,11 @@ public class FDSSuccessorFunction implements SuccessorFunction {
                     newState.swapServer(uid, rid, sid);
                     double v = heuristic.getHeuristicValue(newState);
                     long time = newState.getTotalTime();
-                    retVal.add(new Successor(
+
+                    // Only print values if debugging
+                    retVal.add(new Successor(debug ?
                             "U" + uid + " -> F" + state.getFid(uid, rid) + " from S" +
-                            oldSid + " -> S" + sid + ": S=" + v + "ms T=" + time + "ms",
+                                    oldSid + " -> S" + sid + ": S=" + v + "ms T=" + time + "ms" : "",
                             newState));
                 }
             }
