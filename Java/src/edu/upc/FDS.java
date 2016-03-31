@@ -217,6 +217,18 @@ public class FDS {
         return max;
     }
 
+    public int getMaxTimeSid() {
+        long max = serverTimes[0];
+        int uid = 0;
+        for (int i = 1; i < serverTimes.length; ++i) {
+            if (serverTimes[i] > max) {
+                max = serverTimes[i];
+                uid=i;
+            }
+        }
+        return uid;
+    }
+
     public long getMinTime() {
         long min = serverTimes[0];
         for (int i = 1; i < serverTimes.length; ++i) {
