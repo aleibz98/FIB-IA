@@ -1,0 +1,31 @@
+Replications: 5
+Seed: 1234
+Initial solution: BEST_SERVER
+Algorithm: HILL_CLIMBING
+TestMode: OFF
+
+HillClimbing  -->
+nodesExpanded : 28
+Total Transmission time: 1.525.446 ms
+Maximum transmission time: 39.609 ms
+Minimum transmission time: 15.482 ms
+
+Elapsed time: 9.253 ms
+Average time: 9.253,00 ms
+
+===============================================
+
+Replications: 5
+Seed: 1234
+Initial solution: RANDOM
+Algorithm: HILL_CLIMBING
+TestMode: OFF
+
+HillClimbing  -->
+nodesExpanded : 195
+Total Transmission time: 1.376.118 ms
+Maximum transmission time: 30.346 ms
+Minimum transmission time: 3.153 ms
+
+Elapsed time: 43.726 ms
+Average time: 43.726,00 ms

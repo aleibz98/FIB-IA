@@ -19,6 +19,7 @@ public class FDSDemo {
     private static int users = 200;
     private static int requests = 5;
     private static int seed = 1234;
+    private static int diffSeeds = 1;
     private static int nserv = 50;
     private static int nrep = 5;
     private static int repetitions = 1;
@@ -37,6 +38,8 @@ public class FDSDemo {
         out.println("Servers: " + nserv);
         out.println("Replications: " + nrep);
         out.println("Seed: " + seed);
+        out.println("Initial solution: " + (bestServer ? "BEST_SERVER" : "RANDOM"));
+        out.println("Algorithm: " + (hillClimbing ? "HILL_CLIMBING" : "SIMULATED ANNEALING"));
 
         // Test mode
         if (repetitions != 1) {
@@ -53,6 +56,13 @@ public class FDSDemo {
         if (hillClimbing) System.out.println("\nHillClimbing  -->");
         else System.out.println("\nTSP Simulated Annealing  -->");
 
+        // Initial type
+        FDS.InitialType type;
+        if (bestServer) type = FDS.InitialType.BEST_SERVER;
+        else type = FDS.InitialType.RANDOM;
+
+
+
         // Repeat the execution and get the mean values
         for (int i = 0; i < repetitions; ++i) {
             if (repetitions > 1) System.out.println("Iteration: " + (i + 1));
@@ -61,7 +71,7 @@ public class FDSDemo {
             // Problem initialization
             Requests r = new Requests(users, requests, seed);
             Servers s = new Servers(nserv, nrep, seed);
-            FDS fds = new FDS(s, r, users, nserv, FDS.InitialType.BEST_SERVER, seed);
+            FDS fds = new FDS(s, r, users, nserv, type, seed);
 
             if (hillClimbing) {
                 Pair<SearchAgent, Search> p = HillClimbing(fds);
@@ -158,6 +168,7 @@ public class FDSDemo {
                 case "initial":
                     String a = args[i + 1].toLowerCase();
                     bestServer = a.contains("best");
+                    break;
                 case "algorithm":
                     String al = args[i + 1].toLowerCase();
                     hillClimbing = al.contains("hill");
