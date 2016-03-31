@@ -29,20 +29,31 @@ public class FDSSuccessorFunction implements SuccessorFunction {
         FDS state = (FDS) aState;
         FDSHeuristicFunction heuristic = new FDSHeuristicFunction();
 
+        int worst=state.getMaxTimeSid();
         for (int uid = 0; uid < state.getNUsers(); ++uid) {
             for (int rid = 0; rid < state.getNRequests(uid); ++rid) {
                 for (int sid : FDS.getServers().fileLocations(state.getFid(uid, rid))) {
                     FDS newState = new FDS(state);
-                    int oldSid = state.getSid(uid, rid);
-                    newState.swapServer(uid, rid, sid);
-                    double v = heuristic.getHeuristicValue(newState);
-                    long time = newState.getTotalTime();
-
-                    // Only print values if debugging
-                    retVal.add(new Successor(debug ?
-                            "U" + uid + " -> F" + state.getFid(uid, rid) + " from S" +
-                                    oldSid + " -> S" + sid + ": S=" + v + "ms T=" + time + "ms" : "",
-                            newState));
+                    int oldSid=-1;
+                    double v=-1;
+                    long time=-1;
+                    if (debug) {
+                        oldSid = state.getSid(uid, rid);
+                        v = heuristic.getHeuristicValue(newState);
+                        time = newState.getTotalTime();
+                    }
+                    boolean add=true;
+                    if (worstServer) {
+                        if (!debug)oldSid = state.getSid(uid, rid);
+                        add = (oldSid==worst);
+                    }
+                    if (add) {
+                        newState.swapServer(uid, rid, sid);
+                        retVal.add(new Successor(debug ?
+                                "U" + uid + " -> F" + state.getFid(uid, rid) + " from S" +
+                                        oldSid + " -> S" + sid + ": S=" + v + "ms T=" + time + "ms" : "",
+                                newState));
+                    }
                 }
             }
         }

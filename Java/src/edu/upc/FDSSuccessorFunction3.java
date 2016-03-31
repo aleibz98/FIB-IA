@@ -19,7 +19,7 @@ public class FDSSuccessorFunction3 extends FDSSuccessorFunction implements Succe
 
     public List getSuccessors(Object aState) {
         ArrayList<Object> retVal = new ArrayList<>();
-        FDSSuccessorFunction fdsSuccessorFunction= new FDSSuccessorFunction();
+        FDSSuccessorFunction fdsSuccessorFunction= new FDSSuccessorFunction(debug,worstServer);
         FDSSuccessorFunction2 fdsSuccessorFunction2= new FDSSuccessorFunction2();
         retVal.addAll(fdsSuccessorFunction.getSuccessors(aState));
         retVal.addAll(fdsSuccessorFunction2.getSuccessors(aState));
