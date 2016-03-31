@@ -13,6 +13,7 @@ public class FDSSuccessorFunction2 implements SuccessorFunction {
     public List getSuccessors(Object aState) {
         ArrayList<Object> retVal = new ArrayList<>();
         FDS state = (FDS) aState;
+        FDSHeuristicFunction heuristic = new FDSHeuristicFunction();
 
         /*FDSSuccessorFunction simple = new FDSSuccessorFunction();
         List firststep= simple.getSuccessors(state);
@@ -21,7 +22,6 @@ public class FDSSuccessorFunction2 implements SuccessorFunction {
             retVal.addAll(simple.getSuccessors(((Successor) o).getState()));
         }*/
 
-        FDSHeuristicFunction heuristic = new FDSHeuristicFunction();
         // For all users
         for (int uid = 0; uid < state.getNUsers(); ++uid) {
             // For all files
