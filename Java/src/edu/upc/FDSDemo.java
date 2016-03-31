@@ -271,6 +271,27 @@ public class FDSDemo {
         return null;
     }
 
+    private static Pair<SearchAgent, Search> HillClimbingUnstucking(FDS fds){
+        try {
+            boolean keep = true;
+            SearchAgent searchAgent = null;
+            Search search = null;
+            Problem problem = null;
+            while (keep) {
+                problem = new Problem(fds, new FDSSuccessorFunction(), new FDSGoalTest(), new FDSHeuristicFunction());
+                search = new HillClimbingSearch();
+                searchAgent = new SearchAgent(problem, search);
+                fds=(FDS)search.getGoalState();
+                keep = fds.unstuck(new FDSHeuristicFunction());
+            }
+
+            return new Pair<>(searchAgent, search);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     private static Pair<SearchAgent, Search> SimulatedAnnealing(FDS fds) {
         try {
             Problem problem = new Problem(fds, new FDSSuccessorFunctionSA(), new FDSGoalTest(), new FDSHeuristicFunction());

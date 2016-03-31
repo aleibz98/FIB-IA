@@ -2,6 +2,8 @@ package edu.upc;
 
 import IA.DistFS.Requests;
 import IA.DistFS.Servers;
+import aima.search.framework.HeuristicFunction;
+import aima.search.framework.Successor;
 
 import java.util.*;
 
@@ -42,6 +44,10 @@ public class FDS {
     }
 
     public FDS(FDS f) {
+        copy(f);
+    }
+
+    public void copy(FDS f) {
         serverTimes = f.serverTimes.clone();
         system = new int[f.system.length][];
 
@@ -267,5 +273,34 @@ public class FDS {
 
     public enum InitialType {
         RANDOM, BEST_SERVER
+    }
+
+    public boolean unstuck(HeuristicFunction heuristic){
+        double maxHeuristicValue=heuristic.getHeuristicValue(this);
+        FDS maxSuccessor = null;
+        for (int uid1 = 0; uid1 < getNUsers(); ++uid1) {
+            for (int rid1 = 0; rid1 < getNRequests(uid1); ++rid1) {
+                for (int sid1 : FDS.getServers().fileLocations(getFid(uid1, rid1))) {
+                    FDS newState1 = new FDS(this);
+                    newState1.swapServer(uid1, rid1, sid1);
+                    for (int uid2 = uid1; uid2 < getNUsers(); ++uid2) {
+                        for (int rid2 = rid1 + 1; rid2 < getNRequests(uid2); ++rid2) {
+                            for (int sid2 : FDS.getServers().fileLocations(getFid(uid2, rid2))) {
+                                FDS newState2 = new FDS(newState1);
+                                newState2.swapServer(uid2, rid2, sid2);
+                                double heuristicValue=heuristic.getHeuristicValue(newState2);
+                                if (heuristicValue>maxHeuristicValue){
+                                    maxHeuristicValue=heuristicValue;
+                                    maxSuccessor=newState2;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if (maxSuccessor==null)return false;
+        copy(maxSuccessor);
+        return true;
     }
 }
