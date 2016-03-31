@@ -29,12 +29,34 @@ public class FDSDemo {
     private static boolean debug = false;
     private static boolean bestServer = true;
     private static boolean worstServer = true;
+    private static boolean showHelp = false;
+
+    private static String help =
+            "-h             Print this help\n\n" +
+                    "-a             Print debug info\n" +
+                    "-R n           Repeat n times\n" +
+                    "-s n           Select successor funciton [1|2|3]\n" +
+                    "-heuristic s   Set s as desired heuristic [worstServer|totalTime]\n" +
+                    "-algorithm s   Set s as desired algorithm [hillClimbing|SimulatedAnnealing]\n" +
+                    "-initial s     Set s as desired initial solution [best|random]\n\n" +
+                    "-u n           Set n users for the problem\n" +
+                    "-r n           Set n requests for the problem\n" +
+                    "-serv n        Set n servers\n" +
+                    "-repl n        Set n as minimum replications\n\n" +
+                    "-seed n        Set n as seed\n" +
+                    "-diffS n       Start from selected seed and do the problem with n different seeds\n";
+
 
     public static void main(String[] args) throws Servers.WrongParametersException {
         Locale.setDefault(new Locale("ca"));
         readCommands(args);
         if (seed == -1) seed = new Random().nextInt();
         PrintStream out = System.out;
+
+        if (showHelp) {
+            out.println(help);
+            System.exit(0);
+        }
 
         out.println("Users: " + users);
         out.println("Requests: " + requests);
@@ -149,6 +171,9 @@ public class FDSDemo {
                 case "a":
                     debug = true;
                     continue;
+                case "h":
+                    showHelp = true;
+                    continue;
                 default:
             }
 
@@ -193,7 +218,6 @@ public class FDSDemo {
                 // -R n => Repeat n times the search
                 // -repetitions n => Repeat n times the search
                 case "R":
-                case "repetitions":
                     repetitions = Integer.valueOf(par);
                     checkParameter(repetitions, par);
                     break;
@@ -264,6 +288,5 @@ public class FDSDemo {
             String property = properties.getProperty(key);
             System.out.println(key + " : " + property);
         }
-
     }
 }
