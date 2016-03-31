@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class FDSSuccessorFunction implements SuccessorFunction {
     public List getSuccessors(Object aState) {
-        ArrayList retVal = new ArrayList();
+        ArrayList<Successor> retVal = new ArrayList<>();
         FDS state = (FDS) aState;
         FDSHeuristicFunction heuristic = new FDSHeuristicFunction();
 

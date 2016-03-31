@@ -24,6 +24,7 @@ public class FDSDemo {
     private static int repetitions = 1;
     private static boolean hillClimbing = true;
     private static boolean printActions = false;
+    private static boolean bestServer = true;
 
     public static void main(String[] args) throws Servers.WrongParametersException {
         Locale.setDefault(new Locale("ca"));
@@ -44,7 +45,7 @@ public class FDSDemo {
         } else out.println("TestMode: OFF");
 
         SearchAgent agent = null;
-        FDS res;
+        FDS res = null;
         long tTime = 0;
         long transTime = 0;
         long maxTime = 0, minTime = 0;
@@ -54,13 +55,13 @@ public class FDSDemo {
 
         // Repeat the execution and get the mean values
         for (int i = 0; i < repetitions; ++i) {
-            System.out.println("Iteration: " + (i + 1));
+            if (repetitions > 1) System.out.println("Iteration: " + (i + 1));
             long start = System.currentTimeMillis();
 
             // Problem initialization
             Requests r = new Requests(users, requests, seed);
             Servers s = new Servers(nserv, nrep, seed);
-            FDS fds = new FDS(s, r, users, nserv, FDS.InitialType.RANDOM, seed);
+            FDS fds = new FDS(s, r, users, nserv, FDS.InitialType.BEST_SERVER, seed);
 
             if (hillClimbing) {
                 Pair<SearchAgent, Search> p = HillClimbing(fds);
@@ -89,7 +90,10 @@ public class FDSDemo {
 
 
         // Print results
-        if (printActions) agent.getActions().forEach(out::println);
+        if (printActions) {
+            agent.getActions().forEach(out::println);
+            out.println(res.toString());
+        }
         printInstrumentation(agent.getInstrumentation());
         if (hillClimbing) {
             out.println("Total Transmission time: " + String.format("%,d ms", transTime));
@@ -115,7 +119,7 @@ public class FDSDemo {
     }
 
     private static void readCommands(String[] args) throws IllegalArgumentException {
-        if (args.length < 2) return;
+        if (args.length == 0) return;
 
         for (int i = 0; i < args.length; i += 2) {
             String sub = args[i].substring(1);
@@ -151,6 +155,9 @@ public class FDSDemo {
                     nrep = Integer.valueOf(par);
                     checkParameter(nrep, par);
                     break;
+                case "initial":
+                    String a = args[i + 1].toLowerCase();
+                    bestServer = a.contains("best");
                 case "algorithm":
                     String al = args[i + 1].toLowerCase();
                     hillClimbing = al.contains("hill");
@@ -168,7 +175,7 @@ public class FDSDemo {
 
     private static Pair<SearchAgent, Search> HillClimbing(FDS fds) {
         try {
-            Problem problem = new Problem(fds, new FDSSuccessorFunction(), new FDSGoalTest(), new FDSHeuristicFunction());
+            Problem problem = new Problem(fds, new FDSSuccessorFunction2(), new FDSGoalTest(), new FDSHeuristicFunction());
             Search search = new HillClimbingSearch();
 
             return new Pair<>(new SearchAgent(problem, search), search);
@@ -199,5 +206,4 @@ public class FDSDemo {
         }
 
     }
-
 }

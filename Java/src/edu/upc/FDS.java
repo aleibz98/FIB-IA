@@ -22,12 +22,12 @@ public class FDS {
      * Total load (time) for every server
      */
     public static Servers servers;
+    public static int[][] req;
     /**
      * Vector containing all the requests of every user, every request is of size 2 [IdServer, IdFile]
      * Users[] => Requests[] => [IdServer,IdFile]
      */
     public int[][] system;
-    public int[][] req;
     public long[] serverTimes;
 
     /**
@@ -43,8 +43,9 @@ public class FDS {
 
     public FDS(FDS f) {
         serverTimes = f.serverTimes.clone();
-        system = f.system.clone();
-        req = f.req.clone();
+        system = new int[f.system.length][];
+
+        for (int i = 0; i < system.length; ++i) system[i] = f.system[i].clone();
     }
 
     public static Servers getServers() {
@@ -75,9 +76,6 @@ public class FDS {
             int fid = req[1];
 
             Set<Integer> locations = servers.fileLocations(fid);
-            ArrayList<Integer> query = new ArrayList<>();
-            query.add(fid);
-
             st.get(uid).add((Integer) getRandomFromSet(locations, seed));
             r.get(uid).add(fid);
         }
@@ -109,6 +107,7 @@ public class FDS {
 
         for (int i = 0; i < users; ++i) {
             st.add(new ArrayList<>());
+            r.add(new ArrayList<>());
         }
         for (int i = 0; i < requests.size(); ++i) {
             int[] req = requests.getRequest(i);
@@ -118,17 +117,13 @@ public class FDS {
             Set<Integer> locations = servers.fileLocations(fid);
 
             int bestSid = -1;
-            long bestTime = 1000000;
+            long bestTime = -1;
 
             for (int sid : locations) {
-                if (bestSid == -1) {
+                int time = servers.tranmissionTime(sid, uid);
+                if (time < bestTime || bestSid == -1) {
+                    bestTime = time;
                     bestSid = sid;
-                } else {
-                    int time = servers.tranmissionTime(sid, uid);
-                    if (time < bestTime) {
-                        bestTime = time;
-                        bestSid = sid;
-                    }
                 }
             }
 
@@ -162,11 +157,18 @@ public class FDS {
             serverTimes[i] = 0;
         }
         for (int uid = 0; uid < system.length; uid++) {
-            int[] user = system[uid];
-            for (int request : user) {
-                serverTimes[request] += servers.tranmissionTime(request, idUserConBack[uid]);
+            int[] reqs = system[uid];
+            for (int serv : reqs) {
+                serverTimes[serv] += servers.tranmissionTime(serv, idUserConBack[uid]);
             }
         }
+    }
+
+    public boolean checkConsistency() {
+        long[] aux = serverTimes.clone();
+        calculateServerTimes(FDS.servers, serverTimes.length);
+
+        return Arrays.equals(aux, serverTimes);
     }
 
     private Object getRandomFromSet(Set set, long seed) {
@@ -242,15 +244,13 @@ public class FDS {
     }
 
     public void swapServer(int uid, int rid, int sid) {
+        int oldSid = system[uid][rid];
+        system[uid][rid] = sid;
 
-        int req = system[uid][rid];
-        int oldSid = req;
-        req = sid;
-
-        serverTimes[oldSid] -= servers.tranmissionTime(oldSid, idUserConBack[uid]);
-        serverTimes[sid] += servers.tranmissionTime(sid, idUserConBack[uid]);
-
-
+        long oldTime = servers.tranmissionTime(oldSid, idUserConBack[uid]);
+        long newTime = servers.tranmissionTime(sid, idUserConBack[uid]);
+        serverTimes[oldSid] -= oldTime;
+        serverTimes[sid] += newTime;
     }
 
     public enum InitialType {
