@@ -24,6 +24,7 @@ public class FDSDemo {
     private static int repetitions = 1;
     private static boolean hillClimbing = true;
     private static boolean printActions = false;
+    private static boolean bestServer = true;
 
     public static void main(String[] args) throws Servers.WrongParametersException {
         Locale.setDefault(new Locale("ca"));
@@ -154,6 +155,9 @@ public class FDSDemo {
                     nrep = Integer.valueOf(par);
                     checkParameter(nrep, par);
                     break;
+                case "initial":
+                    String a = args[i + 1].toLowerCase();
+                    bestServer = a.contains("best");
                 case "algorithm":
                     String al = args[i + 1].toLowerCase();
                     hillClimbing = al.contains("hill");
