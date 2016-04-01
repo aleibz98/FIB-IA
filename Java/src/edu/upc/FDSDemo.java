@@ -26,7 +26,7 @@ public class FDSDemo {
     private static Algorithm algorithm = Algorithm.HILL_CLIMBING;
     private static boolean debug = false;
     private static boolean printActions = false;
-    private static boolean randomInit = false;
+    private static boolean randomInit = true;
     private static boolean showHelp = false;
     private static String help =
             "-h             Print this help\n\n" +
@@ -60,7 +60,7 @@ public class FDSDemo {
         out.println("Servers: " + nserv);
         out.println("Replications: " + nrep);
         out.println("Successor F: " + successors);
-        out.println("Initial solution: " + (randomInit ? "BEST_SERVER" : "RANDOM"));
+        out.println("Initial solution: " + (randomInit ? "RANDOM" : "BEST_SERVER"));
         out.println("algorithm: " + algorithm.toString());
         out.println("Heuristic: " + heuristic);
         out.println("Diff Seed Mode: " + (diffSeeds != 1 ? "ON" : "OFF"));
@@ -73,8 +73,8 @@ public class FDSDemo {
 
         // Initial type
         FDS.InitialType type;
-        if (randomInit) type = FDS.InitialType.BEST_SERVER;
-        else type = FDS.InitialType.RANDOM;
+        if (randomInit) type = FDS.InitialType.RANDOM;
+        else type = FDS.InitialType.BEST_SERVER;
 
         FDSSuccessorFunction.debug = debug;
         FDSSuccessorFunction.worstServer = heuristic == 1;
@@ -241,8 +241,7 @@ public class FDSDemo {
                     break;
                 // -initial [best|random] => Select initial solution
                 case "initial":
-                    String a = args[i + 1].toLowerCase();
-                    randomInit = a.contains("rand");
+                    randomInit = par.toLowerCase().contains("rand");
                     break;
                 // -algorithm [hillClimbing|Simulated] => Select algorithm
                 case "algorithm":
