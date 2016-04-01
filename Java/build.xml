@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+<project name="File Distributed System" default="build">
+    <property name="src.dir" value="src"/>
+    <property name="build.dir" value="out/classes"/>
+    <property name="out.dir" value="out"/>
+    <property name="lib.dir" value="Lib"/>
+
+    <path id="master-classpath">
+
+    </path>
+    <copy todir="${build.dir}">
+        <fileset dir="${lib.dir}" includes="*.jar"/>
+        <fileset dir="${lib.dir}" includes="*.jar"/>
+    </copy>
+
+    <target name="build">
+        <echo>Apache Ant version is ${ant.version}</echo>
+        <mkdir dir="${build.dir}"/>
+        <javac destdir="${build.dir}" source="1.8" target="1.8">
+            <src path="${src.dir}"/>
+        </javac>
+    </target>
+
+    <target name="clean" description="Clean output directories">
+        <delete>
+            <fileset dir="${build.dir}">
+                <include name="*.class"/>
+            </fileset>
+        </delete>
+    </target>
+
+    <target name="build-jar">
+        <mkdir dir="${out.dir}"/>
+        <jar destfile="${out.dir}/FDS.jar"
+             basedir="${build.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="edu.upc.FDSDemo"/>
+                <attribute name="Class-Path" value="AIMA.jar/ DistribFileSystem.jar/"/>
+            </manifest>
+        </jar>
+    </target>
+</project>
