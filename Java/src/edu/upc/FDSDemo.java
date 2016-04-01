@@ -22,11 +22,11 @@ public class FDSDemo {
     private static int nrep = 5;
     private static int repetitions = 1;
     private static int successors = 3;
+    private static int heuristic = 1;
     private static Algorithm algorithm = Algorithm.HILL_CLIMBING;
     private static boolean debug = false;
     private static boolean printActions = false;
     private static boolean randomInit = false;
-    private static boolean worstServer = true;
     private static boolean showHelp = false;
     private static String help =
             "-h             Print this help\n\n" +
@@ -62,7 +62,7 @@ public class FDSDemo {
         out.println("Successor F: " + successors);
         out.println("Initial solution: " + (randomInit ? "BEST_SERVER" : "RANDOM"));
         out.println("algorithm: " + algorithm.toString());
-        out.println("Optimization: " + (worstServer ? "WORST_SERVER" : "TOTAL_TIME"));
+        out.println("Heuristic: " + heuristic);
         out.println("Diff Seed Mode: " + (diffSeeds != 1 ? "ON" : "OFF"));
 
         // Test mode
@@ -77,11 +77,9 @@ public class FDSDemo {
         else type = FDS.InitialType.RANDOM;
 
         FDSSuccessorFunction.debug = debug;
-        FDSSuccessorFunction.worstServer = worstServer;
+        FDSSuccessorFunction.worstServer = heuristic == 1;
 
-        for (int j = 0; j < diffSeeds; ++j) {
-            out.println("Seed: " + (seed + j));
-
+        for (int sed = seed; sed < seed + diffSeeds; ++sed) {
             SearchAgent agent = null;
             FDS res = null;
             long tTime = 0;
@@ -91,7 +89,8 @@ public class FDSDemo {
             long tTransTime = 0;
             long tMaxTime = 0, tMinTime = 0;
 
-            System.out.println("\n" + algorithm.toString() + " -->");
+            out.println("\n" + algorithm.toString() + " -->");
+            out.println("Seed: " + sed);
 
             // Repeat the execution and get the mean values
             for (int i = 0; i < repetitions; ++i) {
@@ -99,9 +98,9 @@ public class FDSDemo {
                 long start = System.currentTimeMillis();
 
                 // Problem initialization
-                Requests r = new Requests(users, requests, seed);
-                Servers s = new Servers(nserv, nrep, seed);
-                FDS fds = new FDS(s, r, users, nserv, type, seed);
+                Requests r = new Requests(users, requests, sed);
+                Servers s = new Servers(nserv, nrep, sed);
+                FDS fds = new FDS(s, r, users, nserv, type, sed);
 
                 switch (algorithm) {
                     case HILL_CLIMBING: {
@@ -199,12 +198,15 @@ public class FDSDemo {
                 // -d => Debug mode
                 case "d":
                     debug = true;
+                    --i;
                     continue;
                 case "a":
                     printActions = true;
+                    --i;
                     continue;
                 case "h":
                     showHelp = true;
+                    --i;
                     continue;
                 default:
             }
@@ -215,21 +217,21 @@ public class FDSDemo {
             switch (sub) {
                 // -u n => Set n users for the problem
                 case "u":
-                    users = Integer.valueOf(args[i + 1]);
+                    users = Integer.valueOf(par);
                     checkParameter(users, par);
                     break;
                 // -r n => Set n requests for the problem
                 case "r":
-                    requests = Integer.valueOf(args[i + 1]);
+                    requests = Integer.valueOf(par);
                     checkParameter(requests, par);
                     break;
                 // -seed n => Set seed n
                 case "seed":
-                    seed = Integer.valueOf(args[i + 1]);
+                    seed = Integer.valueOf(par);
                     break;
                 // -serv n => Set n servers
                 case "serv":
-                    nserv = Integer.valueOf(args[i + 1]);
+                    nserv = Integer.valueOf(par);
                     checkParameter(nserv, par);
                     break;
                 // -repl n => Set n as the replication number
@@ -269,8 +271,8 @@ public class FDSDemo {
                     break;
                 // -heuristic [worstServer|totalTime]
                 case "heuristic":
-                    String aux = args[i + 1].toLowerCase();
-                    worstServer = aux.contains("worst");
+                    heuristic = Integer.valueOf(par);
+                    checkParameter(heuristic, par);
                     break;
                 default:
                     throw new IllegalArgumentException("Argument not found: " + args[i]);
@@ -296,8 +298,16 @@ public class FDSDemo {
             }
 
             HeuristicFunction h;
-            if (worstServer) h = new FDSHeuristicFunction();
-            else h = new FDSHeuristicFunction2();
+            switch (heuristic) {
+                case 1:
+                    h = new FDSHeuristicFunction();
+                    break;
+                case 2:
+                    h = new FDSHeuristicFunction2();
+                    break;
+                default:
+                    throw new RuntimeException("Bad heuristic function");
+            }
 
             Problem problem = new Problem(fds, f, new FDSGoalTest(), h);
             Search search = new HillClimbingSearch();
@@ -332,8 +342,16 @@ public class FDSDemo {
             }
 
             HeuristicFunction h;
-            if (worstServer) h = new FDSHeuristicFunction();
-            else h = new FDSHeuristicFunction2();
+            switch (heuristic) {
+                case 1:
+                    h = new FDSHeuristicFunction();
+                    break;
+                case 2:
+                    h = new FDSHeuristicFunction2();
+                    break;
+                default:
+                    throw new RuntimeException("Bad heuristic function");
+            }
 
             int maxUnstucks=-1;
             while (keep && ((maxUnstucks==-1)||(maxUnstucks--)>0)) {
@@ -342,7 +360,7 @@ public class FDSDemo {
                 searchAgent = new SearchAgent(problem, search);
                 fds=(FDS)search.getGoalState();
                 //System.out.println("Before unstuck: " + h.getHeuristicValue(fds));
-                keep = fds.unstuck(h, false, worstServer);
+                keep = fds.unstuck(h, false, heuristic == 1);
                 if (keep) System.out.println("After unstuck: "+h.getHeuristicValue(fds));
                 //else System.out.println("Unstuck failed");
             }

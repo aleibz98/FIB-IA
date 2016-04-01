@@ -3,7 +3,6 @@ package edu.upc;
 import IA.DistFS.Requests;
 import IA.DistFS.Servers;
 import aima.search.framework.HeuristicFunction;
-import aima.search.framework.Successor;
 
 import java.util.*;
 
@@ -19,7 +18,7 @@ public class FDS {
     /**
      * Used to convert from idUser to array position
      */
-    private static HashMap<Integer, Integer> idUserCon = new HashMap<>();
+    private static HashMap<Integer, Integer> idUserCon;
     /**
      * Used to convert from array position to idUser
      */
@@ -37,6 +36,7 @@ public class FDS {
      */
     public FDS(Servers servers, Requests requests, int users, int nServ, InitialType init, long seed) {
         idUserConBack = new int[users];
+        idUserCon = new HashMap<>();
         if (init == InitialType.RANDOM) initialRandom(servers, requests, users, seed);
         else if (init == InitialType.BEST_SERVER) initialBestServer(servers, requests, users);
         calculateServerTimes(servers, nServ);
@@ -47,15 +47,15 @@ public class FDS {
         copy(f);
     }
 
+    public static Servers getServers() {
+        return servers;
+    }
+
     public void copy(FDS f) {
         serverTimes = f.serverTimes.clone();
         system = new int[f.system.length][];
 
         for (int i = 0; i < system.length; ++i) system[i] = f.system[i].clone();
-    }
-
-    public static Servers getServers() {
-        return servers;
     }
 
     /**
@@ -101,6 +101,9 @@ public class FDS {
         if (userID == null) {
             userID = idUserCon.size();
             idUserCon.put(uid, idUserCon.size());   // Add new ID
+            if (userID >= idUserConBack.length) {
+                System.out.println("Out: " + userID + " " + uid);
+            }
             idUserConBack[userID] = uid;            // Store new ID for backwards conversion
         }
         uid = userID;
@@ -271,12 +274,8 @@ public class FDS {
         serverTimes[sid] += newTime;
     }
 
-    public enum InitialType {
-        RANDOM, BEST_SERVER
-    }
-
-    public boolean unstuck(HeuristicFunction heuristic, boolean searchAll, boolean worstServer){
-        double maxHeuristicValue=heuristic.getHeuristicValue(this);
+    public boolean unstuck(HeuristicFunction heuristic, boolean searchAll, boolean worstServer) {
+        double maxHeuristicValue = heuristic.getHeuristicValue(this);
         FDS maxSuccessor = null;
         boolean end = false;
         for (int uid1 = 0; !end && uid1 < getNUsers(); ++uid1) {
@@ -285,11 +284,11 @@ public class FDS {
                     int sid1 = iterator.next();
                     FDS newState1 = new FDS(this);
                     newState1.swapServer(uid1, rid1, sid1);
-                    int worst1=newState1.getMaxTimeSid();
+                    int worst1 = newState1.getMaxTimeSid();
                     for (int uid2 = uid1; !end && uid2 < getNUsers(); ++uid2) {
                         for (int rid2 = rid1 + 1; !end && rid2 < getNRequests(uid2); ++rid2) {
                             int oldSid = newState1.getSid(uid2, rid2);
-                            if (worstServer || worst1==oldSid) {
+                            if (worstServer || worst1 == oldSid) {
                                 for (Iterator<Integer> iterator1 = FDS.getServers().fileLocations(getFid(uid2, rid2)).iterator(); !end && iterator1.hasNext(); ) {
                                     int sid2 = iterator1.next();
                                     FDS newState2 = new FDS(newState1);
@@ -307,8 +306,12 @@ public class FDS {
                 }
             }
         }
-        if (maxSuccessor==null)return false;
+        if (maxSuccessor == null) return false;
         copy(maxSuccessor);
         return true;
+    }
+
+    public enum InitialType {
+        RANDOM, BEST_SERVER
     }
 }
