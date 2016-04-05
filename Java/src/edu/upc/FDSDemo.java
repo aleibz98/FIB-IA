@@ -14,9 +14,9 @@ import java.util.Random;
 
 @SuppressWarnings("unchecked")
 public class FDSDemo {
+    public static int seed = 1234;
     private static int users = 200;
     private static int requests = 5;
-    private static int seed = 1234;
     private static int diffSeeds = 1;
     private static int nserv = 50;
     private static int nrep = 5;
@@ -391,8 +391,8 @@ public class FDSDemo {
 
     private static Pair<SearchAgent, Search> SimulatedAnnealing(FDS fds) {
         try {
-            Problem problem = new Problem(fds, new FDSSuccessorFunctionSA(), new FDSGoalTest(), new FDSHeuristicFunction());
-            SimulatedAnnealingSearch search = new SimulatedAnnealingSearch(SASteps, SAStiter, SAK, SAlamb);
+            Problem problem = new Problem(fds, new FDSSuccessorFunctionSA(), new FDSGoalTest(), new FDSHeuristicFunction2());
+            SimulatedAnnealingSearch search = new SimulatedAnnealingSearch(20000, 100, 10, 0.001);
             //search.traceOn();
 
             return new Pair<>(new SearchAgent(problem, search), search);
