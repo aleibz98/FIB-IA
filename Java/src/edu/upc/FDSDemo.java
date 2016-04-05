@@ -21,7 +21,7 @@ public class FDSDemo {
     private static int nserv = 50;
     private static int nrep = 5;
     private static int repetitions = 1;
-    private static int successors = 3;
+    private static int successors = 1;
     private static int heuristic = 1;
     private static Algorithm algorithm = Algorithm.HILL_CLIMBING;
     private static boolean debug = false;
@@ -33,9 +33,9 @@ public class FDSDemo {
                     "-a             Print actions\n" +
                     "-d             Print debug info\n" +
                     "-R n           Repeat n times\n" +
-                    "-s n           Select successor funciton [1|2|3]\n" +
-                    "-heuristic s   Set s as desired heuristic [worstServer|totalTime]\n" +
-                    "-algorithm s   Set s as desired algorithm [hillClimbing|SimulatedAnnealing]\n" +
+                    "-s n           Select successor function [1|2|3]\n" +
+                    "-heuristic s   Set s as desired heuristic [1|2]\n" +
+                    "-algorithm s   Set s as desired algorithm [1|2|3]\n" +
                     "-initial s     Set s as desired initial solution [best|random]\n\n" +
                     "-u n           Set n users for the problem\n" +
                     "-r n           Set n requests for the problem\n" +
@@ -243,7 +243,7 @@ public class FDSDemo {
                 case "initial":
                     randomInit = par.toLowerCase().contains("rand");
                     break;
-                // -algorithm [hillClimbing|Simulated] => Select algorithm
+                // -algorithm n => Select algorithm n
                 case "algorithm":
                     int x = Integer.valueOf(par);
                     try {
@@ -268,7 +268,7 @@ public class FDSDemo {
                     successors = Integer.valueOf(par);
                     checkParameter(successors, par);
                     break;
-                // -heuristic [worstServer|totalTime]
+                // -heuristic [1|2]
                 case "heuristic":
                     heuristic = Integer.valueOf(par);
                     checkParameter(heuristic, par);
