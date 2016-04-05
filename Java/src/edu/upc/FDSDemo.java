@@ -28,6 +28,13 @@ public class FDSDemo {
     private static boolean printActions = false;
     private static boolean randomInit = true;
     private static boolean showHelp = false;
+
+    // Simulated annealing parameters
+    private static int SASteps = 1000;
+    private static int SAStiter = 50;
+    private static int SAK = 2;
+    private static double SAlamb = 0.001;
+
     private static String help =
             "-h             Print this help\n\n" +
                     "-a             Print actions\n" +
@@ -83,11 +90,7 @@ public class FDSDemo {
             SearchAgent agent = null;
             FDS res = null;
             long tTime = 0;
-            long transTime = 0;
-            long maxTime = 0, minTime = 0;
-
-            long tTransTime = 0;
-            long tMaxTime = 0, tMinTime = 0;
+            TimeResult time = new TimeResult(repetitions);
 
             out.println("\n" + algorithm.toString() + " -->");
             out.println("Seed: " + sed);
@@ -110,25 +113,35 @@ public class FDSDemo {
                             assert p != null;
                             agent = p.getKey();
                             res = ((FDS) p.getValue().getGoalState());
-                            transTime = res.getTotalTime();
-                            maxTime = res.getMaxTime();
-                            minTime = res.getMinTime();
+                            time.setTransTime(res.getTotalTime());
+                            time.setMaxTime(res.getMaxTime());
+                            time.setMinTime(res.getMinTime());
                         }
                         break;
                     }
                     case SIMULATED_ANNEALING: {
-                        Pair<SearchAgent, Search> p = SimulatedAnnealing(fds);
-                        assert p != null;
-                        agent = p.getKey();
-                        res = ((FDS) p.getValue().getGoalState());
+                        for (int j = SASteps; j < SASteps + 10000; j += 500) {
+                            for (int k = SAStiter; k < SAStiter + 1000; k += 100) {
+                                for (int l = SAK; l < SAK + 10; l += 1) {
+                                    for (double m = SAlamb; m < SAlamb + .01; m += .002) {
+                                        Pair<SearchAgent, Search> p = SimulatedAnnealing(fds);
+                                        assert p != null;
+                                        agent = p.getKey();
+                                        res = ((FDS) p.getValue().getGoalState());
+                                        time.setTransTime(res.getTotalTime());
+                                        time.setMaxTime(res.getMaxTime());
+                                        time.setMinTime(res.getMinTime());
 
-                        transTime = res.getTotalTime();
-                        maxTime = res.getMaxTime();
-                        minTime = res.getMinTime();
+                                        /*time.addTransTime(res.getTotalTime());
+                                        time.addMaxTime(res.getMaxTime());
+                                        time.addMinTime(res.getMinTime());
+*/
+                                        printResults(out, agent, (FDS) p.getValue().getGoalState(), time);
+                                    }
+                                }
+                            }
+                        }
 
-                        tTransTime += res.getTotalTime();
-                        tMaxTime += res.getMaxTime();
-                        tMinTime += res.getMinTime();
                         break;
                     }
                     case HILL_CLIMBING_UNSTUCKING: {
@@ -137,9 +150,10 @@ public class FDSDemo {
                             assert p != null;
                             agent = p.getKey();
                             res = ((FDS) p.getValue().getGoalState());
-                            transTime = res.getTotalTime();
-                            maxTime = res.getMaxTime();
-                            minTime = res.getMinTime();
+
+                            time.setTransTime(res.getTotalTime());
+                            time.setMaxTime(res.getMaxTime());
+                            time.setMinTime(res.getMinTime());
                         }
                     }
                 }
@@ -147,39 +161,43 @@ public class FDSDemo {
                 long end = System.currentTimeMillis();
                 tTime += end - start;
 
-                if (i + 1 == repetitions || debug) {
-                    assert agent != null;
-
-                    // Print results
-                    if (printActions) {
-                        agent.getActions().forEach(out::println);
-                        out.println(res.toString());
-                    }
-                    printInstrumentation(agent.getInstrumentation());
-
-                    switch (algorithm) {
-                        case HILL_CLIMBING:
-                        case HILL_CLIMBING_UNSTUCKING:
-                            out.println("Total Transmission time: " + String.format("%,d ms", transTime));
-                            out.println("Maximum transmission time: " + String.format("%,d ms", maxTime));
-                            out.println("Minimum transmission time: " + String.format("%,d ms", minTime));
-                            break;
-                        case SIMULATED_ANNEALING:
-                            if (i + 1 != repetitions) break;
-                            double time1 = transTime / ((double) repetitions);
-                            double time2 = maxTime / ((double) repetitions);
-                            double time3 = minTime / ((double) repetitions);
-
-                            out.println("Average total transmission time: " + String.format("%,f ms", time1));
-                            out.println("Average max transmission time: " + String.format("%,f ms", time2));
-                            out.println("Average min transmission time: " + String.format("%,f ms", time3));
-                    }
-                }
+                if (debug || i + 1 == repetitions) printResults(out, agent, res, time);
             }
 
             System.out.println();
             out.println("Elapsed time: " + String.format("%,d ms", tTime));
             out.println("Average time: " + String.format("%,.2f ms", tTime / ((double) repetitions)));
+        }
+    }
+
+    private static void printResults(PrintStream out, SearchAgent agent, FDS res, TimeResult time) {
+        assert agent != null;
+
+        // Print results
+        if (printActions) {
+            agent.getActions().forEach(out::println);
+            out.println(res.toString());
+        }
+        printInstrumentation(agent.getInstrumentation());
+
+        switch (algorithm) {
+            case HILL_CLIMBING:
+            case HILL_CLIMBING_UNSTUCKING:
+                out.println("Total Transmission time: " + String.format("%,d ms", time.getTransTime()));
+                out.println("Maximum transmission time: " + String.format("%,d ms", time.getMaxTime()));
+                out.println("Minimum transmission time: " + String.format("%,d ms", time.getMinTime()));
+                break;
+            case SIMULATED_ANNEALING:
+                if (debug) {
+                    out.println("Results:");
+                    out.println(String.format("%,d ms", time.getTransTime()));
+                    out.println(String.format("%,d ms", time.getMaxTime()));
+                } else {
+                    out.println("Average total transmission time: " + String.format("%,f ms", time.getAvgTransTime()));
+                    out.println("Average max transmission time: " + String.format("%,f ms", time.getAvgMaxTime()));
+                    out.println("Average min transmission time: " + String.format("%,f ms", time.getAvgMinTime()));
+                }
+                break;
         }
     }
 
@@ -318,7 +336,7 @@ public class FDSDemo {
         return null;
     }
 
-    private static Pair<SearchAgent, Search> HillClimbingUnstucking(FDS fds){
+    private static Pair<SearchAgent, Search> HillClimbingUnstucking(FDS fds) {
         try {
             boolean keep = true;
             SearchAgent searchAgent = null;
@@ -352,15 +370,15 @@ public class FDSDemo {
                     throw new RuntimeException("Bad heuristic function");
             }
 
-            int maxUnstucks=-1;
-            while (keep && ((maxUnstucks==-1)||(maxUnstucks--)>0)) {
+            int maxUnstucks = -1;
+            while (keep && ((maxUnstucks == -1) || (maxUnstucks--) > 0)) {
                 problem = new Problem(fds, f, new FDSGoalTest(), h);
                 search = new HillClimbingSearch();
                 searchAgent = new SearchAgent(problem, search);
-                fds=(FDS)search.getGoalState();
+                fds = (FDS) search.getGoalState();
                 //System.out.println("Before unstuck: " + h.getHeuristicValue(fds));
                 keep = fds.unstuck(h, false, heuristic == 1);
-                if (keep) System.out.println("After unstuck: "+h.getHeuristicValue(fds));
+                if (keep) System.out.println("After unstuck: " + h.getHeuristicValue(fds));
                 //else System.out.println("Unstuck failed");
             }
 
@@ -374,7 +392,7 @@ public class FDSDemo {
     private static Pair<SearchAgent, Search> SimulatedAnnealing(FDS fds) {
         try {
             Problem problem = new Problem(fds, new FDSSuccessorFunctionSA(), new FDSGoalTest(), new FDSHeuristicFunction());
-            SimulatedAnnealingSearch search = new SimulatedAnnealingSearch(2000, 100, 5, 0.001);
+            SimulatedAnnealingSearch search = new SimulatedAnnealingSearch(SASteps, SAStiter, SAK, SAlamb);
             //search.traceOn();
 
             return new Pair<>(new SearchAgent(problem, search), search);
