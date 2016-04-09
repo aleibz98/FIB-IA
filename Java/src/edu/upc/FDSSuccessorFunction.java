@@ -5,6 +5,7 @@ import aima.search.framework.SuccessorFunction;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by marc.asenjo on 17/03/2016.
@@ -33,9 +34,11 @@ public class FDSSuccessorFunction implements SuccessorFunction {
                             time = newState.getTotalTime();
                         }
                         newState.swapServer(uid, rid, sid);
-                        retVal.add(new Successor(debug ?
-                                "U" + uid + " -> F" + state.getFid(uid, rid) + " from S" +
-                                        oldSid + " -> S" + sid + ": S=" + v + "ms T=" + time + "ms" : "",
+                        retVal.add(new Successor(//debug ?
+             //                   "U" + uid + " -> F" + state.getFid(uid, rid) + " from S" +
+             //                           oldSid + " -> S" + sid + ": S=" + v + "ms T=" + time + "ms" : "",
+
+                                String.format(Locale.FRANCE, "%f", v),
                                 newState));
                     }
                 }
