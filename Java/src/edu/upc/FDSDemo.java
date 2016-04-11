@@ -29,7 +29,7 @@ public class FDSDemo {
     private static Algorithm algorithm = Algorithm.HILL_CLIMBING;
     private static boolean debug = false;
     private static boolean printActions = false;
-    private static boolean randomInit = true;
+    private static boolean randomInit = false;
     private static boolean showHelp = false;
 
     // Simulated annealing parameters
@@ -123,26 +123,16 @@ public class FDSDemo {
                         break;
                     }
                     case SIMULATED_ANNEALING: {
-                        /*for (int j = SASteps; j < SASteps + 10000; j += 500) {
-                            for (int k = SAStiter; k < SAStiter + 1000; k += 100) {
-                                for (int l = SAK; l < SAK + 10; l += 1) {
-                                    for (double m = SAlamb; m < SAlamb + .01; m += .002) {*/
-                                        p = SimulatedAnnealing(fds);
-                                        assert p != null;
-                                        res = ((FDS) p.getValue().getGoalState());
-                                        time.setTransTime(res.getTotalTime());
-                                        time.setMaxTime(res.getMaxTime());
-                                        time.setMinTime(res.getMinTime());
+                        p = SimulatedAnnealing(fds);
+                        assert p != null;
+                        res = ((FDS) p.getValue().getGoalState());
+                        time.setTransTime(res.getTotalTime());
+                        time.setMaxTime(res.getMaxTime());
+                        time.setMinTime(res.getMinTime());
 
-                                        /*time.addTransTime(res.getTotalTime());
-                                        time.addMaxTime(res.getMaxTime());
-                                        time.addMinTime(res.getMinTime());
-*/
-                                        //printResults(out, p, (FDS) p.getValue().getGoalState(), time);
-                             /*       }
-                                }
-                            }
-                        }*/
+                        time.addTransTime(res.getTotalTime());
+                        time.addMaxTime(res.getMaxTime());
+                        time.addMinTime(res.getMinTime());
 
                         break;
                     }
@@ -172,7 +162,7 @@ public class FDSDemo {
         }
     }
 
-    private static void printResults(PrintStream out, Pair<SearchAgent,Search> p, FDS res, TimeResult time) {
+    private static void printResults(PrintStream out, Pair<SearchAgent, Search> p, FDS res, TimeResult time) {
 
         assert p != null;
         SearchAgent agent = p.getKey();
@@ -191,8 +181,8 @@ public class FDSDemo {
                 default:
                     throw new RuntimeException("Bad heuristic function");
             }
-            if (algorithm!=Algorithm.SIMULATED_ANNEALING)agent.getActions().forEach(out::println);
-            else{
+            if (algorithm != Algorithm.SIMULATED_ANNEALING) agent.getActions().forEach(out::println);
+            else {
                 PrintWriter writer = null;
                 try {
                     writer = new PrintWriter("Out.txt", "UTF-8");
@@ -200,12 +190,11 @@ public class FDSDemo {
                     e.printStackTrace();
                 }
                 assert writer != null;
-                for (Object n : search.getPathStates()){
+                for (Object n : search.getPathStates()) {
                     writer.println(String.format(Locale.FRANCE, "%f", h.getHeuristicValue(n)));
                 }
                 writer.close();
             }
-            //out.println(res.toString());
         }
         printInstrumentation(agent.getInstrumentation());
 
@@ -433,8 +422,8 @@ public class FDSDemo {
                     throw new RuntimeException("Bad heuristic function");
             }
             Problem problem = new Problem(fds, new FDSSuccessorFunctionSA(), new FDSGoalTest(), h);
-            SimulatedAnnealingSearch search = new SimulatedAnnealingSearch(20000, 200, (int)1E6, 0.01);
-            search.traceOn();
+            SimulatedAnnealingSearch search = new SimulatedAnnealingSearch(20000, 200, (int) 1E6, 0.01);
+            if (debug) search.traceOn();
 
             return new Pair<>(new SearchAgent(problem, search), search);
         } catch (Exception e) {
