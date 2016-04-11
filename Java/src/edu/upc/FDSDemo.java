@@ -7,7 +7,10 @@ import aima.search.informed.HillClimbingSearch;
 import aima.search.informed.SimulatedAnnealingSearch;
 import javafx.util.Pair;
 
+import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.Random;
@@ -135,7 +138,7 @@ public class FDSDemo {
                                         time.addMaxTime(res.getMaxTime());
                                         time.addMinTime(res.getMinTime());
 */
-                                        printResults(out, p, (FDS) p.getValue().getGoalState(), time);
+                                        //printResults(out, p, (FDS) p.getValue().getGoalState(), time);
                              /*       }
                                 }
                             }
@@ -190,9 +193,17 @@ public class FDSDemo {
             }
             if (algorithm!=Algorithm.SIMULATED_ANNEALING)agent.getActions().forEach(out::println);
             else{
-                for (Object n : search.getPathStates()){
-                    System.out.println(String.format(Locale.FRANCE, "%f", h.getHeuristicValue(n)));
+                PrintWriter writer = null;
+                try {
+                    writer = new PrintWriter("Out.txt", "UTF-8");
+                } catch (FileNotFoundException | UnsupportedEncodingException e) {
+                    e.printStackTrace();
                 }
+                assert writer != null;
+                for (Object n : search.getPathStates()){
+                    writer.println(String.format(Locale.FRANCE, "%f", h.getHeuristicValue(n)));
+                }
+                writer.close();
             }
             //out.println(res.toString());
         }
@@ -422,7 +433,7 @@ public class FDSDemo {
                     throw new RuntimeException("Bad heuristic function");
             }
             Problem problem = new Problem(fds, new FDSSuccessorFunctionSA(), new FDSGoalTest(), h);
-            SimulatedAnnealingSearch search = new SimulatedAnnealingSearch(20000, 100, 10000000, 0.001);
+            SimulatedAnnealingSearch search = new SimulatedAnnealingSearch(20000, 200, (int)1E6, 0.01);
             search.traceOn();
 
             return new Pair<>(new SearchAgent(problem, search), search);
@@ -464,4 +475,6 @@ public class FDSDemo {
             }
         }
     }
+
+
 }
