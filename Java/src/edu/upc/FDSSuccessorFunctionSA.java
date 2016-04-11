@@ -5,7 +5,6 @@ import aima.search.framework.SuccessorFunction;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Random;
 
 /**
@@ -36,12 +35,12 @@ public class FDSSuccessorFunctionSA implements SuccessorFunction {
         FDS newState = new FDS(state);
         int oldSid=state.getSid(uid,rid);
         newState.swapServer(uid, rid, sid);
-
-
+        long time = newState.getTotalTime();
         double v = heuristic.getHeuristicValue(newState);
-        //String S = "Intercambio del " + " " + state.getSid() + " " + j + " Coste(" + v + ") ---> ";
+        String S = "U" + uid + " -> F" + state.getFid(uid, rid) + " from S" +
+                oldSid + " -> S" + sid + ": S=" + v + "ms T=" + time + "ms";
 
-        retVal.add(new Successor(String.format(Locale.FRANCE, "%f", v), newState));
+        retVal.add(new Successor(S, newState));
 
         return retVal;
     }
