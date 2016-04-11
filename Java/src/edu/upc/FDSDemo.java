@@ -89,11 +89,12 @@ public class FDSDemo {
         FDSSuccessorFunction.debug = debug;
         FDSSuccessorFunction.worstServer = heuristic == 1;
 
+        long tTime = 0;
+        TimeResult time2 = new TimeResult(diffSeeds);
         for (int sed = seed; sed < seed + diffSeeds; ++sed) {
             Pair<SearchAgent, Search> p = null;
 
             FDS res = null;
-            long tTime = 0;
             TimeResult time = new TimeResult(repetitions);
 
             out.println("\n" + algorithm.toString() + " -->");
@@ -119,6 +120,10 @@ public class FDSDemo {
                             time.setTransTime(res.getTotalTime());
                             time.setMaxTime(res.getMaxTime());
                             time.setMinTime(res.getMinTime());
+
+                            time.addTransTime(res.getTotalTime());
+                            time.addMaxTime(res.getMaxTime());
+                            time.addMinTime(res.getMinTime());
                         }
                         break;
                     }
@@ -156,10 +161,20 @@ public class FDSDemo {
                 if (debug || i + 1 == repetitions) printResults(out, p, res, time);
             }
 
-            System.out.println();
-            out.println("Elapsed time: " + String.format("%,d ms", tTime));
-            out.println("Average time: " + String.format("%,.2f ms", tTime / ((double) repetitions)));
+            time2.addTransTime((long) time.getAvgTransTime());
+            time2.addMaxTime((long) time.getAvgMaxTime());
+            time2.addMinTime((long) time.getAvgMinTime());
+
+
         }
+
+        out.println(String.format("%,f ms", time2.getAvgTransTime()));
+        out.println(String.format("%,f ms",time2.getAvgMaxTime()));
+        out.println(String.format("%,f ms",time2.getAvgMinTime()));
+
+        System.out.println();
+        out.println("Elapsed time: " + String.format("%,d ms", tTime));
+        out.println("Average time: " + String.format("%,.2f ms", tTime / ((double) repetitions*diffSeeds)));
     }
 
     private static void printResults(PrintStream out, Pair<SearchAgent, Search> p, FDS res, TimeResult time) {
@@ -422,8 +437,8 @@ public class FDSDemo {
                     throw new RuntimeException("Bad heuristic function");
             }
             Problem problem = new Problem(fds, new FDSSuccessorFunctionSA(), new FDSGoalTest(), h);
-            SimulatedAnnealingSearch search = new SimulatedAnnealingSearch(20000, 200, (int) 1E6, 0.01);
-            if (debug) search.traceOn();
+            SimulatedAnnealingSearch search = new SimulatedAnnealingSearch(20000, 20, (int) 1E2, 0.03);
+            search.traceOn();
 
             return new Pair<>(new SearchAgent(problem, search), search);
         } catch (Exception e) {
