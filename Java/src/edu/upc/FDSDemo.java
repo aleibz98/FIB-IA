@@ -7,35 +7,45 @@ import aima.search.informed.HillClimbingSearch;
 import aima.search.informed.SimulatedAnnealingSearch;
 import javafx.util.Pair;
 
+import java.io.FileNotFoundException;
 import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Locale;
 import java.util.Properties;
 import java.util.Random;
 
 @SuppressWarnings("unchecked")
 public class FDSDemo {
+    public static int seed = 1234;
     private static int users = 200;
     private static int requests = 5;
-    private static int seed = 1234;
     private static int diffSeeds = 1;
     private static int nserv = 50;
     private static int nrep = 5;
     private static int repetitions = 1;
-    private static int successors = 3;
+    private static int successors = 1;
     private static int heuristic = 1;
     private static Algorithm algorithm = Algorithm.HILL_CLIMBING;
     private static boolean debug = false;
     private static boolean printActions = false;
-    private static boolean randomInit = true;
+    private static boolean randomInit = false;
     private static boolean showHelp = false;
+
+    // Simulated annealing parameters
+    private static int SASteps = 1000;
+    private static int SAStiter = 50;
+    private static int SAK = 2;
+    private static double SAlamb = 0.001;
+
     private static String help =
             "-h             Print this help\n\n" +
                     "-a             Print actions\n" +
                     "-d             Print debug info\n" +
                     "-R n           Repeat n times\n" +
-                    "-s n           Select successor funciton [1|2|3]\n" +
-                    "-heuristic s   Set s as desired heuristic [worstServer|totalTime]\n" +
-                    "-algorithm s   Set s as desired algorithm [hillClimbing|SimulatedAnnealing]\n" +
+                    "-s n           Select successor function [1|2|3]\n" +
+                    "-heuristic s   Set s as desired heuristic [1|2]\n" +
+                    "-algorithm s   Set s as desired algorithm [1|2|3]\n" +
                     "-initial s     Set s as desired initial solution [best|random]\n\n" +
                     "-u n           Set n users for the problem\n" +
                     "-r n           Set n requests for the problem\n" +
@@ -79,15 +89,13 @@ public class FDSDemo {
         FDSSuccessorFunction.debug = debug;
         FDSSuccessorFunction.worstServer = heuristic == 1;
 
+        long tTime = 0;
+        TimeResult time2 = new TimeResult(diffSeeds);
         for (int sed = seed; sed < seed + diffSeeds; ++sed) {
-            SearchAgent agent = null;
-            FDS res = null;
-            long tTime = 0;
-            long transTime = 0;
-            long maxTime = 0, minTime = 0;
+            Pair<SearchAgent, Search> p = null;
 
-            long tTransTime = 0;
-            long tMaxTime = 0, tMinTime = 0;
+            FDS res = null;
+            TimeResult time = new TimeResult(repetitions);
 
             out.println("\n" + algorithm.toString() + " -->");
             out.println("Seed: " + sed);
@@ -105,41 +113,43 @@ public class FDSDemo {
                 switch (algorithm) {
                     case HILL_CLIMBING: {
                         FDSHeuristicFunction2.factor = i + 10;
-                        Pair<SearchAgent, Search> p = HillClimbing(fds);
+                        p = HillClimbing(fds);
                         if (i + 1 == repetitions || debug) {
                             assert p != null;
-                            agent = p.getKey();
                             res = ((FDS) p.getValue().getGoalState());
-                            transTime = res.getTotalTime();
-                            maxTime = res.getMaxTime();
-                            minTime = res.getMinTime();
+                            time.setTransTime(res.getTotalTime());
+                            time.setMaxTime(res.getMaxTime());
+                            time.setMinTime(res.getMinTime());
+
+                            time.addTransTime(res.getTotalTime());
+                            time.addMaxTime(res.getMaxTime());
+                            time.addMinTime(res.getMinTime());
                         }
                         break;
                     }
                     case SIMULATED_ANNEALING: {
-                        Pair<SearchAgent, Search> p = SimulatedAnnealing(fds);
+                        p = SimulatedAnnealing(fds);
                         assert p != null;
-                        agent = p.getKey();
                         res = ((FDS) p.getValue().getGoalState());
+                        time.setTransTime(res.getTotalTime());
+                        time.setMaxTime(res.getMaxTime());
+                        time.setMinTime(res.getMinTime());
 
-                        transTime = res.getTotalTime();
-                        maxTime = res.getMaxTime();
-                        minTime = res.getMinTime();
+                        time.addTransTime(res.getTotalTime());
+                        time.addMaxTime(res.getMaxTime());
+                        time.addMinTime(res.getMinTime());
 
-                        tTransTime += res.getTotalTime();
-                        tMaxTime += res.getMaxTime();
-                        tMinTime += res.getMinTime();
                         break;
                     }
                     case HILL_CLIMBING_UNSTUCKING: {
-                        Pair<SearchAgent, Search> p = HillClimbingUnstucking(fds);
+                        p = HillClimbingUnstucking(fds);
                         if (i + 1 == repetitions || debug) {
                             assert p != null;
-                            agent = p.getKey();
                             res = ((FDS) p.getValue().getGoalState());
-                            transTime = res.getTotalTime();
-                            maxTime = res.getMaxTime();
-                            minTime = res.getMinTime();
+
+                            time.setTransTime(res.getTotalTime());
+                            time.setMaxTime(res.getMaxTime());
+                            time.setMinTime(res.getMinTime());
                         }
                     }
                 }
@@ -147,39 +157,80 @@ public class FDSDemo {
                 long end = System.currentTimeMillis();
                 tTime += end - start;
 
-                if (i + 1 == repetitions || debug) {
-                    assert agent != null;
-
-                    // Print results
-                    if (printActions) {
-                        agent.getActions().forEach(out::println);
-                        out.println(res.toString());
-                    }
-                    printInstrumentation(agent.getInstrumentation());
-
-                    switch (algorithm) {
-                        case HILL_CLIMBING:
-                        case HILL_CLIMBING_UNSTUCKING:
-                            out.println("Total Transmission time: " + String.format("%,d ms", transTime));
-                            out.println("Maximum transmission time: " + String.format("%,d ms", maxTime));
-                            out.println("Minimum transmission time: " + String.format("%,d ms", minTime));
-                            break;
-                        case SIMULATED_ANNEALING:
-                            if (i + 1 != repetitions) break;
-                            double time1 = transTime / ((double) repetitions);
-                            double time2 = maxTime / ((double) repetitions);
-                            double time3 = minTime / ((double) repetitions);
-
-                            out.println("Average total transmission time: " + String.format("%,f ms", time1));
-                            out.println("Average max transmission time: " + String.format("%,f ms", time2));
-                            out.println("Average min transmission time: " + String.format("%,f ms", time3));
-                    }
-                }
+                assert p != null;
+                if (debug || i + 1 == repetitions) printResults(out, p, res, time);
             }
 
-            System.out.println();
-            out.println("Elapsed time: " + String.format("%,d ms", tTime));
-            out.println("Average time: " + String.format("%,.2f ms", tTime / ((double) repetitions)));
+            time2.addTransTime((long) time.getAvgTransTime());
+            time2.addMaxTime((long) time.getAvgMaxTime());
+            time2.addMinTime((long) time.getAvgMinTime());
+
+
+        }
+
+        out.println(String.format("%,f ms", time2.getAvgTransTime()));
+        out.println(String.format("%,f ms",time2.getAvgMaxTime()));
+        out.println(String.format("%,f ms",time2.getAvgMinTime()));
+
+        System.out.println();
+        out.println("Elapsed time: " + String.format("%,d ms", tTime));
+        out.println("Average time: " + String.format("%,.2f ms", tTime / ((double) repetitions*diffSeeds)));
+    }
+
+    private static void printResults(PrintStream out, Pair<SearchAgent, Search> p, FDS res, TimeResult time) {
+
+        assert p != null;
+        SearchAgent agent = p.getKey();
+        Search search = p.getValue();
+
+        // Print results
+        if (printActions) {
+            HeuristicFunction h;
+            switch (heuristic) {
+                case 1:
+                    h = new FDSHeuristicFunction();
+                    break;
+                case 2:
+                    h = new FDSHeuristicFunction2();
+                    break;
+                default:
+                    throw new RuntimeException("Bad heuristic function");
+            }
+            if (algorithm != Algorithm.SIMULATED_ANNEALING) agent.getActions().forEach(out::println);
+            else {
+                PrintWriter writer = null;
+                try {
+                    writer = new PrintWriter("Out.txt", "UTF-8");
+                } catch (FileNotFoundException | UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+                assert writer != null;
+                for (Object n : search.getPathStates()) {
+                    writer.println(String.format(Locale.FRANCE, "%f", h.getHeuristicValue(n)));
+                }
+                writer.close();
+            }
+        }
+        printInstrumentation(agent.getInstrumentation());
+
+        switch (algorithm) {
+            case HILL_CLIMBING:
+            case HILL_CLIMBING_UNSTUCKING:
+                out.println("Total Transmission time: " + String.format("%,d ms", time.getTransTime()));
+                out.println("Maximum transmission time: " + String.format("%,d ms", time.getMaxTime()));
+                out.println("Minimum transmission time: " + String.format("%,d ms", time.getMinTime()));
+                break;
+            case SIMULATED_ANNEALING:
+                if (debug) {
+                    out.println("Results:");
+                    out.println(String.format("%,d ms", time.getTransTime()));
+                    out.println(String.format("%,d ms", time.getMaxTime()));
+                } else {
+                    out.println("Average total transmission time: " + String.format("%,f ms", time.getAvgTransTime()));
+                    out.println("Average max transmission time: " + String.format("%,f ms", time.getAvgMaxTime()));
+                    out.println("Average min transmission time: " + String.format("%,f ms", time.getAvgMinTime()));
+                }
+                break;
         }
     }
 
@@ -243,7 +294,7 @@ public class FDSDemo {
                 case "initial":
                     randomInit = par.toLowerCase().contains("rand");
                     break;
-                // -algorithm [hillClimbing|Simulated] => Select algorithm
+                // -algorithm n => Select algorithm n
                 case "algorithm":
                     int x = Integer.valueOf(par);
                     try {
@@ -268,7 +319,7 @@ public class FDSDemo {
                     successors = Integer.valueOf(par);
                     checkParameter(successors, par);
                     break;
-                // -heuristic [worstServer|totalTime]
+                // -heuristic [1|2]
                 case "heuristic":
                     heuristic = Integer.valueOf(par);
                     checkParameter(heuristic, par);
@@ -318,7 +369,7 @@ public class FDSDemo {
         return null;
     }
 
-    private static Pair<SearchAgent, Search> HillClimbingUnstucking(FDS fds){
+    private static Pair<SearchAgent, Search> HillClimbingUnstucking(FDS fds) {
         try {
             boolean keep = true;
             SearchAgent searchAgent = null;
@@ -352,15 +403,15 @@ public class FDSDemo {
                     throw new RuntimeException("Bad heuristic function");
             }
 
-            int maxUnstucks=-1;
-            while (keep && ((maxUnstucks==-1)||(maxUnstucks--)>0)) {
+            int maxUnstucks = -1;
+            while (keep && ((maxUnstucks == -1) || (maxUnstucks--) > 0)) {
                 problem = new Problem(fds, f, new FDSGoalTest(), h);
                 search = new HillClimbingSearch();
                 searchAgent = new SearchAgent(problem, search);
-                fds=(FDS)search.getGoalState();
+                fds = (FDS) search.getGoalState();
                 //System.out.println("Before unstuck: " + h.getHeuristicValue(fds));
                 keep = fds.unstuck(h, false, heuristic == 1);
-                if (keep) System.out.println("After unstuck: "+h.getHeuristicValue(fds));
+                if (keep) System.out.println("After unstuck: " + h.getHeuristicValue(fds));
                 //else System.out.println("Unstuck failed");
             }
 
@@ -373,9 +424,21 @@ public class FDSDemo {
 
     private static Pair<SearchAgent, Search> SimulatedAnnealing(FDS fds) {
         try {
-            Problem problem = new Problem(fds, new FDSSuccessorFunctionSA(), new FDSGoalTest(), new FDSHeuristicFunction());
-            SimulatedAnnealingSearch search = new SimulatedAnnealingSearch(2000, 100, 5, 0.001);
-            //search.traceOn();
+
+            HeuristicFunction h;
+            switch (heuristic) {
+                case 1:
+                    h = new FDSHeuristicFunction();
+                    break;
+                case 2:
+                    h = new FDSHeuristicFunction2();
+                    break;
+                default:
+                    throw new RuntimeException("Bad heuristic function");
+            }
+            Problem problem = new Problem(fds, new FDSSuccessorFunctionSA(), new FDSGoalTest(), h);
+            SimulatedAnnealingSearch search = new SimulatedAnnealingSearch(20000, 20, (int) 1E2, 0.03);
+            search.traceOn();
 
             return new Pair<>(new SearchAgent(problem, search), search);
         } catch (Exception e) {
@@ -416,4 +479,6 @@ public class FDSDemo {
             }
         }
     }
+
+
 }

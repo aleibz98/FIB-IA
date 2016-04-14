@@ -180,7 +180,7 @@ public class FDS {
         return Arrays.equals(aux, serverTimes);
     }
 
-    private Object getRandomFromSet(Set set, long seed) {
+    public Object getRandomFromSet(Set set, long seed) {
         int size = set.size();
         int item = new Random(seed).nextInt(size);
         int i = 0;

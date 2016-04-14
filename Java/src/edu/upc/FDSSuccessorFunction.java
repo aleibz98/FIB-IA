@@ -34,7 +34,7 @@ public class FDSSuccessorFunction implements SuccessorFunction {
                         }
                         newState.swapServer(uid, rid, sid);
                         retVal.add(new Successor(debug ?
-                                "U" + uid + " -> F" + state.getFid(uid, rid) + " from S" +
+                                        "U" + uid + " -> F" + state.getFid(uid, rid) + " from S" +
                                         oldSid + " -> S" + sid + ": S=" + v + "ms T=" + time + "ms" : "",
                                 newState));
                     }
