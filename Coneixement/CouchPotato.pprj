@@ -1,4 +1,4 @@
-; Tue Apr 26 13:00:36 CEST 2016
+; Thu Apr 28 13:38:40 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -20,46 +20,373 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[CouchPotato_ProjectKB_Class178]
-		[CouchPotato_ProjectKB_Class179]
-		[CouchPotato_ProjectKB_Class180]
-		[CouchPotato_ProjectKB_Class181]
-		[CouchPotato_ProjectKB_Class182]
-		[CouchPotato_ProjectKB_Class183]))
+		[CouchPotato_ProjectKB_Class10112]
+		[CouchPotato_ProjectKB_Class10113]
+		[CouchPotato_ProjectKB_Class10114]
+		[CouchPotato_ProjectKB_Class10115]
+		[CouchPotato_ProjectKB_Class10116]))
 
 ([CLSES_TAB] of  Widget
 
 	(widget_class_name "edu.stanford.smi.protege.widget.ClsesTab"))
 
-([CouchPotato_ProjectKB_Class178] of  String
+([CouchPotato_ProjectKB_Class1] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class2])
+	(widget_class_name "se.liu.ida.JessTab.JessTab"))
+
+([CouchPotato_ProjectKB_Class10] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10112] of  String
 
 	(name ":INSTANCE-ANNOTATION")
 	(string_value "%3AANNOTATION-TEXT"))
 
-([CouchPotato_ProjectKB_Class179] of  String
-
-	(name "PERSONA")
-	(string_value "%3ANAME"))
-
-([CouchPotato_ProjectKB_Class180] of  String
+([CouchPotato_ProjectKB_Class10113] of  String
 
 	(name ":META-CLASS")
 	(string_value "%3ANAME"))
 
-([CouchPotato_ProjectKB_Class181] of  String
+([CouchPotato_ProjectKB_Class10114] of  String
 
 	(name ":PAL-CONSTRAINT")
 	(string_value "%3APAL-NAME"))
 
-([CouchPotato_ProjectKB_Class182] of  String
+([CouchPotato_ProjectKB_Class10115] of  String
+
+	(name "Test")
+	(string_value "%3ANAME"))
+
+([CouchPotato_ProjectKB_Class10116] of  String
 
 	(name "Person")
 	(string_value "age"))
 
-([CouchPotato_ProjectKB_Class183] of  String
+([CouchPotato_ProjectKB_Class11] of  Widget
 
-	(name "Exercice")
-	(string_value "%3ANAME"))
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class12])
+	(widget_class_name "ezpal.EZPalTab"))
+
+([CouchPotato_ProjectKB_Class12] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class13] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class14])
+	(widget_class_name "edu.stanford.smi.protegex.server_changes.prompt.UsersTab"))
+
+([CouchPotato_ProjectKB_Class14] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class15] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class16])
+	(widget_class_name "ca.uvic.csr.shrimp.jambalaya.JambalayaTab"))
+
+([CouchPotato_ProjectKB_Class16] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class17] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class18])
+	(widget_class_name "edu.stanford.smi.protege.widget.instance_tree.InstanceTreeTab"))
+
+([CouchPotato_ProjectKB_Class18] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class19] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class20])
+	(widget_class_name "edu.stanford.smi.protegex.widget.pal.PalConstraintsTab"))
+
+([CouchPotato_ProjectKB_Class2] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class20] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class21] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class22])
+	(widget_class_name "uk.ac.man.ac.mig.coode.individuals.ui.OWLDLIndividualsTab"))
+
+([CouchPotato_ProjectKB_Class22] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class23] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class24])
+	(widget_class_name "edu.stanford.smi.protege.widget.ClsesAndInstancesTab"))
+
+([CouchPotato_ProjectKB_Class24] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class25] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class26])
+	(widget_class_name "edu.stanford.smi.protegex.evaluation.MetaAnalysis"))
+
+([CouchPotato_ProjectKB_Class26] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class27] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class28])
+	(widget_class_name "uk.ac.man.cs.mig.coode.owlviz.ui.OWLVizTab"))
+
+([CouchPotato_ProjectKB_Class28] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class29] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class30])
+	(widget_class_name "edu.stanford.smi.protege.query.LuceneQueryPlugin"))
+
+([CouchPotato_ProjectKB_Class3] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class4])
+	(widget_class_name "edu.stanford.smi.protegex.owl.ui.metadatatab.OWLMetadataTab"))
+
+([CouchPotato_ProjectKB_Class30] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class31] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class32])
+	(widget_class_name "edu.stanford.smi.protegex.owl.ui.cls.OWLClassesTab"))
+
+([CouchPotato_ProjectKB_Class32] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class33] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class34])
+	(widget_class_name "edu.stanford.smi.protegex.owl.ui.individuals.OWLIndividualsTab"))
+
+([CouchPotato_ProjectKB_Class34] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class35] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class36])
+	(widget_class_name "org.protege.owl.mm.portability.protege3.MappingMasterTab"))
+
+([CouchPotato_ProjectKB_Class36] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class37] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class38])
+	(widget_class_name "edu.stanford.smi.protegex.changeanalysis.ChangeAnalysisTab"))
+
+([CouchPotato_ProjectKB_Class38] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class39] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class40])
+	(widget_class_name "TGViztab.TGVizTab"))
+
+([CouchPotato_ProjectKB_Class4] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class40] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class41] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class42])
+	(widget_class_name "edu.stanford.smi.protegex.changes.changesKBViewTab.ChangesKBViewTab"))
+
+([CouchPotato_ProjectKB_Class42] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class43] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class44])
+	(widget_class_name "edu.stanford.smi.protege.widget.KAToolTab"))
+
+([CouchPotato_ProjectKB_Class44] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class45] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class46])
+	(widget_class_name "edu.stanford.smi.protegex.xml.tab.XMLTab"))
+
+([CouchPotato_ProjectKB_Class46] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class47] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class48])
+	(widget_class_name "edu.stanford.smi.protegex.widget.pal.PalQueriesTab"))
+
+([CouchPotato_ProjectKB_Class48] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class49] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class50])
+	(widget_class_name "edu.stanford.smi.protegex.chatPlugin.ChatTab"))
+
+([CouchPotato_ProjectKB_Class5] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class6])
+	(widget_class_name "edu.stanford.smi.protegex.owl.ui.properties.OWLPropertiesTab"))
+
+([CouchPotato_ProjectKB_Class50] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class51] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class52])
+	(widget_class_name "org.protege.owl.axiome.ui.AxiomeTab"))
+
+([CouchPotato_ProjectKB_Class52] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class53] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class54])
+	(widget_class_name "edu.stanford.smi.protege.keywordsearch.StringSearch"))
+
+([CouchPotato_ProjectKB_Class54] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class55] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class56])
+	(widget_class_name "edu.stanford.smi.protegex.owl.ui.widget.OWLFormsTab"))
+
+([CouchPotato_ProjectKB_Class56] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class57] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class58])
+	(widget_class_name "script.ProtegeScriptTab"))
+
+([CouchPotato_ProjectKB_Class58] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class59] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class60])
+	(widget_class_name "edu.stanford.smi.protegex.changes.ChangesTab"))
+
+([CouchPotato_ProjectKB_Class6] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class60] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class61] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class62])
+	(widget_class_name "edu.stanford.smi.protegex.owl.swrl.ui.tab.SWRLTab"))
+
+([CouchPotato_ProjectKB_Class62] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class63] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class64])
+	(widget_class_name "edu.stanford.smi.protegex.fctab.FacetConstraintsTab"))
+
+([CouchPotato_ProjectKB_Class64] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class65] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class66])
+	(widget_class_name "edu.stanford.smi.protege.widget.instance_tree.KnowledgeTreeTab"))
+
+([CouchPotato_ProjectKB_Class66] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class67] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class68])
+	(widget_class_name "edu.stanford.smi.protegex.datamaster.DataMasterTab"))
+
+([CouchPotato_ProjectKB_Class68] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class69] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class70])
+	(widget_class_name "dfki.protege.ontoviz_tab.OntovizTab"))
+
+([CouchPotato_ProjectKB_Class7] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class8])
+	(widget_class_name "edu.stanford.smi.protege.widget.ProtegePropertiesTab"))
+
+([CouchPotato_ProjectKB_Class70] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class71] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class72])
+	(widget_class_name "edu.stanford.smi.protegex.changes.stats.ChangeStatisticsTab"))
+
+([CouchPotato_ProjectKB_Class72] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class73] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class74])
+	(widget_class_name "edu.stanford.smi.protegex.prompt.PromptTab"))
+
+([CouchPotato_ProjectKB_Class74] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class8] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class9] of  Widget
+
+	(is_hidden TRUE)
+	(property_list [CouchPotato_ProjectKB_Class10])
+	(widget_class_name "uk.ac.man.cs.mig.coode.debugger.test.DebuggerTestTab"))
 
 ([CREATION_TIMESTAMP_WIDGET] of  Widget
 
@@ -96,6 +423,9 @@
 
 	(widget_class_name "edu.stanford.smi.protege.widget.InstancesTab"))
 
+([KB_265892_Class0] of  Map
+)
+
 ([KB_692925_Class0] of  String
 
 	(name "factory_class_name")
@@ -104,180 +434,10 @@
 ([KB_692925_Class1] of  Map
 )
 
-([KB_692925_Class10] of  Property_List
-)
-
-([KB_692925_Class102] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "PES")
-	(property_list [KB_692925_Class103])
-	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
-	(width 200)
-	(x 0)
-	(y 0))
-
-([KB_692925_Class103] of  Property_List
-)
-
-([KB_692925_Class106] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "EDAT")
-	(property_list [KB_692925_Class107])
-	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
-	(width 200)
-	(x 0)
-	(y 60))
-
-([KB_692925_Class107] of  Property_List
-)
-
-([KB_692925_Class11] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class12])
-	(widget_class_name "uk.ac.man.cs.mig.coode.debugger.test.DebuggerTestTab"))
-
 ([KB_692925_Class110] of  Boolean
 
 	(boolean_value FALSE)
 	(name "use_roundtrip"))
-
-([KB_692925_Class12] of  Property_List
-)
-
-([KB_692925_Class120] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "imc")
-	(property_list [KB_692925_Class121])
-	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
-	(width 200)
-	(x 0)
-	(y 120))
-
-([KB_692925_Class121] of  Property_List
-)
-
-([KB_692925_Class126] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "KB_666750_Class15")
-	(property_list [KB_692925_Class127])
-	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
-	(width 200)
-	(x 0)
-	(y 240))
-
-([KB_692925_Class127] of  Property_List
-)
-
-([KB_692925_Class128] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "KB_666750_Class15")
-	(property_list [KB_692925_Class129])
-	(widget_class_name "edu.stanford.smi.protege.widget.FloatFieldWidget")
-	(width 100)
-	(x 0)
-	(y 240))
-
-([KB_692925_Class129] of  Property_List
-)
-
-([KB_692925_Class13] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class14])
-	(widget_class_name "ezpal.EZPalTab"))
-
-([KB_692925_Class130] of  Widget
-
-	(height 120)
-	(is_hidden FALSE)
-	(name "pressure")
-	(property_list [KB_692925_Class131])
-	(widget_class_name "edu.stanford.smi.protege.widget.FloatListWidget")
-	(width 200)
-	(x 0)
-	(y 240))
-
-([KB_692925_Class131] of  Property_List
-)
-
-([KB_692925_Class132] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "ppm")
-	(property_list [KB_692925_Class133])
-	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
-	(width 200)
-	(x 0)
-	(y 250))
-
-([KB_692925_Class133] of  Property_List
-)
-
-([KB_692925_Class14] of  Property_List
-)
-
-([KB_692925_Class144] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "name")
-	(property_list [KB_692925_Class145])
-	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
-	(width 200)
-	(x 0)
-	(y 0))
-
-([KB_692925_Class145] of  Property_List
-)
-
-([KB_692925_Class148] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "pMax")
-	(property_list [KB_692925_Class149])
-	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
-	(width 200)
-	(x 0)
-	(y 120))
-
-([KB_692925_Class149] of  Property_List
-)
-
-([KB_692925_Class15] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class16])
-	(widget_class_name "edu.stanford.smi.protegex.server_changes.prompt.UsersTab"))
-
-([KB_692925_Class152] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "pMin")
-	(property_list [KB_692925_Class153])
-	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
-	(width 200)
-	(x 0)
-	(y 180))
-
-([KB_692925_Class153] of  Property_List
-)
-
-([KB_692925_Class16] of  Property_List
-)
 
 ([KB_692925_Class163] of  String
 
@@ -288,303 +448,6 @@
 
 	(name "instances_file_name")
 	(string_value "CouchPotato.pins"))
-
-([KB_692925_Class17] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class18])
-	(widget_class_name "ca.uvic.csr.shrimp.jambalaya.JambalayaTab"))
-
-([KB_692925_Class18] of  Property_List
-)
-
-([KB_692925_Class19] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class20])
-	(widget_class_name "edu.stanford.smi.protege.widget.instance_tree.InstanceTreeTab"))
-
-([KB_692925_Class2] of  Map
-)
-
-([KB_692925_Class20] of  Property_List
-)
-
-([KB_692925_Class21] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class22])
-	(widget_class_name "edu.stanford.smi.protegex.widget.pal.PalConstraintsTab"))
-
-([KB_692925_Class22] of  Property_List
-)
-
-([KB_692925_Class23] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class24])
-	(widget_class_name "uk.ac.man.ac.mig.coode.individuals.ui.OWLDLIndividualsTab"))
-
-([KB_692925_Class24] of  Property_List
-)
-
-([KB_692925_Class25] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class26])
-	(widget_class_name "edu.stanford.smi.protege.widget.ClsesAndInstancesTab"))
-
-([KB_692925_Class26] of  Property_List
-)
-
-([KB_692925_Class27] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class28])
-	(widget_class_name "edu.stanford.smi.protegex.evaluation.MetaAnalysis"))
-
-([KB_692925_Class28] of  Property_List
-)
-
-([KB_692925_Class29] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class30])
-	(widget_class_name "uk.ac.man.cs.mig.coode.owlviz.ui.OWLVizTab"))
-
-([KB_692925_Class3] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class4])
-	(widget_class_name "se.liu.ida.JessTab.JessTab"))
-
-([KB_692925_Class30] of  Property_List
-)
-
-([KB_692925_Class31] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class32])
-	(widget_class_name "edu.stanford.smi.protege.query.LuceneQueryPlugin"))
-
-([KB_692925_Class32] of  Property_List
-)
-
-([KB_692925_Class33] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class34])
-	(widget_class_name "edu.stanford.smi.protegex.owl.ui.cls.OWLClassesTab"))
-
-([KB_692925_Class34] of  Property_List
-)
-
-([KB_692925_Class35] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class36])
-	(widget_class_name "edu.stanford.smi.protegex.owl.ui.individuals.OWLIndividualsTab"))
-
-([KB_692925_Class36] of  Property_List
-)
-
-([KB_692925_Class37] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class38])
-	(widget_class_name "org.protege.owl.mm.portability.protege3.MappingMasterTab"))
-
-([KB_692925_Class38] of  Property_List
-)
-
-([KB_692925_Class39] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class40])
-	(widget_class_name "edu.stanford.smi.protegex.changeanalysis.ChangeAnalysisTab"))
-
-([KB_692925_Class4] of  Property_List
-)
-
-([KB_692925_Class40] of  Property_List
-)
-
-([KB_692925_Class41] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class42])
-	(widget_class_name "TGViztab.TGVizTab"))
-
-([KB_692925_Class42] of  Property_List
-)
-
-([KB_692925_Class43] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class44])
-	(widget_class_name "edu.stanford.smi.protegex.changes.changesKBViewTab.ChangesKBViewTab"))
-
-([KB_692925_Class44] of  Property_List
-)
-
-([KB_692925_Class45] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class46])
-	(widget_class_name "edu.stanford.smi.protege.widget.KAToolTab"))
-
-([KB_692925_Class46] of  Property_List
-)
-
-([KB_692925_Class47] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class48])
-	(widget_class_name "edu.stanford.smi.protegex.xml.tab.XMLTab"))
-
-([KB_692925_Class48] of  Property_List
-)
-
-([KB_692925_Class49] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class50])
-	(widget_class_name "edu.stanford.smi.protegex.widget.pal.PalQueriesTab"))
-
-([KB_692925_Class5] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class6])
-	(widget_class_name "edu.stanford.smi.protegex.owl.ui.metadatatab.OWLMetadataTab"))
-
-([KB_692925_Class50] of  Property_List
-)
-
-([KB_692925_Class51] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class52])
-	(widget_class_name "edu.stanford.smi.protegex.chatPlugin.ChatTab"))
-
-([KB_692925_Class52] of  Property_List
-)
-
-([KB_692925_Class53] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class54])
-	(widget_class_name "org.protege.owl.axiome.ui.AxiomeTab"))
-
-([KB_692925_Class54] of  Property_List
-)
-
-([KB_692925_Class55] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class56])
-	(widget_class_name "edu.stanford.smi.protege.keywordsearch.StringSearch"))
-
-([KB_692925_Class56] of  Property_List
-)
-
-([KB_692925_Class57] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class58])
-	(widget_class_name "edu.stanford.smi.protegex.owl.ui.widget.OWLFormsTab"))
-
-([KB_692925_Class58] of  Property_List
-)
-
-([KB_692925_Class59] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class60])
-	(widget_class_name "script.ProtegeScriptTab"))
-
-([KB_692925_Class6] of  Property_List
-)
-
-([KB_692925_Class60] of  Property_List
-)
-
-([KB_692925_Class61] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class62])
-	(widget_class_name "edu.stanford.smi.protegex.changes.ChangesTab"))
-
-([KB_692925_Class62] of  Property_List
-)
-
-([KB_692925_Class63] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class64])
-	(widget_class_name "edu.stanford.smi.protegex.owl.swrl.ui.tab.SWRLTab"))
-
-([KB_692925_Class64] of  Property_List
-)
-
-([KB_692925_Class65] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class66])
-	(widget_class_name "edu.stanford.smi.protegex.fctab.FacetConstraintsTab"))
-
-([KB_692925_Class66] of  Property_List
-)
-
-([KB_692925_Class67] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class68])
-	(widget_class_name "edu.stanford.smi.protege.widget.instance_tree.KnowledgeTreeTab"))
-
-([KB_692925_Class68] of  Property_List
-)
-
-([KB_692925_Class69] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class70])
-	(widget_class_name "edu.stanford.smi.protegex.datamaster.DataMasterTab"))
-
-([KB_692925_Class7] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class8])
-	(widget_class_name "edu.stanford.smi.protegex.owl.ui.properties.OWLPropertiesTab"))
-
-([KB_692925_Class70] of  Property_List
-)
-
-([KB_692925_Class71] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class72])
-	(widget_class_name "dfki.protege.ontoviz_tab.OntovizTab"))
-
-([KB_692925_Class72] of  Property_List
-)
-
-([KB_692925_Class73] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class74])
-	(widget_class_name "edu.stanford.smi.protegex.changes.stats.ChangeStatisticsTab"))
-
-([KB_692925_Class74] of  Property_List
-)
-
-([KB_692925_Class75] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class76])
-	(widget_class_name "edu.stanford.smi.protegex.prompt.PromptTab"))
-
-([KB_692925_Class76] of  Property_List
-)
 
 ([KB_692925_Class77] of  Property_List
 
@@ -601,9 +464,6 @@
 
 	(boolean_value FALSE)
 	(name "ButtonDisplayed-Delete Instance"))
-
-([KB_692925_Class8] of  Property_List
-)
 
 ([KB_692925_Class80] of  Property_List
 )
@@ -642,12 +502,6 @@
 
 ([KB_692925_Class89] of  Property_List
 )
-
-([KB_692925_Class9] of  Widget
-
-	(is_hidden TRUE)
-	(property_list [KB_692925_Class10])
-	(widget_class_name "edu.stanford.smi.protege.widget.ProtegePropertiesTab"))
 
 ([KB_692925_Class90] of  Property_List
 )

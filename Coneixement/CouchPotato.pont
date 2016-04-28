@@ -1,4 +1,4 @@
-; Tue Apr 26 13:00:36 CEST 2016
+; Thu Apr 28 13:38:40 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -9,6 +9,11 @@
 	(role abstract)
 	(single-slot ppm
 		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot muscularStress
+		(type SYMBOL)
+		(allowed-values Poco Mucho Nada)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot pMax
@@ -24,8 +29,20 @@
 		(default 75.0)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot KB_666750_Class24
-		(type STRING)
+	(single-slot tired
+		(type SYMBOL)
+		(allowed-values Poco Mucho Nada)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot duration
+		(type INTEGER)
+		(default 0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot frequency
+		(type SYMBOL)
+		(allowed-values Diaria Semanal Mensual None)
+		(default None)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot age
@@ -41,16 +58,16 @@
 		(type FLOAT)
 		(default 1.7)
 ;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot value
+;+		(type ANY)
+;+		(cardinality 0 1)
 		(create-accessor read-write)))
 
 (defclass Person
 	(is-a USER)
 	(role concrete)
 	(single-slot imc
-		(type FLOAT)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot ppm
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
@@ -83,14 +100,51 @@
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
-(defclass Exercice
+(defclass Test
 	(is-a USER)
 	(role concrete)
+	(single-slot ppm
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot tired
+		(type SYMBOL)
+		(allowed-values Poco Mucho Nada)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot muscularStress
+		(type SYMBOL)
+		(allowed-values Poco Mucho Nada)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot %3ANAME
 		(type STRING)
 ;+		(cardinality 0 1)
 		(create-accessor read-write)))
 
-(defclass Parameter
+(defclass Activity
 	(is-a USER)
+	(role abstract)
+	(single-slot duration
+		(type INTEGER)
+		(default 0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot frequency
+		(type SYMBOL)
+		(allowed-values Diaria Semanal Mensual None)
+		(default None)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot %3ANAME
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass WorkActivity
+	(is-a Activity)
+	(role concrete))
+
+(defclass NonWorkActivity
+	(is-a Activity)
 	(role concrete))

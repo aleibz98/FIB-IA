@@ -1,10 +1,28 @@
-; Tue Apr 26 13:00:36 CEST 2016
+; Thu Apr 28 13:38:40 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
 
-([Carrera+Sostenida] of  Exercice
+([Carrera+Sostenida] of  Test
 )
 
-([Subir+tramos+de+escalera] of  Exercice
+([Muscular+Effort] of  WorkActivity
+)
+
+([Repetitive+Movement] of  WorkActivity
+)
+
+([Sitting] of  WorkActivity
+)
+
+([Standing+up] of  WorkActivity
+)
+
+([Subir+tramos+de+escalera] of  Test
+)
+
+([Walking] of  WorkActivity
+)
+
+([Weight+Lift] of  WorkActivity
 )
