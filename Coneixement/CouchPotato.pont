@@ -1,4 +1,4 @@
-; Thu Apr 28 13:38:40 CEST 2016
+; Fri Apr 29 10:04:44 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -7,13 +7,65 @@
 (defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
 	(is-a USER)
 	(role abstract)
-	(single-slot ppm
+	(single-slot consumo+de+fruta
+;+		(comment "Piezas a la semana")
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot respuesta
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot CouchPotato_Class2
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot activities
+		(type INSTANCE)
+;+		(allowed-classes Actividad)
+		(create-accessor read-write))
+	(single-slot peso
+		(type FLOAT)
+		(default 75.0)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot imc
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot muscularStress
+	(single-slot picar+entre+horas
+;+		(comment "de 0 (nada) a 10 (mucho)")
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot cansancio
 		(type SYMBOL)
-		(allowed-values Poco Mucho Nada)
+		(allowed-values Mucho Poco Nada)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot duracion
+		(type INTEGER)
+		(default 0)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot tests
+		(type INSTANCE)
+;+		(allowed-classes Test)
+		(create-accessor read-write))
+	(single-slot frequencia
+		(type SYMBOL)
+		(allowed-values Diaria Semanal Mensual None)
+		(default None)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot abuso+de+sal
+;+		(comment "de 0 (nada) a 10 (mucho)")
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot ppm
+		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot pMax
@@ -24,39 +76,19 @@
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot weight
-		(type FLOAT)
-		(default 75.0)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot tired
+	(single-slot tirantezMuscular
 		(type SYMBOL)
 		(allowed-values Poco Mucho Nada)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot duration
-		(type INTEGER)
-		(default 0)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot frequency
-		(type SYMBOL)
-		(allowed-values Diaria Semanal Mensual None)
-		(default None)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot age
-		(type INTEGER)
-		(default 25)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot imc
-		(type FLOAT)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot height
+	(single-slot altura
 		(type FLOAT)
 		(default 1.7)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot edad
+		(type INTEGER)
+		(default 25)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot value
@@ -64,21 +96,34 @@
 ;+		(cardinality 0 1)
 		(create-accessor read-write)))
 
-(defclass Person
+(defclass Persona
 	(is-a USER)
 	(role concrete)
 	(single-slot imc
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot height
+	(multislot activities
+		(type INSTANCE)
+;+		(allowed-classes Actividad)
+		(create-accessor read-write))
+	(single-slot altura
 		(type FLOAT)
 		(default 1.7)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot weight
+	(multislot tests
+		(type INSTANCE)
+;+		(allowed-classes Test)
+		(create-accessor read-write))
+	(single-slot peso
 		(type FLOAT)
 		(default 75.0)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot edad
+		(type INTEGER)
+		(default 25)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot pMax
@@ -89,15 +134,14 @@
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot CouchPotato_Class2
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot %3ANAME
 		(type STRING)
 		(default "Paco")
 ;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot age
-		(type INTEGER)
-		(default 25)
-;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
 (defclass Test
@@ -107,12 +151,12 @@
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot tired
+	(single-slot cansancio
 		(type SYMBOL)
-		(allowed-values Poco Mucho Nada)
+		(allowed-values Mucho Poco Nada)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot muscularStress
+	(single-slot tirantezMuscular
 		(type SYMBOL)
 		(allowed-values Poco Mucho Nada)
 ;+		(cardinality 0 1)
@@ -122,15 +166,15 @@
 ;+		(cardinality 0 1)
 		(create-accessor read-write)))
 
-(defclass Activity
+(defclass Actividad
 	(is-a USER)
-	(role abstract)
-	(single-slot duration
+	(role concrete)
+	(single-slot duracion
 		(type INTEGER)
 		(default 0)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot frequency
+	(single-slot frequencia
 		(type SYMBOL)
 		(allowed-values Diaria Semanal Mensual None)
 		(default None)
@@ -141,10 +185,62 @@
 ;+		(cardinality 0 1)
 		(create-accessor read-write)))
 
-(defclass WorkActivity
-	(is-a Activity)
+(defclass Actividad+de+Trabajo
+	(is-a Actividad)
 	(role concrete))
 
-(defclass NonWorkActivity
-	(is-a Activity)
+(defclass Actividad+fuera+de+Trabajo
+	(is-a Actividad)
+	(role concrete))
+
+(defclass Estatica
+	(is-a Actividad+fuera+de+Trabajo)
+	(role concrete))
+
+(defclass Tarea+domestica
+	(is-a Actividad+fuera+de+Trabajo)
+	(role concrete))
+
+(defclass Desplazamiento
+	(is-a Actividad+fuera+de+Trabajo)
+	(role concrete))
+
+(defclass Salud
+	(is-a USER)
+	(role concrete)
+	(single-slot %3ANAME
+		(type STRING)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Dieta
+	(is-a Salud)
+	(role concrete)
+	(single-slot picar+entre+horas
+;+		(comment "de 0 (nada) a 10 (mucho)")
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot consumo+de+fruta
+;+		(comment "Piezas a la semana")
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot abuso+de+sal
+;+		(comment "de 0 (nada) a 10 (mucho)")
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Problema
+	(is-a Salud)
+	(role concrete)
+	(single-slot respuesta
+		(type SYMBOL)
+		(allowed-values FALSE TRUE)
+;+		(cardinality 0 1)
+		(create-accessor read-write)))
+
+(defclass Problema+musculo-esqueletico
+	(is-a Problema)
 	(role concrete))

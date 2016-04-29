@@ -1,28 +1,82 @@
-; Thu Apr 28 13:38:40 CEST 2016
+; Fri Apr 29 10:04:44 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
 
-([Carrera+Sostenida] of  Test
+([Articulaciones] of  Problema+musculo-esqueletico
 )
 
-([Muscular+Effort] of  WorkActivity
+([Barrer] of  Tarea+domestica
+
+	(duracion 0)
+	(frequencia None))
+
+([Carrera+sostenida] of  Test
 )
 
-([Repetitive+Movement] of  WorkActivity
+([Cervicales] of  Problema+musculo-esqueletico
 )
 
-([Sitting] of  WorkActivity
+([Colada] of  Tarea+domestica
+
+	(duracion 0)
+	(frequencia None))
+
+([Compra] of  Desplazamiento
+
+	(duracion 0)
+	(frequencia None))
+
+([De+pie] of  Actividad+de+Trabajo
 )
 
-([Standing+up] of  WorkActivity
+([Desplazamiento+a+pie] of  Actividad+de+Trabajo
+)
+
+([Esfuerzos+musculares] of  Actividad+de+Trabajo
+)
+
+([Espalda] of  Problema+musculo-esqueletico
+)
+
+([Fregar] of  Tarea+domestica
+
+	(duracion 0)
+	(frequencia None))
+
+([Lectura] of  Estatica
+
+	(duracion 0)
+	(frequencia None))
+
+([Levantamiento+de+peso] of  Actividad+de+Trabajo
+)
+
+([Movimientos+Repetitivos] of  Actividad+de+Trabajo
+)
+
+([Paseo] of  Desplazamiento
+
+	(duracion 0)
+	(frequencia None))
+
+([Paseo+mascota] of  Desplazamiento
+
+	(duracion 0)
+	(frequencia None))
+
+([Planchar] of  Tarea+domestica
+
+	(duracion 0)
+	(frequencia None))
+
+([Sentado] of  Actividad+de+Trabajo
 )
 
 ([Subir+tramos+de+escalera] of  Test
 )
 
-([Walking] of  WorkActivity
-)
+([Television] of  Estatica
 
-([Weight+Lift] of  WorkActivity
-)
+	(duracion 0)
+	(frequencia None))
