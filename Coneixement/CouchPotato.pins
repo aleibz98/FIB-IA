@@ -1,9 +1,12 @@
-; Tue May 03 11:58:10 CEST 2016
+; Tue May 03 13:07:24 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
 
-([Articulaciones] of  Problema+musculo-esqueletico
+([Antebrazos] of  Grupo+muscular
+)
+
+([Articular] of  Problema+musculo-esqueletico
 )
 
 ([Barrer] of  Tarea+domestica
@@ -12,16 +15,30 @@
 	(frequencia None))
 
 ([Bicicleta+estatica] of  Ejercicio+con+aparatos
+
+	(calorias+quemadas 6.4)
+	(duracion+maxima 90)
+	(duracion+minima 20)
+	(edad+maxima 60)
+	(edad+minima 12))
+
+([Brazos] of  Problema+musculo-esqueletico
+
+	(zona
+		[B%C3%ADceps]
+		[Deltoides]
+		[Dorsal]
+		[Tr%C3%ADceps]))
+
+([B%C3%ADceps] of  Grupo+muscular
 )
 
 ([Carrera+sostenida] of  Test
 )
 
-([Cervicales] of  Problema+musculo-esqueletico
-)
+([Cinta+de+correr] of  Ejercicio+con+aparatos
 
-([Cinta+de+andar] of  Ejercicio+con+aparatos
-)
+	(duracion+minima 20))
 
 ([Colada] of  Tarea+domestica
 
@@ -33,10 +50,28 @@
 	(duracion 0)
 	(frequencia None))
 
+([Cuadriceps] of  Grupo+muscular
+)
+
+([Cuello] of  Problema+musculo-esqueletico
+
+	(zona [Trapecio]))
+
+([Cuidar+del+jard%C3%ADn] of  Tarea+domestica
+
+	(duracion 0)
+	(frequencia None))
+
 ([De+pie] of  Actividad+de+Trabajo
 )
 
+([Deltoides] of  Grupo+muscular
+)
+
 ([Desplazamiento+a+pie] of  Actividad+de+Trabajo
+)
+
+([Dorsal] of  Grupo+muscular
 )
 
 ([Equilibrio] of  Objetivo
@@ -46,7 +81,11 @@
 )
 
 ([Espalda] of  Problema+musculo-esqueletico
-)
+
+	(respuesta FALSE)
+	(zona
+		[Dorsal]
+		[Trapecio]))
 
 ([Flexibilidad] of  Objetivo
 )
@@ -55,6 +94,12 @@
 
 	(duracion 0)
 	(frequencia None))
+
+([Gemelos] of  Grupo+muscular
+)
+
+([Gluteos] of  Grupo+muscular
+)
 
 ([Lectura] of  Estatica
 
@@ -98,16 +143,58 @@
 )
 
 ([Remo] of  Ejercicio+con+aparatos
-)
+
+	(calorias+quemadas 10.0)
+	(grupos+musculares
+		[Antebrazos]
+		[B%C3%ADceps]
+		[Cuadriceps]
+		[Dorsal]
+		[Gemelos]
+		[Tr%C3%ADceps]
+		[Deltoides]
+		[Gluteos])
+	(problemas+aliviados
+		[Articular]
+		[Rodillas])
+	(problemas+contraindicados [Sobrepeso])
+	(repeticiones+minimas 20))
+
+([Rodillas] of  Problema+musculo-esqueletico
+
+	(zona [Gemelos]))
+
+([Salir+a+correr] of  Desplazamiento
+
+	(duracion 0)
+	(frequencia None))
 
 ([Sentado] of  Actividad+de+Trabajo
+)
+
+([Sistema+Card%C3%ADaco] of  Objetivo
 )
 
 ([Sobrepeso] of  Otros+problemas
 )
 
 ([Stepper] of  Ejercicio+con+aparatos
-)
+
+	(calorias+quemadas 6.1)
+	(duracion+maxima 30)
+	(duracion+minima 10)
+	(edad+maxima 55)
+	(ejercicios+combinan [Cinta+de+correr])
+	(grupos+musculares
+		[Cuadriceps]
+		[Gemelos]
+		[Gluteos])
+	(objetivos+ejercicio [Sistema+Card%C3%ADaco])
+	(problemas+contraindicados
+		[Articular]
+		[Rodillas])
+	(repeticiones+maximas 200)
+	(repeticiones+minimas 10))
 
 ([Subir+tramos+de+escalera] of  Test
 )
@@ -116,3 +203,9 @@
 
 	(duracion 0)
 	(frequencia None))
+
+([Trapecio] of  Grupo+muscular
+)
+
+([Tr%C3%ADceps] of  Grupo+muscular
+)
