@@ -1,4 +1,4 @@
-; Fri Apr 29 10:04:44 CEST 2016
+; Tue May 03 11:58:10 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -11,10 +11,16 @@
 	(duracion 0)
 	(frequencia None))
 
+([Bicicleta+estatica] of  Ejercicio+con+aparatos
+)
+
 ([Carrera+sostenida] of  Test
 )
 
 ([Cervicales] of  Problema+musculo-esqueletico
+)
+
+([Cinta+de+andar] of  Ejercicio+con+aparatos
 )
 
 ([Colada] of  Tarea+domestica
@@ -33,10 +39,16 @@
 ([Desplazamiento+a+pie] of  Actividad+de+Trabajo
 )
 
+([Equilibrio] of  Objetivo
+)
+
 ([Esfuerzos+musculares] of  Actividad+de+Trabajo
 )
 
 ([Espalda] of  Problema+musculo-esqueletico
+)
+
+([Flexibilidad] of  Objetivo
 )
 
 ([Fregar] of  Tarea+domestica
@@ -52,6 +64,9 @@
 ([Levantamiento+de+peso] of  Actividad+de+Trabajo
 )
 
+([Mantenimiento] of  Objetivo
+)
+
 ([Movimientos+Repetitivos] of  Actividad+de+Trabajo
 )
 
@@ -65,12 +80,33 @@
 	(duracion 0)
 	(frequencia None))
 
+([Pesos] of  Ejercicio+con+aparatos
+)
+
 ([Planchar] of  Tarea+domestica
 
 	(duracion 0)
 	(frequencia None))
 
+([Ponerse+en+forma] of  Objetivo
+)
+
+([Presion+alta] of  Otros+problemas
+)
+
+([Rebajar+Peso] of  Objetivo
+)
+
+([Remo] of  Ejercicio+con+aparatos
+)
+
 ([Sentado] of  Actividad+de+Trabajo
+)
+
+([Sobrepeso] of  Otros+problemas
+)
+
+([Stepper] of  Ejercicio+con+aparatos
 )
 
 ([Subir+tramos+de+escalera] of  Test

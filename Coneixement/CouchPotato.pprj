@@ -1,4 +1,4 @@
-; Fri Apr 29 10:04:44 CEST 2016
+; Tue May 03 11:58:10 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -20,11 +20,11 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[CouchPotato_ProjectKB_Class86]
-		[CouchPotato_ProjectKB_Class87]
-		[CouchPotato_ProjectKB_Class88]
-		[CouchPotato_ProjectKB_Class89]
-		[CouchPotato_ProjectKB_Class90]))
+		[CouchPotato_ProjectKB_Class10316]
+		[CouchPotato_ProjectKB_Class10317]
+		[CouchPotato_ProjectKB_Class10318]
+		[CouchPotato_ProjectKB_Class10319]
+		[CouchPotato_ProjectKB_Class10320]))
 
 ([CLSES_TAB] of  Widget
 
@@ -38,6 +38,719 @@
 
 ([CouchPotato_ProjectKB_Class10] of  Property_List
 )
+
+([CouchPotato_ProjectKB_Class10121] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "duracion_minima")
+	(property_list [CouchPotato_ProjectKB_Class10122])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 60))
+
+([CouchPotato_ProjectKB_Class10122] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10123] of  Widget
+
+	(height 120)
+	(is_hidden FALSE)
+	(name "objetivos")
+	(property_list [CouchPotato_ProjectKB_Class10124])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 200)
+	(x 0)
+	(y 120))
+
+([CouchPotato_ProjectKB_Class10124] of  Property_List
+
+	(properties
+		[CouchPotato_ProjectKB_Class10125]
+		[CouchPotato_ProjectKB_Class10126]))
+
+([CouchPotato_ProjectKB_Class10125] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([CouchPotato_ProjectKB_Class10126] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([CouchPotato_ProjectKB_Class10130] of  Widget
+
+	(height 120)
+	(is_hidden FALSE)
+	(name "objetivos")
+	(property_list [CouchPotato_ProjectKB_Class10131])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
+	(width 200)
+	(x 0)
+	(y 120))
+
+([CouchPotato_ProjectKB_Class10131] of  Property_List
+
+	(properties
+		[CouchPotato_ProjectKB_Class10132]
+		[CouchPotato_ProjectKB_Class10133]))
+
+([CouchPotato_ProjectKB_Class10132] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([CouchPotato_ProjectKB_Class10133] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([CouchPotato_ProjectKB_Class10134] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "duracion_minima")
+	(property_list [CouchPotato_ProjectKB_Class10135])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 0))
+
+([CouchPotato_ProjectKB_Class10135] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10138] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "calorias_quemadas")
+	(property_list [CouchPotato_ProjectKB_Class10139])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 240))
+
+([CouchPotato_ProjectKB_Class10139] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10140] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "calorias_quemadas")
+	(property_list [CouchPotato_ProjectKB_Class10141])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 240))
+
+([CouchPotato_ProjectKB_Class10141] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10142] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "calorias_quemadas")
+	(property_list [CouchPotato_ProjectKB_Class10143])
+	(widget_class_name "edu.stanford.smi.protege.widget.IntegerFieldWidget")
+	(width 100)
+	(x 0)
+	(y 240))
+
+([CouchPotato_ProjectKB_Class10143] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10144] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "calorias_quemadas")
+	(property_list [CouchPotato_ProjectKB_Class10145])
+	(widget_class_name "edu.stanford.smi.protege.widget.IntegerFieldWidget")
+	(width 100)
+	(x 0)
+	(y 240))
+
+([CouchPotato_ProjectKB_Class10145] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10154] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "duracion_maxima")
+	(property_list [CouchPotato_ProjectKB_Class10155])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 360))
+
+([CouchPotato_ProjectKB_Class10155] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10156] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "duracion_maxima")
+	(property_list [CouchPotato_ProjectKB_Class10157])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 360))
+
+([CouchPotato_ProjectKB_Class10157] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10162] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "repeticiones_minimas")
+	(property_list [CouchPotato_ProjectKB_Class10163])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 420))
+
+([CouchPotato_ProjectKB_Class10163] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10164] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "repeticiones_minimas")
+	(property_list [CouchPotato_ProjectKB_Class10165])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 420))
+
+([CouchPotato_ProjectKB_Class10165] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10170] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "repeticiones_maximas")
+	(property_list [CouchPotato_ProjectKB_Class10171])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 480))
+
+([CouchPotato_ProjectKB_Class10171] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10172] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "repeticiones_maximas")
+	(property_list [CouchPotato_ProjectKB_Class10173])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 480))
+
+([CouchPotato_ProjectKB_Class10173] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10185] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "problemas_contraindicados")
+	(property_list [CouchPotato_ProjectKB_Class10186])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 540))
+
+([CouchPotato_ProjectKB_Class10186] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10187] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "problemas_contraindicados")
+	(property_list [CouchPotato_ProjectKB_Class10188])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 540))
+
+([CouchPotato_ProjectKB_Class10188] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10189] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "problemas_contraindicados")
+	(property_list [CouchPotato_ProjectKB_Class10190])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
+	(width 200)
+	(x 0)
+	(y 540))
+
+([CouchPotato_ProjectKB_Class10190] of  Property_List
+
+	(properties
+		[CouchPotato_ProjectKB_Class10191]
+		[CouchPotato_ProjectKB_Class10192]))
+
+([CouchPotato_ProjectKB_Class10191] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([CouchPotato_ProjectKB_Class10192] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([CouchPotato_ProjectKB_Class10193] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "problemas_contraindicados")
+	(property_list [CouchPotato_ProjectKB_Class10194])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
+	(width 200)
+	(x 0)
+	(y 540))
+
+([CouchPotato_ProjectKB_Class10194] of  Property_List
+
+	(properties
+		[CouchPotato_ProjectKB_Class10195]
+		[CouchPotato_ProjectKB_Class10196]))
+
+([CouchPotato_ProjectKB_Class10195] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([CouchPotato_ProjectKB_Class10196] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([CouchPotato_ProjectKB_Class10205] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "grupos_musculares")
+	(property_list [CouchPotato_ProjectKB_Class10206])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 660))
+
+([CouchPotato_ProjectKB_Class10206] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10207] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "grupos_musculares")
+	(property_list [CouchPotato_ProjectKB_Class10208])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 660))
+
+([CouchPotato_ProjectKB_Class10208] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10209] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "grupos_musculares")
+	(property_list [CouchPotato_ProjectKB_Class10210])
+	(widget_class_name "edu.stanford.smi.protege.widget.IntegerFieldWidget")
+	(width 100)
+	(x 0)
+	(y 660))
+
+([CouchPotato_ProjectKB_Class10210] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10211] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "grupos_musculares")
+	(property_list [CouchPotato_ProjectKB_Class10212])
+	(widget_class_name "edu.stanford.smi.protege.widget.IntegerFieldWidget")
+	(width 100)
+	(x 0)
+	(y 660))
+
+([CouchPotato_ProjectKB_Class10212] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10213] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "grupos_musculares")
+	(property_list [CouchPotato_ProjectKB_Class10214])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
+	(width 200)
+	(x 0)
+	(y 660))
+
+([CouchPotato_ProjectKB_Class10214] of  Property_List
+
+	(properties
+		[CouchPotato_ProjectKB_Class10215]
+		[CouchPotato_ProjectKB_Class10216]))
+
+([CouchPotato_ProjectKB_Class10215] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([CouchPotato_ProjectKB_Class10216] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([CouchPotato_ProjectKB_Class10217] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "grupos_musculares")
+	(property_list [CouchPotato_ProjectKB_Class10218])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
+	(width 200)
+	(x 0)
+	(y 660))
+
+([CouchPotato_ProjectKB_Class10218] of  Property_List
+
+	(properties
+		[CouchPotato_ProjectKB_Class10219]
+		[CouchPotato_ProjectKB_Class10220]))
+
+([CouchPotato_ProjectKB_Class10219] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([CouchPotato_ProjectKB_Class10220] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([CouchPotato_ProjectKB_Class10234] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "edad_minima")
+	(property_list [CouchPotato_ProjectKB_Class10235])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 780))
+
+([CouchPotato_ProjectKB_Class10235] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10236] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "edad_minima")
+	(property_list [CouchPotato_ProjectKB_Class10237])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 780))
+
+([CouchPotato_ProjectKB_Class10237] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10246] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "problemas_aliviados")
+	(property_list [CouchPotato_ProjectKB_Class10247])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 900))
+
+([CouchPotato_ProjectKB_Class10247] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10248] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "problemas_aliviados")
+	(property_list [CouchPotato_ProjectKB_Class10249])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 900))
+
+([CouchPotato_ProjectKB_Class10249] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10250] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "problemas_aliviados")
+	(property_list [CouchPotato_ProjectKB_Class10251])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
+	(width 200)
+	(x 0)
+	(y 900))
+
+([CouchPotato_ProjectKB_Class10251] of  Property_List
+
+	(properties
+		[CouchPotato_ProjectKB_Class10252]
+		[CouchPotato_ProjectKB_Class10253]))
+
+([CouchPotato_ProjectKB_Class10252] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([CouchPotato_ProjectKB_Class10253] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([CouchPotato_ProjectKB_Class10254] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "problemas_aliviados")
+	(property_list [CouchPotato_ProjectKB_Class10255])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
+	(width 200)
+	(x 0)
+	(y 900))
+
+([CouchPotato_ProjectKB_Class10255] of  Property_List
+
+	(properties
+		[CouchPotato_ProjectKB_Class10256]
+		[CouchPotato_ProjectKB_Class10257]))
+
+([CouchPotato_ProjectKB_Class10256] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([CouchPotato_ProjectKB_Class10257] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([CouchPotato_ProjectKB_Class10266] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "ejercicios_combinan")
+	(property_list [CouchPotato_ProjectKB_Class10267])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 1020))
+
+([CouchPotato_ProjectKB_Class10267] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10268] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "ejercicios_combinan")
+	(property_list [CouchPotato_ProjectKB_Class10269])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 1020))
+
+([CouchPotato_ProjectKB_Class10269] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10270] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "ejercicios_combinan")
+	(property_list [CouchPotato_ProjectKB_Class10271])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
+	(width 200)
+	(x 0)
+	(y 1020))
+
+([CouchPotato_ProjectKB_Class10271] of  Property_List
+
+	(properties
+		[CouchPotato_ProjectKB_Class10272]
+		[CouchPotato_ProjectKB_Class10273]))
+
+([CouchPotato_ProjectKB_Class10272] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([CouchPotato_ProjectKB_Class10273] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([CouchPotato_ProjectKB_Class10274] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "ejercicios_combinan")
+	(property_list [CouchPotato_ProjectKB_Class10275])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
+	(width 200)
+	(x 0)
+	(y 1020))
+
+([CouchPotato_ProjectKB_Class10275] of  Property_List
+
+	(properties
+		[CouchPotato_ProjectKB_Class10276]
+		[CouchPotato_ProjectKB_Class10277]))
+
+([CouchPotato_ProjectKB_Class10276] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([CouchPotato_ProjectKB_Class10277] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([CouchPotato_ProjectKB_Class10286] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "objetivos_ejercicio")
+	(property_list [CouchPotato_ProjectKB_Class10287])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 1140))
+
+([CouchPotato_ProjectKB_Class10287] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10288] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "objetivos_ejercicio")
+	(property_list [CouchPotato_ProjectKB_Class10289])
+	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
+	(width 200)
+	(x 0)
+	(y 1140))
+
+([CouchPotato_ProjectKB_Class10289] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class10290] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "objetivos_ejercicio")
+	(property_list [CouchPotato_ProjectKB_Class10291])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
+	(width 200)
+	(x 0)
+	(y 1140))
+
+([CouchPotato_ProjectKB_Class10291] of  Property_List
+
+	(properties
+		[CouchPotato_ProjectKB_Class10292]
+		[CouchPotato_ProjectKB_Class10293]))
+
+([CouchPotato_ProjectKB_Class10292] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([CouchPotato_ProjectKB_Class10293] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([CouchPotato_ProjectKB_Class10294] of  Widget
+
+	(height 60)
+	(is_hidden FALSE)
+	(name "objetivos_ejercicio")
+	(property_list [CouchPotato_ProjectKB_Class10295])
+	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
+	(width 200)
+	(x 0)
+	(y 1140))
+
+([CouchPotato_ProjectKB_Class10295] of  Property_List
+
+	(properties
+		[CouchPotato_ProjectKB_Class10296]
+		[CouchPotato_ProjectKB_Class10297]))
+
+([CouchPotato_ProjectKB_Class10296] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-View References to Value"))
+
+([CouchPotato_ProjectKB_Class10297] of  Boolean
+
+	(boolean_value FALSE)
+	(name "ButtonDisplayed-Delete Instance"))
+
+([CouchPotato_ProjectKB_Class10316] of  String
+
+	(name ":INSTANCE-ANNOTATION")
+	(string_value "%3AANNOTATION-TEXT"))
+
+([CouchPotato_ProjectKB_Class10317] of  String
+
+	(name "Persona")
+	(string_value "edad"))
+
+([CouchPotato_ProjectKB_Class10318] of  String
+
+	(name ":META-CLASS")
+	(string_value "%3ANAME"))
+
+([CouchPotato_ProjectKB_Class10319] of  String
+
+	(name ":PAL-CONSTRAINT")
+	(string_value "%3APAL-NAME"))
+
+([CouchPotato_ProjectKB_Class10320] of  String
+
+	(name "Test")
+	(string_value "%3ANAME"))
 
 ([CouchPotato_ProjectKB_Class11] of  Widget
 
@@ -357,36 +1070,11 @@
 ([CouchPotato_ProjectKB_Class8] of  Property_List
 )
 
-([CouchPotato_ProjectKB_Class86] of  String
-
-	(name ":INSTANCE-ANNOTATION")
-	(string_value "%3AANNOTATION-TEXT"))
-
-([CouchPotato_ProjectKB_Class87] of  String
-
-	(name "Persona")
-	(string_value "edad"))
-
-([CouchPotato_ProjectKB_Class88] of  String
-
-	(name ":PAL-CONSTRAINT")
-	(string_value "%3APAL-NAME"))
-
-([CouchPotato_ProjectKB_Class89] of  String
-
-	(name ":META-CLASS")
-	(string_value "%3ANAME"))
-
 ([CouchPotato_ProjectKB_Class9] of  Widget
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class10])
 	(widget_class_name "uk.ac.man.cs.mig.coode.debugger.test.DebuggerTestTab"))
-
-([CouchPotato_ProjectKB_Class90] of  String
-
-	(name "Test")
-	(string_value "%3ANAME"))
 
 ([CREATION_TIMESTAMP_WIDGET] of  Widget
 
@@ -422,6 +1110,9 @@
 ([INSTANCES_TAB] of  Widget
 
 	(widget_class_name "edu.stanford.smi.protege.widget.InstancesTab"))
+
+([KB_152601_Class0] of  Map
+)
 
 ([KB_692925_Class0] of  String
 
@@ -528,9 +1219,6 @@
 
 	(properties [protege_ProjectKB_Class165]))
 
-([KB_939327_Class0] of  Map
-)
-
 ([LAYOUT_PROPERTIES] of  Property_List
 
 	(name "layout properties")
@@ -613,11 +1301,11 @@
 
 	(browser_slot_names [BROWSER_SLOT_NAMES])
 	(customized_instance_widgets
-		[INSTANCE_ANNOTATION_FORM_WIDGET]
-		[STANDARD_SLOT_FORM_WIDGET]
 		[STANDARD_FACET_FORM_WIDGET]
 		[PAL_FORM_WIDGET]
-		[STANDARD_CLASS_FORM_WIDGET])
+		[STANDARD_CLASS_FORM_WIDGET]
+		[INSTANCE_ANNOTATION_FORM_WIDGET]
+		[STANDARD_SLOT_FORM_WIDGET])
 	(default_cls_metaclass ":STANDARD-CLASS")
 	(default_facet_metaclass ":STANDARD-FACET")
 	(default_instance_widget_class_name "edu.stanford.smi.protege.widget.FormWidget")
