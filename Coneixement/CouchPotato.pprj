@@ -1,4 +1,4 @@
-; Thu May 05 18:51:44 CEST 2016
+; Thu May 05 18:47:28 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -20,16 +20,16 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[CouchPotato_ProjectKB_Class111]
-		[CouchPotato_ProjectKB_Class112]
-		[CouchPotato_ProjectKB_Class113]
-		[CouchPotato_ProjectKB_Class114]
-		[CouchPotato_ProjectKB_Class115]
-		[CouchPotato_ProjectKB_Class116]
-		[CouchPotato_ProjectKB_Class117]
-		[CouchPotato_ProjectKB_Class118]
-		[CouchPotato_ProjectKB_Class119]
-		[CouchPotato_ProjectKB_Class120]))
+		[CouchPotato_ProjectKB_Class94]
+		[CouchPotato_ProjectKB_Class95]
+		[CouchPotato_ProjectKB_Class96]
+		[CouchPotato_ProjectKB_Class97]
+		[CouchPotato_ProjectKB_Class98]
+		[CouchPotato_ProjectKB_Class99]
+		[CouchPotato_ProjectKB_Class100]
+		[CouchPotato_ProjectKB_Class101]
+		[CouchPotato_ProjectKB_Class102]
+		[CouchPotato_ProjectKB_Class103]))
 
 ([CLSES_TAB] of  Widget
 
@@ -44,64 +44,34 @@
 ([CouchPotato_ProjectKB_Class10] of  Property_List
 )
 
+([CouchPotato_ProjectKB_Class100] of  String
+
+	(name ":META-CLASS")
+	(string_value "%3ANAME"))
+
+([CouchPotato_ProjectKB_Class101] of  String
+
+	(name "Ejercicio")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class102] of  String
+
+	(name "Test")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class103] of  String
+
+	(name "Problema IMC")
+	(string_value "nombre"))
+
 ([CouchPotato_ProjectKB_Class11] of  Widget
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class12])
 	(widget_class_name "edu.stanford.smi.protegex.owl.ui.cls.OWLClassesTab"))
 
-([CouchPotato_ProjectKB_Class111] of  String
-
-	(name "Objetivo")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class112] of  String
-
-	(name ":INSTANCE-ANNOTATION")
-	(string_value "%3AANNOTATION-TEXT"))
-
-([CouchPotato_ProjectKB_Class113] of  String
-
-	(name "Grupo muscular")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class114] of  String
-
-	(name "Actividad")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class115] of  String
-
-	(name ":PAL-CONSTRAINT")
-	(string_value "%3APAL-NAME"))
-
-([CouchPotato_ProjectKB_Class116] of  String
-
-	(name "Salud")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class117] of  String
-
-	(name ":META-CLASS")
-	(string_value "%3ANAME"))
-
-([CouchPotato_ProjectKB_Class118] of  String
-
-	(name "Ejercicio")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class119] of  String
-
-	(name "Test")
-	(string_value "nombre"))
-
 ([CouchPotato_ProjectKB_Class12] of  Property_List
 )
-
-([CouchPotato_ProjectKB_Class120] of  String
-
-	(name "Problema IMC")
-	(string_value "nombre"))
 
 ([CouchPotato_ProjectKB_Class13] of  Widget
 
@@ -409,64 +379,44 @@
 ([CouchPotato_ProjectKB_Class74] of  Property_List
 )
 
-([CouchPotato_ProjectKB_Class75] of  String
-
-	(name "Objetivo")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class76] of  String
-
-	(name ":INSTANCE-ANNOTATION")
-	(string_value "%3AANNOTATION-TEXT"))
-
-([CouchPotato_ProjectKB_Class77] of  String
-
-	(name "Grupo muscular")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class78] of  String
-
-	(name "Actividad")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class79] of  String
-
-	(name ":PAL-CONSTRAINT")
-	(string_value "%3APAL-NAME"))
-
 ([CouchPotato_ProjectKB_Class8] of  Property_List
 )
-
-([CouchPotato_ProjectKB_Class80] of  String
-
-	(name "Salud")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class81] of  String
-
-	(name ":META-CLASS")
-	(string_value "%3ANAME"))
-
-([CouchPotato_ProjectKB_Class82] of  String
-
-	(name "Ejercicio")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class83] of  String
-
-	(name "Test")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class84] of  String
-
-	(name "Problema IMC")
-	(string_value "nombre"))
 
 ([CouchPotato_ProjectKB_Class9] of  Widget
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class10])
 	(widget_class_name "dfki.protege.ontoviz_tab.OntovizTab"))
+
+([CouchPotato_ProjectKB_Class94] of  String
+
+	(name "Objetivo")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class95] of  String
+
+	(name ":INSTANCE-ANNOTATION")
+	(string_value "%3AANNOTATION-TEXT"))
+
+([CouchPotato_ProjectKB_Class96] of  String
+
+	(name "Grupo muscular")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class97] of  String
+
+	(name "Actividad")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class98] of  String
+
+	(name ":PAL-CONSTRAINT")
+	(string_value "%3APAL-NAME"))
+
+([CouchPotato_ProjectKB_Class99] of  String
+
+	(name "Salud")
+	(string_value "nombre"))
 
 ([CREATION_TIMESTAMP_WIDGET] of  Widget
 
@@ -503,7 +453,7 @@
 
 	(widget_class_name "edu.stanford.smi.protege.widget.InstancesTab"))
 
-([KB_023043_Class0] of  Map
+([KB_685145_Class0] of  Map
 )
 
 ([KB_692925_Class0] of  String
