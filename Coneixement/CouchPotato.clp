@@ -939,6 +939,12 @@
 
 )
 
+([Troll] of Persona
+	(nombre "Inigo")
+	(altura 1.9)
+	(peso 75)
+	(imc 20))
+
 
 
 )
@@ -1056,7 +1062,18 @@
 	?persona <-(object (is-a Persona)(nombre ?nombreA))
 	(test (eq (str-compare  ?nombre ?nombreA) 0))
 	=>
-	(do-for-all-instances ((?a Actividad)) (> 1 0) (printout r ?a:nombre))
+	(bind ?lista_actividades (find-all-instances ((?a Actividad)) TRUE))
+	(printout t "0 : Deja de añadir" crlf)
+	(loop-for-count (?i 1 (length$ ?lista_actividades)) do
+		(bind ?aux (nth$ ?i ?lista_actividades))
+		(printout t ?i " : " (send ?aux get-nombre) crlf)
+	)
+	(bind ?respuesta (pregunta-numerica "Que actividad quieres anadir? " 0 (length$ ?lista_actividades)))
+	(while (> ?respuesta 0) do 
+		(slot-insert$ ?persona problemas+fisicos 1 (nth$ ?respuesta ?lista_actividades))
+		(bind ?respuesta (pregunta-numerica "Que actividad quieres anadir? " 0 (length$ ?lista_actividades)))
+	)
+)
 )
 
 
@@ -1075,4 +1092,4 @@
     (bind ?fruta (pregunta-numerica "Cuantas piezas de fruta tomas a la semana? " 0.0 500.0))
     (send ?dieta put-consumo+de+fruta ?fruta)
 )
-	
+
