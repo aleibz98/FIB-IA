@@ -1026,6 +1026,8 @@
     =>
     (bind ?persona (make-instance persona of Persona))
 	(send ?persona put-nombre ?nombre)
+	(bind ?edad (pregunta-numerica "Edad (anos): " 0.0 100.0))
+    (send ?persona put-altura ?edad)
     (bind ?altura (pregunta-numerica "Altura (m): " 0.0 3.0))
     (send ?persona put-altura ?altura)
     (bind ?peso (pregunta-numerica "Peso (kg): " 0.0 600.0))
@@ -1077,7 +1079,6 @@
 )
 
 
-
 (defrule crea-dieta
 	(nombre ?nombre)
 	?persona <-(object (is-a Persona)(nombre ?nombreA))
@@ -1091,13 +1092,16 @@
     (send ?dieta put-picar+entre+horas ?picar)
     (bind ?fruta (pregunta-numerica "Cuantas piezas de fruta tomas a la semana? " 0.0 500.0))
     (send ?dieta put-consumo+de+fruta ?fruta)
+	
+	(send ?persona put-dieta ?dieta)
 )
 
-(defrule pide-problemas
+(defrule pide-problema
 	(nombre ?nombre)
-    (test (any-instancep ((?dieta Dieta)) TRUE))
+	?persona <-(object (is-a Persona)(nombre ?nombreA))
+	(test (eq (str-compare  ?nombre ?nombreA) 0))
 	=>
-	(printout t "Problemas musculo-esqueleticos: " crlf crlf)
+	(printout t "Problemas musculo-esqueleticos: " crlf)
 	(bind ?lista_problemas_musc (find-all-instances ((?p Problema+musculo-esqueletico)) TRUE))
 	(printout t "0 : Deja de añadir" crlf)
 	(loop-for-count (?i 1 (length$ ?lista_problemas_musc)) do

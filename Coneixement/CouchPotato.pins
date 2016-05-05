@@ -1,4 +1,4 @@
-; Thu May 05 18:47:28 CEST 2016
+; Thu May 05 19:07:33 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -88,13 +88,13 @@
 
 	(duracion 0)
 	(frequencia None)
-	(nombre "Hacer colada"))
+	(nombre "Colada"))
 
 ([Compra] of  Desplazamiento
 
 	(duracion 0)
 	(frequencia None)
-	(nombre "Comprar"))
+	(nombre "Compra"))
 
 ([CouchPotato_Class0] of  Ejercicio+con+aparatos
 
@@ -454,7 +454,7 @@
 
 ([De+pie] of  Actividad+de+Trabajo
 
-	(nombre "Estar de pie"))
+	(nombre "De pie"))
 
 ([Deltoides] of  Grupo+muscular
 
@@ -505,7 +505,7 @@
 
 	(duracion 0)
 	(frequencia None)
-	(nombre "Leer"))
+	(nombre "Lectura"))
 
 ([Levantamiento+de+peso] of  Actividad+de+Trabajo
 
@@ -523,13 +523,13 @@
 
 	(duracion 0)
 	(frequencia None)
-	(nombre "Pasear"))
+	(nombre "Paseo"))
 
 ([Paseo+mascota] of  Desplazamiento
 
 	(duracion 0)
 	(frequencia None)
-	(nombre "Pasear mascota"))
+	(nombre "Paseo mascota"))
 
 ([Pesos] of  Ejercicio+con+aparatos
 
@@ -616,7 +616,7 @@
 
 ([Sentado] of  Actividad+de+Trabajo
 
-	(nombre "Estar sentado"))
+	(nombre "Sentado"))
 
 ([Sistema+Card%C3%ADaco] of  Objetivo
 
@@ -663,7 +663,7 @@
 
 	(duracion 0)
 	(frequencia None)
-	(nombre "Ver la television"))
+	(nombre "Television"))
 
 ([Trapecio] of  Grupo+muscular
 
