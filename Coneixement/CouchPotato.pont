@@ -1,4 +1,4 @@
-; Thu May 05 18:37:00 CEST 2016
+; Thu May 05 18:47:28 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -170,6 +170,11 @@
 	(multislot tests
 		(type INSTANCE)
 ;+		(allowed-classes Test)
+		(create-accessor read-write))
+	(single-slot persona
+		(type INSTANCE)
+;+		(allowed-classes Persona)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot problemas
 		(type INSTANCE)
@@ -560,13 +565,13 @@
 		(allowed-values moderada normal dificil)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot salud
-		(type INSTANCE)
-;+		(allowed-classes Salud)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(single-slot ejercicio
 		(type INSTANCE)
 ;+		(allowed-classes Ejercicio)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot persona
+		(type INSTANCE)
+;+		(allowed-classes Persona)
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))
