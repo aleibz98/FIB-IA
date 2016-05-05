@@ -1,4 +1,4 @@
-; Tue May 03 13:07:24 CEST 2016
+; Thu May 05 10:54:51 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -82,7 +82,6 @@
 
 ([Espalda] of  Problema+musculo-esqueletico
 
-	(respuesta FALSE)
 	(zona
 		[Dorsal]
 		[Trapecio]))
@@ -157,7 +156,6 @@
 	(problemas+aliviados
 		[Articular]
 		[Rodillas])
-	(problemas+contraindicados [Sobrepeso])
 	(repeticiones+minimas 20))
 
 ([Rodillas] of  Problema+musculo-esqueletico
@@ -175,9 +173,6 @@
 ([Sistema+Card%C3%ADaco] of  Objetivo
 )
 
-([Sobrepeso] of  Otros+problemas
-)
-
 ([Stepper] of  Ejercicio+con+aparatos
 
 	(calorias+quemadas 6.1)
@@ -189,7 +184,6 @@
 		[Cuadriceps]
 		[Gemelos]
 		[Gluteos])
-	(objetivos+ejercicio [Sistema+Card%C3%ADaco])
 	(problemas+contraindicados
 		[Articular]
 		[Rodillas])
