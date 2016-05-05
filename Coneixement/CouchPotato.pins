@@ -1,4 +1,4 @@
-; Thu May 05 09:54:34 CEST 2016
+; Thu May 05 14:57:49 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -67,6 +67,11 @@
 		[Gemelos]
 		[Tr%C3%ADceps])
 	(nombre "Cinta de correr")
+	(objetivos
+		[Mantenimiento]
+		[Ponerse+en+forma]
+		[Rebajar+Peso]
+		[Sistema+Card%C3%ADaco])
 	(problemas+aliviados
 		[CouchPotato_Class3]
 		[CouchPotato_Class4]
@@ -104,6 +109,12 @@
 		[Trapecio]
 		[Tr%C3%ADceps])
 	(nombre "Pesos brazos")
+	(objetivos
+		[Mantenimiento]
+		[Ponerse+en+forma]
+		[Rebajar+Peso]
+		[Sistema+Card%C3%ADaco]
+		[CouchPotato_Class30])
 	(problemas+aliviados
 		[CouchPotato_Class3]
 		[CouchPotato_Class4]
@@ -116,13 +127,274 @@
 		[Articular])
 	(repeticiones+minimas 10))
 
+([CouchPotato_Class10] of  Ejercicio+con+pesas
+
+	(calorias+quemadas 3.4)
+	(duracion+maxima 20)
+	(duracion+minima 5)
+	(grupos+musculares
+		[CouchPotato_Class14]
+		[CouchPotato_Class21])
+	(nombre "Pecho")
+	(objetivos
+		[Mantenimiento]
+		[Ponerse+en+forma]
+		[Rebajar+Peso]
+		[Sistema+Card%C3%ADaco]
+		[CouchPotato_Class30])
+	(repeticiones+maximas 50)
+	(repeticiones+minimas 10))
+
+([CouchPotato_Class11] of  Ejercicio+con+pesas
+
+	(calorias+quemadas 3.0)
+	(duracion+maxima 20)
+	(duracion+minima 5)
+	(ejercicios+combinan
+		[CouchPotato_Class12]
+		[CouchPotato_Class15]
+		[CouchPotato_Class10]
+		[CouchPotato_Class16]
+		[CouchPotato_Class13])
+	(grupos+musculares
+		[Deltoides]
+		[Trapecio])
+	(nombre "Hombro")
+	(objetivos
+		[Mantenimiento]
+		[Ponerse+en+forma]
+		[Rebajar+Peso]
+		[Sistema+Card%C3%ADaco]
+		[CouchPotato_Class30])
+	(problemas+aliviados
+		[CouchPotato_Class3]
+		[CouchPotato_Class4]
+		[CouchPotato_Class5]
+		[CouchPotato_Class6]
+		[CouchPotato_Class7]
+		[CouchPotato_Class8])
+	(repeticiones+maximas 50)
+	(repeticiones+minimas 10))
+
+([CouchPotato_Class12] of  Ejercicio+con+pesas
+
+	(calorias+quemadas 3.4)
+	(duracion+maxima 20)
+	(duracion+minima 5)
+	(ejercicios+combinan
+		[CouchPotato_Class15]
+		[CouchPotato_Class11]
+		[CouchPotato_Class10]
+		[CouchPotato_Class16]
+		[CouchPotato_Class13])
+	(grupos+musculares [B%C3%ADceps])
+	(nombre "Biceps")
+	(objetivos
+		[Mantenimiento]
+		[Ponerse+en+forma]
+		[Rebajar+Peso]
+		[Sistema+Card%C3%ADaco]
+		[CouchPotato_Class30])
+	(problemas+aliviados
+		[Brazos]
+		[CouchPotato_Class3]
+		[CouchPotato_Class4]
+		[CouchPotato_Class5]
+		[CouchPotato_Class6]
+		[CouchPotato_Class7]
+		[CouchPotato_Class8])
+	(repeticiones+maximas 50)
+	(repeticiones+minimas 10))
+
+([CouchPotato_Class13] of  Ejercicio+con+pesas
+
+	(calorias+quemadas 3.6)
+	(duracion+maxima 20)
+	(duracion+minima 5)
+	(ejercicios+combinan
+		[CouchPotato_Class12]
+		[CouchPotato_Class15]
+		[CouchPotato_Class11]
+		[CouchPotato_Class10]
+		[CouchPotato_Class16])
+	(grupos+musculares [Tr%C3%ADceps])
+	(nombre "Triceps")
+	(objetivos
+		[Mantenimiento]
+		[Ponerse+en+forma]
+		[Rebajar+Peso]
+		[Sistema+Card%C3%ADaco]
+		[CouchPotato_Class30])
+	(problemas+aliviados
+		[CouchPotato_Class3]
+		[CouchPotato_Class4]
+		[CouchPotato_Class5]
+		[CouchPotato_Class6]
+		[CouchPotato_Class7]
+		[CouchPotato_Class8])
+	(repeticiones+maximas 50)
+	(repeticiones+minimas 10))
+
+([CouchPotato_Class14] of  Grupo+muscular
+
+	(nombre "Pectoral"))
+
+([CouchPotato_Class15] of  Ejercicio+con+pesas
+
+	(calorias+quemadas 3.1)
+	(duracion+maxima 20)
+	(duracion+minima 5)
+	(ejercicios+combinan
+		[CouchPotato_Class12]
+		[CouchPotato_Class11]
+		[CouchPotato_Class10]
+		[CouchPotato_Class16]
+		[CouchPotato_Class13])
+	(grupos+musculares
+		[Deltoides]
+		[Trapecio]
+		[Dorsal])
+	(nombre "Espalda")
+	(objetivos
+		[Mantenimiento]
+		[Ponerse+en+forma]
+		[Rebajar+Peso]
+		[Sistema+Card%C3%ADaco]
+		[CouchPotato_Class30])
+	(problemas+aliviados
+		[CouchPotato_Class3]
+		[CouchPotato_Class4]
+		[CouchPotato_Class5]
+		[CouchPotato_Class6]
+		[CouchPotato_Class7]
+		[CouchPotato_Class8])
+	(repeticiones+maximas 50)
+	(repeticiones+minimas 10))
+
+([CouchPotato_Class16] of  Ejercicio+con+pesas
+
+	(calorias+quemadas 4.1)
+	(duracion+maxima 20)
+	(duracion+minima 5)
+	(ejercicios+combinan
+		[CouchPotato_Class12]
+		[CouchPotato_Class15]
+		[CouchPotato_Class11]
+		[CouchPotato_Class10]
+		[CouchPotato_Class13])
+	(grupos+musculares
+		[Cuadriceps]
+		[Gemelos])
+	(nombre "Piernas")
+	(objetivos
+		[Mantenimiento]
+		[Ponerse+en+forma]
+		[Rebajar+Peso]
+		[Sistema+Card%C3%ADaco]
+		[CouchPotato_Class30])
+	(problemas+aliviados
+		[CouchPotato_Class3]
+		[CouchPotato_Class4]
+		[CouchPotato_Class5]
+		[CouchPotato_Class6]
+		[CouchPotato_Class7]
+		[CouchPotato_Class8])
+	(repeticiones+maximas 50)
+	(repeticiones+minimas 10))
+
+([CouchPotato_Class17] of  Ejercicio+de+suelo
+
+	(calorias+quemadas 5.1)
+	(duracion+maxima 20)
+	(duracion+minima 5)
+	(edad+minima 5)
+	(nombre "Flexiones")
+	(repeticiones+maximas 100)
+	(repeticiones+minimas 10))
+
 ([CouchPotato_Class2] of  Problema+IMC
 
 	(nombre "Peso insuficiente"))
 
+([CouchPotato_Class20] of  Ejercicio+de+suelo
+
+	(calorias+quemadas 2.5)
+	(duracion+maxima 20)
+	(duracion+minima 5)
+	(ejercicios+combinan
+		[CouchPotato_Class9]
+		[CouchPotato_Class17])
+	(grupos+musculares
+		[CouchPotato_Class21]
+		[Gluteos])
+	(nombre "Hipopresivos")
+	(problemas+aliviados
+		[CouchPotato_Class3]
+		[CouchPotato_Class4]
+		[CouchPotato_Class5]
+		[CouchPotato_Class6]
+		[CouchPotato_Class7]
+		[CouchPotato_Class8])
+	(repeticiones+maximas 50)
+	(repeticiones+minimas 10))
+
+([CouchPotato_Class21] of  Grupo+muscular
+
+	(nombre "Abdominales"))
+
+([CouchPotato_Class24] of  Estiramientos
+
+	(calorias+quemadas 0.0)
+	(duracion+maxima 5)
+	(duracion+minima 1)
+	(ejercicios+combinan
+		[CouchPotato_Class26]
+		[CouchPotato_Class25])
+	(grupos+musculares
+		[B%C3%ADceps]
+		[Deltoides]
+		[Tr%C3%ADceps])
+	(nombre "Brazos")
+	(problemas+aliviados
+		[Articular]
+		[Brazos])
+	(repeticiones+maximas 4)
+	(repeticiones+minimas 2))
+
+([CouchPotato_Class25] of  Estiramientos
+
+	(duracion+maxima 5)
+	(duracion+minima 1)
+	(nombre "Piernas")
+	(repeticiones+maximas 4)
+	(repeticiones+minimas 2))
+
+([CouchPotato_Class26] of  Estiramientos
+
+	(calorias+quemadas 0.0)
+	(duracion+maxima 5)
+	(duracion+minima 1)
+	(ejercicios+combinan
+		[CouchPotato_Class24]
+		[CouchPotato_Class25])
+	(grupos+musculares
+		[Deltoides]
+		[Dorsal]
+		[Trapecio])
+	(nombre "Espalda")
+	(problemas+aliviados
+		[Articular]
+		[Cuello])
+	(repeticiones+maximas 4)
+	(repeticiones+minimas 2))
+
 ([CouchPotato_Class3] of  Problema+IMC
 
 	(nombre "Obesidad tipo 1"))
+
+([CouchPotato_Class30] of  Musculacion
+
+	(nombre "Musculacion"))
 
 ([CouchPotato_Class4] of  Problema+IMC
 
@@ -145,7 +417,25 @@
 	(nombre "Sobrepeso grado 2"))
 
 ([CouchPotato_Class9] of  Ejercicio+de+suelo
-)
+
+	(calorias+quemadas 4.5)
+	(duracion+maxima 20)
+	(duracion+minima 5)
+	(edad+minima 5)
+	(ejercicios+combinan
+		[CouchPotato_Class17]
+		[CouchPotato_Class20])
+	(grupos+musculares [CouchPotato_Class21])
+	(nombre "Abdominales")
+	(problemas+aliviados
+		[CouchPotato_Class7]
+		[CouchPotato_Class3]
+		[CouchPotato_Class4]
+		[CouchPotato_Class5]
+		[CouchPotato_Class6]
+		[CouchPotato_Class8])
+	(repeticiones+maximas 100)
+	(repeticiones+minimas 10))
 
 ([Cuadriceps] of  Grupo+muscular
 
@@ -253,6 +543,12 @@
 		[Gemelos]
 		[Gluteos])
 	(nombre "Pesos piernas")
+	(objetivos
+		[Mantenimiento]
+		[Ponerse+en+forma]
+		[Rebajar+Peso]
+		[Sistema+Card%C3%ADaco]
+		[CouchPotato_Class30])
 	(problemas+aliviados
 		[CouchPotato_Class3]
 		[CouchPotato_Class4]
@@ -296,6 +592,12 @@
 		[Deltoides]
 		[Gluteos])
 	(nombre "Remo")
+	(objetivos
+		[Mantenimiento]
+		[Ponerse+en+forma]
+		[Rebajar+Peso]
+		[Sistema+Card%C3%ADaco]
+		[CouchPotato_Class30])
 	(problemas+aliviados
 		[Articular]
 		[Rodillas])
@@ -334,6 +636,12 @@
 		[Gemelos]
 		[Gluteos])
 	(nombre "Stepper")
+	(objetivos
+		[Equilibrio]
+		[Mantenimiento]
+		[Ponerse+en+forma]
+		[Rebajar+Peso]
+		[Sistema+Card%C3%ADaco])
 	(problemas+aliviados
 		[CouchPotato_Class3]
 		[CouchPotato_Class4]

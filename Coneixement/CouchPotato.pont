@@ -1,4 +1,4 @@
-; Thu May 05 09:54:34 CEST 2016
+; Thu May 05 14:57:49 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -149,10 +149,9 @@
 		(allowed-values Poco Mucho Nada)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot grupo_muscular
+	(multislot grupo_muscular
 		(type INSTANCE)
 ;+		(allowed-classes Grupo+muscular)
-;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot duracion
 ;+		(comment "en minutos")
@@ -210,8 +209,7 @@
 	(multislot tiempo+diario+disponible
 ;+		(comment "tiempo diario en minutos")
 		(type INTEGER)
-		(range 30 %3FVARIABLE)
-		(default 30)
+		(range 30 1440)
 		(cardinality 7 7)
 		(create-accessor read-write))
 	(multislot zona
@@ -240,9 +238,9 @@
 (defclass Persona
 	(is-a USER)
 	(role concrete)
-	(multislot actividades
+	(multislot objetivos
 		(type INSTANCE)
-;+		(allowed-classes Actividad)
+;+		(allowed-classes Objetivo)
 		(create-accessor read-write))
 	(single-slot edad
 		(type INTEGER)
@@ -254,22 +252,9 @@
 ;+		(allowed-classes Dieta)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot nombre
-		(type STRING)
-		(default "Paco")
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(single-slot imc
 		(type FLOAT)
 ;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot pMin
-		(type FLOAT)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(multislot tests
-		(type INSTANCE)
-;+		(allowed-classes Test)
 		(create-accessor read-write))
 	(single-slot pMax
 		(type FLOAT)
@@ -280,14 +265,31 @@
 		(default 1.7)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(multislot problemas+fisicos
-		(type INSTANCE)
-;+		(allowed-classes Problema)
-		(create-accessor read-write))
 	(single-slot peso
 		(type FLOAT)
 		(default 75.0)
 ;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot actividades
+		(type INSTANCE)
+;+		(allowed-classes Actividad)
+		(create-accessor read-write))
+	(single-slot nombre
+		(type STRING)
+		(default "Paco")
+;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot pMin
+		(type FLOAT)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot tests
+		(type INSTANCE)
+;+		(allowed-classes Test)
+		(create-accessor read-write))
+	(multislot problemas+fisicos
+		(type INSTANCE)
+;+		(allowed-classes Problema)
 		(create-accessor read-write)))
 
 (defclass Test
@@ -410,10 +412,9 @@
 (defclass Musculacion
 	(is-a Objetivo)
 	(role concrete)
-	(single-slot grupo_muscular
+	(multislot grupo_muscular
 		(type INSTANCE)
 ;+		(allowed-classes Grupo+muscular)
-;+		(cardinality 0 1)
 		(create-accessor read-write)))
 
 (defclass Programa
@@ -453,8 +454,7 @@
 	(multislot tiempo+diario+disponible
 ;+		(comment "tiempo diario en minutos")
 		(type INTEGER)
-		(range 30 %3FVARIABLE)
-		(default 30)
+		(range 30 1440)
 		(cardinality 7 7)
 		(create-accessor read-write))
 	(multislot miercoles
