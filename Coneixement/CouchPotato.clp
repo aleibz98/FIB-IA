@@ -1074,7 +1074,6 @@
 		(bind ?respuesta (pregunta-numerica "Que actividad quieres anadir? " 0 (length$ ?lista_actividades)))
 	)
 )
-)
 
 
 
@@ -1091,5 +1090,23 @@
     (send ?dieta put-picar+entre+horas ?picar)
     (bind ?fruta (pregunta-numerica "Cuantas piezas de fruta tomas a la semana? " 0.0 500.0))
     (send ?dieta put-consumo+de+fruta ?fruta)
+)
+
+(defrule pide-problemas
+	(nombre ?nombre)
+    (test (any-instancep ((?dieta Dieta)) TRUE))
+	=>
+	(printout t "Problemas musculo-esqueleticos: " crlf crlf)
+	(bind ?lista_problemas_musc (find-all-instances ((?p Problema+musculo-esqueletico)) TRUE))
+	(printout t "0 : Deja de añadir" crlf)
+	(loop-for-count (?i 1 (length$ ?lista_problemas_musc)) do
+		(bind ?aux (nth$ ?i ?lista_problemas_musc))
+		(printout t ?i " : " (send ?aux get-nombre) crlf)
+	)
+	(bind ?respuesta (pregunta-numerica "Que problema de estos tienes? " 0 (length$ ?lista_problemas_musc)))
+	(while (> ?respuesta 0) do 
+		(slot-insert$ ?persona problemas+fisicos 1 (nth$ ?respuesta ?lista_problemas_musc))
+		(bind ?respuesta (pregunta-numerica "Que problema de estos tienes? " 0 (length$ ?lista_problemas_musc)))
+	)
 )
 
