@@ -1,4 +1,4 @@
-; Thu May 05 14:57:49 CEST 2016
+; Thu May 05 15:07:13 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -20,16 +20,16 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[CouchPotato_ProjectKB_Class330]
-		[CouchPotato_ProjectKB_Class331]
-		[CouchPotato_ProjectKB_Class332]
-		[CouchPotato_ProjectKB_Class333]
-		[CouchPotato_ProjectKB_Class334]
-		[CouchPotato_ProjectKB_Class335]
-		[CouchPotato_ProjectKB_Class336]
-		[CouchPotato_ProjectKB_Class337]
-		[CouchPotato_ProjectKB_Class338]
-		[CouchPotato_ProjectKB_Class339]))
+		[CouchPotato_ProjectKB_Class340]
+		[CouchPotato_ProjectKB_Class341]
+		[CouchPotato_ProjectKB_Class342]
+		[CouchPotato_ProjectKB_Class343]
+		[CouchPotato_ProjectKB_Class344]
+		[CouchPotato_ProjectKB_Class345]
+		[CouchPotato_ProjectKB_Class346]
+		[CouchPotato_ProjectKB_Class347]
+		[CouchPotato_ProjectKB_Class348]
+		[CouchPotato_ProjectKB_Class349]))
 
 ([CLSES_TAB] of  Widget
 
@@ -285,58 +285,58 @@
 	(property_list [CouchPotato_ProjectKB_Class34])
 	(widget_class_name "edu.stanford.smi.protegex.owl.ui.individuals.OWLIndividualsTab"))
 
-([CouchPotato_ProjectKB_Class330] of  String
+([CouchPotato_ProjectKB_Class34] of  Property_List
+)
+
+([CouchPotato_ProjectKB_Class340] of  String
 
 	(name "Objetivo")
 	(string_value "nombre"))
 
-([CouchPotato_ProjectKB_Class331] of  String
+([CouchPotato_ProjectKB_Class341] of  String
 
 	(name ":INSTANCE-ANNOTATION")
 	(string_value "%3AANNOTATION-TEXT"))
 
-([CouchPotato_ProjectKB_Class332] of  String
+([CouchPotato_ProjectKB_Class342] of  String
 
 	(name "Grupo muscular")
 	(string_value "nombre"))
 
-([CouchPotato_ProjectKB_Class333] of  String
+([CouchPotato_ProjectKB_Class343] of  String
 
 	(name "Actividad")
 	(string_value "nombre"))
 
-([CouchPotato_ProjectKB_Class334] of  String
+([CouchPotato_ProjectKB_Class344] of  String
 
 	(name ":PAL-CONSTRAINT")
 	(string_value "%3APAL-NAME"))
 
-([CouchPotato_ProjectKB_Class335] of  String
+([CouchPotato_ProjectKB_Class345] of  String
 
 	(name "Salud")
 	(string_value "nombre"))
 
-([CouchPotato_ProjectKB_Class336] of  String
+([CouchPotato_ProjectKB_Class346] of  String
 
 	(name ":META-CLASS")
 	(string_value "%3ANAME"))
 
-([CouchPotato_ProjectKB_Class337] of  String
+([CouchPotato_ProjectKB_Class347] of  String
 
 	(name "Ejercicio")
 	(string_value "nombre"))
 
-([CouchPotato_ProjectKB_Class338] of  String
+([CouchPotato_ProjectKB_Class348] of  String
 
 	(name "Test")
 	(string_value "nombre"))
 
-([CouchPotato_ProjectKB_Class339] of  String
+([CouchPotato_ProjectKB_Class349] of  String
 
 	(name "Problema IMC")
 	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class34] of  Property_List
-)
 
 ([CouchPotato_ProjectKB_Class35] of  Widget
 
