@@ -1,4 +1,4 @@
-; Thu May 05 18:47:28 CEST 2016
+; Thu May 05 20:09:37 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -76,13 +76,13 @@
 		[CouchPotato_Class3]
 		[CouchPotato_Class4]
 		[CouchPotato_Class5]
-		[CouchPotato_Class6]
 		[CouchPotato_Class7]
 		[CouchPotato_Class8])
 	(problemas+contraindicados
 		[Presion+alta]
 		[Articular]
-		[Rodillas]))
+		[Rodillas]
+		[CouchPotato_Class6]))
 
 ([Colada] of  Tarea+domestica
 
