@@ -1,11 +1,7 @@
-; Thu May 05 11:22:13 CEST 2016
+; Thu May 05 09:44:58 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
-
-([Antebrazos] of  Grupo+muscular
-
-	(nombre "Antebrazos"))
 
 ([Articular] of  Problema+musculo-esqueletico
 
@@ -46,7 +42,15 @@
 ([Cinta+de+correr] of  Ejercicio+con+aparatos
 
 	(duracion+minima 20)
-	(nombre "Cinta de correr"))
+	(ejercicios+combinan [Bicicleta+estatica])
+	(grupos+musculares
+		[Gemelos]
+		[Tr%C3%ADceps])
+	(nombre "Cinta de correr")
+	(problemas+contraindicados
+		[Presion+alta]
+		[Articular]
+		[Rodillas]))
 
 ([Colada] of  Tarea+domestica
 
@@ -59,6 +63,48 @@
 	(duracion 0)
 	(frequencia None)
 	(nombre "Compra"))
+
+([CouchPotato_Class0] of  Ejercicio+con+aparatos
+
+	(calorias+quemadas 4.0)
+	(duracion+maxima 30)
+	(duracion+minima 10)
+	(edad+minima 12)
+	(grupos+musculares
+		[B%C3%ADceps]
+		[Deltoides]
+		[Trapecio]
+		[Tr%C3%ADceps])
+	(nombre "Pesos brazos")
+	(repeticiones+minimas 10))
+
+([CouchPotato_Class2] of  Problema+IMC
+
+	(nombre "Peso insuficiente"))
+
+([CouchPotato_Class3] of  Problema+IMC
+
+	(nombre "Obesidad tipo 1"))
+
+([CouchPotato_Class4] of  Problema+IMC
+
+	(nombre "Obesidad tipo 2"))
+
+([CouchPotato_Class5] of  Problema+IMC
+
+	(nombre "Obesidad tipo 3"))
+
+([CouchPotato_Class6] of  Problema+IMC
+
+	(nombre "Obesidad tipo 4"))
+
+([CouchPotato_Class7] of  Problema+IMC
+
+	(nombre "Sobrepeso tipo 1"))
+
+([CouchPotato_Class8] of  Problema+IMC
+
+	(nombre "Sobrepeso tipo 2"))
 
 ([Cuadriceps] of  Grupo+muscular
 
@@ -156,7 +202,16 @@
 
 ([Pesos] of  Ejercicio+con+aparatos
 
-	(nombre "Pesos"))
+	(calorias+quemadas 5.0)
+	(duracion+maxima 30)
+	(duracion+minima 10)
+	(edad+minima 12)
+	(grupos+musculares
+		[Cuadriceps]
+		[Gemelos]
+		[Gluteos])
+	(nombre "Pesos piernas")
+	(repeticiones+minimas 10))
 
 ([Planchar] of  Tarea+domestica
 
@@ -180,7 +235,6 @@
 
 	(calorias+quemadas 10.0)
 	(grupos+musculares
-		[Antebrazos]
 		[B%C3%ADceps]
 		[Cuadriceps]
 		[Dorsal]

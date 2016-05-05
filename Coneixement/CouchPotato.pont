@@ -1,4 +1,4 @@
-; Thu May 05 11:22:13 CEST 2016
+; Thu May 05 09:44:58 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -398,29 +398,6 @@
 (defclass Problema+IMC
 	(is-a Problema)
 	(role concrete))
-
-(defclass Obesidad
-	(is-a Problema+IMC)
-	(role concrete)
-	(single-slot tipo
-		(type INTEGER)
-		(range 1 4)
-;+		(cardinality 1 1)
-		(create-accessor read-write)))
-
-(defclass Peso+Insuficiente
-	(is-a Problema+IMC)
-	(role concrete))
-
-(defclass Sobrepeso
-	(is-a Problema+IMC)
-	(role concrete)
-	(single-slot grado
-;+		(comment "1 - 2")
-		(type INTEGER)
-		(range 1 2)
-;+		(cardinality 1 1)
-		(create-accessor read-write)))
 
 (defclass Objetivo
 	(is-a USER)
