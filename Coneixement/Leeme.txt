@@ -1,0 +1,3 @@
+El prototipo es capaz de leer los datos básicos de la persona,
+detectar que problemas tiene y imprimir los ejercicios que seria
+capaz de hacer.
