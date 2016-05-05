@@ -1,4 +1,4 @@
-; Wed May 04 19:52:01 CEST 2016
+; Thu May 05 11:59:51 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -7,6 +7,12 @@
 (defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
 	(is-a USER)
 	(role abstract)
+	(single-slot grado
+;+		(comment "1 - 2")
+		(type INTEGER)
+		(range 1 2)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
 	(single-slot consumo+de+fruta
 ;+		(comment "Piezas a la semana")
 		(type INTEGER)
@@ -17,16 +23,10 @@
 		(type INSTANCE)
 ;+		(allowed-classes Ejercicio)
 		(create-accessor read-write))
-	(single-slot respuesta
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(multislot tiempo+diario+disponible
 ;+		(comment "tiempo diario en minutos")
 		(type INTEGER)
-		(range 30 %3FVARIABLE)
-		(default 30)
+		(range 30 1440)
 		(cardinality 7 7)
 		(create-accessor read-write))
 	(multislot zona
@@ -59,6 +59,11 @@
 		(default 75.0)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
+	(single-slot tipo
+		(type INTEGER)
+		(range 1 4)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
 	(single-slot calorias+quemadas
 ;+		(comment "calorias quemadas por minuto")
 		(type FLOAT)
@@ -78,14 +83,14 @@
 		(type INTEGER)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot cansancio
-		(type SYMBOL)
-		(allowed-values Mucho Poco Nada)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(single-slot duracion+minima
 ;+		(comment "en minutos")
 		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot cansancio
+		(type SYMBOL)
+		(allowed-values Mucho Poco Nada)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot duracion
@@ -94,12 +99,12 @@
 		(default 0)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(multislot lunes
-;+		(comment "ejercicios lunes")
+	(multislot sabado
 		(type INSTANCE)
 ;+		(allowed-classes Ejercicio)
 		(create-accessor read-write))
-	(multislot sabado
+	(multislot lunes
+;+		(comment "ejercicios lunes")
 		(type INSTANCE)
 ;+		(allowed-classes Ejercicio)
 		(create-accessor read-write))
@@ -116,20 +121,20 @@
 		(type INSTANCE)
 ;+		(allowed-classes Test)
 		(create-accessor read-write))
-	(single-slot frequencia
-		(type SYMBOL)
-		(allowed-values Diaria Semanal Mensual None)
-		(default None)
-;+		(cardinality 0 1)
+	(single-slot ejercicio
+		(type INSTANCE)
+;+		(allowed-classes Ejercicio)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot problemas+aliviados
 		(type INSTANCE)
 ;+		(allowed-classes Problema)
 		(create-accessor read-write))
-	(single-slot ejercicio
-		(type INSTANCE)
-;+		(allowed-classes Ejercicio)
-;+		(cardinality 1 1)
+	(single-slot frequencia
+		(type SYMBOL)
+		(allowed-values Diaria Semanal Mensual None)
+		(default None)
+;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot dieta
 		(type INSTANCE)
@@ -205,11 +210,7 @@
 		(create-accessor read-write))
 	(single-slot nombre
 		(type STRING)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(multislot objetivos+ejercicio
-		(type INSTANCE)
-;+		(allowed-classes Objetivo)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot altura
 		(type FLOAT)
@@ -251,17 +252,18 @@
 		(default 1.7)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(multislot tests
-		(type INSTANCE)
-;+		(allowed-classes Test)
-		(create-accessor read-write))
 	(single-slot peso
 		(type FLOAT)
 		(default 75.0)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
+	(multislot tests
+		(type INSTANCE)
+;+		(allowed-classes Test)
+		(create-accessor read-write))
 	(single-slot nombre
 		(type STRING)
+		(default "Paco")
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot edad
@@ -273,6 +275,10 @@
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(multislot problemas+fisicos
+		(type INSTANCE)
+;+		(allowed-classes Problema)
+		(create-accessor read-write))
 	(single-slot pMin
 		(type FLOAT)
 ;+		(cardinality 0 1)
@@ -281,10 +287,6 @@
 		(type INSTANCE)
 ;+		(allowed-classes Dieta)
 ;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(multislot problemas+fisicos
-		(type INSTANCE)
-;+		(allowed-classes Problema)
 		(create-accessor read-write)))
 
 (defclass Test
@@ -301,7 +303,7 @@
 		(create-accessor read-write))
 	(single-slot nombre
 		(type STRING)
-;+		(cardinality 0 1)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot tirantezMuscular
 		(type SYMBOL)
@@ -320,7 +322,7 @@
 		(create-accessor read-write))
 	(single-slot nombre
 		(type STRING)
-;+		(cardinality 0 1)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot frequencia
 		(type SYMBOL)
@@ -354,7 +356,7 @@
 	(role concrete)
 	(single-slot nombre
 		(type STRING)
-;+		(cardinality 0 1)
+;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
 (defclass Dieta
@@ -378,12 +380,7 @@
 
 (defclass Problema
 	(is-a Salud)
-	(role concrete)
-	(single-slot respuesta
-		(type SYMBOL)
-		(allowed-values FALSE TRUE)
-;+		(cardinality 0 1)
-		(create-accessor read-write)))
+	(role concrete))
 
 (defclass Problema+musculo-esqueletico
 	(is-a Problema)
@@ -397,12 +394,16 @@
 	(is-a Problema)
 	(role concrete))
 
+(defclass Problema+IMC
+	(is-a Problema)
+	(role concrete))
+
 (defclass Objetivo
 	(is-a USER)
 	(role concrete)
 	(single-slot nombre
 		(type STRING)
-;+		(cardinality 0 1)
+;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
 (defclass Musculacion
@@ -417,20 +418,19 @@
 (defclass Programa
 	(is-a USER)
 	(role concrete)
-	(multislot objetivos
-		(type INSTANCE)
-;+		(allowed-classes Objetivo)
-		(create-accessor read-write))
 	(multislot jueves
 ;+		(comment "ejercicios jueves")
 		(type INSTANCE)
 ;+		(allowed-classes Ejercicio)
 		(create-accessor read-write))
+	(multislot objetivos
+		(type INSTANCE)
+;+		(allowed-classes Objetivo)
+		(create-accessor read-write))
 	(multislot tiempo+diario+disponible
 ;+		(comment "tiempo diario en minutos")
 		(type INTEGER)
-		(range 30 %3FVARIABLE)
-		(default 30)
+		(range 30 1440)
 		(cardinality 7 7)
 		(create-accessor read-write))
 	(multislot lunes
@@ -485,15 +485,11 @@
 		(create-accessor read-write))
 	(single-slot nombre
 		(type STRING)
-;+		(cardinality 0 1)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot edad+maxima
 		(type INTEGER)
 ;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(multislot objetivos+ejercicio
-		(type INSTANCE)
-;+		(allowed-classes Objetivo)
 		(create-accessor read-write))
 	(multislot ejercicios+combinan
 		(type INSTANCE)
@@ -502,6 +498,10 @@
 	(single-slot edad+minima
 		(type INTEGER)
 ;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot objetivos
+		(type INSTANCE)
+;+		(allowed-classes Objetivo)
 		(create-accessor read-write))
 	(multislot problemas+contraindicados
 ;+		(comment "problemas del usuario contraindicados para este ejercicio")
@@ -543,7 +543,7 @@
 	(role concrete)
 	(single-slot nombre
 		(type STRING)
-;+		(cardinality 0 1)
+;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
 (defclass Ejercicio-Persona
@@ -568,25 +568,22 @@
 		(allowed-values moderada normal dificil)
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))
-
         
 (definstances instances
-
-; Wed May 04 19:52:01 CEST 2016
+; Thu May 05 11:59:52 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
 
-([Antebrazos] of  Grupo+muscular
-)
-
 ([Articular] of  Problema+musculo-esqueletico
-)
+
+	(nombre "Articular"))
 
 ([Barrer] of  Tarea+domestica
 
 	(duracion 0)
-	(frequencia None))
+	(frequencia None)
+	(nombre "Barrer"))
 
 ([Bicicleta+estatica] of  Ejercicio+con+aparatos
 
@@ -594,10 +591,29 @@
 	(duracion+maxima 90)
 	(duracion+minima 20)
 	(edad+maxima 60)
-	(edad+minima 12))
+	(edad+minima 12)
+	(ejercicios+combinan
+		[Cinta+de+correr]
+		[Stepper])
+	(grupos+musculares
+		[Cuadriceps]
+		[Gemelos]
+		[Gluteos])
+	(nombre "Bicicleta estatica")
+	(problemas+aliviados
+		[CouchPotato_Class3]
+		[CouchPotato_Class4]
+		[CouchPotato_Class5]
+		[CouchPotato_Class6]
+		[CouchPotato_Class7]
+		[CouchPotato_Class8])
+	(problemas+contraindicados
+		[Articular]
+		[Rodillas]))
 
 ([Brazos] of  Problema+musculo-esqueletico
 
+	(nombre "Brazos")
 	(zona
 		[B%C3%ADceps]
 		[Deltoides]
@@ -605,136 +621,245 @@
 		[Tr%C3%ADceps]))
 
 ([B%C3%ADceps] of  Grupo+muscular
-)
+
+	(nombre "Biceps"))
 
 ([Carrera+sostenida] of  Test
-)
+
+	(nombre "Carrera sostenida"))
 
 ([Cinta+de+correr] of  Ejercicio+con+aparatos
 
-	(duracion+minima 20))
+	(duracion+minima 20)
+	(edad+minima 12)
+	(ejercicios+combinan
+		[Bicicleta+estatica]
+		[Stepper])
+	(grupos+musculares
+		[Gemelos]
+		[Tr%C3%ADceps])
+	(nombre "Cinta de correr")
+	(problemas+aliviados
+		[CouchPotato_Class3]
+		[CouchPotato_Class4]
+		[CouchPotato_Class5]
+		[CouchPotato_Class6]
+		[CouchPotato_Class7]
+		[CouchPotato_Class8])
+	(problemas+contraindicados
+		[Presion+alta]
+		[Articular]
+		[Rodillas]))
 
 ([Colada] of  Tarea+domestica
 
 	(duracion 0)
-	(frequencia None))
+	(frequencia None)
+	(nombre "Colada"))
 
 ([Compra] of  Desplazamiento
 
 	(duracion 0)
-	(frequencia None))
+	(frequencia None)
+	(nombre "Compra"))
 
-([CouchPotato_Class1] of  Persona
+([CouchPotato_Class0] of  Ejercicio+con+aparatos
 
-	(altura 190.0)
-	(dieta [CouchPotato_Class2])
-	(edad 20)
-	(nombre "Inigo")
-	(peso 75.0))
+	(calorias+quemadas 4.0)
+	(duracion+maxima 30)
+	(duracion+minima 10)
+	(edad+minima 12)
+	(ejercicios+combinan [Pesos])
+	(grupos+musculares
+		[B%C3%ADceps]
+		[Deltoides]
+		[Trapecio]
+		[Tr%C3%ADceps])
+	(nombre "Pesos brazos")
+	(problemas+aliviados
+		[CouchPotato_Class3]
+		[CouchPotato_Class4]
+		[CouchPotato_Class5]
+		[CouchPotato_Class6]
+		[CouchPotato_Class7]
+		[CouchPotato_Class8])
+	(problemas+contraindicados
+		[Presion+alta]
+		[Articular])
+	(repeticiones+minimas 10))
 
-([CouchPotato_Class2] of  Dieta
+([CouchPotato_Class2] of  Problema+IMC
 
-	(abuso+de+sal 10)
-	(consumo+de+fruta 10)
-	(picar+entre+horas 10))
+	(nombre "Peso insuficiente"))
+
+([CouchPotato_Class3] of  Problema+IMC
+
+	(nombre "Obesidad tipo 1"))
+
+([CouchPotato_Class4] of  Problema+IMC
+
+	(nombre "Obesidad tipo 2"))
+
+([CouchPotato_Class5] of  Problema+IMC
+
+	(nombre "Obesidad tipo 3"))
+
+([CouchPotato_Class6] of  Problema+IMC
+
+	(nombre "Obesidad tipo 4"))
+
+([CouchPotato_Class7] of  Problema+IMC
+
+	(nombre "Sobrepeso grado 1"))
+
+([CouchPotato_Class8] of  Problema+IMC
+
+	(nombre "Sobrepeso grado 2"))
+
+([CouchPotato_Class9] of  Ejercicio+de+suelo
+)
 
 ([Cuadriceps] of  Grupo+muscular
-)
+
+	(nombre "Cuadriceps"))
 
 ([Cuello] of  Problema+musculo-esqueletico
 
+	(nombre "Cuello")
 	(zona [Trapecio]))
 
 ([Cuidar+del+jard%C3%ADn] of  Tarea+domestica
 
 	(duracion 0)
-	(frequencia None))
+	(frequencia None)
+	(nombre "Cuidar del jardin"))
 
 ([De+pie] of  Actividad+de+Trabajo
-)
+
+	(nombre "De pie"))
 
 ([Deltoides] of  Grupo+muscular
-)
+
+	(nombre "Deltoides"))
 
 ([Desplazamiento+a+pie] of  Actividad+de+Trabajo
-)
+
+	(nombre "Desplazamientos a pie"))
 
 ([Dorsal] of  Grupo+muscular
-)
+
+	(nombre "Dorsal"))
 
 ([Equilibrio] of  Objetivo
-)
+
+	(nombre "Equilibrio"))
 
 ([Esfuerzos+musculares] of  Actividad+de+Trabajo
-)
+
+	(nombre "Esfuerzos musculares"))
 
 ([Espalda] of  Problema+musculo-esqueletico
 
-	(respuesta FALSE)
+	(nombre "Espalda")
 	(zona
 		[Dorsal]
 		[Trapecio]))
 
 ([Flexibilidad] of  Objetivo
-)
+
+	(nombre "Flexibilidad"))
 
 ([Fregar] of  Tarea+domestica
 
 	(duracion 0)
-	(frequencia None))
+	(frequencia None)
+	(nombre "Fregar"))
 
 ([Gemelos] of  Grupo+muscular
-)
+
+	(nombre "Gemelos"))
 
 ([Gluteos] of  Grupo+muscular
-)
+
+	(nombre "Gluteos"))
 
 ([Lectura] of  Estatica
 
 	(duracion 0)
-	(frequencia None))
+	(frequencia None)
+	(nombre "Lectura"))
 
 ([Levantamiento+de+peso] of  Actividad+de+Trabajo
-)
+
+	(nombre "Levantamiento de peso"))
 
 ([Mantenimiento] of  Objetivo
-)
+
+	(nombre "Mantenimiento"))
 
 ([Movimientos+Repetitivos] of  Actividad+de+Trabajo
-)
+
+	(nombre "Movimientos repetitivos"))
 
 ([Paseo] of  Desplazamiento
 
 	(duracion 0)
-	(frequencia None))
+	(frequencia None)
+	(nombre "Paseo"))
 
 ([Paseo+mascota] of  Desplazamiento
 
 	(duracion 0)
-	(frequencia None))
+	(frequencia None)
+	(nombre "Paseo mascota"))
 
 ([Pesos] of  Ejercicio+con+aparatos
-)
+
+	(calorias+quemadas 5.0)
+	(duracion+maxima 30)
+	(duracion+minima 10)
+	(edad+minima 12)
+	(ejercicios+combinan [CouchPotato_Class0])
+	(grupos+musculares
+		[Cuadriceps]
+		[Gemelos]
+		[Gluteos])
+	(nombre "Pesos piernas")
+	(problemas+aliviados
+		[CouchPotato_Class3]
+		[CouchPotato_Class4]
+		[CouchPotato_Class5]
+		[CouchPotato_Class6]
+		[CouchPotato_Class7]
+		[CouchPotato_Class8])
+	(problemas+contraindicados
+		[Presion+alta]
+		[Articular]
+		[Rodillas])
+	(repeticiones+minimas 10))
 
 ([Planchar] of  Tarea+domestica
 
 	(duracion 0)
-	(frequencia None))
+	(frequencia None)
+	(nombre "Planchar"))
 
 ([Ponerse+en+forma] of  Objetivo
-)
+
+	(nombre "Ponerse en forma"))
 
 ([Presion+alta] of  Otros+problemas
-)
+
+	(nombre "Presion alta"))
 
 ([Rebajar+Peso] of  Objetivo
-)
+
+	(nombre "Rebajar peso"))
 
 ([Remo] of  Ejercicio+con+aparatos
 
 	(calorias+quemadas 10.0)
 	(grupos+musculares
-		[Antebrazos]
 		[B%C3%ADceps]
 		[Cuadriceps]
 		[Dorsal]
@@ -742,29 +867,30 @@
 		[Tr%C3%ADceps]
 		[Deltoides]
 		[Gluteos])
+	(nombre "Remo")
 	(problemas+aliviados
 		[Articular]
 		[Rodillas])
-	(problemas+contraindicados [Sobrepeso])
 	(repeticiones+minimas 20))
 
 ([Rodillas] of  Problema+musculo-esqueletico
 
+	(nombre "Rodillas")
 	(zona [Gemelos]))
 
 ([Salir+a+correr] of  Desplazamiento
 
 	(duracion 0)
-	(frequencia None))
+	(frequencia None)
+	(nombre "Salir a correr"))
 
 ([Sentado] of  Actividad+de+Trabajo
-)
+
+	(nombre "Sentado"))
 
 ([Sistema+Card%C3%ADaco] of  Objetivo
-)
 
-([Sobrepeso] of  Otros+problemas
-)
+	(nombre "Sistema cardiaco"))
 
 ([Stepper] of  Ejercicio+con+aparatos
 
@@ -772,12 +898,21 @@
 	(duracion+maxima 30)
 	(duracion+minima 10)
 	(edad+maxima 55)
-	(ejercicios+combinan [Cinta+de+correr])
+	(ejercicios+combinan
+		[Cinta+de+correr]
+		[Bicicleta+estatica])
 	(grupos+musculares
 		[Cuadriceps]
 		[Gemelos]
 		[Gluteos])
-	(objetivos+ejercicio [Sistema+Card%C3%ADaco])
+	(nombre "Stepper")
+	(problemas+aliviados
+		[CouchPotato_Class3]
+		[CouchPotato_Class4]
+		[CouchPotato_Class5]
+		[CouchPotato_Class6]
+		[CouchPotato_Class7]
+		[CouchPotato_Class8])
 	(problemas+contraindicados
 		[Articular]
 		[Rodillas])
@@ -785,18 +920,22 @@
 	(repeticiones+minimas 10))
 
 ([Subir+tramos+de+escalera] of  Test
-)
+
+	(nombre "Subir tramos escalera"))
 
 ([Television] of  Estatica
 
 	(duracion 0)
-	(frequencia None))
+	(frequencia None)
+	(nombre "Television"))
 
 ([Trapecio] of  Grupo+muscular
-)
+
+	(nombre "Trapecio"))
 
 ([Tr%C3%ADceps] of  Grupo+muscular
-)
+
+	(nombre "Triceps"))
 
 )
 
@@ -835,7 +974,7 @@
 	(format t "%s [%d,%d] " ?pregunta ?rangini ?rangfi) 
 	(bind ?respuesta (read)) 
 	(while (not(and(>= ?respuesta ?rangini)(<= ?respuesta ?rangfi))) do 
-		(format t "¿%s? [%d,%d] " ?pregunta ?rangini ?rangfi) 
+		(format t "%s [%d,%d] " ?pregunta ?rangini ?rangfi) 
 		(bind ?respuesta (read)) 
 	) 
 	?respuesta
@@ -872,17 +1011,50 @@
     (assert (nombre ?nombre))
 )
 
+(deffunction anadir-ProblemaIMC (?persona ?problema)
+	(bind ?instancia (find-instance ((?p Problema+IMC)) (eq (str-compare ?p:nombre ?problema) 0)))
+	(slot-insert$ ?persona problemas+fisicos 1 ?instancia)
+)
+
 (defrule crea-persona
     (nombre ?nombre)
     (test (not (any-instancep ((?persona Persona)) (eq (str-compare ?persona:nombre ?nombre) 0))))
     =>
     (bind ?persona (make-instance persona of Persona))
+	(send ?persona put-nombre ?nombre)
     (bind ?altura (pregunta-numerica "Altura (m): " 0.0 3.0))
     (send ?persona put-altura ?altura)
     (bind ?peso (pregunta-numerica "Peso (kg): " 0.0 600.0))
     (send ?persona put-peso ?peso)
 	(bind ?imc (/ ?peso (* ?altura ?altura)))
     (send ?persona put-imc ?imc)
-	
-	
+	(if (< ?imc 18.5) then (anadir-ProblemaIMC ?persona "Peso insuficiente") else
+		(if (> ?imc 50) then (anadir-ProblemaIMC ?persona "Obesidad tipo 4") else
+			(if (> ?imc 40) then (anadir-ProblemaIMC ?persona "Obesidad tipo 3") else
+				(if (> ?imc 35) then (anadir-ProblemaIMC ?persona "Obesidad tipo 2") else 
+					(if (> ?imc 30) then (anadir-ProblemaIMC ?persona "Obesidad tipo 1") else
+						(if (> ?imc 27) then (anadir-ProblemaIMC ?persona "Sobrepeso grado 2") else 
+							(if (> ?imc 25) then (anadir-ProblemaIMC ?persona "Sobrepeso grado 1"))
+						)
+					)
+				)
+			)
+		)
+	)
+    (bind ?pMin (pregunta-numerica "Cual es tu presion sanguinea minima (diastolica)? " 0.0 200.0))
+	(bind ?pMax (pregunta-numerica "Cual es tu presion sanguinea maxima (sistolica)? " 0.0 200.0))
+    (send ?persona put-pMin ?pMin)
+    (send ?persona put-pMax ?pMax)
+	(if (or (>= ?pMin 90) (>= ?pMax 140)) then 
+		(bind ?instancia (find-instance ((?p Otros+problemas)) (eq (str-compare ?p:nombre "Presion alta") 0)))
+		(slot-insert$ ?persona problemas+fisicos 1 ?instancia)
+	)
+)
+
+(defrule pide-actividades
+	(nombre ?nombre)
+	?persona <-(object (is-a Persona)(nombre ?nombreA))
+	(test (eq (str-compare  ?nombre ?nombreA) 0))
+	=>
+	(do-for-all-instances ((?a Actividad)) (> 1 0) (printout r ?a:nombre))
 )
