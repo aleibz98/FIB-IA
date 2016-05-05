@@ -955,8 +955,6 @@
 (deffunction ask-question (?question $?allowed-values)
    (printout t ?question)
    (bind ?answer (read))
-   (if (lexemep ?answer) 
-       then (bind ?answer (lowcase ?answer)))
    (while (not (member ?answer ?allowed-values)) do
       (printout t ?question)
       (bind ?answer (read))
@@ -1066,11 +1064,33 @@
 	(printout t "0 : Deja de añadir" crlf)
 	(loop-for-count (?i 1 (length$ ?lista_actividades)) do
 		(bind ?aux (nth$ ?i ?lista_actividades))
-		(printout t ?i " : " (send ?aux get-nombre) crlf)
+		(printout t ?i " : " (class ?aux) " : " (send ?aux get-nombre) crlf)
 	)
 	(bind ?respuesta (pregunta-numerica "Que actividad quieres anadir? " 0 (length$ ?lista_actividades)))
 	(while (> ?respuesta 0) do 
-		(slot-insert$ ?persona problemas+fisicos 1 (nth$ ?respuesta ?lista_actividades))
+		(bind ?actividad (nth$ ?respuesta ?lista_actividades))
+		(send ?actividad put-duracion   (pregunta-numerica "Cuanto dura la actividad? (minutos)" 0 600))
+		(send ?actividad put-frequencia (ask-question "Con que frequencia? [Diaria|Semanal|Mensual] " Diaria Semanal Mensual))
+		(slot-insert$ ?persona actividades 1 ?actividad)
 		(bind ?respuesta (pregunta-numerica "Que actividad quieres anadir? " 0 (length$ ?lista_actividades)))
 	)
 )
+)
+
+
+
+(defrule crea-dieta
+	(nombre ?nombre)
+	?persona <-(object (is-a Persona)(nombre ?nombreA))
+	(test (eq (str-compare  ?nombre ?nombreA) 0))
+	=>
+	(bind ?dieta (make-instance dieta of Dieta))
+	(send ?dieta put-nombre "Much WOW")
+    (bind ?sal (pregunta-numerica "Consumo de sal: " 0.0 10.0))
+    (send ?dieta put-abuso+de+sal ?sal)
+	(bind ?picar (pregunta-numerica "Picoteo entre horas: " 0.0 10.0))
+    (send ?dieta put-picar+entre+horas ?picar)
+    (bind ?fruta (pregunta-numerica "Cuantas piezas de fruta tomas a la semana? " 0.0 500.0))
+    (send ?dieta put-consumo+de+fruta ?fruta)
+)
+
