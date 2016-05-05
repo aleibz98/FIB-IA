@@ -1075,3 +1075,22 @@
 		(bind ?respuesta (pregunta-numerica "Que actividad quieres anadir? " 0 (length$ ?lista_actividades)))
 	)
 )
+)
+
+
+
+(defrule crea-dieta
+	(nombre ?nombre)
+	?persona <-(object (is-a Persona)(nombre ?nombreA))
+	(test (eq (str-compare  ?nombre ?nombreA) 0))
+	=>
+	(bind ?dieta (make-instance dieta of Dieta))
+	(send ?dieta put-nombre "Much WOW")
+    (bind ?sal (pregunta-numerica "Consumo de sal: " 0.0 10.0))
+    (send ?dieta put-abuso+de+sal ?sal)
+	(bind ?picar (pregunta-numerica "Picoteo entre horas: " 0.0 10.0))
+    (send ?dieta put-picar+entre+horas ?picar)
+    (bind ?fruta (pregunta-numerica "Cuantas piezas de fruta tomas a la semana? " 0.0 500.0))
+    (send ?dieta put-consumo+de+fruta ?fruta)
+)
+
