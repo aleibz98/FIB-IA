@@ -1,4 +1,4 @@
-; Thu May 05 10:54:51 CEST 2016
+; Thu May 05 11:08:36 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -34,7 +34,8 @@
 )
 
 ([Carrera+sostenida] of  Test
-)
+
+	(nombre "Carrera sostenida"))
 
 ([Cinta+de+correr] of  Ejercicio+con+aparatos
 
@@ -191,7 +192,8 @@
 	(repeticiones+minimas 10))
 
 ([Subir+tramos+de+escalera] of  Test
-)
+
+	(nombre "Subir tramos escalera"))
 
 ([Television] of  Estatica
 

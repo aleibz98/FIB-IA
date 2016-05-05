@@ -1,4 +1,4 @@
-; Thu May 05 10:54:51 CEST 2016
+; Thu May 05 11:08:36 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -20,10 +20,10 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[CouchPotato_ProjectKB_Class10095]
-		[CouchPotato_ProjectKB_Class10096]
-		[CouchPotato_ProjectKB_Class10097]
-		[CouchPotato_ProjectKB_Class10098]))
+		[CouchPotato_ProjectKB_Class86]
+		[CouchPotato_ProjectKB_Class87]
+		[CouchPotato_ProjectKB_Class88]
+		[CouchPotato_ProjectKB_Class89]))
 
 ([CLSES_TAB] of  Widget
 
@@ -37,26 +37,6 @@
 
 ([CouchPotato_ProjectKB_Class10] of  Property_List
 )
-
-([CouchPotato_ProjectKB_Class10095] of  String
-
-	(name ":INSTANCE-ANNOTATION")
-	(string_value "%3AANNOTATION-TEXT"))
-
-([CouchPotato_ProjectKB_Class10096] of  String
-
-	(name ":META-CLASS")
-	(string_value "%3ANAME"))
-
-([CouchPotato_ProjectKB_Class10097] of  String
-
-	(name ":PAL-CONSTRAINT")
-	(string_value "%3APAL-NAME"))
-
-([CouchPotato_ProjectKB_Class10098] of  String
-
-	(name "Test")
-	(string_value "%3ANAME"))
 
 ([CouchPotato_ProjectKB_Class11] of  Widget
 
@@ -373,33 +353,34 @@
 ([CouchPotato_ProjectKB_Class74] of  Property_List
 )
 
-([CouchPotato_ProjectKB_Class78] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "respuesta")
-	(property_list [CouchPotato_ProjectKB_Class79])
-	(widget_class_name "edu.stanford.smi.protege.widget.CheckBoxWidget")
-	(width 200)
-	(x 0)
-	(y 60))
-
-([CouchPotato_ProjectKB_Class79] of  Property_List
-)
-
 ([CouchPotato_ProjectKB_Class8] of  Property_List
 )
+
+([CouchPotato_ProjectKB_Class86] of  String
+
+	(name ":INSTANCE-ANNOTATION")
+	(string_value "%3AANNOTATION-TEXT"))
+
+([CouchPotato_ProjectKB_Class87] of  String
+
+	(name ":PAL-CONSTRAINT")
+	(string_value "%3APAL-NAME"))
+
+([CouchPotato_ProjectKB_Class88] of  String
+
+	(name ":META-CLASS")
+	(string_value "%3ANAME"))
+
+([CouchPotato_ProjectKB_Class89] of  String
+
+	(name "Test")
+	(string_value "%3ANAME"))
 
 ([CouchPotato_ProjectKB_Class9] of  Widget
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class10])
 	(widget_class_name "uk.ac.man.cs.mig.coode.debugger.test.DebuggerTestTab"))
-
-([CouchPotato_ProjectKB_Class94] of  String
-
-	(name "Persona")
-	(string_value "nombre"))
 
 ([CREATION_TIMESTAMP_WIDGET] of  Widget
 
@@ -541,7 +522,7 @@
 
 	(properties [protege_ProjectKB_Class165]))
 
-([KB_923127_Class0] of  Map
+([KB_904197_Class0] of  Map
 )
 
 ([LAYOUT_PROPERTIES] of  Property_List
@@ -627,8 +608,8 @@
 	(browser_slot_names [BROWSER_SLOT_NAMES])
 	(customized_instance_widgets
 		[INSTANCE_ANNOTATION_FORM_WIDGET]
-		[STANDARD_SLOT_FORM_WIDGET]
 		[STANDARD_FACET_FORM_WIDGET]
+		[STANDARD_SLOT_FORM_WIDGET]
 		[PAL_FORM_WIDGET]
 		[STANDARD_CLASS_FORM_WIDGET])
 	(default_cls_metaclass ":STANDARD-CLASS")
