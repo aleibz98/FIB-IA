@@ -1432,7 +1432,7 @@
 	)
 	(bind ?respuesta (pregunta-numerica "Que objetivo tienes? " 0 (length$ ?lista_objetivos)))
 	(while (> ?respuesta 0) do 
-		(slot-insert$ ?persona Persona:objetivos 1 (nth$ ?respuesta ?lista_objetivos))
+		(slot-insert$ ?persona objetivos 1 (nth$ ?respuesta ?lista_objetivos))
 		(bind ?respuesta (pregunta-numerica "Que objetivo mas tienes? " 0 (length$ ?lista_objetivos)))
 	)
 )
