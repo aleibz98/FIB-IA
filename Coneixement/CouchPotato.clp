@@ -880,6 +880,9 @@
     (bind ?altura (pregunta-numerica "Altura (m): " 0.0 3.0))
     (send ?persona put-altura ?altura)
     (bind ?peso (pregunta-numerica "Peso (kg): " 0.0 600.0))
-    (send ?persona put-altura ?peso)
-    (send ?persona put-imc (/ ?peso (* ?altura ?altura)))
+    (send ?persona put-peso ?peso)
+	(bind ?imc (/ ?peso (* ?altura ?altura)))
+    (send ?persona put-imc ?imc)
+	
+	
 )
