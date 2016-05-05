@@ -1,4 +1,4 @@
-; Thu May 05 09:44:58 CEST 2016
+; Thu May 05 09:54:34 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -20,7 +20,24 @@
 	(duracion+minima 20)
 	(edad+maxima 60)
 	(edad+minima 12)
-	(nombre "Bicicleta estatica"))
+	(ejercicios+combinan
+		[Cinta+de+correr]
+		[Stepper])
+	(grupos+musculares
+		[Cuadriceps]
+		[Gemelos]
+		[Gluteos])
+	(nombre "Bicicleta estatica")
+	(problemas+aliviados
+		[CouchPotato_Class3]
+		[CouchPotato_Class4]
+		[CouchPotato_Class5]
+		[CouchPotato_Class6]
+		[CouchPotato_Class7]
+		[CouchPotato_Class8])
+	(problemas+contraindicados
+		[Articular]
+		[Rodillas]))
 
 ([Brazos] of  Problema+musculo-esqueletico
 
@@ -42,11 +59,21 @@
 ([Cinta+de+correr] of  Ejercicio+con+aparatos
 
 	(duracion+minima 20)
-	(ejercicios+combinan [Bicicleta+estatica])
+	(edad+minima 12)
+	(ejercicios+combinan
+		[Bicicleta+estatica]
+		[Stepper])
 	(grupos+musculares
 		[Gemelos]
 		[Tr%C3%ADceps])
 	(nombre "Cinta de correr")
+	(problemas+aliviados
+		[CouchPotato_Class3]
+		[CouchPotato_Class4]
+		[CouchPotato_Class5]
+		[CouchPotato_Class6]
+		[CouchPotato_Class7]
+		[CouchPotato_Class8])
 	(problemas+contraindicados
 		[Presion+alta]
 		[Articular]
@@ -70,12 +97,23 @@
 	(duracion+maxima 30)
 	(duracion+minima 10)
 	(edad+minima 12)
+	(ejercicios+combinan [Pesos])
 	(grupos+musculares
 		[B%C3%ADceps]
 		[Deltoides]
 		[Trapecio]
 		[Tr%C3%ADceps])
 	(nombre "Pesos brazos")
+	(problemas+aliviados
+		[CouchPotato_Class3]
+		[CouchPotato_Class4]
+		[CouchPotato_Class5]
+		[CouchPotato_Class6]
+		[CouchPotato_Class7]
+		[CouchPotato_Class8])
+	(problemas+contraindicados
+		[Presion+alta]
+		[Articular])
 	(repeticiones+minimas 10))
 
 ([CouchPotato_Class2] of  Problema+IMC
@@ -100,11 +138,14 @@
 
 ([CouchPotato_Class7] of  Problema+IMC
 
-	(nombre "Sobrepeso tipo 1"))
+	(nombre "Sobrepeso grado 1"))
 
 ([CouchPotato_Class8] of  Problema+IMC
 
-	(nombre "Sobrepeso tipo 2"))
+	(nombre "Sobrepeso grado 2"))
+
+([CouchPotato_Class9] of  Ejercicio+de+suelo
+)
 
 ([Cuadriceps] of  Grupo+muscular
 
@@ -206,11 +247,23 @@
 	(duracion+maxima 30)
 	(duracion+minima 10)
 	(edad+minima 12)
+	(ejercicios+combinan [CouchPotato_Class0])
 	(grupos+musculares
 		[Cuadriceps]
 		[Gemelos]
 		[Gluteos])
 	(nombre "Pesos piernas")
+	(problemas+aliviados
+		[CouchPotato_Class3]
+		[CouchPotato_Class4]
+		[CouchPotato_Class5]
+		[CouchPotato_Class6]
+		[CouchPotato_Class7]
+		[CouchPotato_Class8])
+	(problemas+contraindicados
+		[Presion+alta]
+		[Articular]
+		[Rodillas])
 	(repeticiones+minimas 10))
 
 ([Planchar] of  Tarea+domestica
@@ -273,12 +326,21 @@
 	(duracion+maxima 30)
 	(duracion+minima 10)
 	(edad+maxima 55)
-	(ejercicios+combinan [Cinta+de+correr])
+	(ejercicios+combinan
+		[Cinta+de+correr]
+		[Bicicleta+estatica])
 	(grupos+musculares
 		[Cuadriceps]
 		[Gemelos]
 		[Gluteos])
 	(nombre "Stepper")
+	(problemas+aliviados
+		[CouchPotato_Class3]
+		[CouchPotato_Class4]
+		[CouchPotato_Class5]
+		[CouchPotato_Class6]
+		[CouchPotato_Class7]
+		[CouchPotato_Class8])
 	(problemas+contraindicados
 		[Articular]
 		[Rodillas])

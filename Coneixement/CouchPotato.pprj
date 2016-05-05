@@ -1,4 +1,4 @@
-; Thu May 05 09:44:58 CEST 2016
+; Thu May 05 09:54:34 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -20,15 +20,15 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[CouchPotato_ProjectKB_Class131]
-		[CouchPotato_ProjectKB_Class132]
-		[CouchPotato_ProjectKB_Class133]
-		[CouchPotato_ProjectKB_Class134]
-		[CouchPotato_ProjectKB_Class135]
-		[CouchPotato_ProjectKB_Class136]
-		[CouchPotato_ProjectKB_Class137]
-		[CouchPotato_ProjectKB_Class138]
-		[CouchPotato_ProjectKB_Class139]))
+		[CouchPotato_ProjectKB_Class179]
+		[CouchPotato_ProjectKB_Class180]
+		[CouchPotato_ProjectKB_Class181]
+		[CouchPotato_ProjectKB_Class182]
+		[CouchPotato_ProjectKB_Class183]
+		[CouchPotato_ProjectKB_Class184]
+		[CouchPotato_ProjectKB_Class185]
+		[CouchPotato_ProjectKB_Class186]
+		[CouchPotato_ProjectKB_Class187]))
 
 ([CLSES_TAB] of  Widget
 
@@ -104,51 +104,6 @@
 	(property_list [CouchPotato_ProjectKB_Class14])
 	(widget_class_name "edu.stanford.smi.protegex.server_changes.prompt.UsersTab"))
 
-([CouchPotato_ProjectKB_Class131] of  String
-
-	(name "Objetivo")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class132] of  String
-
-	(name ":INSTANCE-ANNOTATION")
-	(string_value "%3AANNOTATION-TEXT"))
-
-([CouchPotato_ProjectKB_Class133] of  String
-
-	(name "Grupo muscular")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class134] of  String
-
-	(name "Actividad")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class135] of  String
-
-	(name ":PAL-CONSTRAINT")
-	(string_value "%3APAL-NAME"))
-
-([CouchPotato_ProjectKB_Class136] of  String
-
-	(name "Salud")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class137] of  String
-
-	(name ":META-CLASS")
-	(string_value "%3ANAME"))
-
-([CouchPotato_ProjectKB_Class138] of  String
-
-	(name "Ejercicio")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class139] of  String
-
-	(name "Test")
-	(string_value "nombre"))
-
 ([CouchPotato_ProjectKB_Class14] of  Property_List
 )
 
@@ -167,8 +122,53 @@
 	(property_list [CouchPotato_ProjectKB_Class18])
 	(widget_class_name "edu.stanford.smi.protege.widget.ClsesAndInstancesTab"))
 
+([CouchPotato_ProjectKB_Class179] of  String
+
+	(name "Objetivo")
+	(string_value "nombre"))
+
 ([CouchPotato_ProjectKB_Class18] of  Property_List
 )
+
+([CouchPotato_ProjectKB_Class180] of  String
+
+	(name ":INSTANCE-ANNOTATION")
+	(string_value "%3AANNOTATION-TEXT"))
+
+([CouchPotato_ProjectKB_Class181] of  String
+
+	(name "Grupo muscular")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class182] of  String
+
+	(name "Actividad")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class183] of  String
+
+	(name ":PAL-CONSTRAINT")
+	(string_value "%3APAL-NAME"))
+
+([CouchPotato_ProjectKB_Class184] of  String
+
+	(name "Salud")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class185] of  String
+
+	(name ":META-CLASS")
+	(string_value "%3ANAME"))
+
+([CouchPotato_ProjectKB_Class186] of  String
+
+	(name "Ejercicio")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class187] of  String
+
+	(name "Test")
+	(string_value "nombre"))
 
 ([CouchPotato_ProjectKB_Class19] of  Widget
 
