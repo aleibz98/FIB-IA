@@ -1,18 +1,21 @@
-; Thu May 05 11:08:36 CEST 2016
+; Thu May 05 11:22:13 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
 
 ([Antebrazos] of  Grupo+muscular
-)
+
+	(nombre "Antebrazos"))
 
 ([Articular] of  Problema+musculo-esqueletico
-)
+
+	(nombre "Articular"))
 
 ([Barrer] of  Tarea+domestica
 
 	(duracion 0)
-	(frequencia None))
+	(frequencia None)
+	(nombre "Barrer"))
 
 ([Bicicleta+estatica] of  Ejercicio+con+aparatos
 
@@ -20,10 +23,12 @@
 	(duracion+maxima 90)
 	(duracion+minima 20)
 	(edad+maxima 60)
-	(edad+minima 12))
+	(edad+minima 12)
+	(nombre "Bicicleta estatica"))
 
 ([Brazos] of  Problema+musculo-esqueletico
 
+	(nombre "Brazos")
 	(zona
 		[B%C3%ADceps]
 		[Deltoides]
@@ -31,7 +36,8 @@
 		[Tr%C3%ADceps]))
 
 ([B%C3%ADceps] of  Grupo+muscular
-)
+
+	(nombre "Biceps"))
 
 ([Carrera+sostenida] of  Test
 
@@ -39,108 +45,136 @@
 
 ([Cinta+de+correr] of  Ejercicio+con+aparatos
 
-	(duracion+minima 20))
+	(duracion+minima 20)
+	(nombre "Cinta de correr"))
 
 ([Colada] of  Tarea+domestica
 
 	(duracion 0)
-	(frequencia None))
+	(frequencia None)
+	(nombre "Colada"))
 
 ([Compra] of  Desplazamiento
 
 	(duracion 0)
-	(frequencia None))
+	(frequencia None)
+	(nombre "Compra"))
 
 ([Cuadriceps] of  Grupo+muscular
-)
+
+	(nombre "Cuadriceps"))
 
 ([Cuello] of  Problema+musculo-esqueletico
 
+	(nombre "Cuello")
 	(zona [Trapecio]))
 
 ([Cuidar+del+jard%C3%ADn] of  Tarea+domestica
 
 	(duracion 0)
-	(frequencia None))
+	(frequencia None)
+	(nombre "Cuidar del jardin"))
 
 ([De+pie] of  Actividad+de+Trabajo
-)
+
+	(nombre "De pie"))
 
 ([Deltoides] of  Grupo+muscular
-)
+
+	(nombre "Deltoides"))
 
 ([Desplazamiento+a+pie] of  Actividad+de+Trabajo
-)
+
+	(nombre "Desplazamientos a pie"))
 
 ([Dorsal] of  Grupo+muscular
-)
+
+	(nombre "Dorsal"))
 
 ([Equilibrio] of  Objetivo
-)
+
+	(nombre "Equilibrio"))
 
 ([Esfuerzos+musculares] of  Actividad+de+Trabajo
-)
+
+	(nombre "Esfuerzos musculares"))
 
 ([Espalda] of  Problema+musculo-esqueletico
 
+	(nombre "Espalda")
 	(zona
 		[Dorsal]
 		[Trapecio]))
 
 ([Flexibilidad] of  Objetivo
-)
+
+	(nombre "Flexibilidad"))
 
 ([Fregar] of  Tarea+domestica
 
 	(duracion 0)
-	(frequencia None))
+	(frequencia None)
+	(nombre "Fregar"))
 
 ([Gemelos] of  Grupo+muscular
-)
+
+	(nombre "Gemelos"))
 
 ([Gluteos] of  Grupo+muscular
-)
+
+	(nombre "Gluteos"))
 
 ([Lectura] of  Estatica
 
 	(duracion 0)
-	(frequencia None))
+	(frequencia None)
+	(nombre "Lectura"))
 
 ([Levantamiento+de+peso] of  Actividad+de+Trabajo
-)
+
+	(nombre "Levantamiento de peso"))
 
 ([Mantenimiento] of  Objetivo
-)
+
+	(nombre "Mantenimiento"))
 
 ([Movimientos+Repetitivos] of  Actividad+de+Trabajo
-)
+
+	(nombre "Movimientos repetitivos"))
 
 ([Paseo] of  Desplazamiento
 
 	(duracion 0)
-	(frequencia None))
+	(frequencia None)
+	(nombre "Paseo"))
 
 ([Paseo+mascota] of  Desplazamiento
 
 	(duracion 0)
-	(frequencia None))
+	(frequencia None)
+	(nombre "Paseo mascota"))
 
 ([Pesos] of  Ejercicio+con+aparatos
-)
+
+	(nombre "Pesos"))
 
 ([Planchar] of  Tarea+domestica
 
 	(duracion 0)
-	(frequencia None))
+	(frequencia None)
+	(nombre "Planchar"))
 
 ([Ponerse+en+forma] of  Objetivo
-)
+
+	(nombre "Ponerse en forma"))
 
 ([Presion+alta] of  Otros+problemas
-)
+
+	(nombre "Presion alta"))
 
 ([Rebajar+Peso] of  Objetivo
-)
+
+	(nombre "Rebajar peso"))
 
 ([Remo] of  Ejercicio+con+aparatos
 
@@ -154,6 +188,7 @@
 		[Tr%C3%ADceps]
 		[Deltoides]
 		[Gluteos])
+	(nombre "Remo")
 	(problemas+aliviados
 		[Articular]
 		[Rodillas])
@@ -161,18 +196,22 @@
 
 ([Rodillas] of  Problema+musculo-esqueletico
 
+	(nombre "Rodillas")
 	(zona [Gemelos]))
 
 ([Salir+a+correr] of  Desplazamiento
 
 	(duracion 0)
-	(frequencia None))
+	(frequencia None)
+	(nombre "Salir a correr"))
 
 ([Sentado] of  Actividad+de+Trabajo
-)
+
+	(nombre "Sentado"))
 
 ([Sistema+Card%C3%ADaco] of  Objetivo
-)
+
+	(nombre "Sistema cardiaco"))
 
 ([Stepper] of  Ejercicio+con+aparatos
 
@@ -185,6 +224,7 @@
 		[Cuadriceps]
 		[Gemelos]
 		[Gluteos])
+	(nombre "Stepper")
 	(problemas+contraindicados
 		[Articular]
 		[Rodillas])
@@ -198,10 +238,13 @@
 ([Television] of  Estatica
 
 	(duracion 0)
-	(frequencia None))
+	(frequencia None)
+	(nombre "Television"))
 
 ([Trapecio] of  Grupo+muscular
-)
+
+	(nombre "Trapecio"))
 
 ([Tr%C3%ADceps] of  Grupo+muscular
-)
+
+	(nombre "Triceps"))

@@ -1,4 +1,4 @@
-; Thu May 05 11:08:36 CEST 2016
+; Thu May 05 11:22:13 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -20,10 +20,15 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[CouchPotato_ProjectKB_Class86]
-		[CouchPotato_ProjectKB_Class87]
-		[CouchPotato_ProjectKB_Class88]
-		[CouchPotato_ProjectKB_Class89]))
+		[CouchPotato_ProjectKB_Class198]
+		[CouchPotato_ProjectKB_Class199]
+		[CouchPotato_ProjectKB_Class200]
+		[CouchPotato_ProjectKB_Class201]
+		[CouchPotato_ProjectKB_Class202]
+		[CouchPotato_ProjectKB_Class203]
+		[CouchPotato_ProjectKB_Class204]
+		[CouchPotato_ProjectKB_Class205]
+		[CouchPotato_ProjectKB_Class206]))
 
 ([CLSES_TAB] of  Widget
 
@@ -80,11 +85,56 @@
 	(property_list [CouchPotato_ProjectKB_Class20])
 	(widget_class_name "edu.stanford.smi.protegex.widget.pal.PalConstraintsTab"))
 
+([CouchPotato_ProjectKB_Class198] of  String
+
+	(name ":INSTANCE-ANNOTATION")
+	(string_value "%3AANNOTATION-TEXT"))
+
+([CouchPotato_ProjectKB_Class199] of  String
+
+	(name "Grupo muscular")
+	(string_value "nombre"))
+
 ([CouchPotato_ProjectKB_Class2] of  Property_List
 )
 
 ([CouchPotato_ProjectKB_Class20] of  Property_List
 )
+
+([CouchPotato_ProjectKB_Class200] of  String
+
+	(name "Ejercicio")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class201] of  String
+
+	(name "Objetivo")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class202] of  String
+
+	(name ":PAL-CONSTRAINT")
+	(string_value "%3APAL-NAME"))
+
+([CouchPotato_ProjectKB_Class203] of  String
+
+	(name ":META-CLASS")
+	(string_value "%3ANAME"))
+
+([CouchPotato_ProjectKB_Class204] of  String
+
+	(name "Test")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class205] of  String
+
+	(name "Actividad")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class206] of  String
+
+	(name "Salud")
+	(string_value "nombre"))
 
 ([CouchPotato_ProjectKB_Class21] of  Widget
 
@@ -356,26 +406,6 @@
 ([CouchPotato_ProjectKB_Class8] of  Property_List
 )
 
-([CouchPotato_ProjectKB_Class86] of  String
-
-	(name ":INSTANCE-ANNOTATION")
-	(string_value "%3AANNOTATION-TEXT"))
-
-([CouchPotato_ProjectKB_Class87] of  String
-
-	(name ":PAL-CONSTRAINT")
-	(string_value "%3APAL-NAME"))
-
-([CouchPotato_ProjectKB_Class88] of  String
-
-	(name ":META-CLASS")
-	(string_value "%3ANAME"))
-
-([CouchPotato_ProjectKB_Class89] of  String
-
-	(name "Test")
-	(string_value "%3ANAME"))
-
 ([CouchPotato_ProjectKB_Class9] of  Widget
 
 	(is_hidden TRUE)
@@ -607,11 +637,11 @@
 
 	(browser_slot_names [BROWSER_SLOT_NAMES])
 	(customized_instance_widgets
-		[INSTANCE_ANNOTATION_FORM_WIDGET]
 		[STANDARD_FACET_FORM_WIDGET]
-		[STANDARD_SLOT_FORM_WIDGET]
 		[PAL_FORM_WIDGET]
-		[STANDARD_CLASS_FORM_WIDGET])
+		[STANDARD_CLASS_FORM_WIDGET]
+		[INSTANCE_ANNOTATION_FORM_WIDGET]
+		[STANDARD_SLOT_FORM_WIDGET])
 	(default_cls_metaclass ":STANDARD-CLASS")
 	(default_facet_metaclass ":STANDARD-FACET")
 	(default_instance_widget_class_name "edu.stanford.smi.protege.widget.FormWidget")
