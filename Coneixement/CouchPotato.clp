@@ -1063,7 +1063,7 @@
 	(test (eq (str-compare  ?nombre ?nombreA) 0))
 	=>
 	(bind ?lista_actividades (find-all-instances ((?a Actividad)) TRUE))
-	(printout t "0 : Deja de añadir" crlf)
+	(printout t "0 : Deja de anadir" crlf)
 	(loop-for-count (?i 1 (length$ ?lista_actividades)) do
 		(bind ?aux (nth$ ?i ?lista_actividades))
 		(printout t ?i " : " (class ?aux) " : " (send ?aux get-nombre) crlf)
@@ -1074,10 +1074,10 @@
 		(send ?actividad put-duracion   (pregunta-numerica "Cuanto dura la actividad? (minutos)" 0 600))
 		(send ?actividad put-frequencia (ask-question "Con que frequencia? [Diaria|Semanal|Mensual] " Diaria Semanal Mensual))
 		(slot-insert$ ?persona actividades 1 ?actividad)
-		(bind ?respuesta (pregunta-numerica "Que actividad quieres anadir? " 0 (length$ ?lista_actividades)))
+		(bind ?respuesta (pregunta-numerica "Que actividad mas quieres anadir? " 0 (length$ ?lista_actividades)))
 	)
 )
-
+  
 
 (defrule crea-dieta
 	(nombre ?nombre)
@@ -1103,7 +1103,7 @@
 	=>
 	(printout t "Problemas musculo-esqueleticos: " crlf)
 	(bind ?lista_problemas_musc (find-all-instances ((?p Problema+musculo-esqueletico)) TRUE))
-	(printout t "0 : Deja de añadir" crlf)
+	(printout t "0 : Deja de anadir" crlf)
 	(loop-for-count (?i 1 (length$ ?lista_problemas_musc)) do
 		(bind ?aux (nth$ ?i ?lista_problemas_musc))
 		(printout t ?i " : " (send ?aux get-nombre) crlf)
@@ -1111,7 +1111,25 @@
 	(bind ?respuesta (pregunta-numerica "Que problema de estos tienes? " 0 (length$ ?lista_problemas_musc)))
 	(while (> ?respuesta 0) do 
 		(slot-insert$ ?persona problemas+fisicos 1 (nth$ ?respuesta ?lista_problemas_musc))
-		(bind ?respuesta (pregunta-numerica "Que problema de estos tienes? " 0 (length$ ?lista_problemas_musc)))
+		(bind ?respuesta (pregunta-numerica "Que problema mas de estos tienes? " 0 (length$ ?lista_problemas_musc)))
+	)
+)
+
+(defrule pide-objetivo
+	(nombre ?nombre)
+	?persona <-(object (is-a Persona)(nombre ?nombreA))
+	(test (eq (str-compare  ?nombre ?nombreA) 0))
+	=>
+	(bind ?lista_objetivos (find-all-instances ((?o Objetivo)) TRUE))
+	(printout t "0 : Deja de anadir" crlf)
+	(loop-for-count (?i 1 (length$ ?lista_objetivos)) do
+		(bind ?aux (nth$ ?i ?lista_objetivos))
+		(printout t ?i " : " (send ?aux get-nombre) crlf)
+	)
+	(bind ?respuesta (pregunta-numerica "Que objetivo tienes? " 0 (length$ ?lista_objetivos)))
+	(while (> ?respuesta 0) do 
+		(slot-insert$ ?persona Persona:objetivos 1 (nth$ ?respuesta ?lista_objetivos))
+		(bind ?respuesta (pregunta-numerica "Que objetivo mas tienes? " 0 (length$ ?lista_objetivos)))
 	)
 )
 
