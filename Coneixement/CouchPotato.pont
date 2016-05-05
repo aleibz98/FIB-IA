@@ -1,4 +1,4 @@
-; Thu May 05 18:51:44 CEST 2016
+; Thu May 05 18:37:00 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -30,7 +30,7 @@
 	(multislot jueves
 ;+		(comment "ejercicios jueves")
 		(type INSTANCE)
-;+		(allowed-classes Ejercicio)
+;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))
 	(single-slot ppm
 		(type FLOAT)
@@ -59,7 +59,7 @@
 	(multislot martes
 ;+		(comment "ejercicios martes")
 		(type INSTANCE)
-;+		(allowed-classes Ejercicio)
+;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))
 	(single-slot edad+minima
 		(type INTEGER)
@@ -81,7 +81,7 @@
 	(multislot miercoles
 ;+		(comment "ejercicios miercoles")
 		(type INSTANCE)
-;+		(allowed-classes Ejercicio)
+;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))
 	(single-slot duracion+maxima
 ;+		(comment "en minutos")
@@ -98,7 +98,7 @@
 		(create-accessor read-write))
 	(multislot domingo
 		(type INSTANCE)
-;+		(allowed-classes Ejercicio)
+;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))
 	(single-slot dificultad
 		(type SYMBOL)
@@ -108,11 +108,11 @@
 	(multislot lunes
 ;+		(comment "ejercicios lunes")
 		(type INSTANCE)
-;+		(allowed-classes Ejercicio)
+;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))
 	(multislot viernes
 		(type INSTANCE)
-;+		(allowed-classes Ejercicio)
+;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))
 	(single-slot value
 ;+		(type ANY)
@@ -124,7 +124,7 @@
 		(create-accessor read-write))
 	(multislot sabado
 		(type INSTANCE)
-;+		(allowed-classes Ejercicio)
+;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))
 	(single-slot picar+entre+horas
 ;+		(comment "de 0 (nada) a 10 (mucho)")
@@ -426,30 +426,30 @@
 		(create-accessor read-write))
 	(multislot sabado
 		(type INSTANCE)
-;+		(allowed-classes Ejercicio)
+;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))
 	(multislot martes
 ;+		(comment "ejercicios martes")
 		(type INSTANCE)
-;+		(allowed-classes Ejercicio)
+;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))
 	(multislot domingo
 		(type INSTANCE)
-;+		(allowed-classes Ejercicio)
+;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))
 	(multislot lunes
 ;+		(comment "ejercicios lunes")
 		(type INSTANCE)
-;+		(allowed-classes Ejercicio)
+;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))
 	(multislot jueves
 ;+		(comment "ejercicios jueves")
 		(type INSTANCE)
-;+		(allowed-classes Ejercicio)
+;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))
 	(multislot viernes
 		(type INSTANCE)
-;+		(allowed-classes Ejercicio)
+;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))
 	(multislot tiempo+diario+disponible
 ;+		(comment "tiempo diario en minutos")
@@ -460,7 +460,7 @@
 	(multislot miercoles
 ;+		(comment "ejercicios miercoles")
 		(type INSTANCE)
-;+		(allowed-classes Ejercicio)
+;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write)))
 
 (defclass Ejercicio
