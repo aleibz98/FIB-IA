@@ -1,4 +1,4 @@
-; Thu May 05 15:07:13 CEST 2016
+; Thu May 05 18:51:44 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -20,16 +20,16 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[CouchPotato_ProjectKB_Class340]
-		[CouchPotato_ProjectKB_Class341]
-		[CouchPotato_ProjectKB_Class342]
-		[CouchPotato_ProjectKB_Class343]
-		[CouchPotato_ProjectKB_Class344]
-		[CouchPotato_ProjectKB_Class345]
-		[CouchPotato_ProjectKB_Class346]
-		[CouchPotato_ProjectKB_Class347]
-		[CouchPotato_ProjectKB_Class348]
-		[CouchPotato_ProjectKB_Class349]))
+		[CouchPotato_ProjectKB_Class111]
+		[CouchPotato_ProjectKB_Class112]
+		[CouchPotato_ProjectKB_Class113]
+		[CouchPotato_ProjectKB_Class114]
+		[CouchPotato_ProjectKB_Class115]
+		[CouchPotato_ProjectKB_Class116]
+		[CouchPotato_ProjectKB_Class117]
+		[CouchPotato_ProjectKB_Class118]
+		[CouchPotato_ProjectKB_Class119]
+		[CouchPotato_ProjectKB_Class120]))
 
 ([CLSES_TAB] of  Widget
 
@@ -50,54 +50,58 @@
 	(property_list [CouchPotato_ProjectKB_Class12])
 	(widget_class_name "edu.stanford.smi.protegex.owl.ui.cls.OWLClassesTab"))
 
-([CouchPotato_ProjectKB_Class119] of  Widget
+([CouchPotato_ProjectKB_Class111] of  String
 
-	(is_hidden FALSE)
-	(name "Obesidad")
-	(property_list [CouchPotato_ProjectKB_Class120])
-	(widget_class_name "edu.stanford.smi.protege.widget.FormWidget"))
+	(name "Objetivo")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class112] of  String
+
+	(name ":INSTANCE-ANNOTATION")
+	(string_value "%3AANNOTATION-TEXT"))
+
+([CouchPotato_ProjectKB_Class113] of  String
+
+	(name "Grupo muscular")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class114] of  String
+
+	(name "Actividad")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class115] of  String
+
+	(name ":PAL-CONSTRAINT")
+	(string_value "%3APAL-NAME"))
+
+([CouchPotato_ProjectKB_Class116] of  String
+
+	(name "Salud")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class117] of  String
+
+	(name ":META-CLASS")
+	(string_value "%3ANAME"))
+
+([CouchPotato_ProjectKB_Class118] of  String
+
+	(name "Ejercicio")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class119] of  String
+
+	(name "Test")
+	(string_value "nombre"))
 
 ([CouchPotato_ProjectKB_Class12] of  Property_List
 )
 
-([CouchPotato_ProjectKB_Class120] of  Property_List
+([CouchPotato_ProjectKB_Class120] of  String
 
-	(properties
-		[CouchPotato_ProjectKB_Class121]
-		[CouchPotato_ProjectKB_Class122]
-		[CouchPotato_ProjectKB_Class124]))
-
-([CouchPotato_ProjectKB_Class121] of  Property_List
-
-	(name "layout properties"))
-
-([CouchPotato_ProjectKB_Class122] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "nombre")
-	(property_list [CouchPotato_ProjectKB_Class123])
-	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
-	(width 200)
-	(x 0)
-	(y 0))
-
-([CouchPotato_ProjectKB_Class123] of  Property_List
-)
-
-([CouchPotato_ProjectKB_Class124] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "tipo")
-	(property_list [CouchPotato_ProjectKB_Class125])
-	(widget_class_name "edu.stanford.smi.protege.widget.IntegerFieldWidget")
-	(width 100)
-	(x 0)
-	(y 60))
-
-([CouchPotato_ProjectKB_Class125] of  Property_List
-)
+	(name "Problema IMC")
+	(string_value "nombre"))
 
 ([CouchPotato_ProjectKB_Class13] of  Widget
 
@@ -189,95 +193,14 @@
 ([CouchPotato_ProjectKB_Class30] of  Property_List
 )
 
-([CouchPotato_ProjectKB_Class307] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "grupo_muscular")
-	(property_list [CouchPotato_ProjectKB_Class308])
-	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
-	(width 200)
-	(x 0)
-	(y 60))
-
-([CouchPotato_ProjectKB_Class308] of  Property_List
-
-	(properties
-		[CouchPotato_ProjectKB_Class309]
-		[CouchPotato_ProjectKB_Class310]))
-
-([CouchPotato_ProjectKB_Class309] of  Boolean
-
-	(boolean_value FALSE)
-	(name "ButtonDisplayed-View References to Value"))
-
 ([CouchPotato_ProjectKB_Class31] of  Widget
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class32])
 	(widget_class_name "edu.stanford.smi.protegex.owl.swrl.ui.tab.SWRLTab"))
 
-([CouchPotato_ProjectKB_Class310] of  Boolean
-
-	(boolean_value FALSE)
-	(name "ButtonDisplayed-Delete Instance"))
-
-([CouchPotato_ProjectKB_Class318] of  Widget
-
-	(height 120)
-	(is_hidden FALSE)
-	(name "grupo_muscular")
-	(property_list [CouchPotato_ProjectKB_Class319])
-	(widget_class_name "edu.stanford.smi.protege.widget.InstanceListWidget")
-	(width 200)
-	(x 0)
-	(y 60))
-
-([CouchPotato_ProjectKB_Class319] of  Property_List
-
-	(properties
-		[CouchPotato_ProjectKB_Class320]
-		[CouchPotato_ProjectKB_Class321]))
-
 ([CouchPotato_ProjectKB_Class32] of  Property_List
 )
-
-([CouchPotato_ProjectKB_Class320] of  Boolean
-
-	(boolean_value FALSE)
-	(name "ButtonDisplayed-View References to Value"))
-
-([CouchPotato_ProjectKB_Class321] of  Boolean
-
-	(boolean_value FALSE)
-	(name "ButtonDisplayed-Delete Instance"))
-
-([CouchPotato_ProjectKB_Class322] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "grupo_muscular")
-	(property_list [CouchPotato_ProjectKB_Class323])
-	(widget_class_name "edu.stanford.smi.protege.widget.InstanceFieldWidget")
-	(width 200)
-	(x 0)
-	(y 60))
-
-([CouchPotato_ProjectKB_Class323] of  Property_List
-
-	(properties
-		[CouchPotato_ProjectKB_Class324]
-		[CouchPotato_ProjectKB_Class325]))
-
-([CouchPotato_ProjectKB_Class324] of  Boolean
-
-	(boolean_value FALSE)
-	(name "ButtonDisplayed-View References to Value"))
-
-([CouchPotato_ProjectKB_Class325] of  Boolean
-
-	(boolean_value FALSE)
-	(name "ButtonDisplayed-Delete Instance"))
 
 ([CouchPotato_ProjectKB_Class33] of  Widget
 
@@ -287,56 +210,6 @@
 
 ([CouchPotato_ProjectKB_Class34] of  Property_List
 )
-
-([CouchPotato_ProjectKB_Class340] of  String
-
-	(name "Objetivo")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class341] of  String
-
-	(name ":INSTANCE-ANNOTATION")
-	(string_value "%3AANNOTATION-TEXT"))
-
-([CouchPotato_ProjectKB_Class342] of  String
-
-	(name "Grupo muscular")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class343] of  String
-
-	(name "Actividad")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class344] of  String
-
-	(name ":PAL-CONSTRAINT")
-	(string_value "%3APAL-NAME"))
-
-([CouchPotato_ProjectKB_Class345] of  String
-
-	(name "Salud")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class346] of  String
-
-	(name ":META-CLASS")
-	(string_value "%3ANAME"))
-
-([CouchPotato_ProjectKB_Class347] of  String
-
-	(name "Ejercicio")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class348] of  String
-
-	(name "Test")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class349] of  String
-
-	(name "Problema IMC")
-	(string_value "nombre"))
 
 ([CouchPotato_ProjectKB_Class35] of  Widget
 
@@ -580,6 +453,9 @@
 
 	(widget_class_name "edu.stanford.smi.protege.widget.InstancesTab"))
 
+([KB_023043_Class0] of  Map
+)
+
 ([KB_692925_Class0] of  String
 
 	(name "factory_class_name")
@@ -685,9 +561,6 @@
 
 	(properties [protege_ProjectKB_Class165]))
 
-([KB_717943_Class0] of  Map
-)
-
 ([LAYOUT_PROPERTIES] of  Property_List
 
 	(name "layout properties")
@@ -770,9 +643,9 @@
 
 	(browser_slot_names [BROWSER_SLOT_NAMES])
 	(customized_instance_widgets
+		[INSTANCE_ANNOTATION_FORM_WIDGET]
 		[STANDARD_CLASS_FORM_WIDGET]
 		[STANDARD_SLOT_FORM_WIDGET]
-		[INSTANCE_ANNOTATION_FORM_WIDGET]
 		[STANDARD_FACET_FORM_WIDGET]
 		[PAL_FORM_WIDGET])
 	(default_cls_metaclass ":STANDARD-CLASS")
