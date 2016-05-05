@@ -38,16 +38,96 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class2])
-	(widget_class_name "se.liu.ida.JessTab.JessTab"))
+	(widget_class_name "edu.stanford.smi.protegex.owl.ui.widget.OWLFormsTab"))
 
 ([CouchPotato_ProjectKB_Class10] of  Property_List
 )
+
+([CouchPotato_ProjectKB_Class10153] of  String
+
+	(name "Objetivo")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class10154] of  String
+
+	(name "Grupo muscular")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class10155] of  String
+
+	(name "Ejercicio de suelo")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class10156] of  String
+
+	(name "Actividad")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class10157] of  String
+
+	(name "Salud")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class10158] of  String
+
+	(name "Estiramientos")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class10159] of  String
+
+	(name "Actividad fuera de Trabajo")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class10160] of  String
+
+	(name "Ejercicio")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class10161] of  String
+
+	(name "Ejercicio con aparatos")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class10162] of  String
+
+	(name ":INSTANCE-ANNOTATION")
+	(string_value "%3AANNOTATION-TEXT"))
+
+([CouchPotato_ProjectKB_Class10163] of  String
+
+	(name "Ejercicio con pesas")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class10164] of  String
+
+	(name ":PAL-CONSTRAINT")
+	(string_value "%3APAL-NAME"))
+
+([CouchPotato_ProjectKB_Class10165] of  String
+
+	(name ":META-CLASS")
+	(string_value "%3ANAME"))
+
+([CouchPotato_ProjectKB_Class10166] of  String
+
+	(name "Test")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class10167] of  String
+
+	(name "Actividad de Trabajo")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class10168] of  String
+
+	(name "Persona")
+	(string_value "nombre"))
 
 ([CouchPotato_ProjectKB_Class11] of  Widget
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class12])
-	(widget_class_name "ezpal.EZPalTab"))
+	(widget_class_name "edu.stanford.smi.protegex.owl.ui.cls.OWLClassesTab"))
 
 ([CouchPotato_ProjectKB_Class12] of  Property_List
 )
@@ -65,7 +145,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class16])
-	(widget_class_name "ca.uvic.csr.shrimp.jambalaya.JambalayaTab"))
+	(widget_class_name "edu.stanford.smi.protege.query.LuceneQueryPlugin"))
 
 ([CouchPotato_ProjectKB_Class16] of  Property_List
 )
@@ -74,7 +154,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class18])
-	(widget_class_name "edu.stanford.smi.protege.widget.instance_tree.InstanceTreeTab"))
+	(widget_class_name "edu.stanford.smi.protege.widget.ClsesAndInstancesTab"))
 
 ([CouchPotato_ProjectKB_Class18] of  Property_List
 )
@@ -83,7 +163,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class20])
-	(widget_class_name "edu.stanford.smi.protegex.widget.pal.PalConstraintsTab"))
+	(widget_class_name "edu.stanford.smi.protege.widget.KAToolTab"))
 
 ([CouchPotato_ProjectKB_Class198] of  String
 
@@ -140,7 +220,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class22])
-	(widget_class_name "uk.ac.man.ac.mig.coode.individuals.ui.OWLDLIndividualsTab"))
+	(widget_class_name "edu.stanford.smi.protege.widget.instance_tree.KnowledgeTreeTab"))
 
 ([CouchPotato_ProjectKB_Class22] of  Property_List
 )
@@ -149,7 +229,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class24])
-	(widget_class_name "edu.stanford.smi.protege.widget.ClsesAndInstancesTab"))
+	(widget_class_name "edu.stanford.smi.protege.keywordsearch.StringSearch"))
 
 ([CouchPotato_ProjectKB_Class24] of  Property_List
 )
@@ -158,7 +238,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class26])
-	(widget_class_name "edu.stanford.smi.protegex.evaluation.MetaAnalysis"))
+	(widget_class_name "edu.stanford.smi.protegex.prompt.PromptTab"))
 
 ([CouchPotato_ProjectKB_Class26] of  Property_List
 )
@@ -167,7 +247,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class28])
-	(widget_class_name "uk.ac.man.cs.mig.coode.owlviz.ui.OWLVizTab"))
+	(widget_class_name "edu.stanford.smi.protegex.widget.pal.PalConstraintsTab"))
 
 ([CouchPotato_ProjectKB_Class28] of  Property_List
 )
@@ -176,13 +256,13 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class30])
-	(widget_class_name "edu.stanford.smi.protege.query.LuceneQueryPlugin"))
+	(widget_class_name "edu.stanford.smi.protegex.owl.ui.metadatatab.OWLMetadataTab"))
 
 ([CouchPotato_ProjectKB_Class3] of  Widget
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class4])
-	(widget_class_name "edu.stanford.smi.protegex.owl.ui.metadatatab.OWLMetadataTab"))
+	(widget_class_name "org.protege.owl.mm.portability.protege3.MappingMasterTab"))
 
 ([CouchPotato_ProjectKB_Class30] of  Property_List
 )
@@ -191,7 +271,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class32])
-	(widget_class_name "edu.stanford.smi.protegex.owl.ui.cls.OWLClassesTab"))
+	(widget_class_name "edu.stanford.smi.protegex.owl.swrl.ui.tab.SWRLTab"))
 
 ([CouchPotato_ProjectKB_Class32] of  Property_List
 )
@@ -209,7 +289,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class36])
-	(widget_class_name "org.protege.owl.mm.portability.protege3.MappingMasterTab"))
+	(widget_class_name "uk.ac.man.cs.mig.coode.debugger.test.DebuggerTestTab"))
 
 ([CouchPotato_ProjectKB_Class36] of  Property_List
 )
@@ -218,7 +298,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class38])
-	(widget_class_name "edu.stanford.smi.protegex.changeanalysis.ChangeAnalysisTab"))
+	(widget_class_name "ca.uvic.csr.shrimp.jambalaya.JambalayaTab"))
 
 ([CouchPotato_ProjectKB_Class38] of  Property_List
 )
@@ -227,7 +307,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class40])
-	(widget_class_name "TGViztab.TGVizTab"))
+	(widget_class_name "edu.stanford.smi.protegex.changes.ChangesTab"))
 
 ([CouchPotato_ProjectKB_Class4] of  Property_List
 )
@@ -239,7 +319,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class42])
-	(widget_class_name "edu.stanford.smi.protegex.changes.changesKBViewTab.ChangesKBViewTab"))
+	(widget_class_name "org.protege.owl.axiome.ui.AxiomeTab"))
 
 ([CouchPotato_ProjectKB_Class42] of  Property_List
 )
@@ -248,7 +328,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class44])
-	(widget_class_name "edu.stanford.smi.protege.widget.KAToolTab"))
+	(widget_class_name "TGViztab.TGVizTab"))
 
 ([CouchPotato_ProjectKB_Class44] of  Property_List
 )
@@ -257,7 +337,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class46])
-	(widget_class_name "edu.stanford.smi.protegex.xml.tab.XMLTab"))
+	(widget_class_name "edu.stanford.smi.protegex.owl.ui.properties.OWLPropertiesTab"))
 
 ([CouchPotato_ProjectKB_Class46] of  Property_List
 )
@@ -266,7 +346,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class48])
-	(widget_class_name "edu.stanford.smi.protegex.widget.pal.PalQueriesTab"))
+	(widget_class_name "uk.ac.man.ac.mig.coode.individuals.ui.OWLDLIndividualsTab"))
 
 ([CouchPotato_ProjectKB_Class48] of  Property_List
 )
@@ -275,13 +355,13 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class50])
-	(widget_class_name "edu.stanford.smi.protegex.chatPlugin.ChatTab"))
+	(widget_class_name "edu.stanford.smi.protege.widget.instance_tree.InstanceTreeTab"))
 
 ([CouchPotato_ProjectKB_Class5] of  Widget
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class6])
-	(widget_class_name "edu.stanford.smi.protegex.owl.ui.properties.OWLPropertiesTab"))
+	(widget_class_name "edu.stanford.smi.protege.widget.ProtegePropertiesTab"))
 
 ([CouchPotato_ProjectKB_Class50] of  Property_List
 )
@@ -290,7 +370,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class52])
-	(widget_class_name "org.protege.owl.axiome.ui.AxiomeTab"))
+	(widget_class_name "edu.stanford.smi.protegex.evaluation.MetaAnalysis"))
 
 ([CouchPotato_ProjectKB_Class52] of  Property_List
 )
@@ -299,7 +379,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class54])
-	(widget_class_name "edu.stanford.smi.protege.keywordsearch.StringSearch"))
+	(widget_class_name "edu.stanford.smi.protegex.changes.changesKBViewTab.ChangesKBViewTab"))
 
 ([CouchPotato_ProjectKB_Class54] of  Property_List
 )
@@ -308,7 +388,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class56])
-	(widget_class_name "edu.stanford.smi.protegex.owl.ui.widget.OWLFormsTab"))
+	(widget_class_name "se.liu.ida.JessTab.JessTab"))
 
 ([CouchPotato_ProjectKB_Class56] of  Property_List
 )
@@ -317,7 +397,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class58])
-	(widget_class_name "script.ProtegeScriptTab"))
+	(widget_class_name "edu.stanford.smi.protegex.changeanalysis.ChangeAnalysisTab"))
 
 ([CouchPotato_ProjectKB_Class58] of  Property_List
 )
@@ -326,7 +406,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class60])
-	(widget_class_name "edu.stanford.smi.protegex.changes.ChangesTab"))
+	(widget_class_name "uk.ac.man.cs.mig.coode.owlviz.ui.OWLVizTab"))
 
 ([CouchPotato_ProjectKB_Class6] of  Property_List
 )
@@ -338,7 +418,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class62])
-	(widget_class_name "edu.stanford.smi.protegex.owl.swrl.ui.tab.SWRLTab"))
+	(widget_class_name "edu.stanford.smi.protegex.changes.stats.ChangeStatisticsTab"))
 
 ([CouchPotato_ProjectKB_Class62] of  Property_List
 )
@@ -347,7 +427,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class64])
-	(widget_class_name "edu.stanford.smi.protegex.fctab.FacetConstraintsTab"))
+	(widget_class_name "script.ProtegeScriptTab"))
 
 ([CouchPotato_ProjectKB_Class64] of  Property_List
 )
@@ -356,7 +436,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class66])
-	(widget_class_name "edu.stanford.smi.protege.widget.instance_tree.KnowledgeTreeTab"))
+	(widget_class_name "edu.stanford.smi.protegex.chatPlugin.ChatTab"))
 
 ([CouchPotato_ProjectKB_Class66] of  Property_List
 )
@@ -365,7 +445,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class68])
-	(widget_class_name "edu.stanford.smi.protegex.datamaster.DataMasterTab"))
+	(widget_class_name "edu.stanford.smi.protegex.fctab.FacetConstraintsTab"))
 
 ([CouchPotato_ProjectKB_Class68] of  Property_List
 )
@@ -374,13 +454,13 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class70])
-	(widget_class_name "dfki.protege.ontoviz_tab.OntovizTab"))
+	(widget_class_name "edu.stanford.smi.protegex.xml.tab.XMLTab"))
 
 ([CouchPotato_ProjectKB_Class7] of  Widget
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class8])
-	(widget_class_name "edu.stanford.smi.protege.widget.ProtegePropertiesTab"))
+	(widget_class_name "edu.stanford.smi.protegex.widget.pal.PalQueriesTab"))
 
 ([CouchPotato_ProjectKB_Class70] of  Property_List
 )
@@ -389,7 +469,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class72])
-	(widget_class_name "edu.stanford.smi.protegex.changes.stats.ChangeStatisticsTab"))
+	(widget_class_name "edu.stanford.smi.protegex.datamaster.DataMasterTab"))
 
 ([CouchPotato_ProjectKB_Class72] of  Property_List
 )
@@ -398,7 +478,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class74])
-	(widget_class_name "edu.stanford.smi.protegex.prompt.PromptTab"))
+	(widget_class_name "ezpal.EZPalTab"))
 
 ([CouchPotato_ProjectKB_Class74] of  Property_List
 )
@@ -410,7 +490,7 @@
 
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class10])
-	(widget_class_name "uk.ac.man.cs.mig.coode.debugger.test.DebuggerTestTab"))
+	(widget_class_name "dfki.protege.ontoviz_tab.OntovizTab"))
 
 ([CREATION_TIMESTAMP_WIDGET] of  Widget
 
@@ -446,6 +526,9 @@
 ([INSTANCES_TAB] of  Widget
 
 	(widget_class_name "edu.stanford.smi.protege.widget.InstancesTab"))
+
+([KB_518595_Class0] of  Map
+)
 
 ([KB_692925_Class0] of  String
 
@@ -551,9 +634,6 @@
 ([KB_692925_Class98] of  Property_List
 
 	(properties [protege_ProjectKB_Class165]))
-
-([KB_904197_Class0] of  Map
-)
 
 ([LAYOUT_PROPERTIES] of  Property_List
 
