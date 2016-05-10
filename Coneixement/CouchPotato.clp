@@ -1438,29 +1438,29 @@
 )
 
 (defrule crea-programa
-
+    
 	=>
 	(bind ?programa (make-instance programa of Programa))
 	(bind ?lista_tiempos (create$))
-	
-	(printout t "Quantos minutos disponibles tienes al dia?" crlf)
+    
+    (printout t "Quantos minutos disponibles tienes al dia?" crlf)
 
-	(bind ?respuesta (pregunta-numerica "Lunes: " 30 1440)
-	(bind ?lista_tiempos (insert$ ?lista_tiempos 1 ?respuesta))
-	(bind ?respuesta (pregunta-numerica "Martes: " 30 1440)
-	(bind ?lista_tiempos (insert$ ?lista_tiempos 1 ?respuesta))
-	(bind ?respuesta (pregunta-numerica "Miercoles: " 30 1440)
-	(bind ?lista_tiempos (insert$ ?lista_tiempos 1 ?respuesta))
-	(bind ?respuesta (pregunta-numerica "Jueves: " 30 1440)
-	(bind ?lista_tiempos (insert$ ?lista_tiempos 1 ?respuesta))
-	(bind ?respuesta (pregunta-numerica "Viernes: " 30 1440)
-	(bind ?lista_tiempos (insert$ ?lista_tiempos 1 ?respuesta))
-	(bind ?respuesta (pregunta-numerica "Sabado: " 30 1440)
-	(bind ?lista_tiempos (insert$ ?lista_tiempos 1 ?respuesta))
-	(bind ?respuesta (pregunta-numerica "Domingo: " 30 1440)
-	(bind ?lista_tiempos (insert$ ?lista_tiempos 1 ?respuesta))
-	
-	(send ?programa put-tiempo+diario+disponible ?lista_tiempos)
+    (bind ?respuesta (pregunta-numerica "Lunes: " 30 1440))
+    (bind ?lista_tiempos (insert$ ?lista_tiempos 1 ?respuesta))
+    (bind ?respuesta (pregunta-numerica "Martes: " 30 1440))
+    (bind ?lista_tiempos (insert$ ?lista_tiempos 2 ?respuesta))
+    (bind ?respuesta (pregunta-numerica "Miercoles: " 30 1440))
+    (bind ?lista_tiempos (insert$ ?lista_tiempos 3 ?respuesta))
+    (bind ?respuesta (pregunta-numerica "Jueves: " 30 1440))
+    (bind ?lista_tiempos (insert$ ?lista_tiempos 4 ?respuesta))
+    (bind ?respuesta (pregunta-numerica "Viernes: " 30 1440))
+    (bind ?lista_tiempos (insert$ ?lista_tiempos 5 ?respuesta))
+    (bind ?respuesta (pregunta-numerica "Sabado: " 30 1440))
+    (bind ?lista_tiempos (insert$ ?lista_tiempos 6 ?respuesta))
+    (bind ?respuesta (pregunta-numerica "Domingo: " 30 1440))
+    (bind ?lista_tiempos (insert$ ?lista_tiempos 7 ?respuesta))
+    
+    (send ?programa put-tiempo+diario+disponible ?lista_tiempos)
 )
 
 
