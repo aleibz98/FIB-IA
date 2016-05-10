@@ -1331,7 +1331,7 @@
     (bind ?persona (make-instance persona of Persona))
 	(send ?persona put-nombre ?nombre)
 	(bind ?edad (pregunta-numerica "Edad (anos): " 0.0 100.0))
-    (send ?persona put-altura ?edad)
+    (send ?persona put-edad ?edad)
     (bind ?altura (pregunta-numerica "Altura (m): " 0.0 3.0))
     (send ?persona put-altura ?altura)
     (bind ?peso (pregunta-numerica "Peso (kg): " 0.0 600.0))
@@ -1436,6 +1436,34 @@
 		(bind ?respuesta (pregunta-numerica "Que objetivo mas tienes? " 0 (length$ ?lista_objetivos)))
 	)
 )
+
+(defrule crea-programa
+
+	=>
+	(bind ?programa (make-instance programa of Programa))
+	(bind ?lista_tiempos (create$))
+	
+	(printout t "Quantos minutos disponibles tienes al dia?" crlf)
+
+	(bind ?respuesta (pregunta-numerica "Lunes: " 30 1440)
+	(bind ?lista_tiempos (insert$ ?lista_tiempos 1 ?respuesta))
+	(bind ?respuesta (pregunta-numerica "Martes: " 30 1440)
+	(bind ?lista_tiempos (insert$ ?lista_tiempos 1 ?respuesta))
+	(bind ?respuesta (pregunta-numerica "Miercoles: " 30 1440)
+	(bind ?lista_tiempos (insert$ ?lista_tiempos 1 ?respuesta))
+	(bind ?respuesta (pregunta-numerica "Jueves: " 30 1440)
+	(bind ?lista_tiempos (insert$ ?lista_tiempos 1 ?respuesta))
+	(bind ?respuesta (pregunta-numerica "Viernes: " 30 1440)
+	(bind ?lista_tiempos (insert$ ?lista_tiempos 1 ?respuesta))
+	(bind ?respuesta (pregunta-numerica "Sabado: " 30 1440)
+	(bind ?lista_tiempos (insert$ ?lista_tiempos 1 ?respuesta))
+	(bind ?respuesta (pregunta-numerica "Domingo: " 30 1440)
+	(bind ?lista_tiempos (insert$ ?lista_tiempos 1 ?respuesta))
+	
+	(send ?programa put-tiempo+diario+disponible ?lista_tiempos)
+)
+
+
 
 (defrule pasa-a-generar
 	(declare (salience -10))
