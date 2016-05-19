@@ -26,13 +26,15 @@
 \date{\today}
 \maketitle
 
-\section{Identificació del problema}
+\section{Metodologia de disseny i implementació}
 
-\subsection{El problema}
+\subsection{Identificació del problema}
 
-Amb el creixent nombre de persones que adquireixen hàbits de vida saludable evitant el sedentarisme, la cadena de gimnasos "I'm no couch potato" vol desenvolupar un Sistema Basat en el Coneixement capaç de recomanar programes d'entrenament als seus futurs clients. Dins del procés de recomanació, el primer pas és establir les condicions físiques generals de la persona. Per això, es necessita primer una sèrie de dades bàsiques com el pes i la altura (a partir d'aquestes es pot calcular l'índex de massa corporal), l'edat i la pressió sanguínia (màxima i mínima). També es pot so\l.licitar que es realitzin exercicis senzills per tal d'obtenir alguns paràmetres com les pulsacions per minut, la sensació de cansament / mareig o la tibantor muscular després d'un minut de carrera sostinguda o de pujar un seguit de trams d'escala a ritme normal. 
+\subsubsection{El problema}
 
-A més, es necessitarà informació sobre els hàbits personals que donin una idea dels tipus d'activitats que realitza, com per exemple totes les activitats físiques que fa a la feina (estar assegut, de peu, moviments repetitius, aixecament de pes, esforços musculars, ...), activitats fora de la feina (estàtiques (televisió, lectura, ...), tasques domèstiques (posar una rentadora, planxar, ...), desplaçaments (anar a comprar a peu, passejar, ...)). D'aquestes activitats ens interessa la seva freqüència i la duració. Realitzar poca o molta activitat física a les activitats diàries ens donarà una idea de la intensitat inicial que l'usuari pot suportar i quina part dels objectius ja cobreixen aquestes. 
+Amb el creixent nombre de persones que adquireixen hàbits de vida saludable evitant el sedentarisme, la cadena de gimnasos "I'm no couch potato" vol desenvolupar un Sistema Basat en el Coneixement capaç de recomanar programes d'entrenament als seus futurs clients. Dins del procés de recomanació, el primer pas és establir les condicions físiques generals de la persona. Per això, es necessita primer una sèrie de dades bàsiques com el pes i la altura (a partir d'aquestes es pot calcular l'índex de massa corporal), l'edat i la pressió sanguínia (màxima i mínima). També es pot so\l.licitar que es realitzin exercicis senzills per tal d'obtenir alguns paràmetres com les pulsacions per minut, la sensació de cansament/mareig o la tibantor muscular després d'un minut de carrera sostinguda o de pujar un seguit de trams d'escala a ritme normal. 
+
+A més, es necessitarà informació sobre els hàbits personals que donin una idea dels tipus d'activitats que realitza, com per exemple totes les activitats físiques que fa a la feina (estar assegut, de peu, moviments repetitius, aixecament de pes, esforços musculars, ...), activitats fora de la feina (estàtiques (televisió, lectura...), tasques domèstiques (posar una rentadora, planxar...), desplaçaments (anar a comprar a peu, passejar...)). D'aquestes activitats ens interessa la seva freqüència i la duració. Realitzar poca o molta activitat física a les activitats diàries ens donarà una idea de la intensitat inicial que l'usuari pot suportar i quina part dels objectius ja cobreixen aquestes. 
 
 També es vol obtenir informació sobre la seva salut, com per exemple problemes múscul-esquelètics (mal d'esquena, articulacions, cervicals...) o dieta (consum de fruita, abús de sal, picar entre hores...). 
 A part d'aquesta informació es serà necessari saber els objectius del programa que s'ha de crear (manteniment, posar-se en forma, rebaixar pes, musculació, flexibilitat, equilibri...) així com el temps diari disponible per l'entrenament (com a mínim 30 minuts diaris).
@@ -41,4 +43,43 @@ l sistema té un conjunt d'exercicis que es poden realitzar en un gimnàs prepar
 Aquests, tenen un conjunt de característiques i restriccions com per exemple el nombre de calories que es cremen per quantitat de temps, duració (màxima i mínima), nombre de repeticions (màximes i mínimes), els grups musculars que treballen, si estan contraindicats per alguna condició de l'usuari (pressió alta, problemes musculars o a les articulacions...), si no estan indicats per certes edats o si estan especialment pensats per alleugerar algunes condicions (mal d'esquena, mobilitat limitada...). També tenim informació sobre els exercicis que combinen millor amb cada exercici. La dificultat d'aquests (moderada, normal o difícil) pot estar lligada al propi exercici, al nombre de repeticions que es realitzen o a la condició física de l'usuari (fer 5 abdominals pot ser fàcil per a un usuari amb una condició física normal i sense sobrepès però difícil per a algú amb sobrepès).
 
 El sistema ha de generar un program d'entrenament per a una setmana (de coma a mínim 30 minuts diaris), creant per a cada dia una seqüència d'exercicis adequada al temps del que es disposa. Els exercicis han d'escollir-se segons les condicions físiques/mèdiques de l'usuari. Aquests exercicis han d'anar encaminats principalment a l'objectiu que ha indicat l'usuari atenent a les condicions de partida de l'usuari. Hi ha d'haver suficients exercicis diferents a cada sessió i durant la setmana per evitar la monotonia. 
+
+\subsubsection{Anàlisis viabilitat}
+Com es pot veure en aquest problema l'usuari del gimnàs espera que se li donin una sèrie d'exercicis que ha de realitzar per poder assolir uns certs objectius o millorar la seva condició física. L'usuari en principi acudeix al gimnàs en busca d'un expert que li pugui recomanar quina és la millor opció per les seves característiques.
+
+Així doncs, un \emph{Sistema Basat en el Coneixement} és idoni per substituir aquest expert i així reduir la quantitat de feina que rep. Això és perquè aquest sistema pot respondre a les regles predefinides a partir dels paràmetres establerts per l'usuari obtenint així la resposta que aquest espera.
+
+\subsection{Conceptualització}
+
+\subsubsection{Descripció dels conceptes del domini} 
+
+\begin{description}
+	\item[Objectiu:]  L'usuari vol complir-lo si és possible
+	\item[Activitat:] Activitat física o estàtica que realitza l'usuari fora del gimnàs, normalment a la feina o a casa (pot ser llegir, escombrar, sortir a córrer, estar assegut...).
+	\item[Exercici:]  Activitat física que l'usuari ha de realitzar per complir el pla que se li ha recomanat. Pot ser dins o fora del gimnàs.
+	\item[Test:] Exercici que se li farà fer a l'usuari per tal d'obtenir uns certs paràmetres del seu estat físic.
+	\item[Dificultat:] Cost que té realitzar un cert \emph{Exercici} en funció de l'estat físic de l'usuari. Pot tenir els següents valors:
+	\begin{itemize}
+		\item Fàcil
+		\item Normal
+		\item Difícil
+	\end{itemize}
+	\item[Grup muscular:] Conjunt de músculs que l'usuari pot desitjar treballar en funció de l'objectiu que escolleixi.
+	\item[Dieta:] hàbits alimentaris de l'usuari tals com el consum de sal, de fruita o picar entre hores.
+	\item[Problema de salut:] Diferents problemes físics que pugui tenir l'usuari (per exemple mal d'esquena, dolor a les articulacions, IMC elevat...).
+	
+\end{description}
+
+\subsubsection{Descripció dels problemes que intervenen a la resolució}
+
+Un dels principals problemes que intervenen a la solució és com determinar l'estat físic d'una persona. Això és així perquè és fàcil veure quan una persona està perfectament en forma o quan no ho està però comparar valors intermedis ja es fa més difícil a no ser que se li assigni un valor numèric.
+
+L'altre problema que es planteja és com determinar la dificultat d'un exercici per a una persona. Es converteix en un problema bastant ambigu ja que el que per algú li sembla fàcil per a un altre li és difícil i depèn de molts factors tals com l'estat físic de la persona, l'estat anímic, el cansament que porti acumulat la persona...
+
+També intervé a la resolució com determinar els exercicis que són beneficiosos o que són perjudicials per a un determinat problema físic. 
+
+\subsection{Formalització}
+
+\subsection{Implementació}
+
 \end{document}
