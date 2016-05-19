@@ -1,4 +1,4 @@
-; Tue May 10 12:51:58 CEST 2016
+; Tue May 10 13:08:05 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -11,7 +11,6 @@
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad 1)
 	(nombre "Barrer"))
 
 ([Bicicleta+estatica] of  Ejercicio+con+aparatos
@@ -89,14 +88,12 @@
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad -1)
 	(nombre "Hacer colada"))
 
 ([Compra] of  Desplazamiento
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad 1)
 	(nombre "Comprar"))
 
 ([CouchPotato_Class0] of  Ejercicio+con+aparatos
@@ -453,12 +450,10 @@
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad 2)
 	(nombre "Cuidar del jardin"))
 
 ([De+pie] of  Actividad+de+Trabajo
 
-	(gradoActividad 1)
 	(nombre "Estar de pie"))
 
 ([Deltoides] of  Grupo+muscular
@@ -467,7 +462,6 @@
 
 ([Desplazamiento+a+pie] of  Actividad+de+Trabajo
 
-	(gradoActividad 2)
 	(nombre "Desplazamientos a pie"))
 
 ([Dorsal] of  Grupo+muscular
@@ -480,7 +474,6 @@
 
 ([Esfuerzos+musculares] of  Actividad+de+Trabajo
 
-	(gradoActividad 3)
 	(nombre "Esfuerzos musculares"))
 
 ([Espalda] of  Problema+musculo-esqueletico
@@ -498,7 +491,6 @@
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad 1)
 	(nombre "Fregar"))
 
 ([Gemelos] of  Grupo+muscular
@@ -513,12 +505,10 @@
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad -2)
 	(nombre "Leer"))
 
 ([Levantamiento+de+peso] of  Actividad+de+Trabajo
 
-	(gradoActividad 5)
 	(nombre "Levantamiento de peso"))
 
 ([Mantenimiento] of  Objetivo
@@ -527,21 +517,18 @@
 
 ([Movimientos+Repetitivos] of  Actividad+de+Trabajo
 
-	(gradoActividad 3)
 	(nombre "Movimientos repetitivos"))
 
 ([Paseo] of  Desplazamiento
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad 1)
 	(nombre "Pasear"))
 
 ([Paseo+mascota] of  Desplazamiento
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad 1)
 	(nombre "Pasear mascota"))
 
 ([Pesos] of  Ejercicio+con+aparatos
@@ -579,7 +566,6 @@
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad -2)
 	(nombre "Planchar"))
 
 ([Ponerse+en+forma] of  Objetivo
@@ -626,12 +612,10 @@
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad 4)
 	(nombre "Salir a correr"))
 
 ([Sentado] of  Actividad+de+Trabajo
 
-	(gradoActividad -2)
 	(nombre "Estar sentado"))
 
 ([Sistema+Card%C3%ADaco] of  Objetivo
@@ -679,7 +663,6 @@
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad -5)
 	(nombre "Ver la television"))
 
 ([Trapecio] of  Grupo+muscular

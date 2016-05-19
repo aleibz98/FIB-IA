@@ -1435,6 +1435,9 @@
 		(slot-insert$ ?persona objetivos 1 (nth$ ?respuesta ?lista_objetivos))
 		(bind ?respuesta (pregunta-numerica "Que objetivo mas tienes? " 0 (length$ ?lista_objetivos)))
 	)
+	
+	bind ?dificultad (ask-question "Cual es la dificultad deseada del entrenamiento? [Baja|Media|Alta] " Baja Media Alta))
+	assert (dificultad ?dificultad)
 )
 
 (defrule crea-programa

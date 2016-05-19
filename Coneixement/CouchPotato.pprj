@@ -1,4 +1,4 @@
-; Tue May 10 12:51:58 CEST 2016
+; Tue May 10 13:08:05 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -20,16 +20,16 @@
 ([BROWSER_SLOT_NAMES] of  Property_List
 
 	(properties
-		[CouchPotato_ProjectKB_Class10181]
-		[CouchPotato_ProjectKB_Class10182]
-		[CouchPotato_ProjectKB_Class10183]
-		[CouchPotato_ProjectKB_Class10184]
-		[CouchPotato_ProjectKB_Class10185]
-		[CouchPotato_ProjectKB_Class10186]
-		[CouchPotato_ProjectKB_Class10187]
-		[CouchPotato_ProjectKB_Class10188]
-		[CouchPotato_ProjectKB_Class10189]
-		[CouchPotato_ProjectKB_Class10190]))
+		[CouchPotato_ProjectKB_Class75]
+		[CouchPotato_ProjectKB_Class76]
+		[CouchPotato_ProjectKB_Class77]
+		[CouchPotato_ProjectKB_Class78]
+		[CouchPotato_ProjectKB_Class79]
+		[CouchPotato_ProjectKB_Class80]
+		[CouchPotato_ProjectKB_Class81]
+		[CouchPotato_ProjectKB_Class82]
+		[CouchPotato_ProjectKB_Class83]
+		[CouchPotato_ProjectKB_Class84]))
 
 ([CLSES_TAB] of  Widget
 
@@ -43,98 +43,6 @@
 
 ([CouchPotato_ProjectKB_Class10] of  Property_List
 )
-
-([CouchPotato_ProjectKB_Class10143] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "gradoSedentarismo")
-	(property_list [CouchPotato_ProjectKB_Class10144])
-	(widget_class_name "edu.stanford.smi.protege.widget.CheckBoxWidget")
-	(width 200)
-	(x 0)
-	(y 60))
-
-([CouchPotato_ProjectKB_Class10144] of  Property_List
-)
-
-([CouchPotato_ProjectKB_Class10154] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "gradoSedentarismo")
-	(property_list [CouchPotato_ProjectKB_Class10155])
-	(widget_class_name "edu.stanford.smi.protege.widget.CheckBoxWidget")
-	(width 200)
-	(x 0)
-	(y 60))
-
-([CouchPotato_ProjectKB_Class10155] of  Property_List
-)
-
-([CouchPotato_ProjectKB_Class10165] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "gradoSedentarismo")
-	(property_list [CouchPotato_ProjectKB_Class10166])
-	(widget_class_name "edu.stanford.smi.protege.widget.CheckBoxWidget")
-	(width 200)
-	(x 0)
-	(y 60))
-
-([CouchPotato_ProjectKB_Class10166] of  Property_List
-)
-
-([CouchPotato_ProjectKB_Class10181] of  String
-
-	(name ":INSTANCE-ANNOTATION")
-	(string_value "%3AANNOTATION-TEXT"))
-
-([CouchPotato_ProjectKB_Class10182] of  String
-
-	(name "Grupo muscular")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class10183] of  String
-
-	(name "Ejercicio")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class10184] of  String
-
-	(name "Objetivo")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class10185] of  String
-
-	(name ":META-CLASS")
-	(string_value "%3ANAME"))
-
-([CouchPotato_ProjectKB_Class10186] of  String
-
-	(name ":PAL-CONSTRAINT")
-	(string_value "%3APAL-NAME"))
-
-([CouchPotato_ProjectKB_Class10187] of  String
-
-	(name "Test")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class10188] of  String
-
-	(name "Problema IMC")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class10189] of  String
-
-	(name "Salud")
-	(string_value "nombre"))
-
-([CouchPotato_ProjectKB_Class10190] of  String
-
-	(name "Actividad")
-	(string_value "nombre"))
 
 ([CouchPotato_ProjectKB_Class11] of  Widget
 
@@ -150,48 +58,6 @@
 	(is_hidden TRUE)
 	(property_list [CouchPotato_ProjectKB_Class14])
 	(widget_class_name "edu.stanford.smi.protegex.server_changes.prompt.UsersTab"))
-
-([CouchPotato_ProjectKB_Class134] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "CouchPotato_Class10000")
-	(property_list [CouchPotato_ProjectKB_Class135])
-	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
-	(width 200)
-	(x 0)
-	(y 120))
-
-([CouchPotato_ProjectKB_Class135] of  Property_List
-)
-
-([CouchPotato_ProjectKB_Class136] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "esSedentaria")
-	(property_list [CouchPotato_ProjectKB_Class137])
-	(widget_class_name "edu.stanford.smi.protege.widget.TextFieldWidget")
-	(width 200)
-	(x 0)
-	(y 120))
-
-([CouchPotato_ProjectKB_Class137] of  Property_List
-)
-
-([CouchPotato_ProjectKB_Class138] of  Widget
-
-	(height 60)
-	(is_hidden FALSE)
-	(name "gradoSedentarismo")
-	(property_list [CouchPotato_ProjectKB_Class139])
-	(widget_class_name "edu.stanford.smi.protege.widget.CheckBoxWidget")
-	(width 200)
-	(x 0)
-	(y 120))
-
-([CouchPotato_ProjectKB_Class139] of  Property_List
-)
 
 ([CouchPotato_ProjectKB_Class14] of  Property_List
 )
@@ -493,8 +359,58 @@
 ([CouchPotato_ProjectKB_Class74] of  Property_List
 )
 
+([CouchPotato_ProjectKB_Class75] of  String
+
+	(name ":INSTANCE-ANNOTATION")
+	(string_value "%3AANNOTATION-TEXT"))
+
+([CouchPotato_ProjectKB_Class76] of  String
+
+	(name "Grupo muscular")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class77] of  String
+
+	(name "Ejercicio")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class78] of  String
+
+	(name "Objetivo")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class79] of  String
+
+	(name ":META-CLASS")
+	(string_value "%3ANAME"))
+
 ([CouchPotato_ProjectKB_Class8] of  Property_List
 )
+
+([CouchPotato_ProjectKB_Class80] of  String
+
+	(name ":PAL-CONSTRAINT")
+	(string_value "%3APAL-NAME"))
+
+([CouchPotato_ProjectKB_Class81] of  String
+
+	(name "Test")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class82] of  String
+
+	(name "Problema IMC")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class83] of  String
+
+	(name "Salud")
+	(string_value "nombre"))
+
+([CouchPotato_ProjectKB_Class84] of  String
+
+	(name "Actividad")
+	(string_value "nombre"))
 
 ([CouchPotato_ProjectKB_Class9] of  Widget
 
@@ -537,7 +453,7 @@
 
 	(widget_class_name "edu.stanford.smi.protege.widget.InstancesTab"))
 
-([KB_288402_Class0] of  Map
+([KB_023641_Class0] of  Map
 )
 
 ([KB_692925_Class0] of  String

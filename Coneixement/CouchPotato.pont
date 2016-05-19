@@ -1,4 +1,4 @@
-; Tue May 10 12:51:58 CEST 2016
+; Tue May 10 13:08:05 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -62,11 +62,6 @@
 	(single-slot peso
 		(type FLOAT)
 		(default 75.0)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(single-slot gradoActividad
-		(type INTEGER)
-		(range -5 5)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot grupo_muscular
@@ -332,11 +327,6 @@
 		(type INTEGER)
 		(default 0)
 ;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(single-slot gradoActividad
-		(type INTEGER)
-		(range -5 5)
-;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot frequencia
 		(type SYMBOL)
