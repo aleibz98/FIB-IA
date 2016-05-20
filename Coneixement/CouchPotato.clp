@@ -4,6 +4,12 @@
 ;+ (build "Build 663")
 
 
+; Tue May 10 12:51:58 CEST 2016
+; 
+;+ (version "3.5")
+;+ (build "Build 663")
+
+
 (defclass %3ACLIPS_TOP_LEVEL_SLOT_CLASS "Fake class to save top-level slot information"
 	(is-a USER)
 	(role abstract)
@@ -13,20 +19,20 @@
 		(range 1 2)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot persona
+	(multislot jueves
+;+		(comment "ejercicios jueves")
 		(type INSTANCE)
-;+		(allowed-classes Persona)
-;+		(cardinality 1 1)
+;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))
 	(single-slot consumo+de+fruta
 ;+		(comment "Piezas a la semana")
 		(type INTEGER)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(multislot jueves
-;+		(comment "ejercicios jueves")
+	(single-slot persona
 		(type INSTANCE)
-;+		(allowed-classes Ejercicio-Persona)
+;+		(allowed-classes Persona)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot tiempo+diario+disponible
 ;+		(comment "tiempo diario en minutos")
@@ -64,32 +70,32 @@
 		(default 75.0)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot tipo
+	(single-slot gradoActividad
 		(type INTEGER)
-		(range 1 4)
+		(range -5 5)
 ;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot grupo_muscular
+		(type INSTANCE)
+;+		(allowed-classes Grupo+muscular)
 		(create-accessor read-write))
 	(single-slot calorias+quemadas
 ;+		(comment "calorias quemadas por minuto")
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(multislot grupo_muscular
-		(type INSTANCE)
-;+		(allowed-classes Grupo+muscular)
-		(create-accessor read-write))
-	(single-slot imc
-		(type FLOAT)
-;+		(cardinality 0 1)
+	(single-slot tipo
+		(type INTEGER)
+		(range 1 4)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot picar+entre+horas
 ;+		(comment "de 0 (nada) a 10 (mucho)")
 		(type INTEGER)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot duracion+minima
-;+		(comment "en minutos")
-		(type INTEGER)
+	(single-slot imc
+		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot cansancio
@@ -97,20 +103,25 @@
 		(allowed-values Mucho Poco Nada)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot duracion
+	(single-slot duracion+minima
 ;+		(comment "en minutos")
 		(type INTEGER)
-		(default 0)
 ;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(multislot sabado
-		(type INSTANCE)
-;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))
 	(multislot lunes
 ;+		(comment "ejercicios lunes")
 		(type INSTANCE)
 ;+		(allowed-classes Ejercicio-Persona)
+		(create-accessor read-write))
+	(multislot sabado
+		(type INSTANCE)
+;+		(allowed-classes Ejercicio-Persona)
+		(create-accessor read-write))
+	(single-slot duracion
+;+		(comment "en minutos")
+		(type INTEGER)
+		(default 0)
+;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot salud
 		(type INSTANCE)
@@ -125,20 +136,20 @@
 		(type INSTANCE)
 ;+		(allowed-classes Test)
 		(create-accessor read-write))
-	(single-slot ejercicio
-		(type INSTANCE)
-;+		(allowed-classes Ejercicio)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(multislot problemas+aliviados
-		(type INSTANCE)
-;+		(allowed-classes Problema)
-		(create-accessor read-write))
 	(single-slot frequencia
 		(type SYMBOL)
 		(allowed-values Diaria Semanal Mensual None)
 		(default None)
 ;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot problemas+aliviados
+		(type INSTANCE)
+;+		(allowed-classes Problema)
+		(create-accessor read-write))
+	(single-slot ejercicio
+		(type INSTANCE)
+;+		(allowed-classes Ejercicio)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot dieta
 		(type INSTANCE)
@@ -188,29 +199,29 @@
 		(type INSTANCE)
 ;+		(allowed-classes Problema)
 		(create-accessor read-write))
-	(single-slot tirantezMuscular
-		(type SYMBOL)
-		(allowed-values Poco Mucho Nada)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(multislot miercoles
 ;+		(comment "ejercicios miercoles")
 		(type INSTANCE)
 ;+		(allowed-classes Ejercicio-Persona)
+		(create-accessor read-write))
+	(single-slot tirantezMuscular
+		(type SYMBOL)
+		(allowed-values Poco Mucho Nada)
+;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot duracion+maxima
 ;+		(comment "en minutos")
 		(type INTEGER)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
+	(single-slot repeticiones
+		(type INTEGER)
+;+		(cardinality 1 1)
+		(create-accessor read-write))
 	(multislot grupos+musculares
 ;+		(comment "grupos musculares ejercitados")
 		(type INSTANCE)
 ;+		(allowed-classes Grupo+muscular)
-		(create-accessor read-write))
-	(single-slot repeticiones
-		(type INTEGER)
-;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot nombre
 		(type STRING)
@@ -226,14 +237,14 @@
 		(default 25)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
+	(multislot domingo
+		(type INSTANCE)
+;+		(allowed-classes Ejercicio-Persona)
+		(create-accessor read-write))
 	(single-slot dificultad
 		(type SYMBOL)
 		(allowed-values moderada normal dificil)
 ;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(multislot domingo
-		(type INSTANCE)
-;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))
 	(single-slot value
 ;+		(type ANY)
@@ -260,13 +271,13 @@
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(multislot problemas+fisicos
-		(type INSTANCE)
-;+		(allowed-classes Problema)
-		(create-accessor read-write))
 	(single-slot pMin
 		(type FLOAT)
 ;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot problemas+fisicos
+		(type INSTANCE)
+;+		(allowed-classes Problema)
 		(create-accessor read-write))
 	(multislot objetivos
 		(type INSTANCE)
@@ -277,14 +288,14 @@
 		(default 1.7)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(multislot tests
-		(type INSTANCE)
-;+		(allowed-classes Test)
-		(create-accessor read-write))
 	(single-slot peso
 		(type FLOAT)
 		(default 75.0)
 ;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot tests
+		(type INSTANCE)
+;+		(allowed-classes Test)
 		(create-accessor read-write))
 	(single-slot edad
 		(type INTEGER)
@@ -328,8 +339,9 @@
 		(default 0)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot nombre
-		(type STRING)
+	(single-slot gradoActividad
+		(type INTEGER)
+		(range -5 5)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot frequencia
@@ -337,6 +349,10 @@
 		(allowed-values Diaria Semanal Mensual None)
 		(default None)
 ;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot nombre
+		(type STRING)
+;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
 (defclass Actividad+de+Trabajo
@@ -425,14 +441,14 @@
 (defclass Programa
 	(is-a USER)
 	(role concrete)
+	(multislot objetivos
+		(type INSTANCE)
+;+		(allowed-classes Objetivo)
+		(create-accessor read-write))
 	(multislot jueves
 ;+		(comment "ejercicios jueves")
 		(type INSTANCE)
 ;+		(allowed-classes Ejercicio-Persona)
-		(create-accessor read-write))
-	(multislot objetivos
-		(type INSTANCE)
-;+		(allowed-classes Objetivo)
 		(create-accessor read-write))
 	(multislot tiempo+diario+disponible
 ;+		(comment "tiempo diario en minutos")
@@ -440,8 +456,7 @@
 		(range 30 1440)
 		(cardinality 7 7)
 		(create-accessor read-write))
-	(multislot lunes
-;+		(comment "ejercicios lunes")
+	(multislot sabado
 		(type INSTANCE)
 ;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))
@@ -450,7 +465,8 @@
 		(type INSTANCE)
 ;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))
-	(multislot sabado
+	(multislot lunes
+;+		(comment "ejercicios lunes")
 		(type INSTANCE)
 ;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))
@@ -577,7 +593,7 @@
 		(create-accessor read-write)))
 
 (definstances instances
-; Thu May 05 20:09:37 CEST 2016
+; Tue May 10 12:51:58 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -590,6 +606,7 @@
 
 	(duracion 0)
 	(frequencia None)
+	(gradoActividad 1)
 	(nombre "Barrer"))
 
 ([Bicicleta+estatica] of  Ejercicio+con+aparatos
@@ -667,12 +684,14 @@
 
 	(duracion 0)
 	(frequencia None)
+	(gradoActividad -1)
 	(nombre "Hacer colada"))
 
 ([Compra] of  Desplazamiento
 
 	(duracion 0)
 	(frequencia None)
+	(gradoActividad 1)
 	(nombre "Comprar"))
 
 ([CouchPotato_Class0] of  Ejercicio+con+aparatos
@@ -1029,10 +1048,12 @@
 
 	(duracion 0)
 	(frequencia None)
+	(gradoActividad 2)
 	(nombre "Cuidar del jardin"))
 
 ([De+pie] of  Actividad+de+Trabajo
 
+	(gradoActividad 1)
 	(nombre "Estar de pie"))
 
 ([Deltoides] of  Grupo+muscular
@@ -1041,6 +1062,7 @@
 
 ([Desplazamiento+a+pie] of  Actividad+de+Trabajo
 
+	(gradoActividad 2)
 	(nombre "Desplazamientos a pie"))
 
 ([Dorsal] of  Grupo+muscular
@@ -1053,6 +1075,7 @@
 
 ([Esfuerzos+musculares] of  Actividad+de+Trabajo
 
+	(gradoActividad 3)
 	(nombre "Esfuerzos musculares"))
 
 ([Espalda] of  Problema+musculo-esqueletico
@@ -1070,6 +1093,7 @@
 
 	(duracion 0)
 	(frequencia None)
+	(gradoActividad 1)
 	(nombre "Fregar"))
 
 ([Gemelos] of  Grupo+muscular
@@ -1084,10 +1108,12 @@
 
 	(duracion 0)
 	(frequencia None)
+	(gradoActividad -2)
 	(nombre "Leer"))
 
 ([Levantamiento+de+peso] of  Actividad+de+Trabajo
 
+	(gradoActividad 5)
 	(nombre "Levantamiento de peso"))
 
 ([Mantenimiento] of  Objetivo
@@ -1096,18 +1122,21 @@
 
 ([Movimientos+Repetitivos] of  Actividad+de+Trabajo
 
+	(gradoActividad 3)
 	(nombre "Movimientos repetitivos"))
 
 ([Paseo] of  Desplazamiento
 
 	(duracion 0)
 	(frequencia None)
+	(gradoActividad 1)
 	(nombre "Pasear"))
 
 ([Paseo+mascota] of  Desplazamiento
 
 	(duracion 0)
 	(frequencia None)
+	(gradoActividad 1)
 	(nombre "Pasear mascota"))
 
 ([Pesos] of  Ejercicio+con+aparatos
@@ -1145,6 +1174,7 @@
 
 	(duracion 0)
 	(frequencia None)
+	(gradoActividad -2)
 	(nombre "Planchar"))
 
 ([Ponerse+en+forma] of  Objetivo
@@ -1191,10 +1221,12 @@
 
 	(duracion 0)
 	(frequencia None)
+	(gradoActividad 4)
 	(nombre "Salir a correr"))
 
 ([Sentado] of  Actividad+de+Trabajo
 
+	(gradoActividad -2)
 	(nombre "Estar sentado"))
 
 ([Sistema+Card%C3%ADaco] of  Objetivo
@@ -1242,6 +1274,7 @@
 
 	(duracion 0)
 	(frequencia None)
+	(gradoActividad -5)
 	(nombre "Ver la television"))
 
 ([Trapecio] of  Grupo+muscular
@@ -1361,28 +1394,103 @@
 	)
 )
 
+
 (defrule pide-actividades
 	(nombre ?nombre)
 	?persona <-(object (is-a Persona)(nombre ?nombreA))
 	(test (eq (str-compare  ?nombre ?nombreA) 0))
 	=>
-	(bind ?lista_actividades (find-all-instances ((?a Actividad)) TRUE))
-	(printout t "0 : Deja de anadir" crlf)
+	(bind ?respuesta (si-o-no-p "Tienes trabajo? "))
+	(if (eq ?respuesta TRUE) then (assert(actividad "trabajo")))
+	(bind ?respuesta (si-o-no-p "Llevas a cabo tareas domesticas regularmente? "))
+	(if (eq ?respuesta TRUE) then (assert(actividad "domesticas")))
+	(bind ?respuesta (si-o-no-p "Haces otras actividades? "))
+	(if (eq ?respuesta TRUE) then (assert(actividad "otras")))	
+)
+
+(defrule pide-actividades-trabajo
+	(declare (salience 30))
+	(actividad "trabajo")
+	(nombre ?nombre)
+	?persona <-(object (is-a Persona)(nombre ?nombreA))
+	(test (eq (str-compare  ?nombre ?nombreA) 0))
+	=>
+	(bind ?lista_actividades (find-all-instances ((?a Actividad+de+Trabajo)) TRUE))
+	
+	(printout t crlf "0 : Ya esta" crlf)
 	(loop-for-count (?i 1 (length$ ?lista_actividades)) do
 		(bind ?aux (nth$ ?i ?lista_actividades))
-		(printout t ?i " : " (class ?aux) " : " (send ?aux get-nombre) crlf)
+		(printout t ?i " : " (send ?aux get-nombre) crlf)
 	)
-	(bind ?respuesta (pregunta-numerica "Que actividad quieres anadir? " 0 (length$ ?lista_actividades)))
+	(printout t  crlf)
+	(bind ?respuesta (pregunta-numerica "Que actividad haces en el trabajo? " 0 (length$ ?lista_actividades)))
 	(while (> ?respuesta 0) do 
 		(bind ?actividad (nth$ ?respuesta ?lista_actividades))
-		(send ?actividad put-duracion   (pregunta-numerica "Cuanto dura la actividad? (minutos)" 0 600))
-		(send ?actividad put-frequencia (ask-question "Con que frequencia? [Diaria|Semanal|Mensual] " Diaria Semanal Mensual))
-		(slot-insert$ ?persona actividades 1 ?actividad)
-		(bind ?respuesta (pregunta-numerica "Que actividad mas quieres anadir? " 0 (length$ ?lista_actividades)))
+		(send ?actividad put-duracion   (pregunta-numerica "Durante cuanto tiempo? (minutos)" 0 600))
+		(send ?actividad put-frequencia Diaria)
+		(slot-insert$ ?persona actividades 1 ?actividad)	
+		(bind ?respuesta (pregunta-numerica "Cual mas? " 0 (length$ ?lista_actividades)))
 	)
 )
 
+(defrule pide-actividades-domesticas
+	(declare (salience 20))
+	(actividad "domesticas")
+	(nombre ?nombre)
+	?persona <-(object (is-a Persona)(nombre ?nombreA))
+	(test (eq (str-compare  ?nombre ?nombreA) 0))
+	=>
+	(bind ?lista_actividades (find-all-instances ((?a Tarea+domestica)) TRUE))
+	
+	(printout t crlf "0 : Ya esta" crlf)
+	(loop-for-count (?i 1 (length$ ?lista_actividades)) do
+		(bind ?aux (nth$ ?i ?lista_actividades))
+		(printout t ?i " : " (send ?aux get-nombre) crlf)
+	)
+	(printout t  crlf)
+	(bind ?respuesta (pregunta-numerica "Que actividad domestica de estas haces? " 0 (length$ ?lista_actividades)))
+	(while (> ?respuesta 0) do 
+		(bind ?actividad (nth$ ?respuesta ?lista_actividades))
+		(send ?actividad put-duracion   (pregunta-numerica "Cuanto dura la actividad? (minutos)" 0 600))
+		(send ?actividad put-frequencia (ask-question "Con que frequencia lo haces? [Diaria|Semanal|Mensual] " Diaria Semanal Mensual))
+		(slot-insert$ ?persona actividades 1 ?actividad)	
+		(bind ?respuesta (pregunta-numerica "Cual mas? " 0 (length$ ?lista_actividades)))
+	)
+)
 
+(defrule pide-actividades-otras
+	(actividad "otras")
+	(nombre ?nombre)
+	?persona <-(object (is-a Persona)(nombre ?nombreA))
+	(test (eq (str-compare  ?nombre ?nombreA) 0))
+	=>
+	(bind ?lista_actividades (find-all-instances ((?a Estatica)) TRUE))
+	(bind ?lista_actividades2 (find-all-instances ((?a Desplazamiento)) TRUE))
+	
+	(printout t crlf "0 : Ya esta" crlf)
+	(loop-for-count (?i 1 (length$ ?lista_actividades)) do
+		(bind ?aux (nth$ ?i ?lista_actividades))
+		(printout t ?i " : " (send ?aux get-nombre) crlf)
+	)
+	
+	(loop-for-count (?i 1 (length$ ?lista_actividades2)) do
+		(bind ?aux (nth$ ?i ?lista_actividades2))
+		(printout t (+ ?i (length$ ?lista_actividades)) " : " (send ?aux get-nombre) crlf)
+	)
+	
+	(bind ?respuesta (pregunta-numerica "Que actividad de estas haces? " 0 (+ (length$ ?lista_actividades2)(length$ ?lista_actividades))))
+	(while (> ?respuesta 0) do 
+		(if (<= ?respuesta (length$ ?lista_actividades)) then
+		(bind ?actividad (nth$ ?respuesta ?lista_actividades)) else
+			(bind ?actividad (nth$ (- ?respuesta (length$ ?lista_actividades)) ?lista_actividades2))
+		)
+		(send ?actividad put-duracion   (pregunta-numerica "Cuanto dura la actividad? (minutos)" 0 600))
+		(send ?actividad put-frequencia (ask-question "Con que frequencia lo haces? [Diaria|Semanal|Mensual] " Diaria Semanal Mensual))
+		(slot-insert$ ?persona actividades 1 ?actividad)	
+		(bind ?respuesta (pregunta-numerica "Cual mas? " 0 (+ (length$ ?lista_actividades)(length$ ?lista_actividades2))))
+	)
+)
+	
 (defrule crea-dieta
 	(nombre ?nombre)
 	?persona <-(object (is-a Persona)(nombre ?nombreA))
@@ -1436,8 +1544,8 @@
 		(bind ?respuesta (pregunta-numerica "Que objetivo mas tienes? " 0 (length$ ?lista_objetivos)))
 	)
 	
-	bind ?dificultad (ask-question "Cual es la dificultad deseada del entrenamiento? [Baja|Media|Alta] " Baja Media Alta))
-	assert (dificultad ?dificultad)
+	(bind ?dificultad (ask-question "Cual es la dificultad deseada del entrenamiento? [Baja|Media|Alta] " Baja Media Alta))
+	(assert (dificultad ?dificultad))
 )
 
 (defrule crea-programa
@@ -1478,6 +1586,35 @@
   (import MAIN ?ALL)
   (import preguntas-persona ?ALL)
   (export ?ALL))
+
+(defrule calc-fitness
+	(nombre ?nombre)
+	?dieta <-(object (is-a Dieta)(nombre "Much WOW"))
+	?persona <-(object (is-a Persona)(nombre ?nombreA))
+	(test (eq (str-compare  ?nombre ?nombreA) 0))
+	=>
+	(bind ?fitness 0)
+	(bind ?lista_actividades (send ?persona get-actividades))
+	(loop-for-count (?i 1 (length$ ?lista_actividades)) do
+		(bind ?aux (nth$ ?i ?lista_actividades))
+		(bind ?sedent (* (send ?aux get-gradoActividad) (send ?aux get-duracion)))
+		(bind ?freq (send ?aux get-frequencia))
+		(if (eq ?freq Diaria) then (bind ?sedent (* ?sedent 30)) else
+			(if (eq ?freq Semanal) then (bind ?sedent (* ?sedent 4)) else
+				(if (eq ?freq Mensual) then (bind ?sedent (* ?sedent 1)))
+			)
+		)
+		(bind ?fitness (+ ?fitness ?sedent))
+	)
+	
+    (bind ?sal (send ?dieta get-abuso+de+sal))
+    (bind ?picar (send ?dieta get-picar+entre+horas))
+    (bind ?fruta (send ?dieta get-consumo+de+fruta))
+	
+	(bind ?fitness (+(*(+ ?sal ?picar) 100) ?fruta ?fitness))
+	(printout t "fitness " ?fitness crlf) 
+	(assert (fitness ?fitness))
+)
 
 (defrule generar
 	(nombre ?nombre)
