@@ -1611,18 +1611,41 @@
     (bind ?picar (send ?dieta get-picar+entre+horas))
     (bind ?fruta (send ?dieta get-consumo+de+fruta))
 	
-	(bind ?fitness (+(*(+ ?sal ?picar) 100) ?fruta ?fitness))
+	(bind ?fitness (+ (* (+ ?sal ?picar) 100) ?fruta ?fitness)) ;(sal+picar)*100+fruta+fitness
 	(printout t "fitness " ?fitness crlf) 
 	(assert (fitness ?fitness))
 )
 
-(defrule generar
+(deffunction calcula_puntuacion(?ejercicio ?persona)
+	(bind ?res 0)
+	
+	(bind ?lista_problemas (send ?persona get-problemas+fisicos))
+	(bind ?lista_aliviados (send ?ejercicio get-problemas+aliviados))
+	(progn$ (?aliviado ?lista_aliviados)
+		(progn$ (?problema ?lista_problemas)
+			(if (eq ?aliviado ?problema) then (bind ?res (+ ?res 1)))
+		)
+	)
+	
+	(bind ?lista_objetivos (send ?persona get-objetivos))
+	(bind ?lista_cumplidos (send ?ejercicio get-objetivos))
+	(progn$ (?objetivo ?lista_objetivos)
+		(progn$ (?cumplido ?lista_cumplidos)
+			(if (eq ?cumplido ?objetivo) then (bind ?res (+ ?res 1)))
+		)
+	)
+	
+	?res
+)
+
+(deftemplate ejercicio_puntuado (slot ejercicio) (slot puntuacion))
+
+(defrule generar-ejercicios
 	(nombre ?nombre)
 	?persona <-(object (is-a Persona)(nombre ?nombreA))
 	(test (eq (str-compare  ?nombre ?nombreA) 0))
 	=>
 	(bind ?lista_problemas (send ?persona get-problemas+fisicos))
-	(bind ?lista_ejercicios (create$))
 	(do-for-all-instances ((?e Ejercicio)) TRUE 
 		(bind ?restricciones (send ?e get-problemas+contraindicados))
 		(bind ?anadir 1)
@@ -1630,10 +1653,23 @@
 			(bind ?aux (nth$ ?i ?restricciones))
 			(if (member ?aux ?lista_problemas) then (bind ?anadir 0))
 		)
-		(if (= ?anadir 1) then (bind ?lista_ejercicios (insert$ ?lista_ejercicios 1 ?e)))
+		(if (= ?anadir 1) then (assert (ejercicio_puntuado (ejercicio ?e) (puntuacion (calcula_puntuacion ?e ?persona)))))
 	)
+	
+	(assert (solucion (create$)))
+)
+
+(defrule listar-ejercicios
+	?f1 <- (solucion $?lista_ejercicios)
+	?f2 <-(ejercicio_puntuado (ejercicio ?e) (puntuacion ?p))
+	(not (ejercicio_puntuado (puntuacion ?p2&:(< ?p2 ?p))))
+	=>
+	(bind ?lista_ejercicios (insert$ ?lista_ejercicios 1 ?e))
+	(retract ?f1)
+	(retract ?f2)
 	(assert (solucion ?lista_ejercicios))
 )
+
 
 (defrule imprimir-solucion
 	(solucion $?lista_ejercicios)
@@ -1645,5 +1681,5 @@
 	(printout t  crlf  crlf crlf"Hemos detectado que tienes los siguientes problemas: " crlf crlf)
 	(progn$ (?var ?lista_problemas) (printout t (send ?var get-nombre) crlf))
 	(printout t crlf crlf "Estos son los ejercicios que podrias hacer teniendo en cuenta tus problemas: " crlf crlf)
-	(progn$ (?var ?lista_ejercicios) (printout t (send ?var get-nombre) crlf))
+	(progn$ (?var ?lista_ejercicios) (printout t (send ?var get-nombre) "  :  " (calcula_puntuacion ?var ?persona) crlf))
 )
