@@ -1968,7 +1968,6 @@
 	?persona <-(object (is-a Persona)(nombre ?nombreA)(peso ?peso))
 	(test (eq (str-compare  ?nombre ?nombreA) 0))
 	=>
-	(bind ?fitness 40000)
 	(bind ?min-fit 10000)
 	(bind ?max-fit 50000)
 	(bind ?fitness (clamp ?min-fit ?fitness ?max-fit)) 
