@@ -509,4 +509,419 @@ En referència a possibles recomanacions existents, hem utilitzat els exercicis 
 
 Totes aquestes proves es faran en relació a 2 usuaris diferents, en els que cadascun d'ells es troba en un determinat estat físic, d'aquesta manera simularem diferents situacions que poden verificar el SBC.
 
+\subsection{Prova 1}
+\subsubsection{Introducción}
+En esta prueba nos basaremos en una persona de 30 años que tiene algo de obesidad y que por lo tanto tiene como objetivo principal reducir su peso. Sin embargo, también quiere entrenar sus brazos especialmente (bíceps) y ponerse en forma.
+Para explorar un poco las posibilidades del sistema, haremos que esta persona tenga una presión alta. Solo está empezando, así que quiere un plan que no le agote del todo, de dificultad baja.
+Trabaja de informático en una empresa con lo que suele pasar el día sentado, aunque debe caminar unos minutos cada día. No suele hacer tareas domésticas y ve bastante la tele, aunque muy de vez en cuando sale a pasear.
+Probablemente por su posición al trabajar, sufre de problemas de espalda, así que deberá evitar los ejercicios que le puedan ser perjudiciales en este respecto.
+Su dieta no es la mejor, aunque no pica mucho entre horas, pero adora los pasteles. Su disponibilidad es de media hora al día, menos los fines de semana, que podrá hacer ejercicio durante 45 minutos.
+
+\subsubsection{Resultado esperado}
+Debido a su IMC, el programa le asignará un caso de Obesidad de grado 2, y también una Presión Alta. Estos dos problemas físicos eliminarán la posibilidad de hacer algunos ejercicios. 
+Ya que todas sus características tienden a negativas en cuanto a lo preparado que está físicamente, el sistema le calculará una "fitness" baja a partir de sus actividades y dieta.
+Sabiendo esto, el sistema debería pedir-le un test de subir y bajar escaleras para comprobar si forma física. Dependiendo de sus parámetros en este test su "fitness" variará.
+Finalmente, teniendo en cuenta todos los parámetros anteriores, se escogerán los ejercicios que ayudan a los objetivos de reducir peso y ponerse en forma y muscular los bíceps, así como se eliminarán aquellos que no son recomendados con sus problemas de espalda y otros problemas.
+Con estos ejercicios se creará un horario que se ajuste a sus tiempos.
+\subsubsection{Entrada CLIPS}
+\begin{verbatim}
+Entrada CLIPS
+
+----------------------------
+--Sistema de recomendacion--
+-----de entrenamientos------
+----------------------------
+----I'm no couch potato-----
+----------------------------
+
+Nombre: Joan
+Edad (anos):  [0,100] 30
+Altura (m):  [0,3] 1.6
+Peso (kg):  [0,600] 95
+Cual es tu presion sanguinea minima (diastolica)?  [0,200] 100
+Cual es tu presion sanguinea maxima (sistolica)?  [0,200] 150
+Tienes trabajo? si
+Llevas a cabo tareas domesticas regularmente? no
+Haces otras actividades? si
+Tienes problemas musculo-esqueleticos? si
+
+0 : Ya esta
+1 : Estar de pie
+2 : Desplazamientos a pie
+3 : Esfuerzos musculares
+4 : Levantamiento de peso
+5 : Movimientos repetitivos
+6 : Estar sentado
+
+Que actividad haces en el trabajo?  [0,6] 6
+Durante cuanto tiempo? (minutos) [0,600] 360
+Cual mas?  [0,6] 2
+Durante cuanto tiempo? (minutos) [0,600] 60
+Cual mas?  [0,6] 0
+
+0 : Ya esta
+1 : Leer
+2 : Ver la television
+3 : Comprar
+4 : Pasear
+5 : Pasear mascota
+6 : Salir a correr
+Que actividad de estas haces?  [0,6] 2
+Cuanto dura la actividad? (minutos) [0,600] 100
+Con que frequencia lo haces? [Diaria|Semanal|Mensual] Diaria
+Cual mas?  [0,6] 4
+Cuanto dura la actividad? (minutos) [0,600] 120
+Con que frequencia lo haces? [Diaria|Semanal|Mensual] Semanal
+Cual mas?  [0,6] 0
+Problemas musculo-esqueleticos: 
+0 : Deja de anadir
+1 : Articular
+2 : Brazos
+3 : Cuello
+4 : Espalda
+5 : Rodillas
+Que problema de estos tienes?  [0,5] 4
+Que problema mas de estos tienes?  [0,5] 0
+Consumo de sal:  [0,10] 5
+Picoteo entre horas:  [0,10] 5
+Cuantas piezas de fruta tomas a la semana?  [0,200] 10
+Cuantas veces a la semana tomas alguna pieza de pasteleria?  [0,200] 15
+0 : Deja de anadir
+1 : Equilibrio
+2 : Flexibilidad
+3 : Mantenimiento
+4 : Ponerse en forma
+5 : Rebajar peso
+6 : Sistema cardiaco
+7 : Musculacion
+Que objetivo tienes?  [0,7] 5
+Que objetivo mas tienes?  [0,7] 4
+Que objetivo mas tienes?  [0,7] 7
+0 : Deja de anadir
+1 : Biceps
+2 : Pectoral
+3 : Abdominales
+4 : Cuadriceps
+5 : Deltoides
+6 : Dorsal
+7 : Gemelos
+8 : Gluteos
+9 : Trapecio
+10 : Triceps
+Que musculo en concreto?  [0,10] 1
+Alguno mas?  [0,10] 0
+Que objetivo mas tienes?  [0,7] 0
+Cual es la dificultad deseada del entrenamiento? [Baja|Media|Alta] Baja
+Quantos minutos disponibles tienes al dia?
+Lunes:  [30,1440] 30
+Martes:  [30,1440] 30
+Miercoles:  [30,1440] 30
+Jueves:  [30,1440] 30
+Viernes:  [30,1440] 30
+Sabado:  [30,1440] 45
+Domingo:  [30,1440] 45
+\end{verbatim}
+\subsubsection{Salida CLIPS}
+\begin{verbatim}
+Por favor toma el test de subir tramos de escalera (2 minutos)
+Introduce aqui los resultados obtenidos: 
+Pulsaciones por minuto  [50,250] 170
+Cansacio [Mucho|Poco|Nada] Mucho
+Tirantez Muscular [Mucho|Poco|Nada] Poco
+
+
+
+Hemos detectado que tienes los siguientes problemas: 
+
+Espalda
+Presion alta
+Obesidad tipo 2
+
+
+Estos son los ejercicios que podrias hacer teniendo en cuenta tus problemas: 
+
+Biceps  :  10
+Bicicleta estatica  :  9
+Stepper  :  9
+Hombro  :  9
+Triceps  :  9
+Piernas  :  9
+Calorias deseadas: 0.0
+
+-----Programa propuesto-----
+
+----------
+Lunes
+----------
+Piernas
+Triceps
+Hombro
+Biceps
+
+----------
+Martes
+----------
+Stepper
+
+----------
+Miercoles
+----------
+Piernas
+Triceps
+Hombro
+Biceps
+
+----------
+Jueves
+----------
+Stepper
+
+----------
+Viernes
+----------
+Piernas
+Triceps
+Hombro
+Biceps
+
+----------
+Sabado
+----------
+Bicicleta estatica
+Stepper
+
+----------
+Domingo
+----------
+Piernas
+Triceps
+Hombro
+Biceps
+\end{verbatim}
+\subsubsection{Resultado}
+Como esperábamos, se le han diagnosticado tres problemas a Joan: dolor de espalda, Obesidad de tipo 2 y Presión alta. Sus resultados al test que se le ha acabado haciendo han sido malos, así que su valor de estado físico es muy bajo.
+Con estas restricciones y sus preferencias se han escogido los ejercicios que se ven en la salida del CLIPS, con sus puntuaciones a su lado.
+Para evitar que se hagan los mismos ejercicios dos días seguidos, hay días que quedan un poco vacíos, pero después de todo solo tiene 30 minutos disponibles esos días.
+Notar también que son los ejercicios que mejor le van los que repite con más frecuencia, aunque en este caso en concreto no se puede apreciar muy bien. 
+\subsection{Prova 2}
+\subsubsection{Introducció}
+Aquesta prova es centra en un home de 25 anys que es troba en molt bona forma però que té un problema als genolls. Treballa com a repartidor d'encàrrecs, i també és molt actiu a casa. La seva dieta és impecable i té com a objectiu millorar els seus músculs superiors.
+\subsubsection{Resultat esperat}
+En aquest cas, esperem que els exercicis recomanats siguin els que més treballen la part superior del cos, ja que és el que ha demanat l'usuari. Tot i així s'hauran de restringir tots els exercicis que fan servir el genoll. Com és un home tan actiu, el seu grau de fitness és molt actiu, per tant els exercicis que li assignarem duraran més.
+\subsubsection{Entrada CLIPS}
+\begin{verbatim}
+----------------------------
+--Sistema de recomendacion--
+-----de entrenamientos------
+----------------------------
+----I'm no couch potato-----
+----------------------------
+Nombre: John
+Edad (anos):  [0,100] 25
+Altura (m):  [0,3] 1.9
+Peso (kg):  [0,600] 100
+Cual es tu presion sanguinea minima (diastolica)?  [0,200] 70
+Cual es tu presion sanguinea maxima (sistolica)?  [0,200] 110
+Tienes trabajo? si
+Llevas a cabo tareas domesticas regularmente? si
+Haces otras actividades? si
+Tienes problemas musculo-esqueleticos? si
+
+0 : Ya esta
+1 : Estar de pie
+2 : Desplazamientos a pie
+3 : Esfuerzos musculares
+4 : Levantamiento de peso
+5 : Movimientos repetitivos
+6 : Estar sentado
+
+Que actividad haces en el trabajo?  [0,6] 3
+Durante cuanto tiempo? (minutos) [0,600] 240
+Cual mas?  [0,6] 4
+Durante cuanto tiempo? (minutos) [0,600] 240
+Cual mas?  [0,6] 5
+Durante cuanto tiempo? (minutos) [0,600] 240
+Cual mas?  [0,6] 0
+
+0 : Ya esta
+1 : Barrer
+2 : Hacer colada
+3 : Cuidar del jardin
+4 : Fregar
+5 : Planchar
+
+Que actividad domestica de estas haces?  [0,5] 1
+Cuanto dura la actividad? (minutos) [0,600] 10
+Con que frequencia lo haces? [Diaria|Semanal|Mensual] Diaria
+Cual mas?  [0,5] 2
+Cuanto dura la actividad? (minutos) [0,600] 40
+Con que frequencia lo haces? [Diaria|Semanal|Mensual] Semanal
+Cual mas?  [0,5] 3
+Cuanto dura la actividad? (minutos) [0,600] 60
+Con que frequencia lo haces? [Diaria|Semanal|Mensual] Mensual
+Cual mas?  [0,5] 4
+Cuanto dura la actividad? (minutos) [0,600] 10
+Con que frequencia lo haces? [Diaria|Semanal|Mensual] Diaria
+Cual mas?  [0,5] 0
+
+0 : Ya esta
+1 : Leer
+2 : Ver la television
+3 : Comprar
+4 : Pasear
+5 : Pasear mascota
+6 : Salir a correr
+Que actividad de estas haces?  [0,6] 4
+Cuanto dura la actividad? (minutos) [0,600] 30
+Con que frequencia lo haces? [Diaria|Semanal|Mensual] Diaria
+Cual mas?  [0,6] 6
+Cuanto dura la actividad? (minutos) [0,600] 30
+Con que frequencia lo haces? [Diaria|Semanal|Mensual] Diaria
+Cual mas?  [0,6] 5
+Cuanto dura la actividad? (minutos) [0,600] 60
+Con que frequencia lo haces? [Diaria|Semanal|Mensual] Semanal
+Cual mas?  [0,6] 0
+Problemas musculo-esqueleticos: 
+0 : Deja de anadir
+1 : Articular
+2 : Brazos
+3 : Cuello
+4 : Espalda
+5 : Rodillas
+Que problema de estos tienes?  [0,5] 5
+Que problema mas de estos tienes?  [0,5] 0
+Consumo de sal:  [0,10] 3
+Picoteo entre horas:  [0,10] 0
+Cuantas piezas de fruta tomas a la semana?  [0,200] 12
+Cuantas veces a la semana tomas alguna pieza de pasteleria?  [0,200] 0
+0 : Deja de anadir
+1 : Equilibrio
+2 : Flexibilidad
+3 : Mantenimiento
+4 : Ponerse en forma
+5 : Rebajar peso
+6 : Sistema cardiaco
+7 : Musculacion
+Que objetivo tienes?  [0,7] 4
+Que objetivo mas tienes?  [0,7] 7
+0 : Deja de anadir
+1 : Biceps
+2 : Pectoral
+3 : Abdominales
+4 : Cuadriceps
+5 : Deltoides
+6 : Dorsal
+7 : Gemelos
+8 : Gluteos
+9 : Trapecio
+10 : Triceps
+Que musculo en concreto?  [0,10] 1
+Alguno mas?  [0,10] 2
+Alguno mas?  [0,10] 9
+Alguno mas?  [0,10] 5
+Alguno mas?  [0,10] 10
+Alguno mas?  [0,10] 0
+Que objetivo mas tienes?  [0,7] 3
+Que objetivo mas tienes?  [0,7] 0
+Cual es la dificultad deseada del entrenamiento? [Baja|Media|Alta] Alta
+Quantos minutos disponibles tienes al dia?
+Lunes:  [30,1440] 300
+Martes:  [30,1440] 400
+Miercoles:  [30,1440] 200
+Jueves:  [30,1440] 100
+Viernes:  [30,1440] 30
+Sabado:  [30,1440] 1000
+Domingo:  [30,1440] 1000
+\end{verbatim}
+
+\subsubsection{Salida CLIPS}
+
+\begin{verbatim}
+fitness 384850
+
+Por favor toma el test de la carrera sostenida (5 minutos)
+Introduce aqui los resultados obtenidos: 
+Pulsaciones por minuto  [50,250] 150
+Cansacio [Mucho|Poco|Nada] Poco
+Tirantez Muscular [Mucho|Poco|Nada] Poco
+fitness 217425.0
+
+
+
+Hemos detectado que tienes los siguientes problemas: 
+
+Rodillas
+Sobrepeso grado 2
+
+
+Estos son los ejercicios que podrias hacer teniendo en cuenta tus problemas: 
+
+Remo  :  12
+Flexiones  :  11
+Hombro  :  11
+Espalda  :  11
+Pesos brazos  :  10
+Pecho  :  10
+Biceps  :  10
+Abdominales  :  6
+Calorias deseadas: 2000.0
+-----Programa propuesto-----
+
+----------
+Lunes
+----------
+Abdominales
+Pesos brazos
+Biceps
+Pecho
+Espalda
+Hombro
+Flexiones
+Remo
+
+----------
+Martes
+----------
+
+----------
+Miercoles
+----------
+Pecho
+Espalda
+Hombro
+Flexiones
+Remo
+
+----------
+Jueves
+----------
+Abdominales
+Pesos brazos
+Biceps
+
+----------
+Viernes
+----------
+Flexiones
+
+----------
+Sabado
+----------
+Abdominales
+Pesos brazos
+Biceps
+Pecho
+Espalda
+Hombro
+Remo
+
+----------
+Domingo
+----------
+Flexiones
+\end{verbatim}
+
+\subsubsection{Resultat}
+Com es pot observar, el grau de \textit{fitness} es molt alt. També podem veure que els exercicis més recomenats són els de rem, flexions i hombros, que tots exerciten els músculs superiors, tal i com havia demanat l'usuari. També veiem que no surten alguns exercicis com el de "Pesos piernas" ja que tenen com a problema contraindicat els genolls.
+
 \end{document}
