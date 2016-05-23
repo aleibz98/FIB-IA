@@ -17,6 +17,8 @@
 \usepackage{multirow}
 \usepackage{colortbl}
 
+\setlength{\parskip}{1em}
+
 \begin{document}
 
 \title{\textsc{Sistema Basat en el Coneixement}}
@@ -26,11 +28,9 @@
 \date{\today}
 \maketitle
 
-\section{Metodologia de disseny i implementació}
+\section{Identificació del problema}
 
-\subsection{Identificació del problema}
-
-\subsubsection{El problema}
+\subsection{El problema}
 
 Amb el creixent nombre de persones que adquireixen hàbits de vida saludable evitant el sedentarisme, la cadena de gimnasos "I'm no couch potato" vol desenvolupar un Sistema Basat en el Coneixement capaç de recomanar programes d'entrenament als seus futurs clients. Dins del procés de recomanació, el primer pas és establir les condicions físiques generals de la persona. Per això, es necessita primer una sèrie de dades bàsiques com el pes i la altura (a partir d'aquestes es pot calcular l'índex de massa corporal), l'edat i la pressió sanguínia (màxima i mínima). També es pot so\l.licitar que es realitzin exercicis senzills per tal d'obtenir alguns paràmetres com les pulsacions per minut, la sensació de cansament/mareig o la tibantor muscular després d'un minut de carrera sostinguda o de pujar un seguit de trams d'escala a ritme normal. 
 
@@ -44,14 +44,88 @@ Aquests, tenen un conjunt de característiques i restriccions com per exemple el
 
 El sistema ha de generar un program d'entrenament per a una setmana (de coma a mínim 30 minuts diaris), creant per a cada dia una seqüència d'exercicis adequada al temps del que es disposa. Els exercicis han d'escollir-se segons les condicions físiques/mèdiques de l'usuari. Aquests exercicis han d'anar encaminats principalment a l'objectiu que ha indicat l'usuari atenent a les condicions de partida de l'usuari. Hi ha d'haver suficients exercicis diferents a cada sessió i durant la setmana per evitar la monotonia. 
 
-\subsubsection{Anàlisis viabilitat}
+\subsection{Anàlisis viabilitat}
 Com es pot veure en aquest problema l'usuari del gimnàs espera que se li donin una sèrie d'exercicis que ha de realitzar per poder assolir uns certs objectius o millorar la seva condició física. L'usuari en principi acudeix al gimnàs en busca d'un expert que li pugui recomanar quina és la millor opció per les seves característiques.
 
 Així doncs, un \emph{Sistema Basat en el Coneixement} és idoni per substituir aquest expert i així reduir la quantitat de feina que rep. Això és perquè aquest sistema pot respondre a les regles predefinides a partir dels paràmetres establerts per l'usuari obtenint així la resposta que aquest espera.
 
-\subsection{Conceptualització}
+\subsection{Fonts de coneixement}
 
-\subsubsection{Descripció dels conceptes del domini} 
+En aquest apartat explicarem quines han estat les nostres fonts de coneixement per formar l'ontologia del SBC i així resoldre el nostre problema, han estat les següents:
+
+El nostre \textbf{propi coneixement}, ja que dos dels membres del grup assisteixen regularment al gimnàs on realitzen tot d'activitats físiques diferents amb el qual podem tenir un ampli ventall en quant al coneixement d'activitats o màquines que hi ha en un gimnàs.
+
+Cerques a \textbf{internet} que permetran obtenir més detalls com el consum de calories o l'edat màxima i mínima recomanades per un exercici determinat.
+
+\subsection{Objectius del sistema}
+
+Els objectius que s'espera que el nostre sistema sigui capaç d'assumir seran els següents:
+
+\begin{description}
+	\item[Obtenir] tota la informació d'un client en quant a preferències i objectius que vol realitzar, sent el sistema el que interactuï amb l'usuari.
+	\item[Inferir] tota la informació de l'estat físic del client a partir de les respostes que ens ha proporcionat i descobrir si té algun problema físic.
+	\item[Descartar], partint de tots els exercicis possibles, aquells que no pot realitzar perquè no compleixen l'objectiu que desitgi o perquè siguin perjudicials per la salut de l'usuari.
+	\item[Evaluar], cada solució que no ha estat descartada, depenent de si s'ajusta a les preferències donades o si aporta una diversitat suficient d'exercicis (fer el mateix exercici durant 3 hores seguides pot cansar a l'usuari molt fàcilment).
+	\item[Presentar] adequadament a l'usuari una llista dels exercicis recomanats amb una justificació sobre cadascun d'aquests exercicis, on es mostrarà el grau de qualificació. D'aquesta manera s'intenta que l'usuari tingui més facilitat per escollir entre les diferents opcions proposades.
+\end{description}
+
+\subsection{Resultats esperats pel sistema}
+
+El sistema generarà una llista d'exercicis recomanats en funció del perfil de l'usuari. Per cada exercici es donarà de manera senzilla les raons per les quals es recomana, a més es donarà un grau de recomanació qualitatiu que pot ser:
+
+\begin{description}
+	\item[Altament recomanable]: L'exercici compleix la majoria de preferències i objectius de l'usuari
+	\item[Recomanable] L'exercici compleix alguna de les preferències de l'usuari.
+	\item[Poc recomanable] L'exercici compleix poques preferències de l'usuari.
+\end{description}
+
+Totes les solucions compleixen totes les restriccions imposades per l'usuari o les inferides a través de la seva salut.
+
+\section{Conceptualització}
+
+En aquesta fase pretenem obtenir una visió del problema des del punt de vista de l'expert, així doncs obtindrem  la informació necessària per decidir el coneixement que s'utilitzarà per resoldre el problema. Per resoldre aquesta tasca s'ha de separar la conceptualització en 4 fases que seran:
+
+\begin{enumerate}
+	\item Conèixer quins són els conceptes que ha de gestionar el sistema i les seves característiques de cara a poder elaborar a la fase següent una ontologia que els formalitzi.
+	\item Pretenem obtenir una descomposició del problema en subproblemes, realitzant un anàlisi per refinaments successius fins que puguem fer-nos una idea de la realització jeràrquica de les diferents fases de resolució.
+	\item S'han de donar alguns exemples del coneixement de l'expert, el qual serà extret del domini. D'aquesta manera ens podem fer una idea de com es resolen els problemes típics des del punt de vista de l'expert.
+	\item Tota aquesta feina hauria de donar-nos un model quasi formal del domini i dels problemes i mètodes de resolució que s'hauran d'incloure al sistema.
+\end{enumerate}
+
+\subsection{Descripció dels conceptes del domini} 
+
+El sistema ha de tenir la següent informació que seran conceptes que formin el nostre domini:
+
+\begin{description}
+	\item[Activitat:] És una activitat física o estàtica que realitza l'usuari fora del gimnàs, normalment a la feina o a casa (pot ser llegir, escombrar, sortir a córrer, estar assegut...), conté les següents característiques:
+	
+	\begin{itemize}
+		\item Nom de l'activitat
+		\item Duració cada cop que es realitza
+		\item Si és una activitat més aviat sedentària o és una activitat física intensa.  
+		\item Freqüència amb la que es realitza (setmanalment, mensualment...)
+	\end{itemize}
+	
+	\item[Objectiu:] L'usuari el vol complir si és possible, conté les següents característiques:
+	\begin{itemize}
+		\item Nom de l'objectiu
+		\item Exercicis que contribueixen a millorar aquest objectiu
+	\end{itemize}
+	
+	\item[Exercici:] Activitat física que l'usuari ha de realitzar per complir el pla que se li ha recomanat. Pot ser dins o fora del gimnàs. Conté les següents característiques:
+	\begin{itemize}
+		\item Nom
+		\item Calories cremades per minut
+		\item Duració de l'exercici recomanada (màxima i mínima).
+		\item Edat recomanada (màxima i mínima).
+		\item Exercicis relacionats amb aquest
+		\item Grups musculars que treballa
+		\item Problemes que tracta
+		\item Problemes contraindicats
+		\item Repeticions (màximes i mínimes)
+	\end{itemize}
+\end{description}
+
 
 \begin{description}
 	\item[Objectiu:]  L'usuari vol complir-lo si és possible
@@ -70,7 +144,7 @@ Així doncs, un \emph{Sistema Basat en el Coneixement} és idoni per substituir 
 	
 \end{description}
 
-\subsubsection{Descripció dels problemes que intervenen a la resolució}
+\subsection{Descripció dels problemes que intervenen a la resolució}
 
 Un dels principals problemes que intervenen a la solució és com determinar l'estat físic d'una persona. Això és així perquè és fàcil veure quan una persona està perfectament en forma o quan no ho està però comparar valors intermedis ja es fa més difícil a no ser que se li assigni un valor numèric.
 
@@ -78,8 +152,21 @@ L'altre problema que es planteja és com determinar la dificultat d'un exercici 
 
 També intervé a la resolució com determinar els exercicis que són beneficiosos o que són perjudicials per a un determinat problema físic. 
 
-\subsection{Formalització}
+\section{Formalització}
 
-\subsection{Implementació}
+Per a construir la ontologia s'ha buscat informació d'internet i també de coneixements personals ja que dos membres del grup assisteixen regularment al gimnàs i un ells té el certificat de dinamitzador. 
+
+\subsection{Conceptes de la ontologia}
+
+\begin{description}
+	\item[Objectiu:] 
+	\item[Activitat:]
+	\item[Exercici:]
+	\item[Test:]
+	\item[Dificultat:]
+	\item[Grup muscular:]
+\end{description}
+
+\section{Implementació}
 
 \end{document}
