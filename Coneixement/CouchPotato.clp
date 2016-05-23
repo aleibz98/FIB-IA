@@ -1198,7 +1198,7 @@
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad -15)
+	(gradoActividad -2)
 	(nombre "Leer"))
 
 ([Levantamiento+de+peso] of  Actividad+de+Trabajo
@@ -1329,7 +1329,7 @@
 
 ([Sentado] of  Actividad+de+Trabajo
 
-	(gradoActividad -5)
+	(gradoActividad -2)
 	(nombre "Estar sentado"))
 
 ([Sistema+Card%C3%ADaco] of  Objetivo
@@ -1378,7 +1378,7 @@
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad -20)
+	(gradoActividad -5)
 	(nombre "Ver la television"))
 
 ([Trapecio] of  Grupo+muscular
@@ -1721,9 +1721,55 @@
   (import preguntas-persona ?ALL)
   (export ?ALL))
 
+  
+  
+(deffunction do-test1(?test ?message ?persona)
+	(printout t crlf ?message crlf "Introduce aqui los resultados obtenidos: " crlf)
+	(bind ?ppm (pregunta-numerica "Pulsaciones por minuto " 50  250))
+	(send ?test put-ppm ?ppm)
+	(bind ?cansancio (ask-question "Cansacio [Mucho|Poco|Nada] " Mucho Poco Nada))
+	(send ?test put-cansancio ?cansancio)
+	(bind ?tir (ask-question "Tirantez Muscular [Mucho|Poco|Nada] " Mucho Poco Nada))
+	(send ?test put-tirantezMuscular ?tir)
+	
+	(slot-insert$ ?persona tests 1 ?test)
+	(if (> ?ppm 150) then
+		(if (eq (str-compare ?cansancio "Mucho") 0) then 2000 else
+			(if (eq (str-compare ?tir "Mucho") 0) then 5000 else 8000)
+		)		
+	else
+		(if (eq (str-compare ?cansancio "Mucho") 0) then 8000 else
+			(if (eq (str-compare ?tir "Mucho") 0) then 8000 else 10000)
+		)
+	)
+)
+
+(deffunction do-test2(?test ?message ?persona)
+	(printout t crlf ?message crlf "Introduce aqui los resultados obtenidos: " crlf)
+	(bind ?ppm (pregunta-numerica "Pulsaciones por minuto " 50  250))
+	(send ?test put-ppm ?ppm)
+	(bind ?cansancio (ask-question "Cansacio [Mucho|Poco|Nada] " Mucho Poco Nada))
+	(send ?test put-cansancio ?cansancio)
+	(bind ?tir (ask-question "Tirantez Muscular [Mucho|Poco|Nada] " Mucho Poco Nada))
+	(send ?test put-tirantezMuscular ?tir)
+	
+	(slot-insert$ ?persona tests 1 ?test)
+	(if (> ?ppm 200) then
+		(if (eq (str-compare ?cansancio "Mucho") 0) then 40000 else
+			(if (eq (str-compare ?tir "Mucho") 0) then 42000 else 45000)
+		)		
+	else
+		(if (eq (str-compare ?cansancio "Mucho") 0) then 42000 else
+			(if (eq (str-compare ?tir "Mucho") 0) then 42000 else 50000)
+		)
+	)
+)
+
 (defrule calc-fitness
 	(nombre ?nombre)
 	?dieta <-(object (is-a Dieta)(nombre "Much WOW"))
+	?test1 <-(object (is-a Test)(nombre "Subir tramos escalera"))
+	?test2 <-(object (is-a Test)(nombre "Carrera sostenida"))
 	?persona <-(object (is-a Persona)(nombre ?nombreA))
 	(test (eq (str-compare  ?nombre ?nombreA) 0))
 	=>
@@ -1741,15 +1787,30 @@
 		(bind ?fitness (+ ?fitness ?sedent))
 	)
 	
-    (bind ?sal (- 0 (send ?dieta get-abuso+de+sal)))
-    (bind ?picar (- 0 (send ?dieta get-picar+entre+horas)))
+    (bind ?sal (- 5 (send ?dieta get-abuso+de+sal)))
+    (bind ?picar (- 5 (send ?dieta get-picar+entre+horas)))
     (bind ?fruta (send ?dieta get-consumo+de+fruta))
 	(bind ?pastel (- 0 (send ?dieta get-pasteleria)))
 	
 	(bind ?fitness (+ (* (+ ?sal ?picar ?fruta ?pastel) 50) ?fitness)) ;(sal+picar)*50+fruta*50+fitness
-	(printout t "fitness " ?fitness crlf) 
+	
+	(printout t "fitness " ?fitness crlf)
+	
+	(if (< ?fitness 10000) then
+		(bind ?message "Por favor toma el test de subir tramos de escalera (2 minutos)")
+		(bind ?fitness2 (do-test1 ?test1 ?message ?persona))
+		(bind ?fitness (/ (+ ?fitness ?fitness2) 2))
+		else (if (> ?fitness 50000) then 
+		(bind ?message "Por favor toma el test de la carrera sostenida (5 minutos)")
+		(bind ?fitness2 (do-test2 ?test2 ?message ?persona))
+		(bind ?fitness (/ (+ ?fitness ?fitness2) 2))
+		)
+	)
+	
+	(printout t "fitness " ?fitness crlf)
 	(assert (fitness ?fitness))
 )
+
 
 (deffunction calcula_puntuacion(?ejercicio ?persona)
 	(bind ?res 0)
@@ -2145,5 +2206,3 @@
 	)
 )
 
-
-	

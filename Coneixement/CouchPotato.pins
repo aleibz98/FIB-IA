@@ -1,4 +1,4 @@
-; Mon May 23 17:02:01 CEST 2016
+; Mon May 23 18:24:53 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -585,7 +585,7 @@
 
 ([Esfuerzos+musculares] of  Actividad+de+Trabajo
 
-	(gradoActividad 15)
+	(gradoActividad 20)
 	(nombre "Esfuerzos musculares"))
 
 ([Espalda] of  Problema+musculo-esqueletico
@@ -618,7 +618,7 @@
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad -15)
+	(gradoActividad -2)
 	(nombre "Leer"))
 
 ([Levantamiento+de+peso] of  Actividad+de+Trabajo
@@ -749,7 +749,7 @@
 
 ([Sentado] of  Actividad+de+Trabajo
 
-	(gradoActividad -5)
+	(gradoActividad -2)
 	(nombre "Estar sentado"))
 
 ([Sistema+Card%C3%ADaco] of  Objetivo
@@ -798,7 +798,7 @@
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad -20)
+	(gradoActividad -5)
 	(nombre "Ver la television"))
 
 ([Trapecio] of  Grupo+muscular
