@@ -1427,49 +1427,49 @@
 
 (deffunction print-program (?programa)
     (printout t "-----Programa propuesto-----"crlf)
-    (printout t crlf"--------" clrf "  Lunes" crlf "--------" crlf)
+    (printout t crlf"----------" crlf "  Lunes" crlf "----------" crlf)
     (bind ?lista (send ?programa get-lunes))
     (loop-for-count (?i 1 (length$ ?lista)) do
         (bind ?aux (nth$ ?i ?lista))
         (printout t (send ?aux get-nombre) crlf)
     )
 
-    (printout t crlf"--------" clrf "  Martes" crlf "--------" crlf)
+    (printout t crlf"----------" crlf "  Martes" crlf "----------" crlf)
     (bind ?lista (send ?programa get-martes))
     (loop-for-count (?i 1 (length$ ?lista)) do
         (bind ?aux (nth$ ?i ?lista))
         (printout t (send ?aux get-nombre) crlf)
     )
 
-    (printout t crlf"--------" clrf " Miercoles" crlf "--------" crlf)
+    (printout t crlf"----------" crlf "Miercoles" crlf "----------" crlf)
     (bind ?lista (send ?programa get-miercoles))
     (loop-for-count (?i 1 (length$ ?lista)) do
         (bind ?aux (nth$ ?i ?lista))
         (printout t (send ?aux get-nombre) crlf)
     )
 
-    (printout t crlf"--------" clrf "  Jueves" crlf "--------" crlf)
+    (printout t crlf"----------" crlf "  Jueves" crlf "----------" crlf)
     (bind ?lista (send ?programa get-jueves))
     (loop-for-count (?i 1 (length$ ?lista)) do
         (bind ?aux (nth$ ?i ?lista))
         (printout t (send ?aux get-nombre) crlf)
     )
 
-    (printout t crlf"--------" clrf "  Viernes" crlf "--------" crlf)
+    (printout t crlf"----------" crlf " Viernes" crlf "----------" crlf)
     (bind ?lista (send ?programa get-viernes))
     (loop-for-count (?i 1 (length$ ?lista)) do
         (bind ?aux (nth$ ?i ?lista))
         (printout t (send ?aux get-nombre) crlf)
     )
 
-    (printout t crlf"--------" clrf "  Sabado" crlf "--------" crlf)
+    (printout t crlf"----------" crlf "  Sabado" crlf "----------" crlf)
     (bind ?lista (send ?programa get-sabado))
     (loop-for-count (?i 1 (length$ ?lista)) do
         (bind ?aux (nth$ ?i ?lista))
         (printout t (send ?aux get-nombre) crlf)
     )
 
-    (printout t crlf"--------" clrf " Domingo" crlf "--------" crlf)
+    (printout t crlf"----------" crlf " Domingo" crlf "----------" crlf)
     (bind ?lista (send ?programa get-domingo))
     (loop-for-count (?i 1 (length$ ?lista)) do
         (bind ?aux (nth$ ?i ?lista))
@@ -1527,13 +1527,13 @@
     (send ?persona put-peso ?peso)
 	(bind ?imc (/ ?peso (* ?altura ?altura)))
     (send ?persona put-imc ?imc)
-	(if (< ?imc 18.5) then (anadir-ProblemaIMC ?persona "Peso insuficiente") else
-		(if (> ?imc 50) then (anadir-ProblemaIMC ?persona "Obesidad tipo 4") else
-			(if (> ?imc 40) then (anadir-ProblemaIMC ?persona "Obesidad tipo 3") else
-				(if (> ?imc 35) then (anadir-ProblemaIMC ?persona "Obesidad tipo 2") else 
-					(if (> ?imc 30) then (anadir-ProblemaIMC ?persona "Obesidad tipo 1") else
-						(if (> ?imc 27) then (anadir-ProblemaIMC ?persona "Sobrepeso grado 2") else 
-							(if (> ?imc 25) then (anadir-ProblemaIMC ?persona "Sobrepeso grado 1"))
+	(if (< ?imc 18.5) then (anadir-ProblemaIMC ?persona "Peso insuficiente") (assert(preFitness -1000)) else
+		(if (> ?imc 50) then (anadir-ProblemaIMC ?persona "Obesidad tipo 4") (assert(preFitness -3000))else
+			(if (> ?imc 40) then (anadir-ProblemaIMC ?persona "Obesidad tipo 3") (assert(preFitness -2000)) else
+				(if (> ?imc 35) then (anadir-ProblemaIMC ?persona "Obesidad tipo 2") (assert(preFitness -1600))else 
+					(if (> ?imc 30) then (anadir-ProblemaIMC ?persona "Obesidad tipo 1") (assert(preFitness -1200))else
+						(if (> ?imc 27) then (anadir-ProblemaIMC ?persona "Sobrepeso grado 2") (assert(preFitness -700)) else 
+							(if (> ?imc 25) then (anadir-ProblemaIMC ?persona "Sobrepeso grado 1") (assert(preFitness -300)) else (assert(preFitness 500)))
 						)
 					)
 				)
@@ -1617,6 +1617,7 @@
 )
 
 (defrule pide-actividades-otras
+    (declare (salience 10))
 	(actividad "otras")
 	(nombre ?nombre)
 	?persona <-(object (is-a Persona)(nombre ?nombreA))
@@ -1819,13 +1820,15 @@
 
 (defrule calc-fitness
 	(nombre ?nombre)
+    ?ret <- (preFitness ?pre)
 	?dieta <-(object (is-a Dieta)(nombre "Much WOW"))
 	?test1 <-(object (is-a Test)(nombre "Subir tramos escalera"))
 	?test2 <-(object (is-a Test)(nombre "Carrera sostenida"))
 	?persona <-(object (is-a Persona)(nombre ?nombreA))
 	(test (eq (str-compare  ?nombre ?nombreA) 0))
 	=>
-	(bind ?fitness 0)
+	(bind ?fitness ?pre)
+    (retract ?ret)
 	(bind ?lista_actividades (send ?persona get-actividades))
 	(loop-for-count (?i 1 (length$ ?lista_actividades)) do
 		(bind ?aux (nth$ ?i ?lista_actividades))
