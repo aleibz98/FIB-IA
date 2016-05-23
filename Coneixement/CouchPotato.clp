@@ -1667,15 +1667,25 @@
 	(bind ?lista_aliviados (send ?ejercicio get-problemas+aliviados))
 	(progn$ (?aliviado ?lista_aliviados)
 		(progn$ (?problema ?lista_problemas)
-			(if (eq ?aliviado ?problema) then (bind ?res (+ ?res 1)))
+			(if (eq ?aliviado ?problema) then (bind ?res (+ ?res 3)))
 		)
 	)
 	
 	(bind ?lista_objetivos (send ?persona get-objetivos))
 	(bind ?lista_cumplidos (send ?ejercicio get-objetivos))
+	(bind ?lista_grupos_cumplidos (send ?ejercicio get-grupos+musculares))
 	(progn$ (?objetivo ?lista_objetivos)
-		(progn$ (?cumplido ?lista_cumplidos)
-			(if (eq ?cumplido ?objetivo) then (bind ?res (+ ?res 1)))
+		(if (eq (str-compare  (class ?objetivo) "Musculacion") 0) then 
+			(bind ?lista_grupos_objetivo (send ?objetivo get-grupo_muscular))
+			(progn$ (?grupo_objetivo ?lista_grupos_objetivo)
+				(progn$ (?grupo_cumplido ?lista_grupos_cumplidos)
+					(if (eq ?grupo_cumplido ?grupo_objetivo) then (bind ?res (+ ?res 1)))
+				)
+			)
+		else 
+			(progn$ (?cumplido ?lista_cumplidos)
+				(if (eq ?cumplido ?objetivo) then (bind ?res (+ ?res 3)))
+			)
 		)
 	)
 	
