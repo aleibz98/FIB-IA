@@ -1,4 +1,4 @@
-; Fri May 20 18:10:55 CEST 2016
+; Mon May 23 12:34:01 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -59,7 +59,9 @@
 
 ([Cinta+de+correr] of  Ejercicio+con+aparatos
 
+	(duracion+maxima 120)
 	(duracion+minima 20)
+	(edad+maxima 80)
 	(edad+minima 12)
 	(ejercicios+combinan
 		[Bicicleta+estatica]
@@ -104,6 +106,7 @@
 	(calorias+quemadas 4.0)
 	(duracion+maxima 30)
 	(duracion+minima 10)
+	(edad+maxima 100)
 	(edad+minima 12)
 	(ejercicios+combinan [Pesos])
 	(grupos+musculares
@@ -135,6 +138,8 @@
 	(calorias+quemadas 3.4)
 	(duracion+maxima 20)
 	(duracion+minima 5)
+	(edad+maxima 80)
+	(edad+minima 10)
 	(grupos+musculares
 		[CouchPotato_Class14]
 		[CouchPotato_Class21])
@@ -148,11 +153,23 @@
 	(repeticiones+maximas 50)
 	(repeticiones+minimas 10))
 
+([CouchPotato_Class10001] of  Persona
+
+	(altura 1.7)
+	(edad 50)
+	(imc 22.0)
+	(nombre "Test1")
+	(peso 75.0)
+	(pMax 100.0)
+	(pMin 80.0))
+
 ([CouchPotato_Class11] of  Ejercicio+con+pesas
 
 	(calorias+quemadas 3.0)
 	(duracion+maxima 20)
 	(duracion+minima 5)
+	(edad+maxima 80)
+	(edad+minima 10)
 	(ejercicios+combinan
 		[CouchPotato_Class12]
 		[CouchPotato_Class15]
@@ -184,6 +201,8 @@
 	(calorias+quemadas 3.4)
 	(duracion+maxima 20)
 	(duracion+minima 5)
+	(edad+maxima 80)
+	(edad+minima 10)
 	(ejercicios+combinan
 		[CouchPotato_Class15]
 		[CouchPotato_Class11]
@@ -214,6 +233,8 @@
 	(calorias+quemadas 3.6)
 	(duracion+maxima 20)
 	(duracion+minima 5)
+	(edad+maxima 80)
+	(edad+minima 10)
 	(ejercicios+combinan
 		[CouchPotato_Class12]
 		[CouchPotato_Class15]
@@ -247,6 +268,8 @@
 	(calorias+quemadas 3.1)
 	(duracion+maxima 20)
 	(duracion+minima 5)
+	(edad+maxima 80)
+	(edad+minima 10)
 	(ejercicios+combinan
 		[CouchPotato_Class12]
 		[CouchPotato_Class11]
@@ -279,6 +302,8 @@
 	(calorias+quemadas 4.1)
 	(duracion+maxima 20)
 	(duracion+minima 5)
+	(edad+maxima 80)
+	(edad+minima 10)
 	(ejercicios+combinan
 		[CouchPotato_Class12]
 		[CouchPotato_Class15]
@@ -310,6 +335,7 @@
 	(calorias+quemadas 5.1)
 	(duracion+maxima 20)
 	(duracion+minima 5)
+	(edad+maxima 80)
 	(edad+minima 5)
 	(nombre "Flexiones")
 	(repeticiones+maximas 100)
@@ -324,6 +350,8 @@
 	(calorias+quemadas 2.5)
 	(duracion+maxima 20)
 	(duracion+minima 5)
+	(edad+maxima 80)
+	(edad+minima 5)
 	(ejercicios+combinan
 		[CouchPotato_Class9]
 		[CouchPotato_Class17])
@@ -347,9 +375,11 @@
 
 ([CouchPotato_Class24] of  Estiramientos
 
-	(calorias+quemadas 0.0)
+	(calorias+quemadas 1.0)
 	(duracion+maxima 5)
 	(duracion+minima 1)
+	(edad+maxima 100)
+	(edad+minima 5)
 	(ejercicios+combinan
 		[CouchPotato_Class26]
 		[CouchPotato_Class25])
@@ -366,17 +396,22 @@
 
 ([CouchPotato_Class25] of  Estiramientos
 
+	(calorias+quemadas 1.0)
 	(duracion+maxima 5)
 	(duracion+minima 1)
+	(edad+maxima 100)
+	(edad+minima 5)
 	(nombre "Piernas")
 	(repeticiones+maximas 4)
 	(repeticiones+minimas 2))
 
 ([CouchPotato_Class26] of  Estiramientos
 
-	(calorias+quemadas 0.0)
+	(calorias+quemadas 1.0)
 	(duracion+maxima 5)
 	(duracion+minima 1)
+	(edad+maxima 100)
+	(edad+minima 5)
 	(ejercicios+combinan
 		[CouchPotato_Class24]
 		[CouchPotato_Class25])
@@ -424,6 +459,7 @@
 	(calorias+quemadas 4.5)
 	(duracion+maxima 20)
 	(duracion+minima 5)
+	(edad+maxima 80)
 	(edad+minima 5)
 	(ejercicios+combinan
 		[CouchPotato_Class17]
@@ -513,7 +549,7 @@
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad -30)
+	(gradoActividad -15)
 	(nombre "Leer"))
 
 ([Levantamiento+de+peso] of  Actividad+de+Trabajo
@@ -549,6 +585,7 @@
 	(calorias+quemadas 5.0)
 	(duracion+maxima 30)
 	(duracion+minima 10)
+	(edad+maxima 100)
 	(edad+minima 12)
 	(ejercicios+combinan [CouchPotato_Class0])
 	(grupos+musculares
@@ -597,6 +634,10 @@
 ([Remo] of  Ejercicio+con+aparatos
 
 	(calorias+quemadas 10.0)
+	(duracion+maxima 120)
+	(duracion+minima 10)
+	(edad+maxima 100)
+	(edad+minima 10)
 	(grupos+musculares
 		[B%C3%ADceps]
 		[Cuadriceps]
@@ -631,7 +672,7 @@
 
 ([Sentado] of  Actividad+de+Trabajo
 
-	(gradoActividad -10)
+	(gradoActividad -5)
 	(nombre "Estar sentado"))
 
 ([Sistema+Card%C3%ADaco] of  Objetivo
@@ -644,6 +685,7 @@
 	(duracion+maxima 30)
 	(duracion+minima 10)
 	(edad+maxima 55)
+	(edad+minima 14)
 	(ejercicios+combinan
 		[Cinta+de+correr]
 		[Bicicleta+estatica])
@@ -679,7 +721,7 @@
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad -40)
+	(gradoActividad -20)
 	(nombre "Ver la television"))
 
 ([Trapecio] of  Grupo+muscular

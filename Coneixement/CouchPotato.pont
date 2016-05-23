@@ -1,4 +1,4 @@
-; Fri May 20 18:10:55 CEST 2016
+; Mon May 23 12:34:01 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -13,20 +13,20 @@
 		(range 1 2)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot persona
+	(multislot jueves
+;+		(comment "ejercicios jueves")
 		(type INSTANCE)
-;+		(allowed-classes Persona)
-;+		(cardinality 1 1)
+;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))
 	(single-slot consumo+de+fruta
 ;+		(comment "Piezas a la semana")
 		(type INTEGER)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(multislot jueves
-;+		(comment "ejercicios jueves")
+	(single-slot persona
 		(type INSTANCE)
-;+		(allowed-classes Ejercicio-Persona)
+;+		(allowed-classes Persona)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot tiempo+diario+disponible
 ;+		(comment "tiempo diario en minutos")
@@ -63,6 +63,11 @@
 		(type INSTANCE)
 ;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))
+	(single-slot pasteleria
+;+		(comment "veces a la semana")
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot peso
 		(type FLOAT)
 		(default 75.0)
@@ -73,32 +78,27 @@
 		(range -50 50)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot tipo
-		(type INTEGER)
-		(range 1 4)
-;+		(cardinality 1 1)
+	(multislot grupo_muscular
+		(type INSTANCE)
+;+		(allowed-classes Grupo+muscular)
 		(create-accessor read-write))
 	(single-slot calorias+quemadas
 ;+		(comment "calorias quemadas por minuto")
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(multislot grupo_muscular
-		(type INSTANCE)
-;+		(allowed-classes Grupo+muscular)
-		(create-accessor read-write))
-	(single-slot imc
-		(type FLOAT)
-;+		(cardinality 0 1)
+	(single-slot tipo
+		(type INTEGER)
+		(range 1 4)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot picar+entre+horas
 ;+		(comment "de 0 (nada) a 10 (mucho)")
 		(type INTEGER)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot duracion+minima
-;+		(comment "en minutos")
-		(type INTEGER)
+	(single-slot imc
+		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot cansancio
@@ -106,20 +106,25 @@
 		(allowed-values Mucho Poco Nada)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot duracion
+	(single-slot duracion+minima
 ;+		(comment "en minutos")
 		(type INTEGER)
-		(default 0)
 ;+		(cardinality 0 1)
-		(create-accessor read-write))
-	(multislot sabado
-		(type INSTANCE)
-;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))
 	(multislot lunes
 ;+		(comment "ejercicios lunes")
 		(type INSTANCE)
 ;+		(allowed-classes Ejercicio-Persona)
+		(create-accessor read-write))
+	(multislot sabado
+		(type INSTANCE)
+;+		(allowed-classes Ejercicio-Persona)
+		(create-accessor read-write))
+	(single-slot duracion
+;+		(comment "en minutos")
+		(type INTEGER)
+		(default 0)
+;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot salud
 		(type INSTANCE)
@@ -134,20 +139,20 @@
 		(type INSTANCE)
 ;+		(allowed-classes Test)
 		(create-accessor read-write))
-	(single-slot ejercicio
-		(type INSTANCE)
-;+		(allowed-classes Ejercicio)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(multislot problemas+aliviados
-		(type INSTANCE)
-;+		(allowed-classes Problema)
-		(create-accessor read-write))
 	(single-slot frequencia
 		(type SYMBOL)
 		(allowed-values Diaria Semanal Mensual None)
 		(default None)
 ;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot problemas+aliviados
+		(type INSTANCE)
+;+		(allowed-classes Problema)
+		(create-accessor read-write))
+	(single-slot ejercicio
+		(type INSTANCE)
+;+		(allowed-classes Ejercicio)
+;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot dieta
 		(type INSTANCE)
@@ -197,15 +202,15 @@
 		(type INSTANCE)
 ;+		(allowed-classes Problema)
 		(create-accessor read-write))
-	(single-slot tirantezMuscular
-		(type SYMBOL)
-		(allowed-values Poco Mucho Nada)
-;+		(cardinality 0 1)
-		(create-accessor read-write))
 	(multislot miercoles
 ;+		(comment "ejercicios miercoles")
 		(type INSTANCE)
 ;+		(allowed-classes Ejercicio-Persona)
+		(create-accessor read-write))
+	(single-slot tirantezMuscular
+		(type SYMBOL)
+		(allowed-values Poco Mucho Nada)
+;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot duracion+maxima
 ;+		(comment "en minutos")
@@ -235,14 +240,14 @@
 		(default 25)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
+	(multislot domingo
+		(type INSTANCE)
+;+		(allowed-classes Ejercicio-Persona)
+		(create-accessor read-write))
 	(single-slot dificultad
 		(type SYMBOL)
 		(allowed-values moderada normal dificil)
 ;+		(cardinality 1 1)
-		(create-accessor read-write))
-	(multislot domingo
-		(type INSTANCE)
-;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))
 	(single-slot value
 ;+		(type ANY)
@@ -269,13 +274,13 @@
 		(type FLOAT)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(multislot problemas+fisicos
-		(type INSTANCE)
-;+		(allowed-classes Problema)
-		(create-accessor read-write))
 	(single-slot pMin
 		(type FLOAT)
 ;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(multislot problemas+fisicos
+		(type INSTANCE)
+;+		(allowed-classes Problema)
 		(create-accessor read-write))
 	(multislot objetivos
 		(type INSTANCE)
@@ -286,14 +291,14 @@
 		(default 1.7)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(multislot tests
-		(type INSTANCE)
-;+		(allowed-classes Test)
-		(create-accessor read-write))
 	(single-slot peso
 		(type FLOAT)
 		(default 75.0)
 ;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(multislot tests
+		(type INSTANCE)
+;+		(allowed-classes Test)
 		(create-accessor read-write))
 	(single-slot edad
 		(type INTEGER)
@@ -337,8 +342,9 @@
 		(default 0)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot nombre
-		(type STRING)
+	(single-slot gradoActividad
+		(type INTEGER)
+		(range -50 50)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot frequencia
@@ -347,9 +353,8 @@
 		(default None)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot gradoActividad
-		(type INTEGER)
-		(range -50 50)
+	(single-slot nombre
+		(type STRING)
 ;+		(cardinality 1 1)
 		(create-accessor read-write)))
 
@@ -391,6 +396,11 @@
 		(create-accessor read-write))
 	(single-slot consumo+de+fruta
 ;+		(comment "Piezas a la semana")
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot pasteleria
+;+		(comment "veces a la semana")
 		(type INTEGER)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
@@ -439,14 +449,14 @@
 (defclass Programa
 	(is-a USER)
 	(role concrete)
+	(multislot objetivos
+		(type INSTANCE)
+;+		(allowed-classes Objetivo)
+		(create-accessor read-write))
 	(multislot jueves
 ;+		(comment "ejercicios jueves")
 		(type INSTANCE)
 ;+		(allowed-classes Ejercicio-Persona)
-		(create-accessor read-write))
-	(multislot objetivos
-		(type INSTANCE)
-;+		(allowed-classes Objetivo)
 		(create-accessor read-write))
 	(multislot tiempo+diario+disponible
 ;+		(comment "tiempo diario en minutos")
@@ -454,8 +464,7 @@
 		(range 30 1440)
 		(cardinality 7 7)
 		(create-accessor read-write))
-	(multislot lunes
-;+		(comment "ejercicios lunes")
+	(multislot sabado
 		(type INSTANCE)
 ;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))
@@ -464,7 +473,8 @@
 		(type INSTANCE)
 ;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))
-	(multislot sabado
+	(multislot lunes
+;+		(comment "ejercicios lunes")
 		(type INSTANCE)
 ;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))

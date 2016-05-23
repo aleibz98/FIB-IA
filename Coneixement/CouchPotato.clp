@@ -1,10 +1,4 @@
-; Thu May 05 20:09:37 CEST 2016
-; 
-;+ (version "3.5")
-;+ (build "Build 663")
-
-
-; Tue May 10 12:51:58 CEST 2016
+; Mon May 23 11:32:51 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -57,6 +51,10 @@
 		(type INSTANCE)
 ;+		(allowed-classes Objetivo)
 		(create-accessor read-write))
+	(single-slot repeticiones_max
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot repeticiones+maximas
 		(type INTEGER)
 ;+		(cardinality 0 1)
@@ -65,6 +63,11 @@
 		(type INSTANCE)
 ;+		(allowed-classes Ejercicio-Persona)
 		(create-accessor read-write))
+	(single-slot pasteleria
+;+		(comment "veces a la semana")
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
 	(single-slot peso
 		(type FLOAT)
 		(default 75.0)
@@ -72,7 +75,7 @@
 		(create-accessor read-write))
 	(single-slot gradoActividad
 		(type INTEGER)
-		(range -5 5)
+		(range -50 50)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(multislot grupo_muscular
@@ -214,10 +217,6 @@
 		(type INTEGER)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
-	(single-slot repeticiones
-		(type INTEGER)
-;+		(cardinality 1 1)
-		(create-accessor read-write))
 	(multislot grupos+musculares
 ;+		(comment "grupos musculares ejercitados")
 		(type INSTANCE)
@@ -231,6 +230,10 @@
 		(type FLOAT)
 		(default 1.7)
 ;+		(cardinality 1 1)
+		(create-accessor read-write))
+	(single-slot repeticiones_min
+		(type INTEGER)
+;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot edad
 		(type INTEGER)
@@ -341,7 +344,7 @@
 		(create-accessor read-write))
 	(single-slot gradoActividad
 		(type INTEGER)
-		(range -5 5)
+		(range -50 50)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
 	(single-slot frequencia
@@ -393,6 +396,11 @@
 		(create-accessor read-write))
 	(single-slot consumo+de+fruta
 ;+		(comment "Piezas a la semana")
+		(type INTEGER)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot pasteleria
+;+		(comment "veces a la semana")
 		(type INTEGER)
 ;+		(cardinality 0 1)
 		(create-accessor read-write))
@@ -577,9 +585,13 @@
 ;+		(allowed-classes Persona)
 ;+		(cardinality 1 1)
 		(create-accessor read-write))
-	(single-slot repeticiones
+	(single-slot repeticiones_max
 		(type INTEGER)
-;+		(cardinality 1 1)
+;+		(cardinality 0 1)
+		(create-accessor read-write))
+	(single-slot repeticiones_min
+		(type INTEGER)
+;+		(cardinality 0 1)
 		(create-accessor read-write))
 	(single-slot ejercicio
 		(type INSTANCE)
@@ -593,7 +605,7 @@
 		(create-accessor read-write)))
 
 (definstances instances
-; Tue May 10 12:51:58 CEST 2016
+; Mon May 23 11:32:51 CEST 2016
 ; 
 ;+ (version "3.5")
 ;+ (build "Build 663")
@@ -606,7 +618,7 @@
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad 1)
+	(gradoActividad 20)
 	(nombre "Barrer"))
 
 ([Bicicleta+estatica] of  Ejercicio+con+aparatos
@@ -655,6 +667,7 @@
 ([Cinta+de+correr] of  Ejercicio+con+aparatos
 
 	(duracion+minima 20)
+	(edad+maxima 80)
 	(edad+minima 12)
 	(ejercicios+combinan
 		[Bicicleta+estatica]
@@ -684,14 +697,14 @@
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad -1)
+	(gradoActividad 15)
 	(nombre "Hacer colada"))
 
 ([Compra] of  Desplazamiento
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad 1)
+	(gradoActividad 30)
 	(nombre "Comprar"))
 
 ([CouchPotato_Class0] of  Ejercicio+con+aparatos
@@ -1048,12 +1061,12 @@
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad 2)
+	(gradoActividad 30)
 	(nombre "Cuidar del jardin"))
 
 ([De+pie] of  Actividad+de+Trabajo
 
-	(gradoActividad 1)
+	(gradoActividad 10)
 	(nombre "Estar de pie"))
 
 ([Deltoides] of  Grupo+muscular
@@ -1062,7 +1075,7 @@
 
 ([Desplazamiento+a+pie] of  Actividad+de+Trabajo
 
-	(gradoActividad 2)
+	(gradoActividad 10)
 	(nombre "Desplazamientos a pie"))
 
 ([Dorsal] of  Grupo+muscular
@@ -1075,7 +1088,7 @@
 
 ([Esfuerzos+musculares] of  Actividad+de+Trabajo
 
-	(gradoActividad 3)
+	(gradoActividad 15)
 	(nombre "Esfuerzos musculares"))
 
 ([Espalda] of  Problema+musculo-esqueletico
@@ -1093,7 +1106,7 @@
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad 1)
+	(gradoActividad 20)
 	(nombre "Fregar"))
 
 ([Gemelos] of  Grupo+muscular
@@ -1108,12 +1121,12 @@
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad -2)
+	(gradoActividad -15)
 	(nombre "Leer"))
 
 ([Levantamiento+de+peso] of  Actividad+de+Trabajo
 
-	(gradoActividad 5)
+	(gradoActividad 20)
 	(nombre "Levantamiento de peso"))
 
 ([Mantenimiento] of  Objetivo
@@ -1122,21 +1135,21 @@
 
 ([Movimientos+Repetitivos] of  Actividad+de+Trabajo
 
-	(gradoActividad 3)
+	(gradoActividad 5)
 	(nombre "Movimientos repetitivos"))
 
 ([Paseo] of  Desplazamiento
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad 1)
+	(gradoActividad 30)
 	(nombre "Pasear"))
 
 ([Paseo+mascota] of  Desplazamiento
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad 1)
+	(gradoActividad 35)
 	(nombre "Pasear mascota"))
 
 ([Pesos] of  Ejercicio+con+aparatos
@@ -1174,7 +1187,7 @@
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad -2)
+	(gradoActividad 15)
 	(nombre "Planchar"))
 
 ([Ponerse+en+forma] of  Objetivo
@@ -1221,12 +1234,12 @@
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad 4)
+	(gradoActividad 50)
 	(nombre "Salir a correr"))
 
 ([Sentado] of  Actividad+de+Trabajo
 
-	(gradoActividad -2)
+	(gradoActividad -5)
 	(nombre "Estar sentado"))
 
 ([Sistema+Card%C3%ADaco] of  Objetivo
@@ -1274,7 +1287,7 @@
 
 	(duracion 0)
 	(frequencia None)
-	(gradoActividad -5)
+	(gradoActividad -20)
 	(nombre "Ver la television"))
 
 ([Trapecio] of  Grupo+muscular
@@ -1405,7 +1418,9 @@
 	(bind ?respuesta (si-o-no-p "Llevas a cabo tareas domesticas regularmente? "))
 	(if (eq ?respuesta TRUE) then (assert(actividad "domesticas")))
 	(bind ?respuesta (si-o-no-p "Haces otras actividades? "))
-	(if (eq ?respuesta TRUE) then (assert(actividad "otras")))	
+	(if (eq ?respuesta TRUE) then (assert(actividad "otras")))
+	(bind ?respuesta (si-o-no-p "Tienes problemas musculo-esqueleticos? "))
+	(if (eq ?respuesta TRUE) then (assert(problemas)))
 )
 
 (defrule pide-actividades-trabajo
@@ -1502,13 +1517,16 @@
     (send ?dieta put-abuso+de+sal ?sal)
 	(bind ?picar (pregunta-numerica "Picoteo entre horas: " 0.0 10.0))
     (send ?dieta put-picar+entre+horas ?picar)
-    (bind ?fruta (pregunta-numerica "Cuantas piezas de fruta tomas a la semana? " 0.0 500.0))
+    (bind ?fruta (pregunta-numerica "Cuantas piezas de fruta tomas a la semana? " 0.0 200.0))
     (send ?dieta put-consumo+de+fruta ?fruta)
+	(bind ?pastel (pregunta-numerica "Cuantas veces a la semana tomas alguna pieza de pasteleria? " 0.0 200.0))
+    (send ?dieta put-pasteleria ?pastel)
 	
 	(send ?persona put-dieta ?dieta)
 )
 
 (defrule pide-problema
+	(problemas)
 	(nombre ?nombre)
 	?persona <-(object (is-a Persona)(nombre ?nombreA))
 	(test (eq (str-compare  ?nombre ?nombreA) 0))
@@ -1527,6 +1545,24 @@
 	)
 )
 
+(deffunction pide-grupo-muscular()
+	(bind ?lista_musc (find-all-instances ((?p Grupo+muscular)) TRUE))
+	(bind ?res (create$))
+	(printout t "0 : Deja de anadir" crlf)
+	(loop-for-count (?i 1 (length$ ?lista_musc)) do
+		(bind ?aux (nth$ ?i ?lista_musc))
+		(printout t ?i " : " (send ?aux get-nombre) crlf)
+	)
+	(bind ?respuesta (pregunta-numerica "Que musculo en concreto? " 0 (length$ ?lista_musc)))
+	(while (> ?respuesta 0) do 
+		(bind ?res (insert$ ?res 1 (nth$ ?respuesta ?lista_musc)))
+		(bind ?respuesta (pregunta-numerica "Alguno mas? " 0 (length$ ?lista_musc)))
+		
+	)
+	
+	?res
+)
+
 (defrule pide-objetivo
 	(nombre ?nombre)
 	?persona <-(object (is-a Persona)(nombre ?nombreA))
@@ -1539,10 +1575,17 @@
 		(printout t ?i " : " (send ?aux get-nombre) crlf)
 	)
 	(bind ?respuesta (pregunta-numerica "Que objetivo tienes? " 0 (length$ ?lista_objetivos)))
-	(while (> ?respuesta 0) do 
-		(slot-insert$ ?persona objetivos 1 (nth$ ?respuesta ?lista_objetivos))
+	(while (> ?respuesta 0) do
+		(bind ?aux (nth$ ?respuesta ?lista_objetivos))
+		(if (eq ?respuesta 7) then 
+		(send ?aux put-grupo_muscular (pide-grupo-muscular))
+		
+		else (slot-insert$ ?persona objetivos 1 ?aux))
+		
 		(bind ?respuesta (pregunta-numerica "Que objetivo mas tienes? " 0 (length$ ?lista_objetivos)))
 	)
+	
+	(slot-insert$ ?persona objetivos 1 (find-instance ((?mus Musculacion)) TRUE))
 	
 	(bind ?dificultad (ask-question "Cual es la dificultad deseada del entrenamiento? [Baja|Media|Alta] " Baja Media Alta))
 	(assert (dificultad ?dificultad))
@@ -1607,11 +1650,12 @@
 		(bind ?fitness (+ ?fitness ?sedent))
 	)
 	
-    (bind ?sal (send ?dieta get-abuso+de+sal))
-    (bind ?picar (send ?dieta get-picar+entre+horas))
+    (bind ?sal (- 0 (send ?dieta get-abuso+de+sal)))
+    (bind ?picar (- 0 (send ?dieta get-picar+entre+horas)))
     (bind ?fruta (send ?dieta get-consumo+de+fruta))
+	(bind ?pastel (- 0 (send ?dieta get-pasteleria)))
 	
-	(bind ?fitness (+ (* (+ ?sal ?picar) 100) ?fruta ?fitness)) ;(sal+picar)*100+fruta+fitness
+	(bind ?fitness (+ (* (+ ?sal ?picar ?fruta ?pastel) 50) ?fitness)) ;(sal+picar)*50+fruta*50+fitness
 	(printout t "fitness " ?fitness crlf) 
 	(assert (fitness ?fitness))
 )
@@ -1653,6 +1697,7 @@
 			(bind ?aux (nth$ ?i ?restricciones))
 			(if (member ?aux ?lista_problemas) then (bind ?anadir 0))
 		)
+		(if (or (> (send ?persona get-edad) (send ?e get-edad+maxima))(< (send ?e get-edad+maxima) (send ?e get-edad+maxima))) then (bind ?anadir 0))
 		(if (= ?anadir 1) then (assert (ejercicio_puntuado (ejercicio ?e) (puntuacion (calcula_puntuacion ?e ?persona)))))
 	)
 	
