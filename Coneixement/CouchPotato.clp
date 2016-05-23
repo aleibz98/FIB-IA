@@ -1903,7 +1903,7 @@
 	?res
 )
 
-(deftemplate ejercicio_tiempo (slot ejercicio) (slot tiempo) (slot pos))
+(deftemplate ejercicio_tiempo (slot ejercicio) (slot puntuacion) (slot tiempo))
 
 (defrule calcular-tiempo-ejercicios
 	(lista_ejercicios $?lista_ejercicios)
@@ -1913,7 +1913,6 @@
 	?persona <-(object (is-a Persona)(nombre ?nombreA)(peso ?peso))
 	(test (eq (str-compare  ?nombre ?nombreA) 0))
 	=>
-	(bind ?pos 1)
 	(bind ?fitness 40000)
 	(bind ?min-fit 10000)
 	(bind ?max-fit 50000)
@@ -1930,279 +1929,125 @@
 		(bind ?calorias-minuto (* ?calorias-minuto (/ ?peso 60)))
 		(bind ?tiempo (/ ?calorias-deseadas ?calorias-minuto))
 		(bind ?tiempo (clamp ?dur-min ?tiempo ?dur-max))
-		(assert (ejercicio_tiempo (ejercicio ?ejercicio) (tiempo ?tiempo) (pos ?pos)))
-		(bind ?pos (+ ?pos 1))
+		(assert (ejercicio_tiempo (ejercicio ?ejercicio) (tiempo ?tiempo) (puntuacion -1)))
 	)
 	(setgen 1)
 	(assert (num-program 0))
+	(assert (limit-program 1000))
 )
+
+(defrule juntar-puntuacion 
+	?f1<-(ejercicio_tiempo (ejercicio ?e) (puntuacion ?p))
+	(ejercicio_puntuado (ejercicio ?e2&:(eq ?e ?e2)) (puntuacion ?p1&:(not (eq ?p ?p1))))
+	=>
+	(modify ?f1 (puntuacion ?p1))
+)
+
+(defrule genera-lunes
+	?programa<-(object (is-a Programa)
+		(lunes $?lunes)
+		(tiempo+diario+disponible $?tiempo_disponible))
+	(ejercicio_tiempo (ejercicio ?e&:(not (member ?e ?lunes))) (puntuacion ?p) (tiempo ?t&:(< ?t (nth$ 1 ?tiempo_disponible))))
+	(not(ejercicio_tiempo (ejercicio ?e2&:(not (member ?e2 ?lunes))) (puntuacion ?p2&:(> ?p2 ?p)) (tiempo ?t2&:(< ?t2 (nth$ 1 ?tiempo_disponible)))))
+	=>
+	(send ?programa put-lunes (insert$ ?lunes 1 ?e))
+	(send ?programa put-tiempo+diario+disponible 
+		(replace$ ?tiempo_disponible 1 1
+			(-(nth$ 1 ?tiempo_disponible) ?t)
+		)
+	)
+)
+(defrule genera-martes
+	?programa<-(object (is-a Programa)
+		(martes $?martes)
+		(tiempo+diario+disponible $?tiempo_disponible))
+	(ejercicio_tiempo (ejercicio ?e&:(not (member ?e ?martes))) (puntuacion ?p) (tiempo ?t&:(< ?t (nth$ 2 ?tiempo_disponible))))
+	(not(ejercicio_tiempo (ejercicio ?e2&:(not (member ?e2 ?martes))) (puntuacion ?p2&:(> ?p2 ?p)) (tiempo ?t2&:(< ?t2 (nth$ 2 ?tiempo_disponible)))))
+	=>
+	(send ?programa put-martes (insert$ ?martes 1 ?e))
+	(send ?programa put-tiempo+diario+disponible 
+		(replace$ ?tiempo_disponible 2 2
+			(-(nth$ 2 ?tiempo_disponible) ?t)
+		)
+	)
+)
+(defrule genera-miercoles
+	?programa<-(object (is-a Programa)
+		(miercoles $?miercoles)
+		(tiempo+diario+disponible $?tiempo_disponible))
+	(ejercicio_tiempo (ejercicio ?e&:(not (member ?e ?miercoles))) (puntuacion ?p) (tiempo ?t&:(< ?t (nth$ 1 ?tiempo_disponible))))
+	(not(ejercicio_tiempo (ejercicio ?e2&:(not (member ?e2 ?miercoles))) (puntuacion ?p2&:(> ?p2 ?p)) (tiempo ?t2&:(< ?t2 (nth$ 1 ?tiempo_disponible)))))
+	=>
+	(send ?programa put-miercoles (insert$ ?miercoles 1 ?e))
+	(send ?programa put-tiempo+diario+disponible 
+		(replace$ ?tiempo_disponible 3 3
+			(-(nth$ 3 ?tiempo_disponible) ?t)
+		)
+	)
+)
+(defrule genera-jueves
+	?programa<-(object (is-a Programa)
+		(jueves $?jueves)
+		(tiempo+diario+disponible $?tiempo_disponible))
+	(ejercicio_tiempo (ejercicio ?e&:(not (member ?e ?jueves))) (puntuacion ?p) (tiempo ?t&:(< ?t (nth$ 1 ?tiempo_disponible))))
+	(not(ejercicio_tiempo (ejercicio ?e2&:(not (member ?e2 ?jueves))) (puntuacion ?p2&:(> ?p2 ?p)) (tiempo ?t2&:(< ?t2 (nth$ 1 ?tiempo_disponible)))))
+	=>
+	(send ?programa put-jueves (insert$ ?jueves 1 ?e))
+	(send ?programa put-tiempo+diario+disponible 
+		(replace$ ?tiempo_disponible 4 4
+			(-(nth$ 4 ?tiempo_disponible) ?t)
+		)
+	)
+)
+(defrule genera-viernes
+	?programa<-(object (is-a Programa)
+		(viernes $?viernes)
+		(tiempo+diario+disponible $?tiempo_disponible))
+	(ejercicio_tiempo (ejercicio ?e&:(not (member ?e ?viernes))) (puntuacion ?p) (tiempo ?t&:(< ?t (nth$ 1 ?tiempo_disponible))))
+	(not(ejercicio_tiempo (ejercicio ?e2&:(not (member ?e2 ?viernes))) (puntuacion ?p2&:(> ?p2 ?p)) (tiempo ?t2&:(< ?t2 (nth$ 1 ?tiempo_disponible)))))
+	=>
+	(send ?programa put-viernes (insert$ ?viernes 1 ?e))
+	(send ?programa put-tiempo+diario+disponible 
+		(replace$ ?tiempo_disponible 5 5
+			(-(nth$ 5 ?tiempo_disponible) ?t)
+		)
+	)
+)
+(defrule genera-sabado
+	?programa<-(object (is-a Programa)
+		(sabado $?sabado)
+		(tiempo+diario+disponible $?tiempo_disponible))
+	(ejercicio_tiempo (ejercicio ?e&:(not (member ?e ?sabado))) (puntuacion ?p) (tiempo ?t&:(< ?t (nth$ 1 ?tiempo_disponible))))
+	(not(ejercicio_tiempo (ejercicio ?e2&:(not (member ?e2 ?sabado))) (puntuacion ?p2&:(> ?p2 ?p)) (tiempo ?t2&:(< ?t2 (nth$ 1 ?tiempo_disponible)))))
+	=>
+	(send ?programa put-sabado (insert$ ?sabado 1 ?e))
+	(send ?programa put-tiempo+diario+disponible 
+		(replace$ ?tiempo_disponible 6 6
+			(-(nth$ 6 ?tiempo_disponible) ?t)
+		)
+	)
+)
+(defrule genera-domingo
+	?programa<-(object (is-a Programa)
+		(domingo $?domingo)
+		(tiempo+diario+disponible $?tiempo_disponible))
+	(ejercicio_tiempo (ejercicio ?e&:(not (member ?e ?domingo))) (puntuacion ?p) (tiempo ?t&:(< ?t (nth$ 1 ?tiempo_disponible))))
+	(not(ejercicio_tiempo (ejercicio ?e2&:(not (member ?e2 ?domingo))) (puntuacion ?p2&:(> ?p2 ?p)) (tiempo ?t2&:(< ?t2 (nth$ 1 ?tiempo_disponible)))))
+	=>
+	(send ?programa put-domingo (insert$ ?domingo 1 ?e))
+	(send ?programa put-tiempo+diario+disponible 
+		(replace$ ?tiempo_disponible 7 7
+			(-(nth$ 7 ?tiempo_disponible) ?t)
+		)
+	)
+)
+(defrule final
+	(declare (salience -1))
+	?programa<-(object (is-a Programa))
+	=>
+	(print-program ?programa)
+)
+
 	
-(defrule genera-programa-lunes
-	?f1<-(num-program ?num)
-	(ejercicio_tiempo (ejercicio ?ejercicio) (tiempo ?tiempo&:(> ?tiempo 0))(pos ?pos))
-	?programa<-(object (is-a Programa) 
-		(lunes $?lunes&:(not (member ?ejercicio ?lunes))) 
-		(martes $?martes&:(not (member ?ejercicio ?martes)))
-		(miercoles $?miercoles)
-		(jueves $?jueves)
-		(viernes $?viernes)
-		(sabado $?sabado)
-		(domingo $?domingo&:(not (member ?ejercicio ?domingo))) 
-		(tiempo+diario+disponible $?tiempos_disponibles&:(> (nth$ 1 ?tiempos_disponibles) ?tiempo))
-	)
-	(not (ejercicio_tiempo (ejercicio ?e&:(eq ?e (nth$ (length$ ?lunes) ?lunes))) (pos ?poslast&:(< ?pos ?poslast))))
-	(not (object (is-a Programa)
-		(lunes $?lunes2&:(eq (insert$ ?lunes 1 ?ejercicio) ?lunes2))
-		(martes $?martes2&:(eq ?martes ?martes2))
-		(miercoles $?miercoles2&:(eq ?miercoles ?miercoles2))
-		(jueves $?jueves2&:(eq ?jueves ?jueves2))
-		(viernes $?viernes2&:(eq ?viernes ?viernes2))
-		(sabado $?sabado2&:(eq ?sabado ?sabado2))
-		(domingo $?domingo2&:(eq ?domingo ?domingo2))
-	))
-	=>
-	
-	(bind ?new (make-instance of Programa))
-	(send ?new put-lunes (insert$ ?lunes 1 ?ejercicio))
-	(send ?new put-martes ?martes)
-	(send ?new put-miercoles ?miercoles)
-	(send ?new put-jueves ?jueves)
-	(send ?new put-viernes ?viernes)
-	(send ?new put-sabado ?sabado)
-	(send ?new put-domingo ?domingo)
-	(send ?new put-tiempo+diario+disponible 
-		(replace$ ?tiempos_disponibles 1 1
-			(-(nth$ 1 ?tiempos_disponibles) ?tiempo)
-		)
-	)
-	
-)
-
-(defrule genera-programa-martes
-	(ejercicio_tiempo (ejercicio ?ejercicio) (tiempo ?tiempo&:(> ?tiempo 0))(pos ?pos))
-	?programa<-(object (is-a Programa) 
-		(lunes $?lunes&:(not (member ?ejercicio ?lunes))) 
-		(martes $?martes&:(not (member ?ejercicio ?martes)))
-		(miercoles $?miercoles&:(not (member ?ejercicio ?miercoles)))
-		(jueves $?jueves)
-		(viernes $?viernes)
-		(sabado $?sabado)
-		(domingo $?domingo) 
-		(tiempo+diario+disponible $?tiempos_disponibles&:(> (nth$ 2 ?tiempos_disponibles) ?tiempo))
-	)
-	(not (ejercicio_tiempo (ejercicio ?e&:(eq ?e (nth$ (length$ ?martes) ?martes))) (pos ?poslast&:(< ?pos ?poslast))))
-	(not (object (is-a Programa)
-		(lunes $?lunes2&:(eq ?lunes ?lunes2))
-		(martes $?martes2&:(eq (insert$ ?martes 1 ?ejercicio) ?martes2))
-		(miercoles $?miercoles2&:(eq ?miercoles ?miercoles2))
-		(jueves $?jueves2&:(eq ?jueves ?jueves2))
-		(viernes $?viernes2&:(eq ?viernes ?viernes2))
-		(sabado $?sabado2&:(eq ?sabado ?sabado2))
-		(domingo $?domingo2&:(eq ?domingo ?domingo2))
-	))
-	=>
-	(bind ?new (make-instance of Programa))
-	(send ?new put-lunes ?lunes)
-	(send ?new put-martes (insert$ ?martes 1 ?ejercicio))
-	(send ?new put-miercoles ?miercoles)
-	(send ?new put-jueves (send ?programa get-jueves))
-	(send ?new put-viernes (send ?programa get-viernes))
-	(send ?new put-sabado (send ?programa get-sabado))
-	(send ?new put-domingo (send ?programa get-domingo))
-	(send ?new put-tiempo+diario+disponible 
-		(replace$ ?tiempos_disponibles 2 2
-			(-(nth$ 2 ?tiempos_disponibles) ?tiempo)
-		)
-	)
-)
-
-(defrule genera-programa-miercoles
-	(ejercicio_tiempo (ejercicio ?ejercicio) (tiempo ?tiempo&:(> ?tiempo 0))(pos ?pos))
-	?programa<-(object (is-a Programa) 
-		(lunes $?lunes) 
-		(martes $?martes&:(not (member ?ejercicio ?martes)))
-		(miercoles $?miercoles&:(not (member ?ejercicio ?miercoles)))
-		(jueves $?jueves&:(not (member ?ejercicio ?jueves)))
-		(viernes $?viernes)
-		(sabado $?sabado)
-		(domingo $?domingo)   
-		(tiempo+diario+disponible $?tiempos_disponibles&:(> (nth$ 3 ?tiempos_disponibles) ?tiempo))
-	)
-	(not (ejercicio_tiempo (ejercicio ?e&:(eq ?e (nth$ (length$ ?miercoles) ?miercoles))) (pos ?poslast&:(< ?pos ?poslast))))
-	(not (object (is-a Programa)
-		(lunes $?lunes2&:(eq ?lunes ?lunes2))
-		(martes $?martes2&:(eq ?martes ?martes2))
-		(miercoles $?miercoles2&:(eq (insert$ ?miercoles 1 ?ejercicio) ?miercoles2))
-		(jueves $?jueves2&:(eq ?jueves ?jueves2))
-		(viernes $?viernes2&:(eq ?viernes ?viernes2))
-		(sabado $?sabado2&:(eq ?sabado ?sabado2))
-		(domingo $?domingo2&:(eq ?domingo ?domingo2))
-	))
-	=>
-	(bind ?new (make-instance of Programa))
-	(send ?new put-lunes (send ?programa get-lunes))
-	(send ?new put-martes ?martes)
-	(send ?new put-miercoles (insert$ ?miercoles 1 ?ejercicio))
-	(send ?new put-jueves ?jueves)
-	(send ?new put-viernes (send ?programa get-viernes))
-	(send ?new put-sabado (send ?programa get-sabado))
-	(send ?new put-domingo (send ?programa get-domingo))
-	(send ?new put-tiempo+diario+disponible 
-		(replace$ ?tiempos_disponibles 3 3
-			(-(nth$ 3 ?tiempos_disponibles) ?tiempo)
-		)
-	)
-)
-
-(defrule genera-programa-jueves
-	(ejercicio_tiempo (ejercicio ?ejercicio) (tiempo ?tiempo&:(> ?tiempo 0))(pos ?pos))
-	?programa<-(object (is-a Programa) 
-		(lunes $?lunes) 
-		(martes $?martes)
-		(miercoles $?miercoles&:(not (member ?ejercicio ?miercoles)))
-		(jueves $?jueves&:(not (member ?ejercicio ?jueves)))
-		(viernes $?viernes&:(not (member ?ejercicio ?viernes)))
-		(sabado $?sabado)
-		(domingo $?domingo)   
-		(tiempo+diario+disponible $?tiempos_disponibles&:(> (nth$ 4 ?tiempos_disponibles) ?tiempo))
-	)
-	(not (ejercicio_tiempo (ejercicio ?e&:(eq ?e (nth$ (length$ ?jueves) ?jueves))) (pos ?poslast&:(< ?pos ?poslast))))
-	(not (object (is-a Programa)
-		(lunes $?lunes2&:(eq ?lunes ?lunes2))
-		(martes $?martes2&:(eq ?martes ?martes2))
-		(miercoles $?miercoles2&:(eq ?miercoles ?miercoles2))
-		(jueves $?jueves2&:(eq (insert$ ?jueves 1 ?ejercicio) ?jueves2))
-		(viernes $?viernes2&:(eq ?viernes ?viernes2))
-		(sabado $?sabado2&:(eq ?sabado ?sabado2))
-		(domingo $?domingo2&:(eq ?domingo ?domingo2))
-	))
-	=>
-	(bind ?new (make-instance of Programa))
-	(send ?new put-lunes (send ?programa get-lunes))
-	(send ?new put-martes (send ?programa get-martes))
-	(send ?new put-miercoles ?miercoles)
-	(send ?new put-jueves (insert$ ?jueves 1 ?ejercicio))
-	(send ?new put-viernes ?viernes)
-	(send ?new put-sabado (send ?programa get-sabado))
-	(send ?new put-domingo (send ?programa get-domingo))
-	(send ?new put-tiempo+diario+disponible 
-		(replace$ ?tiempos_disponibles 4 4
-			(-(nth$ 4 ?tiempos_disponibles) ?tiempo)
-		)
-	)
-)
-
-(defrule genera-programa-viernes
-	(ejercicio_tiempo (ejercicio ?ejercicio) (tiempo ?tiempo&:(> ?tiempo 0))(pos ?pos))
-	?programa<-(object (is-a Programa) 
-		(lunes $?lunes) 
-		(martes $?martes)
-		(miercoles $?miercoles)
-		(jueves $?jueves&:(not (member ?ejercicio ?jueves)))
-		(viernes $?viernes&:(not (member ?ejercicio ?viernes)))
-		(sabado $?sabado&:(not (member ?ejercicio ?sabado)))
-		(domingo $?domingo)   
-		(tiempo+diario+disponible $?tiempos_disponibles&:(> (nth$ 5 ?tiempos_disponibles) ?tiempo))
-	)
-	(not (ejercicio_tiempo (ejercicio ?e&:(eq ?e (nth$ (length$ ?viernes) ?viernes))) (pos ?poslast&:(< ?pos ?poslast))))
-	(not (object (is-a Programa)
-		(lunes $?lunes2&:(eq ?lunes ?lunes2))
-		(martes $?martes2&:(eq ?martes ?martes2))
-		(miercoles $?miercoles2&:(eq ?miercoles ?miercoles2))
-		(jueves $?jueves2&:(eq ?jueves ?jueves2))
-		(viernes $?viernes2&:(eq (insert$ ?viernes 1 ?ejercicio) ?viernes2))
-		(sabado $?sabado2&:(eq ?sabado ?sabado2))
-		(domingo $?domingo2&:(eq ?domingo ?domingo2))
-	))
-	=>
-	(bind ?new (make-instance of Programa))
-	(send ?new put-lunes (send ?programa get-lunes))
-	(send ?new put-martes (send ?programa get-martes))
-	(send ?new put-miercoles (send ?programa get-miercoles))
-	(send ?new put-jueves ?jueves)
-	(send ?new put-viernes (insert$ ?viernes 1 ?ejercicio))
-	(send ?new put-sabado ?sabado)
-	(send ?new put-domingo (send ?programa get-domingo))
-	(send ?new put-tiempo+diario+disponible 
-		(replace$ ?tiempos_disponibles 5 5
-			(-(nth$ 5 ?tiempos_disponibles) ?tiempo)
-		)
-	)
-)
-
-(defrule genera-programa-sabado
-	(ejercicio_tiempo (ejercicio ?ejercicio) (tiempo ?tiempo&:(> ?tiempo 0))(pos ?pos))
-	?programa<-(object (is-a Programa) 
-		(lunes $?lunes) 
-		(martes $?martes)
-		(miercoles $?miercoles)
-		(jueves $?jueves)
-		(viernes $?viernes&:(not (member ?ejercicio ?viernes)))
-		(sabado $?sabado&:(not (member ?ejercicio ?sabado)))
-		(domingo $?domingo&:(not (member ?ejercicio ?domingo)))     
-		(tiempo+diario+disponible $?tiempos_disponibles&:(> (nth$ 6 ?tiempos_disponibles) ?tiempo))
-	)
-	(not (ejercicio_tiempo (ejercicio ?e&:(eq ?e (nth$ (length$ ?sabado) ?sabado))) (pos ?poslast&:(< ?pos ?poslast))))
-	(not (object (is-a Programa)
-		(lunes $?lunes2&:(eq ?lunes ?lunes2))
-		(martes $?martes2&:(eq ?martes ?martes2))
-		(miercoles $?miercoles2&:(eq ?miercoles ?miercoles2))
-		(jueves $?jueves2&:(eq ?jueves ?jueves2))
-		(viernes $?viernes2&:(eq ?viernes ?viernes2))
-		(sabado $?sabado2&:(eq (insert$ ?sabado 1 ?ejercicio) ?sabado2))
-		(domingo $?domingo2&:(eq ?domingo ?domingo2))
-	))
-	=>
-	(bind ?new (make-instance of Programa))
-	(send ?new put-lunes (send ?programa get-lunes))
-	(send ?new put-martes (send ?programa get-martes))
-	(send ?new put-miercoles (send ?programa get-miercoles))
-	(send ?new put-jueves (send ?programa get-jueves))
-	(send ?new put-viernes ?viernes)
-	(send ?new put-sabado (insert$ ?sabado 1 ?ejercicio))
-	(send ?new put-domingo ?domingo)
-	(send ?new put-tiempo+diario+disponible 
-		(replace$ ?tiempos_disponibles 6 6
-			(-(nth$ 6 ?tiempos_disponibles) ?tiempo)
-		)
-	)
-)
-
-(defrule genera-programa-domingo
-	(ejercicio_tiempo (ejercicio ?ejercicio) (tiempo ?tiempo&:(> ?tiempo 0))(pos ?pos))
-	?programa<-(object (is-a Programa) 
-		(lunes $?lunes&:(not (member ?ejercicio ?lunes))) 
-		(martes $?martes)
-		(miercoles $?miercoles)
-		(jueves $?jueves)
-		(viernes $?viernes)
-		(sabado $?sabado&:(not (member ?ejercicio ?sabado)))
-		(domingo $?domingo&:(not (member ?ejercicio ?domingo)))  
-		(tiempo+diario+disponible $?tiempos_disponibles&:(> (nth$ 7 ?tiempos_disponibles) ?tiempo))
-	)
-	(not (ejercicio_tiempo (ejercicio ?e&:(eq ?e (nth$ (length$ ?domingo) ?domingo))) (pos ?poslast&:(< ?pos ?poslast))))
-	(not (object (is-a Programa)
-		(lunes $?lunes2&:(eq ?lunes ?lunes2))
-		(martes $?martes2&:(eq ?martes ?martes2))
-		(miercoles $?miercoles2&:(eq ?miercoles ?miercoles2))
-		(jueves $?jueves2&:(eq ?jueves ?jueves2))
-		(viernes $?viernes2&:(eq ?viernes ?viernes2))
-		(sabado $?sabado2&:(eq ?sabado ?sabado2))
-		(domingo $?domingo2&:(eq (insert$ ?domingo 1 ?ejercicio) ?domingo2))
-	))
-	=>
-	(bind ?new (make-instance of Programa))
-	(send ?new put-lunes ?lunes)
-	(send ?new put-martes (send ?programa get-martes))
-	(send ?new put-miercoles (send ?programa get-miercoles))
-	(send ?new put-jueves (send ?programa get-jueves))
-	(send ?new put-viernes (send ?programa get-viernes))
-	(send ?new put-sabado ?sabado)
-	(send ?new put-domingo (insert$ ?domingo 1 ?ejercicio))
-	(send ?new put-tiempo+diario+disponible 
-		(replace$ ?tiempos_disponibles 7 7
-			(-(nth$ 7 ?tiempos_disponibles) ?tiempo)
-		)
-	)
-)
+		
 
