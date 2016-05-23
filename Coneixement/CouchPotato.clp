@@ -1461,6 +1461,20 @@
         (bind ?aux (nth$ ?i ?lista))
         (printout t (send ?aux get-nombre) crlf)
     )
+
+    (printout t crlf"--------" clrf "  Sabado" crlf "--------" crlf)
+    (bind ?lista (send ?programa get-sabado))
+    (loop-for-count (?i 1 (length$ ?lista)) do
+        (bind ?aux (nth$ ?i ?lista))
+        (printout t (send ?aux get-nombre) crlf)
+    )
+
+    (printout t crlf"--------" clrf " Domingo" crlf "--------" crlf)
+    (bind ?lista (send ?programa get-domingo))
+    (loop-for-count (?i 1 (length$ ?lista)) do
+        (bind ?aux (nth$ ?i ?lista))
+        (printout t (send ?aux get-nombre) crlf)
+    )
 )
 
 ;;****************
