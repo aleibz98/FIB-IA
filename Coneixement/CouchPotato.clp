@@ -1707,7 +1707,7 @@
 			(bind ?aux (nth$ ?i ?restricciones))
 			(if (member ?aux ?lista_problemas) then (bind ?anadir 0))
 		)
-		(if (or (> (send ?persona get-edad) (send ?e get-edad+maxima))(< (send ?e get-edad+maxima) (send ?e get-edad+maxima))) then (bind ?anadir 0))
+		(if (or (> (send ?persona get-edad) (send ?e get-edad+maxima))(< (send ?persona get-edad) (send ?e get-edad+minima))) then (bind ?anadir 0))
 		(if (= ?anadir 1) then (assert (ejercicio_puntuado (ejercicio ?e) (puntuacion (calcula_puntuacion ?e ?persona)))))
 	)
 	
