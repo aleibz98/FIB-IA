@@ -2,6 +2,7 @@
 
 \usepackage[dvipsnames]{xcolor} % Code highlighting color
 \usepackage[catalan]{babel} % Language 
+\usepackage{indentfirst}
 \usepackage{fontspec} 
 \usepackage{fullpage}
 \usepackage[a4paper, margin=2cm]{geometry} % To change the margins
@@ -12,12 +13,13 @@
 \usepackage{wrapfig} %To Text wrap
 \usepackage{listings} % Add code
 \usepackage{verbatim}
+\usepackage{nameref}
 \usepackage{tikz}
 \usepackage{subcaption}
 \usepackage{multirow}
 \usepackage{colortbl}
 
-%\setlength{\parskip}{1em}
+\setlength{\parskip}{0.7em}
 %\setlength{\parindent}{1cm}
 \linespread{1.2}
 
@@ -25,12 +27,12 @@
 	\Huge
 	\textbf{Pràctica 2} \\ 
 	\scshape Sistema Basat en el Coneixement
-		}
+	}
 \author{
 	Marc Asenjo i Ponce de León \and
 	Joan Marcè i Igual \and
 	Iñigo Moreno i Caireta
-}
+	}
 \date{\today}
 
 \begin{document}
@@ -115,6 +117,7 @@ El sistema generarà una llista de programes amb una sèrie d'exercicis a realit
 Totes les solucions compleixen totes les restriccions imposades per l'usuari o les inferides a través de la seva salut.
 
 \section{Conceptualització}
+\label{sec:conceptualization}
 
 En aquesta fase pretenem obtenir una visió del problema des del punt de vista de l'expert, així doncs obtindrem la informació necessària per decidir el coneixement que s'utilitzarà per resoldre el problema. Per resoldre aquesta tasca s'ha de separar la conceptualització en 4 fases que seran:
 
@@ -156,6 +159,7 @@ El sistema ha de tenir la següent informació que seran conceptes que formin el
 		\item Problemes que tracta
 		\item Problemes contraindicats
 		\item Repeticions (màximes i mínimes)
+		\item Objectius relacionats amb aquest exercici
 	\end{itemize}
 	
 	\item[Test:] Exercici que se li farà fer a l'usuari per tal d'obtenir uns certs paràmetres del seu estat físic. Conté les següents característiques:
@@ -230,20 +234,78 @@ A continuació l'expert fa una classificació dels programes segons el grau de r
 
 Per realitzar les diferents tasques de conceptualització, es necessari observar com es resolen problemes típics des del punt de vista de l'expert. Obtenim d'aquí els principis generals que podran ser aplicats en diferents contexts.
 
+Les dades personals són la part objectiva de la informació que podem obtenir de l'usuari. Depenent del perfil de l'usuari es pot donar el cas que uns exercicis siguin més importants que altres, per exemple:
+
+\begin{itemize}
+	\item Si un usuari té problemes d'esquena no se li poden recomanar exercicis que siguin perjudicials per aquest problema, així doncs se li intentaran recomanar exercicis beneficiosos per aquest problema.
+	
+	\item Si un usuari inferim a partir de la seva dieta i activitats diàries que té un tipus de vida molt sedentària no li recomanarem exercicis que li siguin molt difícils degut al seu estat físic.
+	
+	\item Si un usuari desitja complir l'objectiu de musculació s'intentarà que només realitzi exercicis que compleixin aquest objectiu i no pas exercicis que no hi tinguin cap mena de relació.
+	
+	\item Si un usuari disposa com a molt de 60 minuts diaris no se li poden assignar exercicis que sumin un total superior a 60 minuts per un dia en concret.
+	
+	\item Una dieta amb massa sal i poca fruita implica que l'usuari no està en molt bona forma.
+	
+	\item Si un usuari té sobrepès es podrà deduir que prefereix objectius que li permetin reduir el seu pes actual.
+	
+	\item Si un usuari te algun problema múscul-esquelètic se li recomanaran exercicis per millorar aquest problema.
+	
+	\item Si un usuari no compleix les característiques necessàries per realitzar un exercici no se li recomanarà (edat mínima)
+	
+	\item Si s'escull un exercici per a un usuari s'intentarà també agafar exercicis que combinen amb aquest per no avorrir a l'usuari amb molta estona fent el mateix exercici.
+\end{itemize}
+
+\subsection{Flux de raonament}
+
+L'alumne després d'identificar-se al sistema, respondrà algunes preguntes, n'hi haurà que seran obligatòries i d'altres que el sistema les proposarà en funció de les anteriors (podrà demanar un test si ho considera necessari en funció dels objectius escollits). A partir de la pressió sanguínia es podrà saber si l'usuari té hipertensió o hipotensió.
+
+Un cop l'usuari ha introduït totes les seves dades, serà necessari obtenir les característiques dels exercicis que poden ser recomanats. 
+
+Per complementar les restriccions i preferències de l'usuari, s'analitzarà tota la informació continguda a les dades que ens ha passat l'usuari i les inferides a partir dels tests.
+
+Un cop completada l'abstracció de les característiques, es descartaran tots aquells exercicis que incompleixin alguna de les restriccions establertes per la condició física de l'usuari, partint de tots els exercicis instanciats pel sistema. També es descartaran tots aquells programes que no compleixin la restricció de temps establerta per l'usuari.
+
+Un cop obtingudes totes les possibles recomanacions, es valorarà la seva qualitat tenint en compte les preferències, explícites i deduïdes, per establir prioritats pel grau de recomanació.
+
+\subsection{Suposicions}
+
+El sistema es basarà en les següents idees per realitzar el procés de descart:
+
+\begin{itemize}
+	\item Un usuari no podrà realitzar un exercici si no compleix l'edat mínima per realitzar-lo o si sobrepassa la màxima.
+	\item Un usuari no podrà realitzar un exercici si té algun problema pel qual l'exercici pot ser perjudicial.
+	\item Els exercicis que són beneficiosos pels problemes de l'usuari tenen prioritat a l'hora d'afegir-los al programa.
+	\item Els exercicis que tinguin una dificultat a la que l'usuari ha seleccionat tindran menys prioritat a l'hora de ser afegits al programa
+	\item Els exercicis que tinguin un objectiu que ha seleccionat l'usuari tindran més prioritat a l'hora de ser afegits al programa.
+	\item La dificultat d'un exercici vindrà donada per les calories per minut de l'exercici (ens donen una idea de la intensitat d'aquest) i per la condició física de l'usuari.
+	\item Si un usuari no se li preguntarà per les activitats físiques que realitzi a la feina
+	\item La classificació de sobrepès, obesitat o pes insuficient vindrà donat per l'Índex de Massa Corporal que s'infereix a partir de l'altura i del pes.
+	
+\end{itemize}
+
 \section{Formalització}
 
-Per a construir la ontologia s'ha buscat informació d'internet i també de coneixements personals ja que dos membres del grup assisteixen regularment al gimnàs i un ells té el certificat de dinamitzador. 
+En aquest apartat analitzarem el problema des del punt de vista de l'Enginyer del Coneixement. Es modelaran les diferents necessitats de representació del coneixement i de resolució de problemes identificades a les fases anteriors.
 
-\subsection{Conceptes de la ontologia}
+\subsection{Desenvolupament de l'ontologia}
 
-\begin{description}
-	\item[Objectiu:] 
-	\item[Activitat:]
-	\item[Exercici:]
-	\item[Test:]
-	\item[Dificultat:]
-	\item[Grup muscular:]
-\end{description}
+A continuació es veuran els passos seguits per desenvolupar l'ontologia a la nostra pràctica.
+
+\subsubsection{Determinar el domini i la cobertura de l'ontologia}
+
+En aquesta fase ens hem de plantejar algunes preguntes bàsiques per poder realitzar una ontologia consistentment.
+
+\emph{Quin domini cobrirà l'ontologia?}
+
+Els conceptes del domini s'han escrit a l'apartat de \textit{\nameref{sec:conceptualization}}, des del punt de vista de l'expert. Aquesta serà la base per definir el domini des del punt de vista de l'enginyer. Principalment, els conceptes que ens interessa definir (junt amb les seves característiques) són \textbf{Objectiu, Activitat, Exercici, Test, Dificultat, Dieta, Problema de salut} i \textbf{Grup muscular}.
+
+\emph{Per a què utilitzarem l'ontologia?}
+
+Per representar els exercicis disponibles, els objectius, problemes i activitats d'un usuari. També per representar  els tests que es realitzen sobre l'usuari. El primer ús que en farem serà un sistema de recomanació dels programes d'exercicis a realitzar.
+
+\emph{A quins tipus de preguntes ha de poder respondre l'ontologia?}
+
 
 \section{Implementació}
 
