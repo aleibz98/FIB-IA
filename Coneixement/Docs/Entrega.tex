@@ -103,19 +103,20 @@ Els objectius que s'espera que el nostre sistema sigui capaç d'assumir seran el
 
 \subsection{Resultats esperats pel sistema}
 
-El sistema generarà una llista d'exercicis recomanats en funció del perfil de l'usuari. Per cada exercici es donarà de manera senzilla les raons per les quals es recomana, a més es donarà un grau de recomanació qualitatiu que pot ser:
+El sistema generarà una llista de programes amb una sèrie d'exercicis a realitzar cada dia recomanats en funció del perfil de l'usuari. Per cada programa es donarà de manera senzilla les raons per les quals es recomana, a més es donarà un grau de recomanació qualitatiu que pot ser:
 
 \begin{description}
-	\item[Altament recomanable:] L'exercici compleix la majoria de preferències i objectius de l'usuari
-	\item[Recomanable:] L'exercici compleix alguna de les preferències de l'usuari.
-	\item[Poc recomanable:] L'exercici compleix poques preferències de l'usuari.
+	\item[Altament recomanable:] El programa compleix la majoria de preferències i objectius de l'usuari
+	\item[Recomanable:] El programa compleix poques preferències de l'usuari.
+	\item[Poc recomanable:] El programa compleix alguna de les preferències de l'usuari.
+	
 \end{description}
 
 Totes les solucions compleixen totes les restriccions imposades per l'usuari o les inferides a través de la seva salut.
 
 \section{Conceptualització}
 
-En aquesta fase pretenem obtenir una visió del problema des del punt de vista de l'expert, així doncs obtindrem  la informació necessària per decidir el coneixement que s'utilitzarà per resoldre el problema. Per resoldre aquesta tasca s'ha de separar la conceptualització en 4 fases que seran:
+En aquesta fase pretenem obtenir una visió del problema des del punt de vista de l'expert, així doncs obtindrem la informació necessària per decidir el coneixement que s'utilitzarà per resoldre el problema. Per resoldre aquesta tasca s'ha de separar la conceptualització en 4 fases que seran:
 
 \begin{enumerate}
 	\item Conèixer quins són els conceptes que ha de gestionar el sistema i les seves característiques de cara a poder elaborar a la fase següent una ontologia que els formalitzi.
@@ -189,41 +190,45 @@ El sistema ha de tenir la següent informació que seran conceptes que formin el
 		\item Consum de sal
 		\item Quantitat que es pica entre hores
 	\end{itemize}
+	
 	\item[Problema de salut:] Diferents problemes físics que pugui tenir l'usuari (mal d'esquena, dolor a les articulacions, IMC elevat...). Conté les següents característiques:
 	\begin{itemize}
 		\item Nom
 		\item Zona associada
 	\end{itemize}
+	
+	\item[Programa:] Conté la solució, és la recomanació d'exercicis diaris per a l'usuari. Conté les següents característiques:
+	\begin{itemize}
+		\item Temps diari disponible
+		\item Llista d'exercicis a realitzar per cada dia de la setmana
+	\end{itemize}
 \end{description}
 
-\subsection{Problemes que intervenen a la resolució}
+\subsection{Subproblemes que intervenen a la resolució}
 
-L'expert identifica els següents problemes que ha de solucionar per poder construir adequadament la solució al problema. El procés de resolució es basa en la resolució seqüencial d'aquests problemes.
+L'expert identifica els següents problemes que ha de solucionar per poder construir adequadament la solució al problema. El procés de resolució es basa en la resolució seqüencial d'aquests subproblemes.
 
 \subsubsection*{Recopilació de la informació de l'usuari}
 
-La primera tasca que l'expert realitza és fer un conjunt de preguntes a l'usuari. És lògic ja que si no sap res de les preferències, hàbits o activitats que realitza l'usuari podrà fer cap hipòtesis. L'altra part de la informació s'obtindrà mitjançant els tests que haurà de passar l'usuari si és necessari. 
+La primera tasca que l'expert realitza és fer un conjunt de preguntes a l'usuari. És lògic ja que si no sap res de l'estat físic, hàbits o activitats que realitza l'usuari no podrà fer cap hipòtesis. L'altra part de la informació s'obtindrà mitjançant els tests que haurà de passar l'usuari si és necessari. 
 
 \subsubsection*{Anàlisis de les preferències i/o restriccions}
 
-A continuació, l'expert analitzarà tots i cadascun dels hàbits alimentaris, activitats diàries i paràmetres físics de l'usuari.
+A continuació, l'expert analitzarà tots i cadascun dels hàbits alimentaris, activitats diàries i paràmetres físics de l'usuari. També s'acabarà de completar tota la informació necessària gràcies a la inferida dels \emph{tests} que se li han realitzat a l'usuari. En aquesta part també es podrà descobrir si l'usuari té algun problema que desconeix i no ens ha marcat anteriorment.
 
 \subsubsection*{Eliminació i valoració dels exercicis}
 
-Una vegada emmagatzemada tota la informació possible, s'obtindran tots els exercicis per se avaluats per saber si formen part de la solució o no i, en cas afirmatiu, quan bona és la solució. Per això es descarten tots els exercicis que no compleixen les restriccions establertes (que són incompatibles per les característiques físiques de l'usuari o que no serveixen pels objectius que aquest s'ha seleccionat).
+Una vegada emmagatzemada tota la informació possible, s'obtindran tots els exercicis per ser avaluats i saber si formen part de la solució o no i, en cas afirmatiu, quan bona és la solució. Per això es descarten tots els exercicis que no compleixen les restriccions establertes (que són incompatibles per les característiques físiques de l'usuari o que no serveixen pels objectius que aquest s'ha seleccionat).
 
-Després tots els exercicis que quedin seran totes les recomanacions que el SBC pot oferir i passarà a avaluar quant bona és una solució, tenint en compte les preferències seleccionades i les inferides del seu estat físic. Es valorarà positivament cada solució amb una preferència complida. En cas de no complir-ne una simplement no s'incrementarà el grau de recomanació però mai es descartarà aquell exercici. Això permetrà donar una valoració qualitativa a la solució així quan es presenti la solució existiran exercicis molt més recomanables que altres.
+Després es realitzaran els programes a partir dels exercicis que quedin i aquestes seran totes les recomanacions que el SBC pot oferir i passarà a avaluar quant bona és una solució, tenint en compte les preferències seleccionades i les inferides del seu estat físic. Es valorarà positivament cada solució amb una preferència complida. En cas de no complir-ne una simplement no s'incrementarà el grau de recomanació però mai es descartarà aquell programa. Això permetrà donar una valoració qualitativa a la solució així quan es presenti existiran programes molt més recomanables que altres.
 
 \subsubsection*{Presentació de la solució a l'usuari}
 
-A continuació l'expert fa una classificació del exercicis segons el 
+A continuació l'expert fa una classificació dels programes segons el grau de recomanació, mostrant-los ordenats de manera descendent junt a les justificacions corresponents degudament diferenciades, per un costat les decisions que han estat preses pel sistema i per l'altra les que s'han pres en funció de les preferències.
 
+\subsection{Exemples del coneixement expert extret del domini} 
 
-Un dels principals problemes que intervenen a la solució és com determinar l'estat físic d'una persona. Això és així perquè és fàcil veure quan una persona està perfectament en forma o quan no ho està però comparar valors intermedis ja es fa més difícil a no ser que se li assigni un valor numèric.
-
-L'altre problema que es planteja és com determinar la dificultat d'un exercici per a una persona. Es converteix en un problema bastant ambigu ja que el que per algú li sembla fàcil per a un altre li és difícil i depèn de molts factors tals com l'estat físic de la persona, l'estat anímic, el cansament que porti acumulat la persona...
-
-També intervé a la resolució com determinar els exercicis que són beneficiosos o que són perjudicials per a un determinat problema físic. 
+Per realitzar les diferents tasques de conceptualització, es necessari observar com es resolen problemes típics des del punt de vista de l'expert. Obtenim d'aquí els principis generals que podran ser aplicats en diferents contexts.
 
 \section{Formalització}
 
