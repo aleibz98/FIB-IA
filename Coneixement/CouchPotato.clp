@@ -1425,6 +1425,58 @@
 	?respuesta
 )
 
+(deffunction print-program (?programa)
+    (printout t "-----Programa propuesto-----"crlf)
+    (printout t crlf"--------" clrf "  Lunes" crlf "--------" crlf)
+    (bind ?lista (send ?programa get-lunes))
+    (loop-for-count (?i 1 (length$ ?lista)) do
+        (bind ?aux (nth$ ?i ?lista))
+        (printout t (send ?aux get-nombre) crlf)
+    )
+
+    (printout t crlf"--------" clrf "  Martes" crlf "--------" crlf)
+    (bind ?lista (send ?programa get-martes))
+    (loop-for-count (?i 1 (length$ ?lista)) do
+        (bind ?aux (nth$ ?i ?lista))
+        (printout t (send ?aux get-nombre) crlf)
+    )
+
+    (printout t crlf"--------" clrf " Miercoles" crlf "--------" crlf)
+    (bind ?lista (send ?programa get-miercoles))
+    (loop-for-count (?i 1 (length$ ?lista)) do
+        (bind ?aux (nth$ ?i ?lista))
+        (printout t (send ?aux get-nombre) crlf)
+    )
+
+    (printout t crlf"--------" clrf "  Jueves" crlf "--------" crlf)
+    (bind ?lista (send ?programa get-jueves))
+    (loop-for-count (?i 1 (length$ ?lista)) do
+        (bind ?aux (nth$ ?i ?lista))
+        (printout t (send ?aux get-nombre) crlf)
+    )
+
+    (printout t crlf"--------" clrf "  Viernes" crlf "--------" crlf)
+    (bind ?lista (send ?programa get-viernes))
+    (loop-for-count (?i 1 (length$ ?lista)) do
+        (bind ?aux (nth$ ?i ?lista))
+        (printout t (send ?aux get-nombre) crlf)
+    )
+
+    (printout t crlf"--------" clrf "  Sabado" crlf "--------" crlf)
+    (bind ?lista (send ?programa get-sabado))
+    (loop-for-count (?i 1 (length$ ?lista)) do
+        (bind ?aux (nth$ ?i ?lista))
+        (printout t (send ?aux get-nombre) crlf)
+    )
+
+    (printout t crlf"--------" clrf " Domingo" crlf "--------" crlf)
+    (bind ?lista (send ?programa get-domingo))
+    (loop-for-count (?i 1 (length$ ?lista)) do
+        (bind ?aux (nth$ ?i ?lista))
+        (printout t (send ?aux get-nombre) crlf)
+    )
+)
+
 ;;****************
 ;;* REGLAS       *
 ;;****************       
@@ -2040,6 +2092,7 @@
 			(-(nth$ 7 ?tiempo_disponible) ?t)
 		)
 	)
+
 )
 (defrule final
 	(declare (salience -1))
