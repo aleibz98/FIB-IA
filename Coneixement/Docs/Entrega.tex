@@ -259,7 +259,7 @@ Les dades personals són la part objectiva de la informació que podem obtenir d
 
 \subsection{Flux de raonament}
 
-L'alumne després d'identificar-se al sistema, respondrà algunes preguntes, n'hi haurà que seran obligatòries i d'altres que el sistema les proposarà en funció de les anteriors (podrà demanar un test si ho considera necessari en funció dels objectius escollits). A partir de la pressió sanguínia es podrà saber si l'usuari té hipertensió o hipotensió.
+L'usuari després d'identificar-se al sistema, respondrà algunes preguntes, n'hi haurà que seran obligatòries i d'altres que el sistema les proposarà en funció de les anteriors (podrà demanar un test si ho considera necessari en funció dels objectius escollits). A partir de la pressió sanguínia es podrà saber si l'usuari té hipertensió o hipotensió.
 
 Un cop l'usuari ha introduït totes les seves dades, serà necessari obtenir les característiques dels exercicis que poden ser recomanats. 
 
@@ -333,7 +333,149 @@ Primer veurem una visió completa de l'ontologia i seguidament explicarem cada c
 
 \pagebreak
 
+Les classes que no estan especificades només hereten directament de la classe superior i no afegeixen cap camp. Només serveixen a nivell conceptual per facilitar la comprensió de la ontologia.
+
+\subsubsection*{\underline{Exercici}}
+
+És un dels conceptes principals de l'ontologia, ja que és el concepte que emmagatzema la informació necessària que permetrà saber si és una possible recomanació per a un determinat usuari. Conté els següents camps:
+
+\begin{description}
+	\item[Nom] de l'exercici
+	\item[Calories cremades] El nombre de calories cremades per minut. 
+	\item[Duració] màxima i mínima de l'exercici
+	\item[Edat] màxima i mínima de l'exercici
+	\item[Repeticions] màximes i mínimes de l'exercici
+	\item[Exericis que combinen] Exercicis que està bé realitzar-los junt amb aquest exercici.
+	\item[Grups musculars] Grups musculars que aquest exercici treballa.
+	\item[Objectius] que l'exercici ajuda a assolir
+	\item[Problemes alleujerats] Problemes associats a l'exercici que aquest ajuda a eliminar
+	\item[Problemes contraindicats] Problemes pels quals realitzar l'exercici és perjudicial
+\end{description}
+
+\subsubsection*{\underline{Activitat}}
+
+Representa una activitat física o estàtica que l'usuari realitza fora del gimnàs.
+
+\begin{description}
+	\item[Nom] de l'activitat
+	\item[Freqüència] amb la que es realitza l'activitat, pot ser:
+	\begin{itemize}
+		\item Diària
+		\item Setmanal
+		\item Mensual
+	\end{itemize}
+	\item[Grau activitat] nivell d'activitat física d'aquesta, quan més alt més activa és l'activitat i quant més baix més sedentària és.
+	\item[Duració] temps en minuts que dura l'activitat
+\end{description}
+
+\subsubsection*{\underline{Persona}}
+
+Representa tota la informació que es té de l'usuari
+
+\begin{description}
+	\item[Nom] de l'usuari
+	\item[Altura] alçada de la persona en metres.
+	\item[Pes] en kg de l'usuari
+	\item[Edat] anys de l'usuari
+	\item[IMC] Índex de Massa Corporal (calculat a partir del pes i l'altura)
+	\item[Pressió Màxima] pressió sanguínia màxima
+	\item[Pressió Mínima] pressió sanguínia mínima
+	\item[Problemes físics] Llista de problemes associats a l'usuari
+	\item[Tests] Llista amb tots els tests que s'han fet a l'usuari (pot no haver-n'hi cap).
+	\item[Activitats] llista amb totes les activitats que l'usuari realitza
+	\item[Objectius] Llista amb tots els objectius que l'usuari ha seleccionat. 
+\end{description}
+
+\subsubsection*{\underline{Programa}}
+
+Representa la solució final on hi ha tots els exercicis associats a cada dia
+
+\begin{description}
+	\item[Dilluns, Dimarts, Dimecres, Dijous, Divendres, Dissabte i Diumenge] Per cada camp hi ha els exercicis associats a cada dia que se li recomanen a l'usuari
+	\item[Temps diari disponible] Llista de mida 7 (una setmana) on l'usuari pot posar el temps del que disposa cada dia de la setmana.
+\end{description}
+
+\subsubsection*{\underline{Test}}
+
+Representa tota la informació que es pot obtenir d'un usuari a l'hora de realitzar un test.
+
+\begin{description}
+	\item[Nom] del test
+	\item[PPM] Pulsacions per Minut de l'usuari just a l'acabar el test
+	\item[Cansanci] relatiu just al finalitzar l'exercici (és un valor subjectiu) pot tenir els següents valors:
+	\begin{itemize}
+		\item Molt
+		\item Poc
+		\item Res
+	\end{itemize}
+	\item[Tirantor muscular] Quantitat de tirantor muscular que l'usuari nota al finalitzar l'exercici, pot tenir els següents valors:
+	\begin{itemize}
+		\item Molt
+		\item Poc
+		\item Res
+	\end{itemize}
+\end{description}
+
+\subsubsection*{\underline{Salut}}
+
+Aquesta classe només té l'atribut del nom ja que només serveix a la jerarquia per poder instanciar tot el que està relacionat amb la salut de l'usuari.  
+
+\subsubsection*{\underline{Dieta}}
+
+Representa la informació de la dieta de l'usuari, conté els següents camps:
+
+\begin{description}
+	\item[Nom] Nom de la dieta
+	\item[Abús de sal] Nombre comprès entre 0 i 10 que representa l'abús de sal de l'usuari (0 gens, 10 molt).
+	\item[Picar entre hores] Nombre comprès entre 0 i 10 que representa la quantitat de menjar que l'usuari pica entre hores (0 gens, 10 molt).
+	\item[Consum de fruita] Nombre que representa la quantitat de peces de fruita de l'usuari durant una setmana.
+	\item[Pastisseria] Nombre de peces de pastisseria que l'usuari menja durant una setmana.
+\end{description}
+
+\subsection{Mètode de resolució}
+
+La classificació heurística es la metodologia de resolució de problemes de SBC que s'adapta al nostra cas, tenim un problema d'\textbf{anàlisis}. En aquest mètode l'expert escull una categoria d'un conjunt de solucions prèviament enumerades (la base de dades dels exercicis possibles a realitzar ofertes pel gimnàs). L'objectiu és obtenir i representar el coneixement necessari perquè l'associació de dades personals i peticions pugui realitzar-se i obtenir una recomanació possible com a solució.
+
+Hem arribat a la conclusió de que tenim un problema d'anàlisis degut a que coneixem quin és el conjunt finit de solucions. Aquest conjunt està format per tots els exercicis que ofereix el gimnàs. En el nostre cas només és el subconjunt d'exercicis que hem escollit per instanciar, dins de tots els oferits pel gimnàs.
+
+La classificació heurística es divideix teòricament en tres etapes (abstracció, associació heurística i refinament). Aquestes etapes encaixen el procés de resolució adquirit de l'expert. Així doncs, a continuació es detalla l'esquema de raonament de cada subproblema identificat a la conceptualització.
+
+\subsubsection{Abstracció de dades}
+
+Per un costat partim d'unes característiques del problema que són característiques que defineixen els usuaris ja sigui explícitament o implícitament, posant explícitament si desitgen que aquesta característica sigui un objectiu, un problema o una activitat a realitzar. 
+
+També tenim la informació de l'estat físic de l'usuari a partir dels tests que aquest hagi pogut realitzar i que en el nostre cas s'haurà d'instanciar demanant-li a l'usuari que realitzi el test.
+
+Si referenciem aquestes etapes des del nostre codi en CLIPS, el mòdul que pertany a aquesta fase és \verb|preguntas-persona|
+
+\subsubsection{Associació heurística}
+
+Un cop hem abstret la informació, és a dir, passar del \emph{Problema Concret} al \emph{Problema Abstracte}, llavors passarem a la següent fase en la que volem passar del \emph{Problema Abstracte} a la \emph{Solució Abstracta}. Aquesta fase la dividirem en dos parts:
+
+En primer lloc hem de fer la inferència de les característiques que tenen els Exercicis que formen part del conjunt de la solució.
+
+En segon lloc hem de fer la inferència de l'estat físic, és a dir, hem d'inferir de la mateixa manera que abans les característiques físiques que té l'usuari, però és important que no només tinguem en compte les característiques dels tests sinó que hem d'utilitzar el sentit comú per inferir les característiques que estan expressades implícitament.
+
+Si ens centrem en referència al nostre codi de CLIPS, els mòduls que pertanyen a aquesta fase són: \verb|generar-solucion| on s'infereix el valor de l'estat físic de l'usuari.
+
+\subsubsection{Refinament}
+
+Un cop realitzades les dues fases anteriors, tan sols queda la última fase. Aquesta fase la dividirem en tres parts:
+
+En primer lloc ens centrarem en descartar totes aquelles recomanacions on s'abstrau de l'usuari que no eren vàlides. Amb això ens assegurem que ninguna recomanació conté un subconjunt de solucions no vàlides.
+
+En segon lloc, ens centrem en avaluar aquelles recomanacions on una determinada característica de l'exercici donat pel gimnàs és igual a la característica que s'ha inferit de l'usuari a partir dels tests o bé s'ha obtingut de l'usuari. Pel que amb això podem obtenir una justificació de perquè la solució serà vàlida més endavant, i el grau de recomanació que serà el que ens ajudi més endavant a saber amb quina preferència han d'aparèixer.
+
+En aquesta tercera fase ens centrem en la ordenació de les recomanacions. Tal i com hem esmentat al paràgraf anterior, utilitzarem el grau de recomanació de manera que ens permeti saber en quin ordre hem d'oferir a l'usuari el conjunt solució d'exercicis, junt a una justificació.
+
+Si ens centrem en referència al nostre codi de CLIPS, el mòdul que pertany a aquesta fase és \verb|generar-solució|.
+
 \section{Implementació}
 
+En aquesta fase ja tenim l'ontologia més adequada per representar el coneixement. També coneixem el mètode de resolució i els processos de raonament. Ara implementarem l'ontologia i encaixarem la descomposició de subproblemes amb la metodologia de classificació heurística. Tot això utilitzant el llenguatge CLIPS.
+
+\subsection{Construcció de l'ontologia}
+
+La representació final de l'ontologia la hem generat amb Protégé (\verb|"CouchPotato.pprj"|) i a més a més, al codi en CLIPS hem utilitzat 3 \verb|deftemplates| pels Exercicis, els temps i les puntuacions. Donat que hi ha una jerarqui a la classe 
 
 \end{document}

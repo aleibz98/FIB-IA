@@ -1763,13 +1763,13 @@
 
 
 
-(defrule pasa-a-generar
+(defrule pasa-a-inferir
 	(declare (salience -10))
 	=>
-	(focus generar-solucion)
+	(focus inferir-datos)
 )
 
-(defmodule generar-solucion "Modulo de generacion de solucion"
+(defmodule inferir-datos "Modulo de inferencia"
   (import MAIN ?ALL)
   (import preguntas-persona ?ALL)
   (export ?ALL))
@@ -1998,8 +1998,18 @@
 	(modify ?f1 (puntuacion ?p1))
 )
 
-(defrule genera-lunes
+(defrule empieza-generar
 	(declare (salience -1))
+	=>
+	(focus generar-solucion)
+)
+(defmodule generar-solucion "Modulo de generacion de solucion"
+  (import MAIN ?ALL)
+  (import preguntas-persona ?ALL)
+  (import inferir-datos ?ALL)
+  (export ?ALL))
+
+(defrule genera-lunes
 	?programa<-(object (is-a Programa)
 		(lunes $?lunes)
 		(tiempo+diario+disponible $?tiempo_disponible))
@@ -2015,7 +2025,6 @@
 	)
 )
 (defrule genera-martes
-	(declare (salience -1))
 	?programa<-(object (is-a Programa)
 		(lunes $?lunes) (martes $?martes)
 		(tiempo+diario+disponible $?tiempo_disponible))
@@ -2031,7 +2040,6 @@
 	)
 )
 (defrule genera-miercoles
-	(declare (salience -1))
 	?programa<-(object (is-a Programa)
 		(martes $?martes)(miercoles $?miercoles)
 		(tiempo+diario+disponible $?tiempo_disponible))
@@ -2047,7 +2055,6 @@
 	)
 )
 (defrule genera-jueves
-	(declare (salience -1))
 	?programa<-(object (is-a Programa)
 		(miercoles $?miercoles)(jueves $?jueves)
 		(tiempo+diario+disponible $?tiempo_disponible))
@@ -2063,7 +2070,6 @@
 	)
 )
 (defrule genera-viernes
-	(declare (salience -1))
 	?programa<-(object (is-a Programa)
 		(jueves $?jueves)(viernes $?viernes)
 		(tiempo+diario+disponible $?tiempo_disponible))
@@ -2079,7 +2085,6 @@
 	)
 )
 (defrule genera-sabado
-	(declare (salience -1))
 	?programa<-(object (is-a Programa)
 		(viernes $?viernes)(sabado $?sabado)
 		(tiempo+diario+disponible $?tiempo_disponible))
@@ -2095,7 +2100,6 @@
 	)
 )
 (defrule genera-domingo
-	(declare (salience -1))
 	?programa<-(object (is-a Programa)
 		(sabado $?sabado)(domingo $?domingo)
 		(tiempo+diario+disponible $?tiempo_disponible))
