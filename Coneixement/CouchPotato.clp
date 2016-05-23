@@ -1802,23 +1802,23 @@
 		(if (= ?anadir 1) then (assert (ejercicio_puntuado (ejercicio ?e) (puntuacion (calcula_puntuacion ?e ?persona)))))
 	)
 	
-	(assert (solucion (create$)))
+	(assert (lista_ejercicios (create$)))
 )
 
 (defrule listar-ejercicios
-	?f1 <- (solucion $?lista_ejercicios)
+	?f1 <- (lista_ejercicios $?lista_ejercicios)
 	?f2 <-(ejercicio_puntuado (ejercicio ?e) (puntuacion ?p))
 	(not (ejercicio_puntuado (puntuacion ?p2&:(< ?p2 ?p))))
 	=>
 	(bind ?lista_ejercicios (insert$ ?lista_ejercicios 1 ?e))
 	(retract ?f1)
 	(retract ?f2)
-	(assert (solucion ?lista_ejercicios))
+	(assert (lista_ejercicios ?lista_ejercicios))
 )
 
 
-(defrule imprimir-solucion
-	(solucion $?lista_ejercicios)
+(defrule imprimir-lista-ejercicios
+	(lista_ejercicios $?lista_ejercicios)
 	(nombre ?nombre)
 	?persona <-(object (is-a Persona)(nombre ?nombreA))
 	(test (eq (str-compare  ?nombre ?nombreA) 0))
@@ -1829,3 +1829,36 @@
 	(printout t crlf crlf "Estos son los ejercicios que podrias hacer teniendo en cuenta tus problemas: " crlf crlf)
 	(progn$ (?var ?lista_ejercicios) (printout t (send ?var get-nombre) "  :  " (calcula_puntuacion ?var ?persona) crlf))
 )
+
+(deffunction clamp (?min ?val ?max)
+	(bind ?res ?val)
+	(if (< ?val ?min) then (bind ?res ?min))
+	(if (> ?val ?max) then (bind ?res ?max))
+	?res
+)
+
+(deftemplate ejercicio_tiempo (slot ejercicio) (slot tiempo))
+
+(defrule calcular-tiempo-ejercicios
+	(lista_ejercicios $?lista_ejercicios)
+	(dificultad ?dificultad)
+	(fitness ?fitness)
+	(nombre ?nombre)
+	?persona <-(object (is-a Persona)(nombre ?nombreA)(peso ?peso))
+	(test (eq (str-compare  ?nombre ?nombreA) 0))
+	=>
+	(bind ?fitness (clamp -2000 ?fitness 5000))
+	(bind ?calorias-deseadas (/ (+ ?fitness 2000) 7)) ;entre 0 y 1000
+	(if (eq (str-compare ?dificultad "Alta") 0) then (bind ?calorias-deseadas (* ?calorias-deseadas 2)))
+	(if (eq (str-compare ?dificultad "Baja") 0) then (bind ?calorias-deseadas (* ?calorias-deseadas 0.5)))
+	(progn$ (?ejercicio ?lista_ejercicios)
+		(bind ?dur-max (send ?ejercicio get-duracion+maxima))
+		(bind ?dur-min (send ?ejercicio get-duracion+minima))
+		(bind ?calorias-minuto (send ?ejercicio get-calorias+quemadas))
+		(bind ?calorias-minuto (* ?calorias-minuto (/ ?peso 60)))
+		(bind ?tiempo (/ ?calorias-deseadas ?calorias-minuto))
+		(bind ?tiempo (clamp ?dur-min ?tiempo ?dur-max))
+		(assert (ejercicio_tiempo (ejercicio ?ejercicio) (tiempo ?tiempo)))
+	)
+)
+	
