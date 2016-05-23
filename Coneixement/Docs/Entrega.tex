@@ -59,15 +59,23 @@ A més, es necessitarà informació sobre els hàbits personals que donin una id
 També es vol obtenir informació sobre la seva salut, com per exemple problemes múscul-esquelètics (mal d'esquena, articulacions, cervicals...) o dieta (consum de fruita, abús de sal, picar entre hores...). 
 A part d'aquesta informació es serà necessari saber els objectius del programa que s'ha de crear (manteniment, posar-se en forma, rebaixar pes, musculació, flexibilitat, equilibri...) així com el temps diari disponible per l'entrenament (com a mínim 30 minuts diaris).
  
-l sistema té un conjunt d'exercicis que es poden realitzar en un gimnàs preparats pels diferents objectius que puguin interessar a l'usuari (cada exercici pot tenir diferents objectius), com exercicis amb màquines (bicicleta estàtica, cinta de córrer, rem, stepper, pesos...), exercicis amb o sense peses pels diferents grups musculars, exercicis de terra o estiraments.
+El sistema té un conjunt d'exercicis que es poden realitzar en un gimnàs preparats pels diferents objectius que puguin interessar a l'usuari (cada exercici pot tenir diferents objectius), com exercicis amb màquines (bicicleta estàtica, cinta de córrer, rem, stepper, pesos...), exercicis amb o sense peses pels diferents grups musculars, exercicis de terra o estiraments.
 Aquests, tenen un conjunt de característiques i restriccions com per exemple el nombre de calories que es cremen per quantitat de temps, duració (màxima i mínima), nombre de repeticions (màximes i mínimes), els grups musculars que treballen, si estan contraindicats per alguna condició de l'usuari (pressió alta, problemes musculars o a les articulacions...), si no estan indicats per certes edats o si estan especialment pensats per alleugerar algunes condicions (mal d'esquena, mobilitat limitada...). També tenim informació sobre els exercicis que combinen millor amb cada exercici. La dificultat d'aquests (moderada, normal o difícil) pot estar lligada al propi exercici, al nombre de repeticions que es realitzen o a la condició física de l'usuari (fer 5 abdominals pot ser fàcil per a un usuari amb una condició física normal i sense sobrepès però difícil per a algú amb sobrepès).
 
-El sistema ha de generar un program d'entrenament per a una setmana (de coma a mínim 30 minuts diaris), creant per a cada dia una seqüència d'exercicis adequada al temps del que es disposa. Els exercicis han d'escollir-se segons les condicions físiques/mèdiques de l'usuari. Aquests exercicis han d'anar encaminats principalment a l'objectiu que ha indicat l'usuari atenent a les condicions de partida de l'usuari. Hi ha d'haver suficients exercicis diferents a cada sessió i durant la setmana per evitar la monotonia. 
+El sistema ha de generar un program d'entrenament (un horari) per a una setmana (de coma a mínim 30 minuts diaris), creant per a cada dia una seqüència d'exercicis adequada al temps del que es disposa. Els exercicis han d'escollir-se segons les condicions físiques/mèdiques de l'usuari. Aquests exercicis han d'anar encaminats principalment a l'objectiu que ha indicat l'usuari atenent a les condicions de partida de l'usuari. Hi ha d'haver suficients exercicis diferents a cada sessió i durant la setmana per evitar la monotonia. 
 
 \subsection{Anàlisis viabilitat}
-Com es pot veure en aquest problema l'usuari del gimnàs espera que se li donin una sèrie d'exercicis que ha de realitzar per poder assolir uns certs objectius o millorar la seva condició física. L'usuari en principi acudeix al gimnàs en busca d'un expert que li pugui recomanar quina és la millor opció per les seves característiques.
+Abans d'intentar resoldre el problema, hem de saber identificar quin tipus de quin tipus és i com es pot resoldre, tenint en compte qüestions com: la informació del domini que es té, la mida, com és la solució que s'ha d'obtenir...
 
-Així doncs, un \emph{Sistema Basat en el Coneixement} és idoni per substituir aquest expert i així reduir la quantitat de feina que rep. Això és perquè aquest sistema pot respondre a les regles predefinides a partir dels paràmetres establerts per l'usuari obtenint així la resposta que aquest espera.
+Podria enfocar-se com un problema de cerca, ja que consisteix en desplaçar-se per l'espai d'exercicis i construir un conjunt d'aquests respectant les restriccions, preferències i estat físic de l'usuari, però no podria resoldre's amb els mètodes de resolució coneguts donat que l'espai d'exploració és bastant ampli i els possibles conjunts de solucions podrien ser molts.
+
+Tampoc es pot fer de forma algorítmica ja que una funció no ens podrà representar totes les decisions d'exploració d'aquest problema.
+
+Així doncs, es pot veure que el volum d'informació procedent de les nostres fonts és molt ric, i això és una característica molt important a l'hora de resoldre un problema mitjançant un SBC. A part de la informació sobre el domini d'aquest problema, també és necessari tenir les preferències i restriccions ja que s'ha d'avaluar cadascuna de forma diferent.
+
+Per altra banda s'ha de mostrar la solució justificada com a resultat de l'execució. És a dir, les raons per les quals es recomana cada horari per a un determinat usuari.
+
+Així doncs, amb aquestes condicions ens permeten afirmar que el problema es pot resoldre mitjançant un \emph{Sistema Basat en el Coneixement}.
 
 \subsection{Fonts de coneixement}
 
@@ -82,11 +90,15 @@ Cerques a \textbf{internet} que permetran obtenir més detalls com el consum de 
 Els objectius que s'espera que el nostre sistema sigui capaç d'assumir seran els següents:
 
 \begin{description}
-	\item[Obtenir] tota la informació d'un client en quant a preferències i objectius que vol realitzar, sent el sistema el que interactuï amb l'usuari.
+	\item[Obtenir] tota la informació d'un client en quant a preferències, estat físic i objectius que vol realitzar, sent el sistema el que interactuï amb l'usuari.
+	
 	\item[Inferir] tota la informació de l'estat físic del client a partir de les respostes que ens ha proporcionat i descobrir si té algun problema físic.
-	\item[Descartar], partint de tots els exercicis possibles, aquells que no pot realitzar perquè no compleixen l'objectiu que desitgi o perquè siguin perjudicials per la salut de l'usuari.
+	
+	\item[Descartar], partint de tots els exercicis possibles, aquells que no pot realitzar perquè no compleixen l'objectiu que desitgi, siguin perjudicials per la salut de l'usuari o que aquest no disposi de prou temps per a realitzar-lo.
+	
 	\item[Evaluar], cada solució que no ha estat descartada, depenent de si s'ajusta a les preferències donades o si aporta una diversitat suficient d'exercicis (fer el mateix exercici durant 3 hores seguides pot cansar a l'usuari molt fàcilment).
-	\item[Presentar] adequadament a l'usuari una llista dels exercicis recomanats amb una justificació sobre cadascun d'aquests exercicis, on es mostrarà el grau de qualificació. D'aquesta manera s'intenta que l'usuari tingui més facilitat per escollir entre les diferents opcions proposades.
+	
+	\item[Presentar] adequadament a l'usuari una llista d'horaris recomanats amb exercicis a realitzar durant una setmana i una justificació per a cadascun	 on es mostrarà el grau de recomanació qualitatiu i quantitatiu. D'aquesta manera s'intenta que l'usuari tingui més facilitat per escollir entre les diferents opcions proposades.
 \end{description}
 
 \subsection{Resultats esperats pel sistema}
@@ -144,27 +156,68 @@ El sistema ha de tenir la següent informació que seran conceptes que formin el
 		\item Problemes contraindicats
 		\item Repeticions (màximes i mínimes)
 	\end{itemize}
-\end{description}
-
-
-\begin{description}
-	\item[Objectiu:]  L'usuari vol complir-lo si és possible
-	\item[Activitat:] Activitat física o estàtica que realitza l'usuari fora del gimnàs, normalment a la feina o a casa (pot ser llegir, escombrar, sortir a córrer, estar assegut...).
-	\item[Exercici:]  Activitat física que l'usuari ha de realitzar per complir el pla que se li ha recomanat. Pot ser dins o fora del gimnàs.
-	\item[Test:] Exercici que se li farà fer a l'usuari per tal d'obtenir uns certs paràmetres del seu estat físic.
-	\item[Dificultat:] Cost que té realitzar un cert \emph{Exercici} en funció de l'estat físic de l'usuari. Pot tenir els següents valors:
+	
+	\item[Test:] Exercici que se li farà fer a l'usuari per tal d'obtenir uns certs paràmetres del seu estat físic. Conté les següents característiques:
+	\begin{itemize}
+		\item Nom
+		\item Pulsacions per minut just a l'acabar
+		\item Cansament a l'acabar, pot ser
+		\begin{itemize}
+			\item Molt
+			\item Poc
+			\item Res
+		\end{itemize}			
+	\end{itemize}
+	
+	\item[Dificultat:] Cost que té realitzar un cert \emph{Exercici} en funció de l'estat físic de l'usuari i de les calories gastades per aquest. Pot tenir els següents valors:
 	\begin{itemize}
 		\item Fàcil
 		\item Normal
 		\item Difícil
 	\end{itemize}
-	\item[Grup muscular:] Conjunt de músculs que l'usuari pot desitjar treballar en funció de l'objectiu que escolleixi.
-	\item[Dieta:] hàbits alimentaris de l'usuari tals com el consum de sal, de fruita o picar entre hores.
-	\item[Problema de salut:] Diferents problemes físics que pugui tenir l'usuari (per exemple mal d'esquena, dolor a les articulacions, IMC elevat...).
 	
+	\item[Grup muscular:] Conjunt de músculs que l'usuari pot desitjar treballar en funció de l'objectiu que escolleixi. Conté les següents característiques:
+	\begin{itemize}
+		\item Nom
+		\item Exercicis o objectius associats a aquest grup muscular.
+	\end{itemize}
+	
+	\item[Dieta:] hàbits alimentaris de l'usuari. Conté les següents característiques:
+	\begin{itemize}
+		\item Nom
+		\item Consum de fruita
+		\item Consum de sal
+		\item Quantitat que es pica entre hores
+	\end{itemize}
+	\item[Problema de salut:] Diferents problemes físics que pugui tenir l'usuari (mal d'esquena, dolor a les articulacions, IMC elevat...). Conté les següents característiques:
+	\begin{itemize}
+		\item Nom
+		\item Zona associada
+	\end{itemize}
 \end{description}
 
-\subsection{Descripció dels problemes que intervenen a la resolució}
+\subsection{Problemes que intervenen a la resolució}
+
+L'expert identifica els següents problemes que ha de solucionar per poder construir adequadament la solució al problema. El procés de resolució es basa en la resolució seqüencial d'aquests problemes.
+
+\subsubsection*{Recopilació de la informació de l'usuari}
+
+La primera tasca que l'expert realitza és fer un conjunt de preguntes a l'usuari. És lògic ja que si no sap res de les preferències, hàbits o activitats que realitza l'usuari podrà fer cap hipòtesis. L'altra part de la informació s'obtindrà mitjançant els tests que haurà de passar l'usuari si és necessari. 
+
+\subsubsection*{Anàlisis de les preferències i/o restriccions}
+
+A continuació, l'expert analitzarà tots i cadascun dels hàbits alimentaris, activitats diàries i paràmetres físics de l'usuari.
+
+\subsubsection*{Eliminació i valoració dels exercicis}
+
+Una vegada emmagatzemada tota la informació possible, s'obtindran tots els exercicis per se avaluats per saber si formen part de la solució o no i, en cas afirmatiu, quan bona és la solució. Per això es descarten tots els exercicis que no compleixen les restriccions establertes (que són incompatibles per les característiques físiques de l'usuari o que no serveixen pels objectius que aquest s'ha seleccionat).
+
+Després tots els exercicis que quedin seran totes les recomanacions que el SBC pot oferir i passarà a avaluar quant bona és una solució, tenint en compte les preferències seleccionades i les inferides del seu estat físic. Es valorarà positivament cada solució amb una preferència complida. En cas de no complir-ne una simplement no s'incrementarà el grau de recomanació però mai es descartarà aquell exercici. Això permetrà donar una valoració qualitativa a la solució així quan es presenti la solució existiran exercicis molt més recomanables que altres.
+
+\subsubsection*{Presentació de la solució a l'usuari}
+
+A continuació l'expert fa una classificació del exercicis segons el 
+
 
 Un dels principals problemes que intervenen a la solució és com determinar l'estat físic d'una persona. Això és així perquè és fàcil veure quan una persona està perfectament en forma o quan no ho està però comparar valors intermedis ja es fa més difícil a no ser que se li assigni un valor numèric.
 
