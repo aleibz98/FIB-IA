@@ -2025,11 +2025,11 @@
 )
 (defrule genera-martes
 	?programa<-(object (is-a Programa)
-		(martes $?martes)
+		(lunes $?lunes) (martes $?martes)
 		(tiempo+diario+disponible $?tiempo_disponible))
-	(ejercicio_tiempo (ejercicio ?e&:(not (member ?e ?martes))) (puntuacion ?p) (tiempo ?t&:(< ?t (nth$ 2 ?tiempo_disponible))))
-	(not(ejercicio_tiempo (ejercicio ?e2&:(not (member ?e2 ?martes))) (puntuacion ?p2&:(> ?p2 ?p)) (tiempo ?t2&:(< ?t2 (nth$ 2 ?tiempo_disponible)))))
-	(not(ejercicio_tiempo (ejercicio ?e3&:(not (member ?e3 ?martes))) (puntuacion ?p3&:(= ?p3 ?p)) (tiempo ?t3&:(< ?t3 ?t))))
+	(ejercicio_tiempo (ejercicio ?e&:(and (not (member ?e ?martes))(not (member ?e ?lunes)))) (puntuacion ?p) (tiempo ?t&:(< ?t (nth$ 2 ?tiempo_disponible))))
+	(not(ejercicio_tiempo (ejercicio ?e2&:(and (not (member ?e2 ?martes))(not (member ?e2 ?lunes)))) (puntuacion ?p2&:(> ?p2 ?p)) (tiempo ?t2&:(< ?t2 (nth$ 2 ?tiempo_disponible)))))
+	(not(ejercicio_tiempo (ejercicio ?e3&:(and (not (member ?e3 ?martes))(not (member ?e3 ?lunes)))) (puntuacion ?p3&:(= ?p3 ?p)) (tiempo ?t3&:(< ?t3 ?t))))
 	=>
 	(send ?programa put-martes (insert$ ?martes 1 ?e))
 	(send ?programa put-tiempo+diario+disponible 
@@ -2040,11 +2040,11 @@
 )
 (defrule genera-miercoles
 	?programa<-(object (is-a Programa)
-		(miercoles $?miercoles)
+		(martes $?martes)(miercoles $?miercoles)
 		(tiempo+diario+disponible $?tiempo_disponible))
-	(ejercicio_tiempo (ejercicio ?e&:(not (member ?e ?miercoles))) (puntuacion ?p) (tiempo ?t&:(< ?t (nth$ 3 ?tiempo_disponible))))
-	(not(ejercicio_tiempo (ejercicio ?e2&:(not (member ?e2 ?miercoles))) (puntuacion ?p2&:(> ?p2 ?p)) (tiempo ?t2&:(< ?t2 (nth$ 3 ?tiempo_disponible)))))
-	(not(ejercicio_tiempo (ejercicio ?e3&:(not (member ?e3 ?miercoles))) (puntuacion ?p3&:(= ?p3 ?p)) (tiempo ?t3&:(< ?t3 ?t))))
+	(ejercicio_tiempo (ejercicio ?e&:(and (not (member ?e ?miercoles))(not (member ?e ?martes)))) (puntuacion ?p) (tiempo ?t&:(< ?t (nth$ 3 ?tiempo_disponible))))
+	(not(ejercicio_tiempo (ejercicio ?e2&:(and (not (member ?e2 ?martes))(not (member ?e2 ?miercoles)))) (puntuacion ?p2&:(> ?p2 ?p)) (tiempo ?t2&:(< ?t2 (nth$ 3 ?tiempo_disponible)))))
+	(not(ejercicio_tiempo (ejercicio ?e3&:(and (not (member ?e3 ?martes))(not (member ?e3 ?miercoles)))) (puntuacion ?p3&:(= ?p3 ?p)) (tiempo ?t3&:(< ?t3 ?t))))
 	=>
 	(send ?programa put-miercoles (insert$ ?miercoles 1 ?e))
 	(send ?programa put-tiempo+diario+disponible 
@@ -2055,11 +2055,11 @@
 )
 (defrule genera-jueves
 	?programa<-(object (is-a Programa)
-		(jueves $?jueves)
+		(miercoles $?miercoles)(jueves $?jueves)
 		(tiempo+diario+disponible $?tiempo_disponible))
-	(ejercicio_tiempo (ejercicio ?e&:(not (member ?e ?jueves))) (puntuacion ?p) (tiempo ?t&:(< ?t (nth$ 4 ?tiempo_disponible))))
-	(not(ejercicio_tiempo (ejercicio ?e2&:(not (member ?e2 ?jueves))) (puntuacion ?p2&:(> ?p2 ?p)) (tiempo ?t2&:(< ?t2 (nth$ 4 ?tiempo_disponible)))))
-	(not(ejercicio_tiempo (ejercicio ?e3&:(not (member ?e3 ?jueves))) (puntuacion ?p3&:(= ?p3 ?p)) (tiempo ?t3&:(< ?t3 ?t))))
+	(ejercicio_tiempo (ejercicio ?e&:(and (not (member ?e ?miercoles))(not (member ?e ?jueves)))) (puntuacion ?p) (tiempo ?t&:(< ?t (nth$ 4 ?tiempo_disponible))))
+	(not(ejercicio_tiempo (ejercicio ?e2&:(and (not (member ?e2 ?miercoles))(not (member ?e2 ?jueves)))) (puntuacion ?p2&:(> ?p2 ?p)) (tiempo ?t2&:(< ?t2 (nth$ 4 ?tiempo_disponible)))))
+	(not(ejercicio_tiempo (ejercicio ?e3&:(and (not (member ?e3 ?miercoles))(not (member ?e3 ?jueves)))) (puntuacion ?p3&:(= ?p3 ?p)) (tiempo ?t3&:(< ?t3 ?t))))
 	=>
 	(send ?programa put-jueves (insert$ ?jueves 1 ?e))
 	(send ?programa put-tiempo+diario+disponible 
@@ -2070,11 +2070,11 @@
 )
 (defrule genera-viernes
 	?programa<-(object (is-a Programa)
-		(viernes $?viernes)
+		(jueves $?jueves)(viernes $?viernes)
 		(tiempo+diario+disponible $?tiempo_disponible))
-	(ejercicio_tiempo (ejercicio ?e&:(not (member ?e ?viernes))) (puntuacion ?p) (tiempo ?t&:(< ?t (nth$ 5 ?tiempo_disponible))))
-	(not(ejercicio_tiempo (ejercicio ?e2&:(not (member ?e2 ?viernes))) (puntuacion ?p2&:(> ?p2 ?p)) (tiempo ?t2&:(< ?t2 (nth$ 5 ?tiempo_disponible)))))
-	(not(ejercicio_tiempo (ejercicio ?e3&:(not (member ?e3 ?viernes))) (puntuacion ?p3&:(= ?p3 ?p)) (tiempo ?t3&:(< ?t3 ?t))))
+	(ejercicio_tiempo (ejercicio ?e&:(and (not (member ?e ?viernes))(not (member ?e ?jueves)))) (puntuacion ?p) (tiempo ?t&:(< ?t (nth$ 5 ?tiempo_disponible))))
+	(not(ejercicio_tiempo (ejercicio ?e2&:(and (not (member ?e2 ?viernes))(not (member ?e2 ?jueves)))) (puntuacion ?p2&:(> ?p2 ?p)) (tiempo ?t2&:(< ?t2 (nth$ 5 ?tiempo_disponible)))))
+	(not(ejercicio_tiempo (ejercicio ?e3&:(and (not (member ?e3 ?viernes))(not (member ?e3 ?jueves)))) (puntuacion ?p3&:(= ?p3 ?p)) (tiempo ?t3&:(< ?t3 ?t))))
 	=>
 	(send ?programa put-viernes (insert$ ?viernes 1 ?e))
 	(send ?programa put-tiempo+diario+disponible 
@@ -2085,11 +2085,11 @@
 )
 (defrule genera-sabado
 	?programa<-(object (is-a Programa)
-		(sabado $?sabado)
+		(viernes $?viernes)(sabado $?sabado)
 		(tiempo+diario+disponible $?tiempo_disponible))
-	(ejercicio_tiempo (ejercicio ?e&:(not (member ?e ?sabado))) (puntuacion ?p) (tiempo ?t&:(< ?t (nth$ 6 ?tiempo_disponible))))
-	(not(ejercicio_tiempo (ejercicio ?e2&:(not (member ?e2 ?sabado))) (puntuacion ?p2&:(> ?p2 ?p)) (tiempo ?t2&:(< ?t2 (nth$ 6 ?tiempo_disponible)))))
-	(not(ejercicio_tiempo (ejercicio ?e3&:(not (member ?e3 ?sabado))) (puntuacion ?p3&:(= ?p3 ?p)) (tiempo ?t3&:(< ?t3 ?t))))
+	(ejercicio_tiempo (ejercicio ?e&:(and (not (member ?e ?viernes))(not (member ?e ?sabado)))) (puntuacion ?p) (tiempo ?t&:(< ?t (nth$ 6 ?tiempo_disponible))))
+	(not(ejercicio_tiempo (ejercicio ?e2&:(and (not (member ?e2 ?viernes))(not (member ?e2 ?sabado)))) (puntuacion ?p2&:(> ?p2 ?p)) (tiempo ?t2&:(< ?t2 (nth$ 6 ?tiempo_disponible)))))
+	(not(ejercicio_tiempo (ejercicio ?e3&:(and (not (member ?e3 ?viernes))(not (member ?e3 ?sabado)))) (puntuacion ?p3&:(= ?p3 ?p)) (tiempo ?t3&:(< ?t3 ?t))))
 	=>
 	(send ?programa put-sabado (insert$ ?sabado 1 ?e))
 	(send ?programa put-tiempo+diario+disponible 
@@ -2100,11 +2100,11 @@
 )
 (defrule genera-domingo
 	?programa<-(object (is-a Programa)
-		(domingo $?domingo)
+		(sabado $?sabado)(domingo $?domingo)
 		(tiempo+diario+disponible $?tiempo_disponible))
-	(ejercicio_tiempo (ejercicio ?e&:(not (member ?e ?domingo))) (puntuacion ?p) (tiempo ?t&:(< ?t (nth$ 7 ?tiempo_disponible))))
-	(not(ejercicio_tiempo (ejercicio ?e2&:(not (member ?e2 ?domingo))) (puntuacion ?p2&:(> ?p2 ?p)) (tiempo ?t2&:(< ?t2 (nth$ 7 ?tiempo_disponible)))))
-	(not(ejercicio_tiempo (ejercicio ?e3&:(not (member ?e3 ?domingo))) (puntuacion ?p3&:(= ?p3 ?p)) (tiempo ?t3&:(< ?t3 ?t))))
+	(ejercicio_tiempo (ejercicio ?e&:(and (not (member ?e ?domingo))(not (member ?e ?sabado)))) (puntuacion ?p) (tiempo ?t&:(< ?t (nth$ 7 ?tiempo_disponible))))
+	(not(ejercicio_tiempo (ejercicio ?e2&:(and (not (member ?e2 ?domingo))(not (member ?e2 ?sabado)))) (puntuacion ?p2&:(> ?p2 ?p)) (tiempo ?t2&:(< ?t2 (nth$ 7 ?tiempo_disponible)))))
+	(not(ejercicio_tiempo (ejercicio ?e3&:(and (not (member ?e3 ?domingo))(not (member ?e3 ?sabado)))) (puntuacion ?p3&:(= ?p3 ?p)) (tiempo ?t3&:(< ?t3 ?t))))
 	=>
 	(send ?programa put-domingo (insert$ ?domingo 1 ?e))
 	(send ?programa put-tiempo+diario+disponible 
