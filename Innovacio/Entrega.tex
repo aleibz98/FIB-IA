@@ -58,7 +58,34 @@
 
 \section{Introducción}
 
-En este trabajo nos hemos centrado en la investigación\cite{deepLearning} sobre distintos métodos de clasificación de células, donde se ha desarrollado un nuevo método que no necesita que sean marcadas. Con esta nueva técnica és posible una clasificación más precisa de las células de un organismo permitiendo así 
+En este trabajo nos hemos centrado en la investigación\cite{deepLearning} sobre distintos métodos de clasificación de células, donde se ha desarrollado un nuevo método que no necesita que sean marcadas. Con esta nueva técnica és posible una clasificación más precisa de las células de un organismo permitiendo así avances en investigaciones como la del cáncer o el biodiésel.
+
+Para poder analizar todos los datos que generan en los procesos de observación. Se utilizan distintos algoritmos entre los cuales están las redes neuronales.
+
+
+\section{Sistemas de clasificación celular}
+Los sistemas de clasificación celular son métodos para detectar ciertos atributos de las células que se encuentran en un conjunto y poder diferenciarlas de acuerdo con los valores de estos atributos. Estos sistemas tienen muchas y muy variadas aplicaciones, algunos ejemplos típicos y muy utilizados hoy en día serian la detección de células cancerígenas, detección de parásitos en tejidos celulares u obtener la cantidad de un componente que tiene una célula para evaluar su validez para un uso en concreto, como es el caso de las células de un alga para conocer su potencial como biocombustible. Sin embargo, de todos sus usos, sin lugar a dudas los más utilizados son los de aspecto médico, así que nos centraremos en ejemplos de éstos.
+
+La mayoría de las técnicas utilizadas están relacionadas con las biotecnologías y son relativamente nuevas, así que se puede considerar un campo en desarrollo y en el que se hacen avances constantemente.
+
+\section{Ejemplos actuales}
+Actualmente no hay muchos sistemas de clasificación celular generales, es decir que puedan ser utilizados para muchas aplicaciones distintas, sino que la mayoría son muy especializados o sólo son válidos para determinar una propiedad específica de las células que están en estudio. Algunos de estos sistemas usan colorantes, otros identificadores de otros tipos, y también hay los que sirven para obtener imágenes que puedan ser analizadas. Empezaremos con el primer caso.
+
+Hay varios tratamientos que nos sirven para sacar información de un tejido celular a base de colorantes. Sin embargo, a parte de los más básicos, hay dos que destacan: la histoquímica y citoquímica. Ambas técnicas sirven para detectar la presencia de moléculas que no serían visibles con colorantes generales, revelándolas usando una reacción química. Se modifica el tejido celular para luego poder colorearlo, o se hace una reacción que involucra las moléculas que se quieren detectar, produciendo una sustancia con color. Un caso específico es la llamada Immunohistoquímica , en la cual se usan anticuerpos con colorante, que se enganchan a membranas celulares específicas. En todos estos casos, sin embargo, tenemos los mismos problemas: necesitamos una preparación previa del tejido para asegurarnos que no se modifican elementos de las células con la reacción química que se quiere provocar, y además necesitamos agentes distintos para detectar moléculas distintas, haciendo estas pruebas válidas solamente para casos muy específicos. 
+
+Después tenemos técnicas muy simples pero efectivas en casos particulares, como es el caso del fraccionamiento celular. Ésta técnica se centra en la diferenciación de distintas partículas, generalmente células, con densidad o tamaño distintos. Esto se consigue con una centrifugación a una velocidad creciente, después de la cual la muestra inicial queda dividida: los elementos más grandes y densos pasan más rápidamente al fondo del recipiente centrifugado que los más pequeños y poco densos. A esta técnica en concreto se le llama separación por centrifugación diferencial. Como podemos observar, sólo nos sirve para casos muy concretos y para la diferenciación de una sola propiedad de células.
+
+Como se ha comentado, existen otros sistemas de detección que no se basan en colorantes. Un ejemplo de un método bastante nuevo y todavía en desarrollo es el basado en nanopartículas de oro para la detección de células cancerígenas. Éstas nanopartículas interaccionan con las membranas celulares, permitiendo la diferenciación entre las que son cancerígenas y las que no. Éste sistema tiene la ventaja que no es tan agresivo como los sistemas de coloración que hemos visto, y puede ser aplicado a una persona, en vez de a un tejido extraído. También es superior a muchos tratamientos actuales debido a que es altamente específico, es decir que no afecta a las células sanas, provocando así efectos secundarios al tratamiento. Una vez conseguida esta detección, se podrían utilizar las nanopartículas para varias cosas, como destruir las células con las que han interaccionado, usando una señal láser. Sin embargo, hay que tener en cuenta que todo esto se mueve dentro de un margen de error, es decir que puede fallar y que se marquen células sanas, por lo que un remedio como destruirlas podría ser contraproducente.
+
+Sin embargo, los métodos más fácilmente comparables con la técnica que queremos estudiar en este trabajo son aquellos que también usan imágenes. Para obtener estas imágenes existen muchos sistemas muy usados, como las ecografías o la resonancia magnética, que con ultrasonido o con ondas de radio potentes respectivamente nos sirven para obtener una imagen de tejidos celulares que sirven para su análisis posteriormente. Otro ejemplo seria el PET-TC, que utiliza pequeñas cantidades de materiales radioactivos llamados radiosondas, una cámara especial y una computadora para ayudar a evaluar las funciones de sus órganos y tejidos. Estos materiales enganchan una substancia que podremos ver a las células que los consumen, y así se pueden identificar aquellas células con mayor actividad en un aspecto en concreto. En el caso específico de las células cancerígenas, éstas son las que hacen la mitosis de forma más activa. Todos estos ejemplos, sin embargo, sirven solo para evaluar conjuntos de células en conjunto.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{intro_1}
+	\caption{Resultados obtenidos en un PET-TC en el que se aprecian las zonas de máxima actividad celular}
+\end{figure}
+
+Sin embargo, una vez obtenida la imagen, no tenemos sistemas que de forma automática detecten los problemas visibles en ellas, y tampoco tenemos muchas formas de ver esta información a nivel celular. Normalmente se usa el conocimiento de una persona para la evaluación de las imágenes, y es por esto que el uso de un método de inteligencia artificial además de una visualización a nivel celular muy rápida es la solución perfecta para la diferenciación o clasificación de células, que es exactamente lo que veremos a continuación.
 
 \section{Introducción al sistema de clasificación}
 
