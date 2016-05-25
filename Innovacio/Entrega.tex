@@ -25,7 +25,7 @@
 
 \setlength{\parskip}{0.7em}
 %\setlength{\parindent}{1cm}
-\linespread{1.2}
+\linespread{1.25}
 
 \title{
 	\Huge
@@ -55,12 +55,17 @@
 \tableofcontents
 
 \newpage
+
+\section{Introducción}
+
+En este trabajo nos hemos centrado en la investigación\cite{deepLearning} sobre distintos métodos de clasificación de células y como las redes neuronales pueden afectar a dichos métodos.
+
 \section{Introducción al sistema de clasificación}
 
 \subsection{Adquisición de datos}
 El sistema que han ideado se basa en combinar tecnologías de fotometría e inteligencia artificial para clasificar correctamente una célula. El sistema tiene que ser capaz de analizar muchas células por segundo mientras pasan por un canal, de esta manera se podrán clasificar las células, aunque haya muchas pocas ocurrencias de una de las opciones, como pasa en el caso de la detección de células cancerígenas, donde la cantidad de células cancerígenas es mucho inferior a la de células en buen estado si la enfermedad aún no ha llegado a los estados más destructivos. Para ello han desarrollado un sistema innovador con el que consiguen capturar unos 36 millones de imágenes por segundo, con lo que se consigue una capacidad de analizar 100.000 células por segundo. Además permite que las células que viajan por el nanotubo se puedan desplazar a 10 metros por segundo.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.95\textwidth]{Phase}
 	\caption{Ejemplo de las fotos obtenidas por el sistema}
@@ -70,7 +75,7 @@ El sistema que han ideado se basa en combinar tecnologías de fotometría e inte
 \subsection{Datos calculados}
 El sistema es capaz de calcular muchos datos de cada célula, pero se pueden clasificar en dos grupos: los relacionados con la morfología de la célula y los que resultan de los análisis fotométricos. Entre los de la morfología de la célula se encuentran: el diámetro, el área, la circularidad de la célula, etc. El análisis fotométrico aporta datos como el índice de refracción de las células, su absorción y dispersión de luz, etc. Se puede encontrar una lista de todos los datos que utilizan en el informe científico. Como tienen tantos datos, muchos están relacionados entre ellos (ver \hyperref[fig:features]{figura~\ref{fig:features}}), haciendo un análisis de la correlación entre los datos, han encontrado que hay tres grupos muy relacionados: los datos relacionados con la morfología, los relacionados con la refracción, y los relacionados con la perdida y dispersión de la luz.
 
-\begin{figure}[h!]
+\begin{figure}[H]
 	\centering
 	\includegraphics[width=0.95\textwidth]{features}
 	\caption{(a) Correlación entre los diferentes datos calculados
@@ -92,11 +97,6 @@ La última capa de nodos es la capa de decisión, en ella, cada nodo representa 
 \end{figure}
 
 Para encontrar los parámetros de la ponderación de las entradas de cada nodo se usa un método iterativo. Inicialmente, se asignan de manera aleatoria \cite{training}. En cada iteración se le pasa a la red neural una cantidad de ejemplos de los cuales se sabe el resultado esperado. Para cada uno de los nodos de la capa de decisión se calcula la curva ROC \cite{roc} (del inglés Receiver Operating Characteristic). Esta curva es una representación de la sensibilidad  (porcentaje de clasificación correcta cuando el resultado tendría que ser positivo \cite{sensibilidad}) y especificidad (porcentaje de clasificación correcta cuando el resultado tendría que ser negativo). La curva se construye calculando la sensibilidad y especificidad para cada valor del parámetro de aceptación. Una vez hemos encontrado la curva ROC de cada nodo de la capa de decisión,  se ajustan los nodos de tal manera que el área que queda por debajo de cada curva ROC sea lo más alta posible.
-
-
-\section{Introducción}
-
-En este trabajo nos hemos centrado en la investigación sobre distintos métodos de clasificación de células y como las redes neuronales pueden afectar a dichos métodos.
 
 \section{Impacto del descubrimiento}
 
