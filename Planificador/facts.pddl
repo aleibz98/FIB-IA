@@ -44,6 +44,6 @@
   	(preparer exP exA)
   ) 
 
-  (:goal (and (currentDay d2)(exLevel exA l6))
+  (:goal (and (currentDay d5)(exLevel exA l6))
 
   ))
