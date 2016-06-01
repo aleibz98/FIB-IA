@@ -5,7 +5,7 @@ import random;
 class Exercice:
 
 	def __init__(self, num, level):
-		self.preparator = []
+		self.preparer = []
 		self.precursor = []
 		self.num = num
 		self.level = level
@@ -68,10 +68,10 @@ def writeInit(file, exercices):
 			file.write("    (precursor " + str(p) + " " + str(e) + ")\n")
 	file.write("\n")
 
-	# Write preparators
+	# Write preparers
 	for e in exercices:
-		for p in e.preparator:
-			file.write("    (preparator " + str(p) + " " + str(e) + ")\n")
+		for p in e.preparer:
+			file.write("    (preparer " + str(p) + " " + str(e) + ")\n")
 	file.write("\n")
 
 	file.write("  )\n")
@@ -106,11 +106,11 @@ def main():
 		numPrecursor = numExercices/4
 
 	try:
-		numPreparator = int(raw_input("Quantos preparadores quieres (default = %d, maximo = %d)? " % (numExercices/3, numExercices - 1)))
-		if numPreparator >= numExercices:
-			numPreparator -= 1
+		numPreparer = int(raw_input("Quantos preparadores quieres (default = %d, maximo = %d)? " % (numExercices/3, numExercices - 1)))
+		if numPreparer >= numExercices:
+			numPreparer -= 1
 	except ValueError:
-		numPreparator = numExercices/4
+		numPreparer = numExercices/4
 
 	print "\nGracias! Estamos generando el problema, por favor espera."
 
@@ -133,20 +133,20 @@ def main():
 		exercices[r].precursor.append(exercices[r + 1])
 		numPrecursor -= 1
 
-	while numPreparator >= 0:
+	while numPreparer >= 0:
 		r = random.randint(0, numExercices - 2)
 
 		# Check that this is not already added
 		addedAlready = False
-		for e in exercices[r].preparator:
+		for e in exercices[r].preparer:
 			if (e == exercices[r]):
 				addedAlready = True
 
 		if addedAlready:
 			continue
 				
-		exercices[r].preparator.append(exercices[r + 1])
-		numPreparator -= 1
+		exercices[r].preparer.append(exercices[r + 1])
+		numPreparer -= 1
 
 	print "Escribiendo el problema en el arxivo " + name + ".pddl"
 	with open(name + ".pddl", "w") as file:
