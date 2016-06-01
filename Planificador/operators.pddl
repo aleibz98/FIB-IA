@@ -10,7 +10,7 @@
   )
 
   (:types
-    exercice level day - object
+    exercice level day num - object
 
   )
 
@@ -18,16 +18,20 @@
     (lower ?l1 - level ?l2 - level)
     (before ?d1 - day ?d2 - day)
     (exLevel ?exercice - exercice ?level - level)
-    (precursor ?befofe - exercice ?after - exercice)
+    (precursor ?before - exercice ?after - exercice)
     (preparer ?before - exercice ?after - exercice)
     (currentDay ?day - day)
     (exerciceToday ?exercice - exercice)
     (lastExerciceToday ?exercice - exercice)
+    ;Extension 3    
+    (numExDia ?num - num) 
+    (smaller ?n1 - num ?n2 - num)
+    (zero ?n - num)
   ) 
 
   (:action do-exercice
-    :parameters (?e - exercice ?l ?nl - level ?d - day)
-    :precondition (and (exLevel ?e ?l) (currentDay ?d)
+    :parameters (?n ?nn - num ?e - exercice ?l ?nl - level )
+    :precondition (and (exLevel ?e ?l) (numExDia ?n) (smaller ?n ?nn) (lower ?l ?nl)
     		(not (exerciceToday ?e)) 
     		(forall (?pr - exercice)
     			(not (and (precursor ?pr ?e) (not (lastExerciceToday ?pr))))
@@ -42,13 +46,16 @@
   		)
     		(lastExerciceToday ?e)
     		(exerciceToday ?e)
-    		(when (lower ?l ?nl) (and (not (exLevel ?e ?l)) (exLevel ?e ?nl)))
+    		(not (exLevel ?e ?l))
+    		(exLevel ?e ?nl)
+		(not (numExDia ?n))
+		(numExDia ?nn)
     	)
     )
 
   (:action do-exercice-without-leveling
-    :parameters (?e - exercice ?l - level ?d - day)
-    :precondition (and (exLevel ?e ?l) (currentDay ?d)
+    :parameters (?n ?nn - num ?e - exercice ?l - level ) 
+    :precondition (and (exLevel ?e ?l) (numExDia ?n) (smaller ?n ?nn)
     		(not (exerciceToday ?e)) 
     		;(forall (?pr - exercice)
     		;	(when (precursor ?pr ?e) (lastExerciceToday ?pr))
@@ -63,6 +70,8 @@
   		)
 		(lastExerciceToday ?e)
     		(exerciceToday ?e)
+    		(not (numExDia ?n))
+		(numExDia ?nn)
     	)
     )
 
@@ -76,6 +85,13 @@
   				(forall (?e - exercice)
   					(when (lastExerciceToday ?e) (not (lastExerciceToday ?e)))
   				)
+  				(forall (?n - num)
+  					(when (zero ?n) (numExDia ?n))
+  				)
+  				(forall (?n - num)
+                                        (when (not(zero ?n)) (not (numExDia ?n)))
+  				)
+  				
   			)
   	)
 
