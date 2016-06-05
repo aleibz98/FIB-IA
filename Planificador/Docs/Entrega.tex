@@ -83,7 +83,14 @@ Aquest problema consta de diverses extensions per poder obtenir millor nota, les
 
 \begin{description}
 	\item[Problema bàsic:] Al pla d'entrenament tots els exercicis tenen 0 o 1 preparadors i cap predecessor. El planificador és capaç de trobar un pla per poder realitzar els exercicis al nivell final de la quinzena encadenant exercicis i pujant el nivell si fa falta segons van passant els dies, tenint en compte que cada exercici te un o cap exercici preparador (els estiraments no tenen cap preparador) i que per tot exercici del pla amb nivell $N$ es compleix que en tot moment en el que s'ha realitzat l'exercici anteriorment s'ha fet amb nivell $N$ o $N - 1$.
-	 
+	\item[Extensió 1:] Els exercicis poden tenir de 0 a N preparadors però cap predecessor. El planificador és capaç de construir un pla per poder realitzar els objectius al nivell desitjat encadenant exercicis i pujant de nivell si fa falta segons van passant els dies, tenint en compte que per a tot exercici que pertany al pla, tots els seus exercicis preparadors pertanyen al pla i estan abans el mateix dia.
+	\item[Extensió 2:] Extensió 1 + 	els exercicis 0 o 1 exercici predecessor. El planificador és capaç de construir un pla per poder realitzar els exercicis al nivell objectiu encadenant exercicis i pujant de nivell si fa falta segons els dies, on per a tot exercici que pertany al pla, tots els seus exercicis precursors i preparadors estan co\l.locats el mateix dia i per a tot exercici del pla amb un nivell $N$ es compleix en tot moment que el mateix exercici ha estat realitzat anteriorment amb un nivell $N + 1$
+	\item[Extensió 3:] El planificador controla que no hi hagi més de 6 exercicis al dia.
+	\item[Extensió 4:] Els exercicis tenen assignat el temps (en minuts) que es triga a realitzar-los (incloent el temps de descans necessari després de l'exercici). El planificador controla que el pla generat no superi els 90 minuts diaris. 
 \end{description}
+
+\section{Domini}
+
+
 
 \end{document}
