@@ -46,6 +46,44 @@
 
 \newpage
 
+\section{Introducció}
 
+\subsection{El problema}
+
+Aquest problema és una continuació de la pràctica 2 realitzada. El client després de quedar satisfet amb el nostre sistema de recomanació d'exercicis construït en CLIPS ens demana ara una eina senzilla que, basant-se en exercicis que l'usuari està realitzant en aquest moment i el seu nivell de dificultat (de l'1 al 10), li faci un pla d'entrenament físic quinzenal amb l'objectiu d'aconseguir pujar de nivell un conjunt d'exercicis escollits. El pla d'entrenament ha de tenir en compte que no es pot realitzar un exercici amb nivell $X$ de dificultat si no s'ha realitzat anteriorment el mateix exercici amb dificultat $X - 1$ i que hi ha exercicis que s'han de fer abans que altres. Es defineixen les següents relacions entre exercicis:
+
+\begin{description}
+	\item[Exercicis precursors:] un exercici és precursor d'un altre si s'ha de fer abans que l'altre exercici el mateix dia d'entrenament, sense haver-hi cap exercici intercalat entre ells. És una restricció estricta que no es pot trencar.
+	\item[Exercicis preparadors:] són exercicis que s'han de fer abans d'un cert exercici el mateix dia d'entrenament però no han d'anar immediatament abans (un exemple són els estiraments, que preparen diversos exercicis per a les sessions d'entrenament). És una restricció estricta que no es pot trencar.
+	\item[Exercicis nivell $N + 1$:] serveixen per modelar l'evolució del nivell de dificultat d'un exercici segons passen els dies. Per cada exercici es pot pujar un nivell $N + 1$ només si aquest exercici s'ha realitzat anteriorment al nivell $N$.
+\end{description}
+
+Així doncs al sistema se li ha de donar coneixement sobre:
+
+\begin{itemize}
+	\item els exercicis que es poden fer al gimnàs
+	\item els exercicis predecessors d'un exercici
+	\item els exercicis preparadors d'un exercici
+	\item els exercicis que l'usuari ja està fent i el nivell al que els fa
+	\item els nivells incrementats d'alguns exercicis als que es vol arribar al final de la quinzena.
+\end{itemize}
+
+El resultat és un pla d'entrenament que:
+\begin{itemize}
+	\item reflexa els exercicis mínims que l'usuari ha de realitzar per arribar als nivells objectiu (\emph{important:} el planificador no ha d'omplir el pla amb exercicis extra, només els necessaris per arribar al dia 15 al nivell desitjat. Si sobren espais es sobreentén que se li dona a l'usuari la llibertat per fer altres exercicis suplementaris al pla d'entrenament).
+	\item per a cada exercici al pla, indica el dia a fer-lo i a quin nivell per arribar als objectius quinzenals.
+	\item per tots els exercicis del pla es compleix en tot moment que els seus predecessors es fan just abans el mateix dia, sense cap exercici intercalat pel mig. 
+	\item per tots els exercicis del pla es compleix en tot moment que els seus exercicis preparadors es fan abans el mateix dia (però hi pot haver exercicis intercalats).
+	\item per tot exercici del pla amb nivell $N$ es compleix en tot moment que el mateix exercici ha estat realitzat algun dia anterior amb nivell $N$ o $N - 1$.
+\end{itemize}
+
+\subsection{Extensions del problema}
+
+Aquest problema consta de diverses extensions per poder obtenir millor nota, les extensions són les següents:
+
+\begin{description}
+	\item[Problema bàsic:] Al pla d'entrenament tots els exercicis tenen 0 o 1 preparadors i cap predecessor. El planificador és capaç de trobar un pla per poder realitzar els exercicis al nivell final de la quinzena encadenant exercicis i pujant el nivell si fa falta segons van passant els dies, tenint en compte que cada exercici te un o cap exercici preparador (els estiraments no tenen cap preparador) i que per tot exercici del pla amb nivell $N$ es compleix que en tot moment en el que s'ha realitzat l'exercici anteriorment s'ha fet amb nivell $N$ o $N - 1$.
+	 
+\end{description}
 
 \end{document}
