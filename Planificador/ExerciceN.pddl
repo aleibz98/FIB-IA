@@ -1,0 +1,65 @@
+(define
+  (problem ExerciceN)
+  (:domain exercices)
+  (:objects 
+    Ex0 Ex1 Ex2 Ex3 Ex4 Ex5 Ex6 Ex7 Ex8 Ex9 Ex10 Ex11 Ex12 Ex13 Ex14  - exercice
+    l1 l2 l3 l4 l5 l6 l7 l8 l9 l10  - level
+    d1 d2 d3 d4 d5 d6 d7 d8 d9 d10 d11 d12 d13 d14 d15  - day
+  )
+  (:init
+    (currentDay d1)
+
+    (lower l1 l2)
+    (lower l2 l3)
+    (lower l3 l4)
+    (lower l4 l5)
+    (lower l5 l6)
+    (lower l6 l7)
+    (lower l7 l8)
+    (lower l8 l9)
+    (lower l9 l10)
+
+    (before d1 d2)
+    (before d2 d3)
+    (before d3 d4)
+    (before d4 d5)
+    (before d5 d6)
+    (before d6 d7)
+    (before d7 d8)
+    (before d8 d9)
+    (before d9 d10)
+    (before d10 d11)
+    (before d11 d12)
+    (before d12 d13)
+    (before d13 d14)
+    (before d14 d15)
+
+    (exLevel Ex0 l10)
+    (exLevel Ex1 l3)
+    (exLevel Ex2 l8)
+    (exLevel Ex3 l8)
+    (exLevel Ex4 l1)
+    (exLevel Ex5 l6)
+    (exLevel Ex6 l9)
+    (exLevel Ex7 l6)
+    (exLevel Ex8 l2)
+    (exLevel Ex9 l3)
+    (exLevel Ex10 l10)
+    (exLevel Ex11 l3)
+    (exLevel Ex12 l10)
+    (exLevel Ex13 l6)
+    (exLevel Ex14 l6)
+
+    (precursor Ex3 Ex2)
+    (precursor Ex8 Ex7)
+    (precursor Ex9 Ex8)
+    (precursor Ex14 Ex13)
+
+    (preparer Ex1 Ex0)
+    (preparer Ex4 Ex3)
+    (preparer Ex8 Ex7)
+    (preparer Ex13 Ex12)
+
+  )
+  (:goal (and (currentDay d15) (exLevel Ex10 l10) (exLevel Ex14 l10) (exLevel Ex13 l10) ))
+)
