@@ -32,11 +32,6 @@
   	(= (exTime exP5) 10)
   	(= (exTime exPr) 15)
   	
-  	;(= (timeDay d1) 0)
-  	;(= (timeDay d2) 0)
-  	;(= (timeDay d3) 0)
-  	;(= (timeDay d4) 0)
-  	;(= (timeDay d5) 0)
   	(= (timeDay) 0)
 
 
@@ -49,6 +44,6 @@
   	(preparer exP5 exA)
   ) 
   
-  (:goal (and (currentDay d5) (= (exLevel exA) 7))
+  (:goal (and (currentDay d5) (= (exLevel exA) 7)(= (exLevel exP) 1)(= (exLevel exP2) 1)(= (exLevel exP3) 1)(= (exLevel exP4) 1)(= (exLevel exP5) 1)(= (exLevel exPr) 1))
 
   ))
