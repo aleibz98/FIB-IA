@@ -48,30 +48,7 @@
     		(exerciceToday ?e)
 
     		(increase (numExToday) 1)
-                (increase (exLevel ?e) 1)
-    	)
-    )
-
-  (:action do-exercice-without-leveling
-    :parameters (?e - exercice) 
-    :precondition (and
-    		(not (exerciceToday ?e)) 
-    		(forall (?pr - exercice)
-    			(not (and (precursor ?pr ?e) (not (lastExerciceToday ?pr))))
-    		)
-    		(forall (?p - exercice)
-    			(not (and (preparer ?p ?e) (not (exerciceToday ?p))))
-    		)
-    		(< (numExToday) 6)
-    	)
-    :effect (and 
-  		(forall (?last - exercice)
-  			(when (lastExerciceToday ?last) (not (lastExerciceToday ?last)))
-  		)
-		(lastExerciceToday ?e)
-    		(exerciceToday ?e)
-    		
-    		(increase (numExToday) 1)
+                (when (< (exLevel ?e) 10) (increase (exLevel ?e) 1))
     	)
     )
 
