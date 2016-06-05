@@ -125,4 +125,35 @@ Com que s'ha utilitzat \verb|fluent| (necessari per realitzar l'extensió 4). Ta
 	\item[timeDay] S'utilitza per contar els minuts totals d'exercicis realitzats i així poder satisfer l'extensió 4 (només s'utilitza a l'extensió 4).
 \end{description}
 
+\section{Operadors}
+
+Els operadors escollits han estat dos, un que és el que realitza l'exercici i l'altre que és el que canvia el dia.
+
+\subsection{\texttt{do-exercice}}
+
+La funció d'aquest operador és realitzar un exercici si s'han complert totes les precondicions d'aquest.
+
+\textbf{Precondicions: } 
+\begin{itemize}
+	\item L'exercici no s'ha realitzat avui encara
+	\item Si té un exercici precursor aquest és l'últim que s'ha fet avui
+	\item Tots els exercicis preparadors ja s'ha fet avui
+	\item (només extensió 3) El nombre d'exercicis fets avui és inferior a 6
+	\item (només extensió 4) Els minuts d'exercicis fets avui més la duració de l'exercici són inferiors o iguals a 90.
+\end{itemize}
+
+Un cop s'ha realitzat l'exercici es posa aquest exercici com a l'últim realitzat avui, també s'afegeix a la llista d'exercicis realitzats avui, s'incrementa el nivell de l'exercici, (a l'extensió 3) s'incrementa el nombre d'exercicis realitzats i (a l'extensió 4) s'incrementa la duració de l'exercici.
+
+\subsection{\texttt{skip-day}}
+
+La funció d'aquest operador és canviar de dia per poder continuar en la creació del pla d'entrenament. Rep dos dies com a paràmetres i incrementa el dia del dia \verb|d1| al \verb|d2|.
+
+\textbf{Precondicions: }
+\begin{itemize}
+	\item El dia \verb|d1| és el dia actual en el que s'està treballant
+	\item El dia \verb|d2| ve després del dia \verb|d1|.
+\end{itemize}
+
+L'efecte de l'operador és marcar tots els exercicis com a no realitzats avui i també marcar que no hi ha cap exercici com a "últim exercici realitzat". A l'extensió 3 marca el nombre d'exercicis realitzats a 0 i a l'extensió 4 posa el nombre de minuts realitzats avui a 0.
+
 \end{document}
