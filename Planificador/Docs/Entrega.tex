@@ -91,6 +91,21 @@ Aquest problema consta de diverses extensions per poder obtenir millor nota, les
 
 \section{Domini}
 
+En aquest domini s'han definit els següents tipus de dades:
 
+\begin{description}
+	\item[exercice] Representa un exercici
+	\item[level] Representa un nivell (no s'usa a l'extensió 4)
+	\item[day] Identifica un dia
+	\item[num] Identifica un nombre per contar (no s'usa a l'extensió 4)
+\end{description}
+
+En el domini s'han definits predicats diferents en funció de quina extensió havien de complir, fins a l'extensió 3 hi ha els següents predicats:
+
+\begin{description}
+	\item[lower] Aquest predicat rep com a paràmetre dos nivells i el seu objectiu és ordenar els nivells (el nivell 1 és més petit que el nivell 2).
+	\item[before] Rep dos dies com a paràmetre i s'utilitza per saber que un dia està abans que un altre (el dia 1 del pla es troba abans que el dia 2).
+	\item[exLevel] Rep un exer
+\end{description}
 
 \end{document}
