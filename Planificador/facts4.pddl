@@ -4,7 +4,7 @@
   (:domain exercices)
 
   (:objects
-    exP exA exPr exP2 exP3 exP4 exP5 none- exercice
+    exP exA exPr exP2 exP3 exP4 exP5 none - exercice
     d1 d2 d3 d4 d5 - day ; d6 d7 d8 d9 d10 d11 d12 d13 d14 d15 - day
   )
 
@@ -38,7 +38,7 @@
 
 		(precursor none exP)
         (precursor exPr exA) 
-		(precursor none Pr)
+		(precursor none exPr)
 		(precursor exP5 exP2)
 		(precursor none exP3)
 		(precursor none exP4)
