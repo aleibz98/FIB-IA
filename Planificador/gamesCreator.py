@@ -31,7 +31,7 @@ def writeObjects(file, exercices):
 	file.write("    ")
 	for e in exercices:
 		file.write(str(e) + " ")
-	file.write(" - exercice\n")
+	file.write("none - exercice\n")
 
 	# Write days
 	file.write("    ")
@@ -44,6 +44,7 @@ def writeObjects(file, exercices):
 def writeInit(file, exercices, extension):
 	file.write("  (:init\n")
 	file.write("    (currentDay d1)\n\n")
+	file.write("    (null none)\n\n")
 
 	# Write days
 	for i in range(14):
@@ -64,8 +65,11 @@ def writeInit(file, exercices, extension):
 
 	# Write precursors
 	for e in exercices:
+		added = False
 		for p in e.precursor:
 			file.write("    (precursor " + str(p) + " " + str(e) + ")\n")
+			added = True
+		if not added: file.write("    (precursor none " + str(e) + ")\n")
 	file.write("\n")
 
 	# Write preparers
