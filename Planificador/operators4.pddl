@@ -31,13 +31,12 @@
   ) 
 
   (:action do-exercice
-    :parameters (?e ?null ?pr - exercice)
+    :parameters (?e ?pr - exercice)
     :precondition (and
-			(null ?null)
+			(precursor ?pr ?e)
 			(not (null ?e))
     		(not (exerciceToday ?e)) 
-			(precursor ?pr ?e)
-    		(or (= ?pr ?null) (lastExerciceToday ?pr))
+    		(or (null ?pr) (lastExerciceToday ?pr))
     		(forall (?p - exercice)
     			(not (and (preparer ?p ?e) (not (exerciceToday ?p))))
     		)
