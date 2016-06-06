@@ -5,7 +5,7 @@
 
   (:objects
     exP exA exPr exP2 exP3 exP4 exP5 none - exercice
-    d1 d2 d3 d4 d5 - day ; d6 d7 d8 d9 d10 d11 d12 d13 d14 d15 - day
+    d1 d2 d3 d4 d5 d6 d7 d8 d9 d10 d11 d12 d13 d14 d15 - day
   )
 
   (:init
@@ -15,6 +15,16 @@
   	(before d2 d3)
   	(before d3 d4)
   	(before d4 d5)
+  	(before d5 d6)
+  	(before d6 d7)
+  	(before d7 d8)
+  	(before d8 d9)
+  	(before d9 d10)
+  	(before d10 d11)
+  	(before d11 d12)
+  	(before d12 d13)
+  	(before d13 d14)
+  	(before d14 d15)
 
   	(= (exLevel exA) 5)
   	(= (exLevel exP) 1)
@@ -36,12 +46,12 @@
 
 	(null none)
 
-		(precursor none exP)
+        (precursor none exP)
         (precursor exPr exA) 
-		(precursor none exPr)
-		(precursor exP5 exP2)
-		(precursor none exP3)
-		(precursor none exP4)
+	(precursor none exPr)
+	(precursor exP5 exP2)
+	(precursor none exP3)
+	(precursor none exP4)
         (precursor none exP5) 
   	(preparer exP exA)
   	(preparer exP2 exA)
