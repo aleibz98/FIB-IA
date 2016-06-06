@@ -48,10 +48,10 @@
   	(preparer exP exA)
   	(preparer exP2 exA)
   	(preparer exP3 exA)
-  	(preparer exP4 exA)
+  	;(preparer exP4 exA)
   	(preparer exP5 exA)
   ) 
   
-  (:goal (and (currentDay d5) (= (exLevel exA) 7))
+  (:goal (and (currentDay d15) (= (exLevel exA) 7))
 
   ))
