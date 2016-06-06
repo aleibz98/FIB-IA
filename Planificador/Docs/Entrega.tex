@@ -18,6 +18,7 @@
 \usepackage{subcaption}
 \usepackage{multirow}
 \usepackage{colortbl}
+\usepackage{listings}
 
 \setlength{\parskip}{0.7em}
 %\setlength{\parindent}{1cm}
@@ -36,6 +37,60 @@
 \date{\today}
 
 \begin{document}
+	
+\lstdefinelanguage{pddl}
+{
+	keywords={
+		define,
+	},
+	morekeywords={[2]
+		domain,
+		problem,
+		requirements,
+		predicates,
+		types,
+		objects,
+		action,
+		init,
+		goal,
+	},
+	morekeywords={[3]
+		parameters,
+		vars,
+		precondition,
+		effect,
+	},
+	morekeywords={[4]
+		forall,
+		or,
+		and,
+		not,
+		when,
+		=,
+		exists,
+		imply,
+	},
+	comment=[l]{\;},
+	sensitive=true
+}[keywords, comments]
+
+\lstdefinelanguage[mapl]{pddl}[]{pddl}
+{
+	morekeywords={[2]
+		sensor,
+	},
+	morekeywords={[3]
+		sense,
+		replan,
+	},
+	morekeywords={[4]
+		KIF,
+	},
+}
+
+\lstset{language=pddl}
+
+
 
 \maketitle
 
@@ -108,11 +163,12 @@ En aquest domini s'han definit els següents tipus de dades:
 En el domini s'han definits predicats diferents en funció de quina extensió havien de complir, fins a l'extensió 3 hi ha els següents predicats:
 \begin{description}
 	\item[before] Relaciona dos dies i s'utilitza per saber que un dia està abans que un altre (el dia 1 del pla es troba abans que el dia 2 per exemple).
-	\item[precursor] Relaciona dos exercicis, el primer és precursor del segon, així és possible satisfer la relació d'un exercici precursor d'un altre.
+	\item[precursor] Relaciona dos exercicis, el primer és precursor del segon, així és possible satisfer la relació d'un exercici precursor d'un altre. Si un exercici no té cap precursor, se li asigna el com a precursor l'exercici nul.
 	\item[preparer] Relaciona dos exercicis, el primer és preparador del segon, així és possible satisfer la relació d'un exercici preparador d'un altre.
 	\item[currentDay] identifica el dia actual, és necessari per realitzar tasques com canviar de dia o per saber els exercicis realitzats en un dia.
 	\item[exerciceToday] Predicat on s'afegeixen els exercicis realitzats durant un dia en concret, al canviar de dia els exercicis marcats s'han d'eliminar per tornar-los a marcar, si cal, al següent dia. És útil satisfer la relació dels exercicis preparadors.
 	\item[lastExerciceToday] S'utilitza per marcar quin ha estat l'últim exercici realitzat en aquell moment durant el dia, és útil per saber complir la relació del exercicis precursors. 
+	\item[null] S'utilitza per marcar quin es l'exercici nul.
 \end{description}
 
 \subsection{Funcions}
@@ -155,5 +211,155 @@ La funció d'aquest operador és canviar de dia per poder continuar en la creaci
 \end{itemize}
 
 L'efecte de l'operador és marcar tots els exercicis com a no realitzats avui i també marcar que no hi ha cap exercici com a "últim exercici realitzat". A l'extensió 3 marca el nombre d'exercicis realitzats a 0 i a l'extensió 4 posa el nombre de minuts realitzats avui a 0.
+
+\section{Jocs de prova}
+
+\subsection{Jocs de prova 1 i 2}
+
+\subsubsection{Introducció}
+
+L'objectiu d'aquest joc de proves és demostrar que els horaris resultants compleixen totes les restriccions de l'extensió 3. El problema consisteix en un horari de 3 setmanes (15 dies) i 7 exercicis. L'objectiu és pujar l'exercici exA del nivell 5 al 7. L'exercici exA té com a preparadors els exercicis exP, exP2, exP3 i exP5 i com a precursor l'exercici exPr. A més, el exP2 té com a precursor el exP5. En el segon joc de prova només afegim exP4 com a preparador.
+
+\subsubsection{Resultat esperat}
+
+Com només cal pujar dos nivells, esperem que el planificador només indiqui dos dies d'exercici, saltant la resta sense fer res. Per complir les restriccions esperem que primer es faran els exercicis preparadors de tal manera que exP5 estigui abans que exP2, després s'hauria de fer exPr i finalment exA. Podem veure que si afegim el exP4 com a preparador superem el límit de sis exercicis al dia i ens hauria de dir que no existeix cap solució.
+
+\subsubsection{Entrada PDDL}
+\begin{lstlisting}
+(define (problem exercices-example1)
+	(:domain exercices)
+	(:objects
+		exP exA exPr exP2 exP3 exP4 exP5 none - exercice
+		d1 d2 d3 d4 d5 d6 d7 d8 d9 d10 d11 d12 d13 d14 d15 - day
+	)
+	(:init
+		(currentDay d1)
+		
+		(before d1 d2)
+		(before d2 d3)
+		(before d3 d4)
+		(before d4 d5)
+		(before d5 d6)
+		(before d6 d7)
+		(before d7 d8)
+		(before d8 d9)
+		(before d9 d10)
+		(before d10 d11)
+		(before d11 d12)
+		(before d12 d13)
+		(before d13 d14)
+		(before d14 d15)
+
+		(= (exLevel exA) 5)
+		(= (exLevel exP) 1)
+		(= (exLevel exP2) 1)
+		(= (exLevel exP3) 1)
+		(= (exLevel exP4) 1)
+		(= (exLevel exP5) 1)
+		(= (exLevel exPr) 1)
+
+		(= (numExToday) 0)
+
+		(null none)
+
+		(precursor none exP)
+		(precursor exPr exA) 
+		(precursor none exPr)
+		(precursor exP5 exP2)
+		(precursor none exP3)
+		(precursor none exP4)
+		(precursor none exP5)
+		
+		(preparer exP exA)
+		(preparer exP2 exA)
+		(preparer exP3 exA)
+		;(preparer exP4 exA)
+		(preparer exP5 exA)
+	) 
+	(:goal (and (currentDay d15) (= (exLevel exA) 7)))
+)
+\end{lstlisting}
+
+\subsubsection{Sortida PDDL}
+
+	Sense l'exercici exP4:\newline
+
+	\setlength{\parskip}{0em}
+    0: SKIP-DAY D1 D2
+    
+    1: SKIP-DAY D2 D3
+    
+    2: SKIP-DAY D3 D4
+    
+    3: SKIP-DAY D4 D5
+    
+    4: SKIP-DAY D5 D6 
+    
+    5: SKIP-DAY D6 D7
+    
+    6: SKIP-DAY D7 D8
+    
+    7: SKIP-DAY D8 D9
+    
+    8: SKIP-DAY D9 D10
+    
+    9: SKIP-DAY D10 D11
+    
+    10: SKIP-DAY D11 D12
+    
+    11: SKIP-DAY D12 D13
+    
+    12: SKIP-DAY D13 D14
+    
+    13: DO-EXERCICE EXP NONE
+    
+    14: DO-EXERCICE EXP3 NONE
+    
+    15: DO-EXERCICE EXP5 NONE
+    
+    16: DO-EXERCICE EXP2 EXP5
+    
+    17: DO-EXERCICE EXPR NONE
+    
+    18: DO-EXERCICE EXA EXPR
+    
+    19: SKIP-DAY D14 D15
+    
+    20: DO-EXERCICE EXP NONE
+    
+    21: DO-EXERCICE EXP3 NONE
+    
+    22: DO-EXERCICE EXP5 NONE
+    
+    23: DO-EXERCICE EXP2 EXP5
+    
+    24: DO-EXERCICE EXPR NONE
+    
+    25: DO-EXERCICE EXA EXPR
+    
+ \setlength{\parskip}{0.7em}
+
+	Amb l'exercici exP4:
+	
+	best first search space empty! problem proven unsolvable.
+	
+\subsection{Jocs de prova 3 i 4}
+\subsubsection{Introducció}
+
+
+\subsubsection{Resultat esperat}
+
+
+
+\subsubsection{Entrada PDDL}
+\begin{lstlisting}
+
+\end{lstlisting}
+
+\subsubsection{Sortida PDDL}
+\setlength{\parskip}{0em}
+
+
+\setlength{\parskip}{0.7em}
 
 \end{document}
