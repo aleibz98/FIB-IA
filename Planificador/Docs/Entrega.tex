@@ -346,20 +346,184 @@ Com només cal pujar dos nivells, esperem que el planificador només indiqui dos
 \subsection{Jocs de prova 3 i 4}
 \subsubsection{Introducció}
 
+L'objectiu d'aquest segon joc de proves és provar els resultats del domini que hauria de complir les restriccions de l'estensió 4. El problema manté moltes semblances amb el que hem vist anteriorment, ja que manté l'idea d'un sol exercici objectiu amb altres exercicis de precursors o preparadors. La diferència principal en aquest cas, però, és l'inclusió dels temps de cada exercici, cosa que s'ha dut a terme utilitzant fluents. També tenim una altra funció que ens indica el temps que portem sumat en el dia actual, que ens servirà per limitar el nombre d'exercicis al dia. El que utilitzarem per fer que les restriccions del problema no es compleixin aquest cop seràn els temps dels exercicis, que en aquets cas sumen 90 exactament.
+
 
 \subsubsection{Resultat esperat}
 
+De forma similar al test anterior, l'exercici exA és l'objectiu, encara que aquest cop haurà de pujar 5 nivells, i per tant es necessitaran 5 dies per dur-ho a terme. L'ordre dels exercicis preparadors i precursors haurà de mantenir les mateixes restriccions, amb l'afegit que ara també tenim l'exP4 que podrà anar en qualsevol posició, mentre sigui abans que exA. Haurem de tenir 7 exercicis per dia, però en aquesta extensió això no ens afecta. Si sumem qualsevol quantitat, per petita que sigui, a qualsevol dels temps dels exercicis, no hi haurà solució al problema ja que per les condicions descrites, han de dur-se a terme tots el mateix dia, i passaran dels 90 minuts.
 
 
 \subsubsection{Entrada PDDL}
 \begin{lstlisting}
 
+(define (problem exercices-example3)
+	(:domain exercices)
+	(:objects
+		exP exA exPr exP2 exP3 exP4 exP5 none - exercice
+		d1 d2 d3 d4 d5 d6 d7 d8 d9 d10 d11 d12 d13 d14 d15 - day
+	)
+	(:init
+		(currentDay d1)
+
+		(before d1 d2)
+		(before d2 d3)
+		(before d3 d4)
+		(before d4 d5)
+		(before d5 d6)
+		(before d6 d7)
+		(before d7 d8)
+		(before d8 d9)
+		(before d9 d10)
+		(before d10 d11)
+		(before d11 d12)
+		(before d12 d13)
+		(before d13 d14)
+		(before d14 d15)
+
+		(= (exLevel exA) 5)
+		(= (exLevel exP) 1)
+		(= (exLevel exP2) 1)
+		(= (exLevel exP3) 1)
+		(= (exLevel exP4) 1)
+		(= (exLevel exP5) 1)
+		(= (exLevel exPr) 1)
+
+		(= (exTime exA) 10)
+		(= (exTime exP) 20)
+		(= (exTime exP2) 10)
+		(= (exTime exP3) 10)
+		(= (exTime exP4) 15)
+		(= (exTime exP5) 10)
+		(= (exTime exPr) 15)
+
+		(= (timeDay) 0)
+
+		(null none)
+
+		(precursor none exP)
+		(precursor exPr exA) 
+		(precursor none exPr)
+		(precursor exP5 exP2)
+		(precursor none exP3)
+		(precursor none exP4)
+		(precursor none exP5) 
+
+		(preparer exP exA)
+		(preparer exP2 exA)
+		(preparer exP3 exA)
+		(preparer exP4 exA)
+		(preparer exP5 exA)
+	) 
+	(:goal (and (currentDay d15) (= (exLevel exA) 10)))
+)
 \end{lstlisting}
 
 \subsubsection{Sortida PDDL}
 \setlength{\parskip}{0em}
-
+    0: SKIP-DAY D1 D2
+    
+    1: SKIP-DAY D2 D3
+    
+    2: SKIP-DAY D3 D4
+    
+    3: SKIP-DAY D4 D5
+    
+    4: SKIP-DAY D5 D6
+    
+    5: SKIP-DAY D6 D7
+    
+    6: SKIP-DAY D7 D8
+    
+    7: SKIP-DAY D8 D9
+    
+    8: SKIP-DAY D9 D10
+    
+    9: SKIP-DAY D10 D11
+    
+    10: DO-EXERCICE EXP NONE
+    
+    11: DO-EXERCICE EXP3 NONE
+    
+    12: DO-EXERCICE EXP4 NONE
+    
+    13: DO-EXERCICE EXP5 NONE
+    
+    14: DO-EXERCICE EXP2 EXP5
+    
+    15: DO-EXERCICE EXPR NONE
+    
+    16: DO-EXERCICE EXA EXPR
+    
+    17: SKIP-DAY D11 D12
+    
+    18: DO-EXERCICE EXP NONE
+    
+    19: DO-EXERCICE EXP3 NONE
+    
+    20: DO-EXERCICE EXP4 NONE
+    
+    21: DO-EXERCICE EXP5 NONE
+    
+    22: DO-EXERCICE EXP2 EXP5
+    
+    23: DO-EXERCICE EXPR NONE
+    
+    24: DO-EXERCICE EXA EXPR
+    
+    25: SKIP-DAY D12 D13
+    
+    26: DO-EXERCICE EXP NONE
+    
+    27: DO-EXERCICE EXP3 NONE
+    
+    28: DO-EXERCICE EXP4 NONE
+    
+    29: DO-EXERCICE EXP5 NONE
+    
+    30: DO-EXERCICE EXP2 EXP5
+    
+    31: DO-EXERCICE EXPR NONE
+    
+    32: DO-EXERCICE EXA EXPR
+    
+    33: SKIP-DAY D13 D14
+    
+    34: DO-EXERCICE EXP NONE
+    
+    35: DO-EXERCICE EXP3 NONE
+    
+    36: DO-EXERCICE EXP4 NONE
+    
+    37: DO-EXERCICE EXP5 NONE
+    
+    38: DO-EXERCICE EXP2 EXP5
+    
+    39: DO-EXERCICE EXPR NONE
+    
+    40: DO-EXERCICE EXA EXPR
+    
+    41: SKIP-DAY D14 D15
+    
+    42: DO-EXERCICE EXP NONE
+    
+    43: DO-EXERCICE EXP3 NONE
+    
+    44: DO-EXERCICE EXP4 NONE
+    
+    45: DO-EXERCICE EXP5 NONE
+    
+    46: DO-EXERCICE EXP2 EXP5
+    
+    47: DO-EXERCICE EXPR NONE
+    
+    48: DO-EXERCICE EXA EXPR
 
 \setlength{\parskip}{0.7em}
+
+
+Si augmentem el temps d'algun exercici:
+
+best first search space empty! problem proven unsolvable.
 
 \end{document}
