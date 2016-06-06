@@ -27,16 +27,13 @@ def writeHeaders(file, name, exercices):
 def writeObjects(file, exercices):
 	file.write("  (:objects \n")
 
+	# Write exercices
 	file.write("    ")
 	for e in exercices:
 		file.write(str(e) + " ")
 	file.write(" - exercice\n")
 
-	file.write("    ")
-	for i in range(10):
-		file.write("l" + str(i+1) + " ")
-	file.write(" - level\n")
-
+	# Write days
 	file.write("    ")
 	for i in range(15):
 		file.write("d" + str(i+1) + " ")
@@ -44,23 +41,26 @@ def writeObjects(file, exercices):
 
 	file.write("  )\n")
 
-def writeInit(file, exercices):
+def writeInit(file, exercices, extension):
 	file.write("  (:init\n")
 	file.write("    (currentDay d1)\n\n")
-
-	# Write levels
-	for i in range(9):
-		file.write("    (lower l" + str(i+1) + " l" + str(i+2) + ")\n")
-	file.write("\n")
 
 	# Write days
 	for i in range(14):
 		file.write("    (before d" + str(i+1) + " d" + str(i+2) + ")\n")
 	file.write("\n")
 
+	# Write exercices' level
 	for e in exercices:
-		file.write("    (exLevel " + str(e) + " l" + str(e.level) + ")\n")
+		file.write("    (= (exLevel " + str(e) + ") " + str(e.level) + ")\n")
 	file.write("\n")
+
+	if extension == 3:
+		file.write("    (= (numExToday) 0)\n\n")
+	else: 
+		for e in exercices:
+			file.write("    (= (exTime " + str(e) + ") " + str(random.randrange(5, 35, 5)) + ")\n")
+		file.write("\n    (= (timeDay) 0)\n\n")
 
 	# Write precursors
 	for e in exercices:
@@ -80,7 +80,7 @@ def writeGoal(file, sample):
 	file.write("  (:goal (and (currentDay d15) ")
 
 	for e in sample:
-		file.write("(exLevel " + str(e) + " l10) ")
+		file.write("(= (exLevel " + str(e) + ") " + str(random.randint(e.level, 10)) + ") ")
 	file.write("))\n")
 
 def main():
@@ -88,6 +88,7 @@ def main():
 	if len(name) == 0:
 		name = "ExerciceN"
 
+	# Use the try catch behaviour to check if the user entered a number or only ENTER
 	try:
 		numExercices = int(raw_input("Quantos ejercicios quieres (default = 15)? "))
 	except ValueError:
@@ -112,40 +113,45 @@ def main():
 	except ValueError:
 		numPreparer = numExercices/4
 
+	try:
+		extension = int(raw_input("Que extension quieres cumplir? [3,4] (default 3) "))
+		if extension != 3 and extension != 4:
+			extension = 3
+	except ValueError:
+		extension = 3
+
+	#Add extension to name
+	name += "_" + str(extension)
+
 	print "\nGracias! Estamos generando el problema, por favor espera."
 
 	exercices = []
 	for i in range(numExercices):
+		# Create exercices with a random level
 		exercices.append(Exercice(i, random.randint(1, 10)))
 
 	while numPrecursor >= 0:
 		r = random.randint(0, numExercices - 2)
 
-		# Check that this is not already added
-		addedAlready = False
-		for e in exercices[r].precursor:
-			if (e == exercices[r]):
-				addedAlready = True
-
-		if addedAlready:
-			continue
-				
+		# Check that a exercice can only have one precursor
+		if (len(exercices[r].precursor) >= 1): continue
 		exercices[r].precursor.append(exercices[r + 1])
 		numPrecursor -= 1
 
 	while numPreparer >= 0:
-		r = random.randint(0, numExercices - 2)
+		r1 = random.randint(0, numExercices - 2)
+		r2 = random.randint(1, numExercices - r1 - 1)
 
-		# Check that this is not already added
-		addedAlready = False
-		for e in exercices[r].preparer:
-			if (e == exercices[r]):
-				addedAlready = True
-
-		if addedAlready:
+		# Check that this preparer is not already added
+		alreadyAdded = False
+		for e in exercices[r1].preparer:
+			if (exercices[r1 + r2] == e):
+				alreadyAdded = True
+		if alreadyAdded:
 			continue
 				
-		exercices[r].preparer.append(exercices[r + 1])
+		# Add the preparer exercice
+		exercices[r1].preparer.append(exercices[r1 + r2])
 		numPreparer -= 1
 
 	print "Escribiendo el problema en el arxivo " + name + ".pddl"
@@ -153,7 +159,7 @@ def main():
 		file.write("(define\n")
 		writeHeaders(file, name, exercices)
 		writeObjects(file, exercices)
-		writeInit(file, exercices)
+		writeInit(file, exercices, extension)
 		writeGoal(file, random.sample(exercices, numFinal))
 		file.write(")\n")
 	print "Finalizado!"
