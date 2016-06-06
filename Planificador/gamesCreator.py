@@ -104,14 +104,14 @@ def main():
 		if numPrecursor >= numExercices:
 			numPrecursor -= 1
 	except ValueError:
-		numPrecursor = numExercices/4
+		numPrecursor = numExercices/3
 
 	try:
 		numPreparer = int(raw_input("Quantos preparadores quieres (default = %d, maximo = %d)? " % (numExercices/3, numExercices - 1)))
 		if numPreparer >= numExercices:
 			numPreparer -= 1
 	except ValueError:
-		numPreparer = numExercices/4
+		numPreparer = numExercices/3
 
 	try:
 		extension = int(raw_input("Que extension quieres cumplir? [3,4] (default 3) "))
@@ -130,7 +130,7 @@ def main():
 		# Create exercices with a random level
 		exercices.append(Exercice(i, random.randint(1, 10)))
 
-	while numPrecursor >= 0:
+	while numPrecursor > 0:
 		r = random.randint(0, numExercices - 2)
 
 		# Check that a exercice can only have one precursor
@@ -138,7 +138,7 @@ def main():
 		exercices[r].precursor.append(exercices[r + 1])
 		numPrecursor -= 1
 
-	while numPreparer >= 0:
+	while numPreparer > 0:
 		r1 = random.randint(0, numExercices - 2)
 		r2 = random.randint(1, numExercices - r1 - 1)
 
