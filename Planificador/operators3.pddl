@@ -26,15 +26,16 @@
     (currentDay ?day - day)
     (exerciceToday ?exercice - exercice)
     (lastExerciceToday ?exercice - exercice)
+    (null ?exercice - exercice)
   ) 
 
   (:action do-exercice
-    :parameters (?e - exercice )
+    :parameters (?e ?pr - exercice )
     :precondition (and
+			(precursor ?pr ?e)
+			(not (null ?e))
     		(not (exerciceToday ?e)) 
-    		(forall (?pr - exercice)
-    			(not (and (precursor ?pr ?e) (not (lastExerciceToday ?pr))))
-    		)
+    		(or (null ?pr) (lastExerciceToday ?pr))
     		(forall (?p - exercice)
     			(not (and (preparer ?p ?e) (not (exerciceToday ?p))))
     		)
